@@ -167,6 +167,7 @@ pku-thesis-pass/
 ├── lib.typ              # 包入口（re-export）
 ├── typst.toml           # 包清单
 ├── thumbnail.png        # 模板预览图
+├── assets/              # 资源文件
 ├── format/
 │   ├── config.typ      # 配置总控
 │   ├── const.typ       # 常量（font-set、size、supplement）
@@ -188,11 +189,9 @@ pku-thesis-pass/
 ├── template/           # Typst Universe 模板
 │   ├── thesis.typ
 │   ├── ref.bib
-│   ├── assets/
 │   └── content/
 ├── thesis.typ           # 用户主文档
 ├── ref.bib              # 参考文献
-├── assets/              # 资源文件
 └── content/             # 用户文档（使用指南）
 ```
 
