@@ -60,9 +60,9 @@ typst watch thesis.typ
   #import "@preview/pku-thesis-pass:0.1.0": config
 
   #let (
-    setup, cover, copyright, abstract-zh, abstract-en, 
-    outline, list-of-figures, list-of-tables, list-of-code, 
-    body-wrap, bibliography, acknowledgements, declaration, 
+    setup, cover, copyright, abstract-zh, abstract-en,
+    outline, list-of-figures, list-of-tables, list-of-code,
+    body-wrap, bibliography, acknowledgements, declaration,
     appendix, font, blind
   ) = config(
     author-zh: "张三",

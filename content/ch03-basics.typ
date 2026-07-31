@@ -151,19 +151,19 @@ Typst 支持无序列表和有序列表：
 #code-preview(
   ```typ
   #figure(
-    image("../assets/logo.svg", width: 30%),
-    caption: "北京大学校徽",
+    image("../assets/placeholder-logo.svg", width: 30%),
+    caption: "校徽占位图",
   ) <logo>
   ```,
   [
     #figure(
-      image("../assets/logo.svg", width: 30%),
-      caption: "北京大学校徽",
+      image("../assets/placeholder-logo.svg", width: 30%),
+      caption: "校徽占位图",
     ) <logo>
   ],
 )
 
-@logo 展示了北京大学校徽。代码中的 `<logo>` 是标签，可以在文中通过 `@logo` 来引用。
+@logo 展示了校徽占位图。出于版权考虑，这里*不包含*北京大学官方校徽和字标，需通过 `config()` 的 `logo` / `wordmark` 参数自行导入真实校徽和字标（见 @config-ref）。代码中的 `<logo>` 是标签，可以在文中通过 `@logo` 来引用。
 
 == 表格
 
@@ -350,7 +350,7 @@ Typst 支持 BibLaTeX 格式的 `.bib` 文件。在文档中引用文献使用 `
 #codeblock(
   ```typ
   #let (setup, ..., body-wrap, bibliography) = config(
-    bib-file: "ref.bib",
+    bib-file: path("ref.bib"),
     bib-style: "numeric",
     bib-version: "2015",
   )
@@ -388,7 +388,7 @@ gb7714-bilingual 会自动检测文献语言。如果自动检测不准确，可
 
 ```typ
 #let (setup, ..., body-wrap, bibliography) = config(
-  bib-file: "ref.bib",
+  bib-file: path("ref.bib"),
   override-bib: true,
   ...
 )
@@ -490,7 +490,7 @@ $ a^2 + b^2 = c^2 $ <eq-pythagoras>
 如果默认的 `@` 引用效果不满足需求，可以使用 `#link` 和 `#ref` 函数手动构造引用文本：
 
 ```typ
-#link(<fig-wordmark>)[北京大学字标]
+#link(<fig-wordmark>)[北京大学字标（占位图）]
 ```
 
-这会在"北京大学字标"上创建指向 @fig-wordmark 的超链接。
+这会在"北京大学字标（占位图）"上创建指向 @fig-wordmark 的超链接。

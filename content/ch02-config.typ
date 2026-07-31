@@ -125,6 +125,12 @@
     `display-icon: false`  关闭语言图标；\
     `lang-format: none`    关闭语言名称；\
     `zebra-fill: none`     关闭交替背景色],
+  [`logo`],
+  [`none`],
+  [封面校徽图片路径，`path` 类型，如 `path("assets/logo.svg")`；为 `none` 时封面显示灰色占位框],
+  [`wordmark`],
+  [`none`],
+  [封面校名字标图片路径，`path` 类型；为 `none` 时封面显示灰色占位框],
 ) <config-layout>
 
 == 参考文献配置
@@ -141,7 +147,7 @@
   [*说明*],
   [`bib-file`],
   [`none`],
-  [BibTeX 文件路径，如 `"ref.bib"`],
+  [BibTeX 文件路径，`path` 类型，如 `path("ref.bib")`],
   [`bib-style`],
   [`"numeric"`],
   [引用风格：`"numeric"`（顺序编码制）或 `"author-date"`（著者—出版年制）],
