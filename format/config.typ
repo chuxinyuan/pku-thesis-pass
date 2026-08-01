@@ -350,6 +350,9 @@
 
   // ========== 致谢 ==========
   let acknowledgements = (body) => {
+    if blind {
+      return
+    }
     set align(left + top)
     acknowledgements-page(
       first-line-indent: first-line-indent,
@@ -358,6 +361,9 @@
 
   // ========== 原创声明 ==========
   let declaration = () => {
+    if blind {
+      return
+    }
     declaration-page(clean-declaration: clean-declaration)
   }
 

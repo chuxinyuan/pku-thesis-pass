@@ -131,15 +131,15 @@
 
 在此处撰写总结和展望...
 
-// ========== 附录 ==========
+// ========== 附录部分 ==========
 #appendix()
 
 = 实验数据
 
 在此处添加实验数据...
 
-// ========== 致谢、原创声明和使用授权 ==========
-#if not blind {
-  acknowledgements[#include "content/acknowledgements.typ"]
-  declaration()
-}
+// ========== 致谢部分 ==========
+#acknowledgements[#include "content/acknowledgements.typ"]
+
+// ========== 原创声明 ==========
+#declaration()

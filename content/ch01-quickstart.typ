@@ -89,10 +89,8 @@ typst watch thesis.typ
 
   这里是附录内容...
 
-  #if not blind {
-    acknowledgements[致谢内容...]
-    declaration()
-  }
+  #acknowledgements[致谢内容...]
+  #declaration()
   ```,
   caption: "论文文件基本结构",
 )

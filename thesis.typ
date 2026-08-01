@@ -129,14 +129,15 @@
 
 #include "content/ch05-advanced.typ"
 
+// ========== 附录部分 ==========
 #appendix()
 
 = 关于 Typst <about>
 
 #include "content/appendix-about.typ"
 
-// ========== 致谢、原创声明和使用授权 ==========
-#if not blind {
-  acknowledgements[#include "content/acknowledgements.typ"]
-  declaration()
-}
+// ========== 致谢部分 ==========
+#acknowledgements[#include "content/acknowledgements.typ"]
+
+// ========== 原创声明 ==========
+#declaration()
