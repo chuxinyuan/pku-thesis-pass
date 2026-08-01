@@ -374,14 +374,14 @@
     list-of-code: list-of-code,
     body-wrap: body-wrap,
     bibliography: bibliography,
+    appendix: appendix,
     acknowledgements: acknowledgements,
     declaration: declaration,
-    appendix: appendix,
-    smartpagebreak: smartpagebreak,
     font: font,
     blind: blind,
     preview: preview,
     always-start-odd: always-start-odd,
     first-line-indent: first-line-indent,
+    smartpagebreak: smartpagebreak,
   )
 }

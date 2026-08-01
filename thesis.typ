@@ -23,9 +23,9 @@
   list-of-code,
   body-wrap,
   bibliography,
+  appendix,
   acknowledgements,
   declaration,
-  appendix,
   font,
   blind,
 ) = config(

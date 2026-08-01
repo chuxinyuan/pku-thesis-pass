@@ -62,8 +62,8 @@ typst watch thesis.typ
   #let (
     setup, cover, copyright, abstract-zh, abstract-en,
     outline, list-of-figures, list-of-tables, list-of-code,
-    body-wrap, bibliography, acknowledgements, declaration,
-    appendix, font, blind
+    body-wrap, bibliography, appendix, acknowledgements,
+    declaration, font, blind
   ) = config(
     author-zh: "张三",
     title-zh: "论文中文题目",

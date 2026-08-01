@@ -168,9 +168,10 @@
 == 补充说明
 
 除了上述配置参数，`config()` 函数还返回若干额外字段：
-- `font`：解析后的字体方案字典，可直接用于自定义页面
+- `font`：解析后的字体方案字典，可直接用于自定义页面（如 `#set text(font: font.仿宋)`）
 - `smartpagebreak`：智能分页函数（支持 `always-start-odd`）
 - `first-line-indent`：首行缩进值（供自定义页面使用）
+- `blind` / `preview` / `always-start-odd`：当前配置值，可由 `--input` CLI 参数覆盖
 
 模板还导出了 `booktab`、`as-booktab`、`codeblock` 三个组件函数，可直接导入使用：
 
