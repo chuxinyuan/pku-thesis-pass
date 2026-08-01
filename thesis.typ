@@ -59,9 +59,9 @@
   outline-depth: 3,
   supplements: (:),
   codly-args: (:),
-  // 官方校徽和字标（pkulogo / pkuword）的 PDF 版本建议从 CTAN 的 pkuthss 包获取：
+  // 官方校徽和字标 pdf 文件建议从 CTAN 的 pkuthss 包获取：
   //   https://ctan.org/pkg/pkuthss
-  // 封面校徽和字标：参数默认值为 none，封面显示灰色占位框
+  // 封面校徽和字标：因版权原因，参数默认值为 none，封面显示灰色占位框
   logo: path("assets/placeholder-logo.svg"),
   wordmark: path("assets/placeholder-wordmark.svg"),
 

@@ -9,9 +9,9 @@
 //   --input system=default|mac|windows|linux    系统字体方案
 // ============================================================
 
-#import "@preview/pku-thesis-pass:0.1.0": config
-// 本地测试时，注释上一行并取消注释下一行：
 // #import "../format/config.typ": config
+// 本地测试时，注释下一行并取消注释上一行
+#import "@preview/pku-thesis-pass:0.1.0": config
 
 #let (
   setup,
@@ -61,14 +61,12 @@
   outline-depth: 3,
   supplements: (:),
   codly-args: (:),
-  // 官方校徽和字标建议从 CTAN 的 pkuthss 包获取：
-  //   https://ctan.org/pkg/pkuthss
-  // Typst 的 `image()` 暂不支持 eps 格式，推荐使用 pdf 或 svg
-  // 封面校徽和字标：参数默认值为 none，封面显示灰色占位框
-  // 如需使用真实校徽和字标，建议您将相关文件放在项目根目录下的 `assets` 路径下
-  // 相应 `path` 的参数值指向该文件即可，例如：
-  //   logo: path("assets/logo.svg"),
-  //   wordmark: path("assets/wordmark.svg"),
+  // 1.封面校徽和字标：因版权原因，参数默认值为 none，封面显示灰色占位框
+  // 2.官方校徽和字标 pdf 文件建议从 CTAN 的 pkuthss 包获取：
+  //  https://ctan.org/pkg/pkuthss
+  // 3.请您将相关文件放在项目根目录的 `assets` 路径下，设置 `path` 指向该文件即可，例如：
+  //   logo: path("assets/pkulogo.pdf"),
+  //   wordmark: path("assets/pkuword.pdf"),
   logo: none,
   wordmark: none,
 

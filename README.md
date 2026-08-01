@@ -95,18 +95,16 @@ typst compile thesis.typ --input system=linux
 
 出于版权考虑，这里**不包含**北京大学的官方校徽和字标，封面默认显示灰色占位框。
 
-如需在封面使用真实校徽和字标，请自行获取官方校徽文件并放入项目目录，然后在 `config()` 中配置，例如：
+官方校徽和字标 pdf 文件建议请您自行从 CTAN 的 [pkuthss](https://ctan.org/pkg/pkuthss) 包获取，将相关文件放在项目根目录的 `assets` 路径下，然后在 `config()` 中配置，例如：
 
 ```typst
 #let (.., cover) = config(
-  logo: path("assets/logo.svg"),
-  wordmark: path("assets/wordmark.svg"),
+  logo: path("assets/pkulogo.pdf"),
+  wordmark: path("assets/pkuword.pdf"),
 )
 ```
 
-官方校徽和字标（`pkulogo` / `pkuword`）可从 CTAN 的 [pkuthss](https://ctan.org/pkg/pkuthss) 包获取。
-
-CTAN 提供 eps 和 pdf 两种格式。Typst 目前仅支持 png/jpg/gif/webp/svg/pdf，请先转换为支持的格式，或者直接用 CTAN pkuthss 包里的 pdf 格式文件。
+注：CTAN 提供 eps 和 pdf 两种格式。Typst 目前仅支持 png/jpg/gif/webp/svg/pdf，暂不支持 eps 格式，建议直接用 pkuthss 包里的 pdf 格式文件，或者转换为 svg 等支持的格式。
 
 ## 功能特性
 
