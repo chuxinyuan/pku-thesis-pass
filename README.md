@@ -6,6 +6,22 @@
   <img src="thumbnail.png" alt="Cover of an example thesis" width="80%">
 </p>
 
+## 功能特性
+
+- 封面（含盲审版）
+- 版权声明页
+- 中英文摘要
+- 自动目录（含图、表、代码列表）
+- 中文章节编号（第X章 + 附录 A/B）
+- GB/T 7714 参考文献（2015 / 2025 标准）
+- 三线表、代码高亮
+- 页眉页脚自动切换
+- 脚注
+- 附录
+- 致谢、原创性声明
+- 命令行参数控制（`blind` / `preview` / `system`）
+- 跨平台字体方案（macOS / Windows / Linux）
+
 ## 使用方式
 
 ### 方式一：从 Typst Universe 创建（推荐）
@@ -20,25 +36,6 @@ cd my-thesis
 ```bash
 git clone https://github.com/chuxinyuan/pku-thesis-pass.git
 cd pku-thesis-pass
-```
-
-## 编译文档
-
-```bash
-# 普通版本
-typst compile thesis.typ
-
-# 盲审版本
-typst compile thesis.typ --input blind=true
-
-# 打印版本（链接不着色）
-typst compile thesis.typ --input preview=false
-
-# 章节不强制从奇数页开始
-typst compile thesis.typ --input always-start-odd=false
-
-# 指定系统字体方案（macOS/Windows/Linux）
-typst compile thesis.typ --input system=linux
 ```
 
 ## 配置说明
@@ -90,22 +87,6 @@ typst compile thesis.typ --input system=linux
 | `bib-version` | str | `"2015"` 或 `"2025"` |
 | `bib-cn-first` | bool | 中文文献优先（默认 `true`） |
 | `bib-pinyin-override` | dict | 多音字校正，如 `("重": "chong2")` |
-
-## 功能特性
-
-- 封面（含盲审版）
-- 版权声明页
-- 中英文摘要
-- 自动目录（含图、表、代码列表）
-- 中文章节编号（第X章 + 附录 A/B）
-- GB/T 7714 参考文献（2015 / 2025 标准）
-- 三线表、代码高亮
-- 页眉页脚自动切换
-- 脚注
-- 附录
-- 致谢、原创性声明
-- 命令行参数控制（`blind` / `preview` / `system`）
-- 跨平台字体方案（macOS / Windows / Linux）
 
 ## 校徽和字标配置
 
@@ -176,6 +157,25 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 | 黑体 | Times New Roman, SimHei, Noto Sans CJK SC, Source Han Sans |
 | 楷体 | Times New Roman, KaiTi, STKaiti, AR PL UKai |
 | 代码 | Consolas, Courier New, Noto Serif CJK SC, Source Han Serif, SimSun |
+
+## 编译文档
+
+```bash
+# 普通版本
+typst compile thesis.typ
+
+# 盲审版本
+typst compile thesis.typ --input blind=true
+
+# 打印版本（链接不着色）
+typst compile thesis.typ --input preview=false
+
+# 章节不强制从奇数页开始
+typst compile thesis.typ --input always-start-odd=false
+
+# 指定系统字体方案（macOS/Windows/Linux）
+typst compile thesis.typ --input system=linux
+```
 
 ## 致谢
 
