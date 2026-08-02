@@ -1,4 +1,4 @@
-#import "../format/utils.typ": as-booktab, booktab, codeblock
+#import "../../format/utils.typ": as-booktab, booktab, codeblock
 
 #let code-preview(code, result) = {
   booktab(
@@ -151,7 +151,7 @@ Typst 支持无序列表和有序列表：
 #code-preview(
   ```typ
   #figure(
-    image("../assets/placeholder-logo.svg", width: 30%),
+    image("../../assets/placeholder-logo.svg", width: 30%),
     caption: "校徽占位图",
   ) <logo>
   ```,

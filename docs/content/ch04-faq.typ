@@ -1,4 +1,4 @@
-#import "../format/utils.typ": booktab
+#import "../../format/utils.typ": booktab
 
 == 行距说明
 

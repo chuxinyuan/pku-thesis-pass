@@ -9,9 +9,7 @@
 //   --input system=default|mac|windows|linux    系统字体方案
 // ============================================================
 
-// #import "../format/config.typ": config
-// 本地测试时，注释下一行并取消注释上一行
-#import "@preview/pku-thesis-pass:0.1.0": config
+#import "@preview/pku-thesis-pass:0.2.0": config
 
 #let (
   setup,

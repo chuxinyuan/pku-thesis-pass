@@ -1,6 +1,6 @@
 // ============================================================
-// 北京大学学位论文模板
-// 渲染文档：typst compile thesis.typ --font-path fonts
+// 北京大学学位论文 Typst 模板使用指南
+// 渲染文档：typst compile docs/guide.typ --root .
 //
 // 命令行参数（--input key=value）：
 //   --input blind=true|false                    盲审模式
@@ -9,7 +9,7 @@
 //   --input system=default|mac|windows|linux    系统字体方案
 // ============================================================
 
-#import "format/config.typ": config
+#import "../format/config.typ": config
 
 #let (
   setup,

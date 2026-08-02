@@ -1,4 +1,4 @@
-#import "../format/utils.typ": booktab
+#import "../../format/utils.typ": booktab
 
 本模板提供了丰富的配置选项，在 `config()` 函数中以命名参数的方式传入。下面详细介绍各个配置项的含义和用法。
 
@@ -176,7 +176,7 @@
 模板还导出了 `booktab`、`as-booktab`、`codeblock` 三个组件函数，可直接导入使用：
 
 ```typ
-#import "@preview/pku-thesis-pass:0.1.0": booktab, as-booktab, codeblock
+#import "@preview/pku-thesis-pass:0.2.0": booktab, as-booktab, codeblock
 ```
 
 === booktab — 三线表
