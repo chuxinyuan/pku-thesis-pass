@@ -9,7 +9,7 @@
 //   --input system=default|mac|windows|linux    系统字体方案
 // ============================================================
 
-#import "../format/config.typ": config
+#import "../format/lib.typ": config
 
 #let (
   setup,
