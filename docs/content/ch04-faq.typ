@@ -14,7 +14,7 @@
 
 == 字体配置
 
-本模板的字体配置在 `format/const.typ` 中定义，支持四套字体方案，通过 `system` 参数切换。默认使用跨平台的 `default` 方案：
+本模板的字体配置在 `format/style.typ` 中定义，支持四套字体方案，通过 `system` 参数切换。默认使用跨平台的 `default` 方案：
 
 #booktab(
   width: 100%,
@@ -37,7 +37,7 @@
 
 其他方案（`mac` / `windows` / `linux`）针对各平台预优化，无冗余 fallback，编译时零 warning。
 
-如需修改字体，可以编辑 `format/const.typ` 中的 `font-set` 字典。
+如需修改字体，可以编辑 `format/style.typ` 中的 `font-set` 字典。
 
 == 字体警告
 
@@ -48,7 +48,7 @@
 - 下载对应字体（如思源宋体、思源黑体等）
   - 将字体安装到系统中
   - 或在编译时加上 `--font-path` 参数指定字体文件所在目录
-- 或编辑 `format/const.typ` 中的字体配置
+- 或编辑 `format/style.typ` 中的字体配置
 
 == 目录深度调整
 

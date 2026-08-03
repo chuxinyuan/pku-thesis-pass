@@ -5,7 +5,7 @@
 // 奇数页显示当前章节标题（或自定义 header 元数据）
 // ============================================================
 
-#import "const.typ": size
+#import "style.typ": size
 #import "utils.typ": chinesenumbering, partcounter, skippedstate
 #import "headings.typ": get-heading-meta
 

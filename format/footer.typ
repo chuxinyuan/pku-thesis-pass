@@ -5,7 +5,7 @@
 // 声明页启用 clean-declaration 后清除页码
 // ============================================================
 
-#import "const.typ": size
+#import "style.typ": size
 #import "utils.typ": partcounter, skippedstate
 
 /// 生成页脚页码（作为 place 元素放置在页面底部）

@@ -8,7 +8,7 @@
 #import "@preview/codly:1.3.0": codly-init, codly
 #import "@preview/codly-languages:0.1.10": codly-languages
 
-#import "const.typ": font, size
+#import "style.typ": font, size
 #import "utils.typ": appendixcounter, chaptercounter, chinesenumbering, sym-circle, sym-square, sym-rhombus
 #import "headings.typ": heading-show-rule
 #import "header.typ": make-header

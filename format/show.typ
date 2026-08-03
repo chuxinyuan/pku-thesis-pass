@@ -4,7 +4,7 @@
 // 职责：图/表/代码块的展示布局、交叉引用链接生成
 // ============================================================
 
-#import "const.typ": size
+#import "style.typ": size
 #import "utils.typ": chinesenumbering, chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter
 
 /// 图、表、代码块的 show 规则

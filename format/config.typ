@@ -26,7 +26,7 @@
 // ========== 子模块导入 ==========
 
 // 基础定义
-#import "const.typ": supplement, font-set
+#import "style.typ": supplement, font-set
 #import "utils.typ": skippedstate, appendix, booktab, as-booktab, codeblock, _resolve-path
 
 // 基础设施

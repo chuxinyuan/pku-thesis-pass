@@ -6,7 +6,7 @@
 // ============================================================
 
 #import "@preview/cuti:0.4.0": show-cn-fakebold
-#import "const.typ": font, size
+#import "style.typ": font, size
 #import "utils.typ": split-text-by-width, build-field-grid, degree-type-checkbox, chinesenumber, chineseyear, _resolve-path, _ensure-not-eps
 
 /// 校徽灰色占位框：未提供校徽图片时显示，提示用户自行配置

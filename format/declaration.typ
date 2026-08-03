@@ -7,7 +7,7 @@
 
 #import "headings.typ": back-heading
 #import "@preview/cuti:0.4.0": show-cn-fakebold
-#import "const.typ": size
+#import "style.typ": size
 
 /// 原创性声明与授权说明页
 /// clean-declaration: 为 true 时清除该页的页眉和页码（通过 <__clean_declaration__> 标签）

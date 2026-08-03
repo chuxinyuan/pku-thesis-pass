@@ -4,7 +4,7 @@
 // ============================================================
 
 #import "headings.typ": front-heading
-#import "const.typ": supplement
+#import "style.typ": supplement
 #import "utils.typ": chaptercounter, chinesenumbering
 
 /// 从 figure caption 中提取纯文本，用于图表列表条目。
