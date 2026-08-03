@@ -1,4 +1,4 @@
-#import "../../format/utils.typ": codeblock
+#import "../../format/components.typ": codeblock
 
 == 安装与环境配置
 

@@ -1,4 +1,4 @@
-#import "../../format/utils.typ": booktab
+#import "../../format/components.typ": booktab
 
 本模板提供了丰富的配置选项，在 `config()` 函数中以命名参数的方式传入。下面详细介绍各个配置项的含义和用法。
 

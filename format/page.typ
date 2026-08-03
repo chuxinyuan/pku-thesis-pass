@@ -9,11 +9,37 @@
 #import "@preview/codly-languages:0.1.10": codly-languages
 
 #import "style.typ": font, size
-#import "utils.typ": appendixcounter, chaptercounter, chinesenumbering, sym-circle, sym-square, sym-rhombus
+#import "utils.typ": appendixcounter, chaptercounter, chinesenumbering
 #import "headings.typ": heading-show-rule
 #import "header.typ": make-header
 #import "footer.typ": make-footer
 #import "show.typ": _figure-show-rule, _ref-show-rule
+
+// ========== 列表符号 ==========
+
+#let sym-circle(size) = box(
+  width: 1em,
+  align(
+    center + horizon,
+    circle(radius: size / 2, fill: black)
+  ),
+)
+
+#let sym-square(size) = box(
+  width: 1em,
+  align(
+    center + horizon,
+    square(size: size, fill: black)
+  ),
+)
+
+#let sym-rhombus(size) = box(
+  width: 1em,
+  align(
+    center + horizon,
+    rotate(45deg, square(size: size, fill: black))
+  ),
+)
 
 /// 页面基础设置函数
 /// 在 #show: setup 处被 config() 调用，作用于全文

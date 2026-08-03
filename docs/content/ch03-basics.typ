@@ -1,4 +1,4 @@
-#import "../../format/utils.typ": as-booktab, booktab, codeblock
+#import "../../format/components.typ": as-booktab, booktab, codeblock
 
 #let code-preview(code, result) = {
   booktab(

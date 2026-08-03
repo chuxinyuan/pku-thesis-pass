@@ -7,7 +7,157 @@
 
 #import "@preview/cuti:0.4.0": show-cn-fakebold
 #import "style.typ": font, size
-#import "utils.typ": split-text-by-width, build-field-grid, degree-type-checkbox, chinesenumber, chineseyear, _resolve-path, _ensure-not-eps
+#import "utils.typ": chinesenumber, chineseyear, _resolve-path, _ensure-not-eps
+
+// ========== 封面排版工具 ==========
+
+/// 按指定宽度拆分文本，返回字符串数组，每行不超过 max-width。
+/// 用于封面页长标题的自动换行。支持中英文混合及空格分词。
+#let split-text-by-width(text-content, max-width) = {
+  let chars = if type(text-content) == str {
+    text-content.clusters()
+  } else {
+    str(text-content).clusters()
+  }
+
+  let is-word-char = (c) => {
+    c.len() == 1 and c != " " and c != "\t" and c != "\n"
+  }
+
+  let tokens = ()
+  let i = 0
+  while i < chars.len() {
+    let c = chars.at(i)
+    if c == "\n" {
+      tokens.push(("\n", true))
+      i += 1
+    } else if c == " " or c == "\t" {
+      if i + 1 < chars.len() and is-word-char(chars.at(i + 1)) {
+        let word = c
+        i += 1
+        while i < chars.len() and is-word-char(chars.at(i)) {
+          word += chars.at(i)
+          i += 1
+        }
+        tokens.push((word, false))
+      } else {
+        tokens.push((c, true))
+        i += 1
+      }
+    } else if is-word-char(c) {
+      let word = c
+      i += 1
+      while i < chars.len() and is-word-char(chars.at(i)) {
+        word += chars.at(i)
+        i += 1
+      }
+      tokens.push((word, false))
+    } else {
+      tokens.push((c, false))
+      i += 1
+    }
+  }
+
+  let result = ()
+  let current = ""
+
+  for (token, is-space) in tokens {
+    if token == "\n" {
+      if current.len() > 0 {
+        result.push(current.trim())
+      }
+      current = ""
+    } else {
+      let next = current + token
+      if measure(next).width > max-width {
+        if current.len() > 0 {
+          result.push(current.trim())
+        }
+        if is-space {
+          current = ""
+        } else {
+          current = token.trim()
+        }
+      } else {
+        current = next
+      }
+    }
+  }
+
+  if current.len() > 0 {
+    result.push(current.trim())
+  }
+
+  result
+}
+
+/// 未选中复选框（空心方框）
+#let sym-box-unchecked(size) = box(width: size, align(
+  center + horizon,
+  square(size: size),
+))
+
+/// 选中复选框（方框内带 ✓）。
+#let sym-box-checked(size) = box(width: size, align(
+  center + horizon,
+  square(size: size)[✓],
+))
+
+/// 构建封面页的字段网格（如姓名、学号等），支持自动换行
+/// fields: 数组，每项为 (字段名, 字段值) 元组
+/// name-width / value-width: 两列宽度
+/// row-height: 每行高度
+#let build-field-grid(fields, name-width, value-width, row-height, font: font) = context {
+  let grid-contents = ()
+
+  for (name, value) in fields {
+    let value-parts = split-text-by-width(value, value-width)
+    for (i, part) in value-parts.enumerate() {
+      if i == 0 {
+        grid-contents.push([#strong(name)#v(0.5em)])
+      } else {
+        grid-contents.push([])
+      }
+      grid-contents.push([
+        #set align(center)
+        #set text(size: size.三号, font: font.仿宋)
+        #part
+        #v(0.5em)
+      ])
+    }
+  }
+
+  grid(
+    columns: (name-width, value-width),
+    rows: row-height,
+    row-gutter: 0.5em,
+    stroke: (x, y) => if x == 1 { (bottom: 1pt) } else { none },
+    ..grid-contents,
+  )
+}
+
+/// 学位类型选择框
+/// degree-type: "academic"（学术学位）或 "professional"（专业学位）
+/// 其他值会触发 assert 报错
+#let degree-type-checkbox(degree-type) = {
+  assert(
+    degree-type == "academic" or degree-type == "professional",
+    message: "degree-type 必须是 \"academic\" 或 \"professional\"，当前值: "
+      + repr(degree-type),
+  )
+  let academic-box = if degree-type == "academic" {
+    sym-box-checked(12pt)
+  } else {
+    sym-box-unchecked(12pt)
+  }
+  let professional-box = if degree-type == "professional" {
+    sym-box-checked(12pt)
+  } else {
+    sym-box-unchecked(12pt)
+  }
+  set align(center + horizon)
+  [#academic-box#h(0.5em)学术学位#h(4 * 0.5em)#professional-box#h(0.5em)专业学位]
+}
 
 /// 校徽灰色占位框：未提供校徽图片时显示，提示用户自行配置
 #let _logo-placeholder(font) = box(

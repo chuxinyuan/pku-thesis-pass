@@ -27,7 +27,8 @@
 
 // 基础定义
 #import "style.typ": supplement, font-set
-#import "utils.typ": skippedstate, appendix, booktab, as-booktab, codeblock, _resolve-path
+#import "utils.typ": skippedstate, appendix, _resolve-path
+#import "components.typ": booktab, as-booktab, codeblock
 
 // 基础设施
 #import "page.typ": page-setup
