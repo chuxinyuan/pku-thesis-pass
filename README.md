@@ -19,6 +19,8 @@
 - 脚注
 - 附录
 - 致谢、原创性声明
+- 正文字数统计（wordometer，标题不计入）
+- 自动设置 PDF 元数据（标题 / 作者，盲审版隐藏作者）
 - 命令行参数控制（`blind` / `preview` / `system`）
 - 跨平台字体方案（macOS / Windows / Linux）
 
@@ -79,6 +81,7 @@ cd pku-thesis-pass
 | `outline-depth` | int | 目录深度（默认 `3`） |
 | `supplements` | dict | 自定义引用记号（图/表/代码/公式前缀） |
 | `codly-args` | dict | 代码块样式参数（行号、语言图标等） |
+| `word-count` | bool | 统计正文与附录字数（默认 `true`），正文中可用 `total-words` / `total-characters` 显示统计结果 |
 | `logo` | path | 封面校徽图片路径，如 `path("assets/logo.svg")`（默认 `none`，显示占位框） |
 | `wordmark` | path | 封面校名字标图片路径（默认 `none`，显示占位框） |
 | `override-bib` | bool | 自定义参考文献样式（默认 `false`） |
