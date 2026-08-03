@@ -1,5 +1,4 @@
-#import "../../format/components.typ": as-booktab, booktab, codeblock
-#import "../../format/show.typ": total-words
+#import "../../format/components.typ": as-booktab, booktab, codeblock, total-words
 
 #let code-preview(code, result) = {
   booktab(
