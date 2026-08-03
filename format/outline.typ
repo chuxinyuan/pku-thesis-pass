@@ -5,7 +5,7 @@
 // ============================================================
 
 #import "headings.typ": front-heading
-#import "utils.typ": in-appendix, chaptercounter, chinesenumbering, phasecounter
+#import "utils.typ": partcounter, chinesenumbering
 
 /// 中文目录
 /// title: 目录标题（默认"目录"）
@@ -26,7 +26,7 @@
     let el_loc = el.location()
 
     // 跳过前置部分（part < 2）的无编号 heading
-    if phasecounter.at(el_loc).first() < 2 and el.numbering == none {
+    if partcounter.at(el_loc).first() < 2 and el.numbering == none {
       return
     }
 
@@ -66,16 +66,17 @@
 
     box(width: 1fr, [#h(2pt) #box(width: 1fr, repeat[.]) #h(2pt)])
 
-    let heading_counter = counter(heading).at(el_loc)
-    let is-appendix = in-appendix(el_loc)
-    let is-first-body-chapter = (
-      el.level == 1
-        and el.numbering != none
-        and heading_counter == (1,)
-        and not is-appendix
+    // 目录页码显示逻辑页计数（it.page()）。但正文第一个编号标题会在 show rule 中
+    // 触发页码重置，而标题的 location() 位于该重置之前，it.page() 取到的是重置前的
+    // 物理页。此重置与 part 1 → 2 的转换同步发生，故此处按同一规则（编号标题且
+    // part < 2）识别该标题，并显示重置后的逻辑页码 1。
+    // 注意：若修改 headings.typ 中 heading-show-rule 的重置条件，需同步此判断。
+    let is-page-reset-chapter = (
+      el.numbering != none
+        and partcounter.at(el_loc).first() < 2
     )
 
-    link(el_loc, if is-first-body-chapter {
+    link(el_loc, if is-page-reset-chapter {
       "1"
     } else {
       it.page()

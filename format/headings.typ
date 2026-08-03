@@ -8,7 +8,7 @@
 // ============================================================
 
 #import "style.typ": size
-#import "utils.typ": phasecounter, chaptercounter, footnotecounter, imagecounter, tablecounter, rawcounter, equationcounter
+#import "utils.typ": partcounter, chaptercounter, footnotecounter, imagecounter, tablecounter, rawcounter, equationcounter
 
 /// 根据标题等级返回对应字号（用于 2–4 级标题）
 #let get-heading-size(level) = {
@@ -29,7 +29,7 @@
 
 // Heading supplement 中可嵌入的元数据字段：
 //   pagebreak: bool         - 是否在此 heading 前分页（默认 true）
-//   phase: int | none        - 状态转换目标 (0/1/2/3/none)
+//   part: int | none         - 状态转换目标 (0/1/2/3/none)
 //   reset-page: bool        - 是否重置页码为 1（默认 false）
 //   show-header: bool       - 是否显示页眉（默认 true）
 //   header: content | none  - 自定义页眉文本（替换标题）
@@ -50,7 +50,7 @@
     outlined: false,
     supplement: [#metadata((
       pagebreak: pagebreak,
-      phase: if enter-front { 1 } else { none },
+      part: if enter-front { 1 } else { none },
       reset-page: enter-front,
       show-header: true,
       ..extra-meta.named(),
@@ -131,7 +131,7 @@
 
   let meta = get-heading-meta(it)
   let should-pagebreak = meta.at("pagebreak", default: true)
-  let target-phase = meta.at("phase", default: none)
+  let target-part = meta.at("part", default: none)
   let should-reset-page = meta.at("reset-page", default: false)
 
   if should-pagebreak {
@@ -139,15 +139,15 @@
   }
 
   context {
-    let current-phase = phasecounter.at(here()).first()
+    let current-part = partcounter.at(here()).first()
 
-    if target-phase != none {
-      phasecounter.update(target-phase)
-    } else if it.numbering != none and current-phase < 2 {
-      phasecounter.update(2)
+    if target-part != none {
+      partcounter.update(target-part)
+    } else if it.numbering != none and current-part < 2 {
+      partcounter.update(2)
     }
 
-    if should-reset-page or (it.numbering != none and current-phase < 2) {
+    if should-reset-page or (it.numbering != none and current-part < 2) {
       counter(page).update(1)
     }
   }
