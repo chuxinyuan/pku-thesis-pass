@@ -151,7 +151,7 @@ Typst 支持无序列表和有序列表：
 #code-preview(
   ```typ
   #figure(
-    image("../../assets/pkulogo.pdf", width: 30%),
+    image("../assets/pkulogo.pdf", width: 30%),
     caption: "北京大学校徽",
   ) <logo>
   ```,
@@ -472,7 +472,7 @@ $ a^2 + b^2 = c^2 $ <eq-pythagoras>
   [公式],
   ["如式 (1.1) 所示"],
   [章节],
-  ["如第 1 章所述"],
+  ["如第一章所述"],
   [附录],
   ["如附录 A 所述"],
 )
