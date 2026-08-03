@@ -30,6 +30,7 @@
   declaration,
   font,
   blind,
+  total-words,
 ) = config(
   // ========== 基本信息 ==========
   author-zh: "张三",

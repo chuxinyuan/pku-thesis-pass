@@ -29,6 +29,7 @@
 #import "style.typ": supplement, font-set
 #import "utils.typ": skippedstate, appendix, _resolve-path
 #import "components.typ": booktab, as-booktab, codeblock
+#import "show.typ": word-count-cjk, total-words, total-characters
 
 // 基础设施
 #import "page.typ": page-setup
@@ -96,6 +97,7 @@
 ///   outline-depth — 目录深度（默认 3）
 ///   supplements — 自定义引用记号
 ///   codly-args — 控制代码块行号、背景色、语言图标等
+///   word-count — 统计正文字数（默认 true，正文任意处可用 total-words / total-characters 显示）
 ///   logo — 封面校徽图片路径，`path` 类型（如 `path("assets/logo.svg")`，默认 none 显示占位框）
 ///   wordmark — 封面校名字标图片路径，`path` 类型（如 `path("assets/wordmark.svg")`，默认 none 显示占位框）
 ///
@@ -156,6 +158,9 @@
     lang-format: none,    // 语言名称
     zebra-fill: none,     // 斑马条纹
   ),
+  // 统计正文字数（CJK 字数 / 总字符数），可用 total-words / total-characters 显示
+  // 如不需要可设为 false
+  word-count: true,
   // 封面校徽、字标图片文件路径，参数值为 none 时封面显示灰色占位框
   // 示例：logo: path("assets/logo.svg"), wordmark: path("assets/wordmark.svg")
   logo: none,
@@ -337,7 +342,13 @@
       leading: 10.5pt,
       spacing: 10.5pt,
     )
-    body
+    // 字数统计：统计正文与附录（show 规则必须与 body 处于同一作用域才生效）
+    if word-count {
+      show: word-count-cjk
+      body
+    } else {
+      body
+    }
   }
 
   // ========== 参考文献 ==========
@@ -394,5 +405,7 @@
     always-start-odd: always-start-odd,
     first-line-indent: first-line-indent,
     smartpagebreak: smartpagebreak,
+    total-words: total-words,
+    total-characters: total-characters,
   )
 }

@@ -1,9 +1,10 @@
 // ============================================================
 // show.typ — 跨元素 show 规则
 // 被 page.typ 的 page-setup 通过 #show figure / #show ref 等引用
-// 职责：图/表/代码块的展示布局、交叉引用链接生成
+// 职责：图/表/代码块的展示布局、交叉引用链接生成、字数统计
 // ============================================================
 
+#import "@preview/wordometer:0.1.5": *
 #import "style.typ": size
 #import "utils.typ": chinesenumbering, chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter
 
@@ -61,10 +62,8 @@
       } else if el.kind == "code" {
         link(el_loc, [#supplements.代码 #chinesenumbering(chaptercounter.at(el_loc).first(), rawcounter.at(el_loc).first(), location: el_loc)])
       } else {
-        // 未知 figure kind 的 fallback：使用 supplements.图表 前缀。
-        // 编号来自该 kind 的子计数器；headings.typ 的 heading-show-rule 只重置
-        // image/table/code 三个已知 kind，未知 kind 的编号跨章节累计，但与
-        // caption 前缀（_figure-show-rule）共用同一计数器，两者保持一致。
+        // 未知 figure kind 的 fallback：前缀用 supplements.图表，编号取该 kind 的
+        // 子计数器（未随章节重置而跨章累计，与 _figure-show-rule 的图题编号一致）
         link(el_loc, [#supplements.图表 #chinesenumbering(
           chaptercounter.at(el_loc).first(),
           counter(figure.where(kind: el.kind)).at(el_loc).first(),
@@ -81,3 +80,29 @@
     h(0em, weak: true)
   }
 }
+
+/// 字数统计 show 规则：排除标题，累计 CJK 字数 / 总词数 / 字符数
+/// 统计结果写入三个 state，供 total-words / total-characters 读取
+/// 由 config() 的 body-wrap 在 word-count: true 时应用（统计正文与附录）
+#let word-count-cjk(content, ..options) = {
+  let stats = word-count-of(
+    content,
+    exclude: (heading),
+    counter: s => (
+      characters: s.replace(regex("\s+"), "").clusters().len(),
+      words: s.matches(regex("\b[\w'’.,\-]+\b")).len(),
+      words-cjk: s.matches(regex("[\p{Han}]|[\p{Latin}'’.,\-]+")).len(),
+    ),
+    ..options,
+  )
+  state("total-words-cjk").update(prev => prev + stats.words-cjk)
+  state("total-words").update(prev => prev + stats.words)
+  state("total-characters").update(prev => prev + stats.characters)
+  content
+}
+
+/// 正文 CJK 字数（含中文标点附近的汉字与拉丁词），显示为内容
+#let total-words = context state("total-words-cjk").final()
+
+/// 正文字符数（去空白后）
+#let total-characters = context state("total-characters").final()

@@ -1,4 +1,5 @@
 #import "../../format/components.typ": as-booktab, booktab, codeblock
+#import "../../format/show.typ": total-words
 
 #let code-preview(code, result) = {
   booktab(
@@ -329,6 +330,23 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 ) <fib>
 
 @fib 展示了斐波那契数列的递归实现。
+
+== 字数统计
+
+如需统计正文与附录的字数，在 `config()` 中设置 `word-count: true`，并在正文任意位置解构出 `total-words`（CJK 字数）或 `total-characters`（字符数）来显示：
+
+#code-preview(
+  ```typ
+  #let (setup, ..., total-words) = config(
+    word-count: true, // 统计正文与附录的字数
+  )
+
+  全文总字数约为 #total-words 字。
+  ```,
+  [全文总字数约为 #total-words 字。],
+)
+
+统计由集成的 #link("https://typst.app/universe/package/wordometer")[wordometer] 包完成，标题不计入统计。
 
 == 参考文献
 

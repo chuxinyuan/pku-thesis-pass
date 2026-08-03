@@ -28,6 +28,7 @@
   declaration,
   font,
   blind,
+  total-words,
 ) = config(
   // ========== 基本信息 ==========
   author-zh: "张三",
@@ -59,7 +60,6 @@
   outline-depth: 3,
   supplements: (:),
   codly-args: (:),
-  // 封面校徽和字标取自 CTAN 的 pkuthss 包
   logo: path("assets/pkulogo.pdf"),
   wordmark: path("assets/pkuword.pdf"),
 
