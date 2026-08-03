@@ -32,7 +32,12 @@
     ]
     it.body
   } else {
-    it
+    it.body
+    [
+      #set text(size: size.图题)
+      #context { supplements.图表 + it.counter.display(it.numbering) + "   " }
+      #it.caption.body
+    ]
   }
 }
 
@@ -55,7 +60,17 @@
         link(el_loc, [#supplements.表 #chinesenumbering(chaptercounter.at(el_loc).first(), tablecounter.at(el_loc).first(), location: el_loc)])
       } else if el.kind == "code" {
         link(el_loc, [#supplements.代码 #chinesenumbering(chaptercounter.at(el_loc).first(), rawcounter.at(el_loc).first(), location: el_loc)])
-      } else { it }
+      } else {
+        // 未知 figure kind 的 fallback：使用 supplements.图表 前缀。
+        // 编号来自该 kind 的子计数器；headings.typ 的 heading-show-rule 只重置
+        // image/table/code 三个已知 kind，未知 kind 的编号跨章节累计，但与
+        // caption 前缀（_figure-show-rule）共用同一计数器，两者保持一致。
+        link(el_loc, [#supplements.图表 #chinesenumbering(
+          chaptercounter.at(el_loc).first(),
+          counter(figure.where(kind: el.kind)).at(el_loc).first(),
+          location: el_loc,
+        )])
+      }
     } else if el.func() == heading {
       if el.level == 1 {
         link(el_loc, chinesenumbering(..counter(heading).at(el_loc), location: el_loc))
