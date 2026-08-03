@@ -52,6 +52,8 @@
   smartpagebreak: none,
   merged-supplements: (:),
   codly-args: (:),
+  document-title: none,
+  document-author: none,
   body: none,
 ) = {
   set page(
@@ -61,6 +63,12 @@
     footer: make-footer(),
   )
   set text(font: font.宋体, size: size.正文, lang: "zh")
+  set document(
+    title: document-title,
+  )
+  if document-author != none {
+    set document(author: document-author)
+  }
   set heading(numbering: chinesenumbering)
 
   set figure(

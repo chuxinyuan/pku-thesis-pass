@@ -219,6 +219,10 @@
       smartpagebreak: smartpagebreak,
       merged-supplements: merged-supplements,
       codly-args: codly-args,
+      // PDF 元数据：盲审时隐藏作者，避免在文件属性中泄露
+      // 文档日期（CreationDate）由 Typst 原生写入编译时间，无需在此设置
+      document-title: title-zh,
+      document-author: if blind { none } else { author-zh },
       body: body,
     )
   }
