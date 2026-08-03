@@ -176,7 +176,7 @@
 模板还导出了 `booktab`、`as-booktab`、`codeblock` 三个组件函数，可直接导入使用：
 
 ```typ
-#import "@preview/pku-thesis-pass:0.2.0": booktab, as-booktab, codeblock
+#import "@preview/pku-thesis-pass:0.3.0": booktab, as-booktab, codeblock
 ```
 
 === booktab — 三线表

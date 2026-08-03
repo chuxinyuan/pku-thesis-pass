@@ -27,7 +27,7 @@
 ### 方式一：从 Typst Universe 创建（推荐）
 
 ```bash
-typst init @preview/pku-thesis-pass:0.2.0 my-thesis
+typst init @preview/pku-thesis-pass:0.3.0 my-thesis
 cd my-thesis
 ```
 

@@ -27,7 +27,7 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
 最简单的插入方式：
 
 ```typ
-#image("../../assets/pkuword.pdf", width: 60%)
+#image("../assets/pkuword.pdf", width: 60%)
 ```
 
 如果是写论文，那么有必要给图片一个 Figure 类、标题和标签，方便自动编号和交叉引用。
