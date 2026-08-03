@@ -176,7 +176,7 @@ Typst 中定义表格使用 `table` 函数。如需标题和引用功能，同�
   - 仅当 `outlined = true`（默认）时，`booktab` 才会包装为 `figure`，此时 `caption` 生效、表格可被 `@label` 引用。
   - 设 `outlined: false` 时为纯表格，`caption` 不生效，且不能使用 `@` 引用。
 
-*注意*：本模板默认允许表格跨页显示（`show figure: set block(breakable: true)`）。如果不希望某个表格被分割，可以在表格前手动插入 `#pagebreak()` 进行调整。
+*注意*：本模板默认允许表格跨页显示（`show figure: set block(breakable: true)`）。长表跨页时会自动重复表头，并在续表页右上角标注"续表"，无需手动控制。如果不希望某个表格被分割，可以在表格前手动插入 `#pagebreak()` 进行调整。
 
 @booktab-example 展示了 `booktab` 的示例效果：
 

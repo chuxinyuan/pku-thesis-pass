@@ -8,6 +8,9 @@
 
 // ========== 三线表组件 ==========
 
+/// 续表标记状态：表格渲染前重置，跨页续表时在表头右上显示"续表"
+#let _booktab-xubiao = state("booktab-xubiao")
+
 /// 计算表格列数：int 直接返回，array 返回长度，否则默认为 1
 #let _booktab-column-count(columns) = if type(columns) == int {
   columns
@@ -15,18 +18,32 @@
 
 /// 三线表内部构建块：block 包裹的 table
 /// 固定顶线 1.5pt、表头线 0.75pt、底线 1.5pt
+/// 顶线与表头线放在 table.header 内，跨页时随表头一起重复；
+/// 表头前插入跨列"续表"标记行：首页隐形占位，续表页右上显示"续表"
 /// footer: 可选的 table.footer 内容
 #let _booktab-block(table-args, header, body, width: auto, footer: none) = block(
   width: width,
   breakable: true,
   {
+    _booktab-xubiao.update(false)
+    let col-count = _booktab-column-count(table-args.at("columns", default: 1))
     set text(size: size.表文)
     table(
       stroke: none,
       ..table-args,
-      table.hline(stroke: 1.5pt),
-      header,
-      table.hline(stroke: 0.75pt),
+      table.header(
+        table.cell(colspan: col-count, {
+          context if _booktab-xubiao.get() {
+            align(right)[续表]
+          } else {
+            v(-0.9em)
+            _booktab-xubiao.update(true)
+          }
+        }),
+        table.hline(stroke: 1.5pt),
+        ..header.children,
+        table.hline(stroke: 0.75pt),
+      ),
       ..body,
       ..if footer != none { (footer,) } else { () },
       table.hline(stroke: 1.5pt),
