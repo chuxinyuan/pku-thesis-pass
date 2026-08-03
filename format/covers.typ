@@ -34,7 +34,7 @@
 ]
 
 /// 正常版封面
-/// 显示北京大学校徽（logo + wordmark）、论文类型、题目、作者信息及学位类型
+/// 显示校徽和字标（logo + wordmark）、论文类型、题目、作者信息及学位类型
 /// 未提供校徽/字标图片时显示灰色占位框（logo/wordmark 参数为 none）
 /// 利用 build-field-grid 实现字段名与值的对齐排版
 #let cover-page-normal(

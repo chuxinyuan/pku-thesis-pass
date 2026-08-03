@@ -140,7 +140,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 可直接导入的组件：
 
 ```typ
-#import "@preview/pku-thesis-pass:0.2.0": booktab, as-booktab, codeblock
+#import "@preview/pku-thesis-pass:0.x.0": booktab, as-booktab, codeblock
 ```
 
 - `#booktab(...)`：生成三线表，第一行自动加粗为表头，支持 `outlined: false` 生成纯表格

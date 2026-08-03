@@ -2,7 +2,7 @@
 
 感谢 #link("https://typst.app/")[Typst] 开发团队创造了这一优秀的排版系统，其简洁的语法和高效的编译速度极大地提升了学术写作的体验。
 
-感谢 #link("https://github.com/pku-typst/pkuthss-typst")[pkuthss-typst] 项目成员前期的伟大贡献，让论文排版这项工作变得简单而有趣。本模板在 pkuthss-typst 的基础上，借助 AI 的力量做了一点点调整，最终形成了现在的 pku-thesis-pass。
+感谢 #link("https://github.com/pku-typst/pkuthss-typst")[pkuthss-typst] 项目成员前期的伟大贡献，让北京大学学位论文排版这项工作变得简单而有趣。本模板在 pkuthss-typst 的基础上，借助 AI 的力量做了微调，最终形成了现在的 pku-thesis-pass。
 
 感谢所有为本模板提出建议、反馈问题的用户，你们的意见帮助我们不断改进模板的功能和易用性。
 

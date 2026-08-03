@@ -9,7 +9,9 @@
 //   --input system=default|mac|windows|linux    系统字体方案
 // ============================================================
 
-#import "@preview/pku-thesis-pass:0.2.0": config
+#import "../format/lib.typ": config
+// 本地测试时注释掉下一行，取消注释上一行
+// #import "@preview/pku-thesis-pass:0.3.0": config
 
 #let (
   setup,
@@ -59,14 +61,8 @@
   outline-depth: 3,
   supplements: (:),
   codly-args: (:),
-  // 1.封面校徽和字标：因版权原因，参数默认值为 none，封面显示灰色占位框
-  // 2.官方校徽和字标 pdf 文件建议从 CTAN 的 pkuthss 包获取：
-  //  https://ctan.org/pkg/pkuthss
-  // 3.请您将相关文件放在项目根目录的 `assets` 路径下，设置 `path` 指向该文件即可，例如：
-  //   logo: path("assets/pkulogo.pdf"),
-  //   wordmark: path("assets/pkuword.pdf"),
-  logo: none,
-  wordmark: none,
+  logo: path("assets/pkulogo.pdf"),
+  wordmark: path("assets/pkuword.pdf"),
 
   // ========== 参考文献 ==========
   bib-file: path("ref.bib"),

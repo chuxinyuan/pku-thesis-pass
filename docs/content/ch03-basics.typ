@@ -151,19 +151,19 @@ Typst 支持无序列表和有序列表：
 #code-preview(
   ```typ
   #figure(
-    image("../../assets/placeholder-logo.svg", width: 30%),
-    caption: "校徽占位图",
+    image("../../assets/pkulogo.pdf", width: 30%),
+    caption: "北京大学校徽",
   ) <logo>
   ```,
   [
     #figure(
-      image("../assets/placeholder-logo.svg", width: 30%),
-      caption: "校徽占位图",
+      image("../assets/pkulogo.pdf", width: 30%),
+      caption: "北京大学校徽",
     ) <logo>
   ],
 )
 
-@logo 展示了校徽占位图。出于版权考虑，这里*不包含*北京大学官方校徽和字标，需通过 `config()` 的 `logo` / `wordmark` 参数自行导入真实校徽和字标（见 @config-ref）。代码中的 `<logo>` 是标签，可以在文中通过 `@logo` 来引用。
+@logo 展示了北京大学校徽。代码中的 `<logo>` 是标签，可以在文中通过 `@logo` 来引用。
 
 == 表格
 
@@ -490,7 +490,7 @@ $ a^2 + b^2 = c^2 $ <eq-pythagoras>
 如果默认的 `@` 引用效果不满足需求，可以使用 `#link` 和 `#ref` 函数手动构造引用文本：
 
 ```typ
-#link(<fig-wordmark>)[北京大学字标（占位图）]
+#link(<fig-wordmark>)[北京大学字标]
 ```
 
-这会在"北京大学字标（占位图）"上创建指向 @fig-wordmark 的超链接。
+这会在"北京大学字标"上创建指向 @fig-wordmark 的超链接，因为我在附录里插入了一张北京大学字标的图片，并给它加了标签 `<fig-wordmark>`。
