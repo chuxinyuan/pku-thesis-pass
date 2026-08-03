@@ -12,6 +12,8 @@
 /// 生成页眉内容（作为 place 元素放置在页面顶部）
 /// header-text: 偶数页统一显示的页眉文本
 #let make-header(header-text: none) = context {
+  // 脚注序号按页编排：每页页眉求值时重置脚注计数器
+  counter(footnote).update(0)
   let part = partcounter.at(here()).first()
   let logical-page = counter(page).at(here()).first()
 
