@@ -5,6 +5,7 @@
 // ============================================================
 
 #import "style.typ": size
+#import "headings.typ": front-heading
 
 /// 英文摘要页
 /// title-en: 英文论文题目（自动 upper 全大写）
@@ -21,19 +22,14 @@
   blind: false,
   body,
 ) = {
-  heading(
-    numbering: none,
-    outlined: false,
-    supplement: [#metadata((
-      pagebreak: true,
-      show-header: true,
-      header: "ABSTRACT",
-      spacing-before: 24pt,
-      spacing-after: 18pt,
-      linespacing: 2em,
-      font: (size: size.英文摘要标题, font: "Arial", weight: "regular"),
-    ))],
-  )[#upper(title-en)]
+  front-heading(
+    upper(title-en),
+    header: "ABSTRACT",
+    spacing-before: 24pt,
+    spacing-after: 18pt,
+    linespacing: 2em,
+    font: (size: size.英文摘要标题, font: "Arial", weight: "regular"),
+  )
 
   // Word 模板中正文仍然是 20pt 行距
   // 对于纯英文字体，测试下来 12.5pt 的匹配效果较好
