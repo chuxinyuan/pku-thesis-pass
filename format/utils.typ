@@ -7,14 +7,14 @@
 
 // ========== 计数器定义 ==========
 
-// partcounter 状态:
+// phasecounter 状态:
 //   0 = 封面区域（无页眉页脚）
 //   1 = 前置部分（罗马数字页码，有页眉）
 //   2 = 正文部分（阿拉伯数字页码，有页眉）
+//   3 = 附录部分（页码同正文，编号切换为 "附录 A"/"A.1"）
 
-#let partcounter = counter("part")
+#let phasecounter = counter("phase")
 #let chaptercounter = counter("chapter")
-#let appendixcounter = counter("appendix")
 #let footnotecounter = counter(footnote)
 #let rawcounter = counter(figure.where(kind: "code"))
 #let imagecounter = counter(figure.where(kind: image))
@@ -28,10 +28,10 @@
 
 /// 附录切换函数：在正文末尾调用，进入附录模式
 /// 发射 pkuthss-appendix 元数据标记（用于触发参考文献渲染）
-/// 并将附录计数器置为 10（>=10 即表示附录区域），重置章节和标题计数器
+/// 并将阶段置为 3（附录区域），重置章节和标题计数器
 #let appendix() = {
   metadata("pkuthss-appendix")
-  appendixcounter.update(10)
+  phasecounter.update(3)
   chaptercounter.update(0)
   counter(heading).update(0)
 }
@@ -49,13 +49,16 @@
     .join("")
 )
 
+/// 判断指定位置是否处于附录区域（phase >= 3）
+#let in-appendix(location) = phasecounter.at(location).first() >= 3
+
 /// 中文章节编号格式化
-/// - 正文部分（appendix < 10）：一级标题显示"第X章"，多级显示"X.X"
-/// - 附录部分（appendix >= 10）：一级显示"附录 A"，多级显示"A.X"
+/// - 正文部分（appendix == 0）：一级标题显示"第X章"，多级显示"X.X"
+/// - 附录部分（appendix == 1）：一级显示"附录 A"，多级显示"A.X"
 /// brackets: 是否为公式引用加括号（如"(1.1)"）
 #let chinesenumbering(..nums, location: none, brackets: false) = context {
   let actual_loc = if location == none { here() } else { location }
-  if appendixcounter.at(actual_loc).first() < 10 {
+  if not in-appendix(actual_loc) {
     if nums.pos().len() == 1 {
       "第" + chinesenumber(nums.pos().first()) + "章"
     } else {

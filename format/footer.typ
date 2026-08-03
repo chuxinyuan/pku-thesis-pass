@@ -1,17 +1,17 @@
 // ============================================================
 // footer.typ — 页脚生成
-// 根据 partcounter 阶段显示罗马数字（前置部分）或阿拉伯数字（正文）
-// 封面阶段（part == 0）不显示页脚
+// 根据 phasecounter 阶段显示罗马数字（前置部分）或阿拉伯数字（正文/附录）
+// 封面阶段（phase == 0）不显示页脚
 // 声明页启用 clean-declaration 后清除页码
 // ============================================================
 
 #import "style.typ": size
-#import "utils.typ": partcounter, skippedstate
+#import "utils.typ": phasecounter, skippedstate
 
 /// 生成页脚页码（作为 place 元素放置在页面底部）
 #let make-footer() = context {
-  let part = partcounter.at(here()).first()
-  if part == 0 { return }
+  let phase = phasecounter.at(here()).first()
+  if phase == 0 { return }
 
   let logical-page = counter(page).at(here()).first()
   if skippedstate.at(here()) and calc.even(logical-page) { return }
@@ -29,7 +29,7 @@
 
   place(bottom + center)[
     #set align(bottom)
-    #if part == 1 {
+    #if phase == 1 {
       numbering("I", page-num)
     } else {
       str(page-num)

@@ -5,7 +5,7 @@
 // ============================================================
 
 #import "headings.typ": front-heading
-#import "utils.typ": appendixcounter, chaptercounter, chinesenumbering, partcounter
+#import "utils.typ": in-appendix, chaptercounter, chinesenumbering, phasecounter
 
 /// 中文目录
 /// title: 目录标题（默认"目录"）
@@ -26,7 +26,7 @@
     let el_loc = el.location()
 
     // 跳过前置部分（part < 2）的无编号 heading
-    if partcounter.at(el_loc).first() < 2 and el.numbering == none {
+    if phasecounter.at(el_loc).first() < 2 and el.numbering == none {
       return
     }
 
@@ -67,7 +67,7 @@
     box(width: 1fr, [#h(2pt) #box(width: 1fr, repeat[.]) #h(2pt)])
 
     let heading_counter = counter(heading).at(el_loc)
-    let is-appendix = appendixcounter.at(el_loc).first() >= 10
+    let is-appendix = in-appendix(el_loc)
     let is-first-body-chapter = (
       el.level == 1
         and el.numbering != none

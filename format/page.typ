@@ -9,7 +9,7 @@
 #import "@preview/codly-languages:0.1.10": codly-languages
 
 #import "style.typ": font, size
-#import "utils.typ": appendixcounter, chaptercounter, chinesenumbering
+#import "utils.typ": in-appendix, chaptercounter, chinesenumbering
 #import "headings.typ": heading-show-rule
 #import "header.typ": make-header
 #import "footer.typ": make-footer
@@ -65,7 +65,7 @@
 
   set figure(
     numbering: (..nums) => context {
-      if appendixcounter.at(here()).first() < 10 {
+      if not in-appendix(here()) {
         numbering("1.1", chaptercounter.at(here()).first(), ..nums)
       } else {
         numbering("A.1", chaptercounter.at(here()).first(), ..nums)
@@ -76,7 +76,7 @@
   set math.equation(
     numbering: (..nums) => context {
       set text(font: font.宋体)
-      if appendixcounter.at(here()).first() < 10 {
+      if not in-appendix(here()) {
         numbering("(1.1)", chaptercounter.at(here()).first(), ..nums)
       } else {
         numbering("(A.1)", chaptercounter.at(here()).first(), ..nums)
