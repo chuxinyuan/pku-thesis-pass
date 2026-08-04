@@ -47,6 +47,8 @@
   [学位类型：`"academic"`（学术学位）或 `"professional"`（专业学位）],
 ) <config-author>
 
+其中 `title-zh` 与 `author-zh` 除了显示在封面外，还会写入 PDF 文档属性（元数据）：`title-zh` 作为标题，`author-zh` 作为作者。盲审模式（`blind: true`）下作者会被隐藏，仅保留标题。详见 @pdf-meta。
+
 == 院系与专业信息
 
 #booktab(

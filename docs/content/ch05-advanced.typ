@@ -51,6 +51,26 @@ typst compile thesis.typ --input blind=true
 typst compile thesis.typ --input blind=false
 ```
 
+== PDF 元数据 <pdf-meta>
+
+模板会自动将论文信息写入 PDF 文档属性（即阅读器中"文件信息 / Document Properties"可查看的元数据）：
+
+- #strong[标题]：取 `title-zh`
+- #strong[作者]：取 `author-zh`
+- #strong[创建日期]：由 Typst 自动写入编译时间，无需配置
+
+这样导出的 PDF 在系统中按标题、作者归类时更规范，也便于检索：
+
+```typ
+#let (setup, ..) = config(
+  title-zh: "论文中文题目",
+  author-zh: "张三",
+  ...
+)
+```
+
+#strong[注意]：盲审模式（`blind: true`）下作者会被隐藏（元数据中不写入作者），仅保留标题，避免在文件属性中泄露个人信息。如需完全匿名，请同时确认封面与正文中不含作者、导师等信息。
+
 == 预览与打印模式
 
 `preview` 参数控制链接文本的显示方式：

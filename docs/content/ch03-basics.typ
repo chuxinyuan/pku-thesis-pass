@@ -260,6 +260,33 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 @integral 展示了一个积分公式。
 
+=== 不编号公式
+
+默认情况下行间公式都会自动编号。若某个公式不需要编号（如推导过程中的中间步骤），可用 `#math.equation($...$, numbering: none, block: true)` 显式关闭，该公式不会占编号，也不影响后续公式编号：
+
+#code-preview(
+  ```typ
+  $ F_n = F_(n-1) + F_(n-2) $ <fibo>
+
+  中间推导，不编号：
+  #math.equation($ F_n = floor(1 / sqrt(5) phi.alt^n) $, numbering: none, block: true)
+
+  后续公式仍从下一号继续：
+  $ F_n = floor(1 / sqrt(5) phi.alt^n) $ <fibo2>
+  ```,
+  [
+    $ F_n = F_(n-1) + F_(n-2) $ <fibo>
+
+    中间推导，不编号：
+    #math.equation($ F_n = floor(1 / sqrt(5) phi.alt^n) $, numbering: none, block: true)
+
+    后续公式仍从下一号继续：
+    $ F_n = floor(1 / sqrt(5) phi.alt^n) $ <fibo2>
+  ],
+)
+
+如上所示，@fibo 与 @fibo2 的编号连续，中间的公式没有编号。
+
 === 多行公式
 
 多行公式使用 `\` 换行，使用 `&` 对齐：
