@@ -8,7 +8,7 @@
 // ============================================================
 
 #import "style.typ": size
-#import "utils.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter
+#import "utils.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
 
 /// 根据标题等级返回对应字号（用于 2–4 级标题）
 #let get-heading-size(level) = {
@@ -181,6 +181,14 @@
     tablecounter.update(())
     rawcounter.update(())
     equationcounter.update(())
+    theoremcounter.update(())
+    definitioncounter.update(())
+    lemmacounter.update(())
+    corollarycounter.update(())
+    propositioncounter.update(())
+    propertycounter.update(())
+    examplecounter.update(())
+    remarkcounter.update(())
   }
 
   set align(center)

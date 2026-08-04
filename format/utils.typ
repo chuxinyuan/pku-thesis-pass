@@ -20,6 +20,20 @@
 #let imagecounter = counter(figure.where(kind: image))
 #let tablecounter = counter(figure.where(kind: table))
 #let equationcounter = counter(math.equation)
+#let theoremcounter = counter(figure.where(kind: "theorem"))
+#let definitioncounter = counter(figure.where(kind: "definition"))
+#let lemmacounter = counter(figure.where(kind: "lemma"))
+#let corollarycounter = counter(figure.where(kind: "corollary"))
+#let propositioncounter = counter(figure.where(kind: "proposition"))
+#let propertycounter = counter(figure.where(kind: "property"))
+#let examplecounter = counter(figure.where(kind: "example"))
+#let remarkcounter = counter(figure.where(kind: "remark"))
+
+/// 定理类环境的 kind 集合：用于 show.typ 识别定理类 figure
+#let theorem-kinds = (
+  "theorem", "definition", "lemma", "corollary",
+  "proposition", "property", "example", "remark",
+)
 
 /// 跳过页状态：用于 always-start-odd 时标记被跳过的空白偶数页。
 #let skippedstate = state("skipped", false)

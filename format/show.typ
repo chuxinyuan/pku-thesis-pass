@@ -5,7 +5,7 @@
 // ============================================================
 
 #import "style.typ": size
-#import "utils.typ": chinesenumbering, chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter
+#import "utils.typ": chinesenumbering, chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter, theorem-kinds
 
 /// 图、表、代码块的 show 规则
 /// 图片：caption 在下方；表格：caption 在上方；代码块：caption 在上方
@@ -30,6 +30,9 @@
       #context { supplements.代码 + it.counter.display(it.numbering) + "   " }
       #it.caption.body
     ]
+    it.body
+  } else if it.kind in theorem-kinds {
+    set align(left)
     it.body
   } else {
     it.body
@@ -60,6 +63,12 @@
         link(el_loc, [#supplements.表 #chinesenumbering(chaptercounter.at(el_loc).first(), tablecounter.at(el_loc).first(), location: el_loc)])
       } else if el.kind == "code" {
         link(el_loc, [#supplements.代码 #chinesenumbering(chaptercounter.at(el_loc).first(), rawcounter.at(el_loc).first(), location: el_loc)])
+      } else if el.kind in theorem-kinds {
+        link(el_loc, [#el.supplement #chinesenumbering(
+          chaptercounter.at(el_loc).first(),
+          counter(figure.where(kind: el.kind)).at(el_loc).first(),
+          location: el_loc,
+        )])
       } else {
         // 未知 figure kind 的 fallback：前缀用 supplements.图表，编号取该 kind 的
         // 子计数器（未随章节重置而跨章累计，与 _figure-show-rule 的图题编号一致）

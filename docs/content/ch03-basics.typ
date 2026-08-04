@@ -1,4 +1,4 @@
-#import "../../format/components.typ": as-booktab, booktab, codeblock, total-words
+#import "../../format/components.typ": as-booktab, booktab, codeblock, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
 
 #let code-preview(code, result) = {
   booktab(
@@ -292,6 +292,71 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
     $ vec(1, 2, delim: "[") $
     $ mat(1, 2; 3, 4) $
     $ lim_(x -> 0) sin(x) / x = 1 $
+  ],
+)
+
+== 定理环境
+
+定理、定义、引理等环境使用 `#theorem`、`#definition`、`#lemma`、`#corollary`、
+`#proposition`、`#property`、`#example`、`#remark` 提供。各类型独立编号
+（随章重置，附录中自动切换为 "A.1"），并支持 `@label` 交叉引用：
+
+#code-preview(
+  ```typ
+  #theorem[
+    设 $n$ 为大于 1 的整数，若 $n$ 没有大于 1 且小于 $n$ 的因数，则称 $n$ 为素数。
+  ]
+
+  #definition[
+    设 $a, b$ 为整数，$b != 0$。若存在整数 $q$ 使得 $a = b q$，则称 $b$ 整除 $a$。
+  ]
+
+  #lemma[每一个素数有且仅有两个正因数。]
+  ```,
+  [
+    #theorem[
+      设 $n$ 为大于 1 的整数，若 $n$ 没有大于 1 且小于 $n$ 的因数，则称 $n$ 为素数。
+    ]
+
+    #definition[
+      设 $a, b$ 为整数，$b != 0$。若存在整数 $q$ 使得 $a = b q$，则称 $b$ 整除 $a$。
+    ]
+
+    #lemma[每一个素数有且仅有两个正因数。]
+  ],
+)
+
+可以使用 `title` 参数为定理命名，配合标签进行交叉引用：
+
+#code-preview(
+  ```typ
+  #theorem(title: [唯一分解定理])[
+    任意大于 1 的整数都可以唯一地分解为素数的乘积。
+  ] <thm:ufd>
+
+  由 @thm:ufd 可知，质因数分解是唯一的。
+  ```,
+  [
+    #theorem(title: [唯一分解定理])[
+      任意大于 1 的整数都可以唯一地分解为素数的乘积。
+    ] <thm:ufd>
+
+    由 @thm:ufd 可知，质因数分解是唯一的。
+  ],
+)
+
+证明使用 `#proof` 环境，自动在末尾添加收尾符号：
+
+#code-preview(
+  ```typ
+  #proof[
+    对 $n$ 使用数学归纳法即可证明。
+  ]
+  ```,
+  [
+    #proof[
+      对 $n$ 使用数学归纳法即可证明。
+    ]
   ],
 )
 
