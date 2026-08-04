@@ -1,4 +1,6 @@
 #import "../../format/components.typ": code-block
+// 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
+// #import "@preview/pku-thesis-pass:0.3.0": code-block
 
 == 安装与环境配置
 

@@ -173,7 +173,7 @@ typst compile thesis.typ --input system=linux
 
 ## 致谢
 
-感谢 [pkuthss-typst](https://github.com/pku-typst/pkuthss-typst) 项目成员前期的伟大贡献，让北京大学学位论文排版这项工作变得简单而有趣，我在此模板的基础上，借助 AI 的力量做了微调。
+感谢 [pkuthss-typst](https://github.com/pku-typst/pkuthss-typst) 项目成员的杰出贡献，正是他们的卓越工作让北京大学学位论文排版变得简单而优雅。本模板在充分借鉴其理念与实现的基础上，借助 AI 辅助微调，最终形成了当前的论文模板。
 
 ## 许可证（License）
 

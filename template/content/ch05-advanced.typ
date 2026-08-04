@@ -1,4 +1,6 @@
 #import "../../format/components.typ": booktab
+// 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
+// #import "@preview/pku-thesis-pass:0.3.0": booktab
 
 #let code-preview(code, result) = {
   booktab(
@@ -202,11 +204,9 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 对于较长的论文，可以将各部分内容拆分到单独的文件中，使用 `include` 引入：
 
 ```typ
-= 引言 <intro>
-#include "content/ch01-intro.typ"
+= 快速开始 <quickstart>
 
-= 文献综述 <litrev>
-#include "content/ch02-litrev.typ"
+#include "content/ch01-quickstart.typ"
 ```
 
 == 模板提供的辅助函数

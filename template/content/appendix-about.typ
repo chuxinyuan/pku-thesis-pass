@@ -1,4 +1,6 @@
 #import "../../format/components.typ": as-booktab, code-block
+// 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
+// #import "@preview/pku-thesis-pass:0.3.0": as-booktab, code-block
 #import "@preview/gribouille:0.6.0": *
 
 撰写学位论文是每个研究生必须完成的功课。在 LaTeX 还是 Typst 的选择上，过去几年我们几乎没有悬念——LaTeX 是唯一的专业排版工具。然而，Typst 的出现正在改变这个局面。
