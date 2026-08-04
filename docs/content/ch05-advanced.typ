@@ -1,5 +1,16 @@
 #import "../../format/components.typ": booktab
 
+#let code-preview(code, result) = {
+  booktab(
+    columns: (1fr, 1fr),
+    outlined: false,
+    align(center)[*代码*],
+    align(center)[*渲染结果*],
+    code,
+    result,
+  )
+}
+
 == 自定义页眉页脚
 
 本模板的页眉页脚通过 `format/header.typ` 和 `format/footer.typ` 控制。页眉规则：
@@ -108,6 +119,69 @@ typst compile thesis.typ --input preview=false
 # 组合多个参数示例
 typst compile thesis.typ --input blind=true --input preview=false --input system=linux
 ```
+
+== LaTeX 引用兼容 <latexref>
+
+在 Typst 中，引用使用 `@标签名` 语法，且要求标签与引用完全一致。LaTeX 用户习惯在标签中加类型前缀，例如 `\label{fig:xxx}`、`\ref{fig:xxx}`。本模板的 `use-latexref` 选项可以兼容 LaTeX 这种写法，方便从 LaTeX 迁移的文档直接沿用原有标签，无需逐个改名。
+
+=== 开启方式
+
+在 `config()` 中设置 `use-latexref: true`：
+
+```typ
+#let (setup, ...) = config(
+  ...
+  use-latexref: true,
+)
+```
+
+开启后，带前缀的引用解析失败时会自动剥离前缀重试。下面是一个完整的例子，左边是代码，右边是实际渲染结果：
+
+#code-preview(
+  ```typ
+  #figure(
+    image("../assets/pkulogo.pdf", width: 30%),
+    caption: "LaTeX 风格标签示例",
+  ) <result>
+
+  如 @fig:result 所示，实验结果...
+  ```,
+  [
+    #figure(
+      image("../assets/pkulogo.pdf", width: 30%),
+      caption: "LaTeX 风格标签示例",
+    ) <result>
+
+    如 @fig:result 所示，LaTeX 风格标签示例...
+  ],
+)
+
+=== 工作原理
+
+- 引用 `@fig:result` 时，模板先尝试精确查找标签 `fig:result`；
+- 若不存在，再尝试剥离前缀 `fig:`，查找标签 `result`；
+- 若剥离后仍找不到，则照常报错（与不开启时的原生行为一致）。
+
+因此开启该选项不会影响已存在的引用：标签本来就叫 `<fig:result>` 时，`@fig:result` 会精确匹配，不做剥离。
+
+=== 默认前缀与自定义
+
+默认剥离的前缀为：
+
+```typ
+("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:")
+```
+
+分别对应图、表、公式、代码、图片、算法。如需增删，用 `latexref-prefixes` 参数覆盖，例如支持中文前缀：
+
+```typ
+#let (setup, ...) = config(
+  use-latexref: true,
+  latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:", "图:", "表:"),
+)
+```
+
+#strong[注意]：该选项只影响引用（`@`）的解析，不影响图、表、公式的编号样式；编号仍遵循模板规则（如"图 1.1"、"式 (1.1)"）。
 
 == 自定义章节样式
 

@@ -95,6 +95,8 @@
 ///   clean-declaration — 声明页清除页眉页码（默认 false）
 ///   outline-depth — 目录深度（默认 3）
 ///   supplements — 自定义引用记号
+///   use-latexref — 是否启用 LaTeX 引用兼容（默认 false）
+///   latexref-prefixes — LaTeX 引用剥离前缀列表（默认 ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:")）
 ///   codly-args — 控制代码块行号、背景色、语言图标等
 ///   word-count — 统计正文字数（默认 true，正文任意处可用 total-words / total-characters 显示）
 ///   logo — 封面校徽图片路径，`path` 类型（如 `path("assets/logo.svg")`，默认 none 显示占位框）
@@ -151,11 +153,16 @@
   // 引用记号自定义（图、表、代码、公式、节）
   // 示例：supplements: (图: "Figure", 表: "Table")
   supplements: (:),
+  // LaTeX 引用兼容：@fig:xxx 等带前缀引用解析失败时，剥离前缀重试 @xxx
+  // 用于从 LaTeX 迁移的文档（LaTeX 习惯写 \ref{fig:xxx}）。默认关闭
+  use-latexref: false,
+  // use-latexref 时尝试剥离的前缀列表
+  latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
   codly-args: (
-    number-format: none,  // 代码行号
-    display-icon: true,   // 语言图标
-    lang-format: none,    // 语言名称
-    zebra-fill: none,     // 斑马条纹
+    display-icon: true,      // 语言图标
+    // number-format: none,  // 代码行号
+    // lang-format: none,    // 语言名称
+    // zebra-fill: none,     // 斑马条纹
   ),
   // 统计正文字数（CJK 字数 / 总字符数），可用 total-words / total-characters 显示
   // 如不需要可设为 false
@@ -223,6 +230,8 @@
       smartpagebreak: smartpagebreak,
       merged-supplements: merged-supplements,
       codly-args: codly-args,
+      use-latexref: use-latexref,
+      latexref-prefixes: latexref-prefixes,
       // PDF 元数据：盲审时隐藏作者，避免在文件属性中泄露
       // 文档日期（CreationDate）由 Typst 原生写入编译时间，无需在此设置
       document-title: title-zh,

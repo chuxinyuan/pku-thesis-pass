@@ -127,6 +127,14 @@
     `display-icon: false`  关闭语言图标；\
     `lang-format: none`    关闭语言名称；\
     `zebra-fill: none`     关闭交替背景色],
+  [`use-latexref`],
+  [`false`],
+  [LaTeX 引用兼容：`@fig:xxx` 等带前缀的引用解析失败时，自动剥离前缀后重试 `@xxx`。\
+    适合从 LaTeX 迁移的文档（LaTeX 习惯用 `\ref{fig:xxx}`），开启后无需改动原有标签写法。\
+    详见 "进阶"一章的 @latexref 小节],
+  [`latexref-prefixes`],
+  [`("fig:", ..)`],
+  [`use-latexref` 为 `true` 时尝试剥离的前缀列表，可按需增删，如 `("图:", "表:")`],
   [`logo`],
   [`none`],
   [封面校徽图片路径，`path` 类型，如 `path("assets/logo.svg")`；为 `none` 时封面显示灰色占位框],

@@ -59,7 +59,8 @@
   clean-declaration: true,
   outline-depth: 3,
   supplements: (:),
-  codly-args: (:),
+  codly-args: (number-format: none),
+  use-latexref: true,
   logo: path("assets/pkulogo.pdf"),
   wordmark: path("assets/pkuword.pdf"),
 

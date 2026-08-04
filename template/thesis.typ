@@ -61,6 +61,8 @@
   clean-declaration: true,
   outline-depth: 3,
   supplements: (:),
+  use-latexref: true,
+  latexref-prefixes: ("fig:", "tbl:", "eqt:"),
   codly-args: (:),
   logo: path("assets/pkulogo.pdf"),
   wordmark: path("assets/pkuword.pdf"),

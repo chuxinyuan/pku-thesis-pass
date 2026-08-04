@@ -9,7 +9,7 @@
 #import "@preview/codly-languages:0.1.10": codly-languages
 
 #import "style.typ": font, size
-#import "utils.typ": in-appendix, chaptercounter, chinesenumbering
+#import "utils.typ": in-appendix, chaptercounter, chinesenumbering, show-latexref
 #import "headings.typ": heading-show-rule
 #import "header.typ": make-header
 #import "footer.typ": make-footer
@@ -54,6 +54,8 @@
   codly-args: (:),
   document-title: none,
   document-author: none,
+  use-latexref: false,
+  latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
   body: none,
 ) = {
   set page(
@@ -133,6 +135,15 @@
   show figure: set block(breakable: true)
   show figure: it => _figure-show-rule(it, merged-supplements)
   show ref: it => _ref-show-rule(it, merged-supplements)
+
+  // LaTeX 引用兼容：@fig:xxx 解析失败时剥离前缀重试 @xxx
+  // 注意：show: 不能写在 if 块内部，否则不会作用于函数体返回的内容
+  let latexref-wrapper = if use-latexref {
+    show-latexref.with(latexref-prefixes)
+  } else {
+    it => it
+  }
+  show: latexref-wrapper
 
   body
 }
