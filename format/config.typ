@@ -333,20 +333,20 @@
     )
   }
 
-  // ========== 代码列表 ==========
-  let list-of-code = () => {
-    listoffigures(
-      title: merged-supplements.代码列表,
-      kind: "code",
-      supplements: merged-supplements,
-    )
-  }
-
   // ========== 公式列表 ==========
   let list-of-equations = () => {
     listoffigures(
       title: merged-supplements.公式列表,
       kind: "equation",
+      supplements: merged-supplements,
+    )
+  }
+
+  // ========== 代码列表 ==========
+  let list-of-code = () => {
+    listoffigures(
+      title: merged-supplements.代码列表,
+      kind: "code",
       supplements: merged-supplements,
     )
   }
@@ -418,8 +418,8 @@
     outline: outline,
     list-of-figures: list-of-figures,
     list-of-tables: list-of-tables,
-    list-of-code: list-of-code,
     list-of-equations: list-of-equations,
+    list-of-code: list-of-code,
     notation: notation,
     body-wrap: body-wrap,
     bibliography: bibliography,
