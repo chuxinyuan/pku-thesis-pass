@@ -12,6 +12,7 @@
 - 版权声明页
 - 中英文摘要
 - 自动目录（含图、表、公式、代码列表）
+- 主要符号对照表
 - 中文章节编号（第X章 + 附录 A/B）
 - GB/T 7714 参考文献（2015 / 2025 标准）
 - 三线表、公式、代码高亮
@@ -80,7 +81,7 @@ cd pku-thesis-pass
 | `always-start-odd` | bool | 章节从奇数页开始（默认 `true`） |
 | `clean-declaration` | bool | 声明页隐藏页眉页脚（默认 `false`） |
 | `outline-depth` | int | 目录深度（默认 `3`） |
-| `supplements` | dict | 自定义引用记号（图/表/代码/公式前缀） |
+| `supplements` | dict | 自定义引用记号（图/表/代码/公式前缀）及列表标题（插图/表格/代码/公式列表、符号表） |
 | `codly-args` | dict | 代码块样式参数（行号、语言图标等） |
 | `use-latexref` | bool | LaTeX 引用兼容（默认 `false`） |
 | `latexref-prefixes` | array | `use-latexref` 为 `true` 时尝试剥离的前缀列表 |

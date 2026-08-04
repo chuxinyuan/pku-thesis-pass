@@ -24,6 +24,7 @@
   list-of-tables,
   list-of-code,
   list-of-equations,
+  notation,
   body-wrap,
   bibliography,
   appendix,
@@ -107,6 +108,9 @@
 
 // ========== 代码列表 ==========
 #list-of-code()  // 如不需要删除或者注释掉本行即可
+
+// ========== 主要符号对照表 ==========
+#notation[#include "content/notation.typ"]
 
 // ========== 正文部分 ==========
 #show: body-wrap

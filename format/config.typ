@@ -35,6 +35,7 @@
 #import "bibliography.typ": render-bibliography
 #import "outline.typ": chineseoutline
 #import "listoffigures.typ": listoffigures
+#import "notation.typ": notation-page
 
 // 页面
 #import "covers.typ": cover-page-blind, cover-page-normal
@@ -350,6 +351,13 @@
     )
   }
 
+  // ========== 主要符号对照表 ==========
+  let notation = (body) => {
+    notation-page(
+      title: merged-supplements.符号表,
+    )[#body]
+  }
+
   // ========== 正文段落样式 ==========
   let body-wrap = (body) => {
     set align(left + top)
@@ -412,6 +420,7 @@
     list-of-tables: list-of-tables,
     list-of-code: list-of-code,
     list-of-equations: list-of-equations,
+    notation: notation,
     body-wrap: body-wrap,
     bibliography: bibliography,
     appendix: appendix,

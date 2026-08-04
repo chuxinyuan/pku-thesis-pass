@@ -22,6 +22,7 @@
   list-of-tables,
   list-of-code,
   list-of-equations,
+  notation,
   body-wrap,
   bibliography,
   appendix,
@@ -104,6 +105,18 @@
 
 // ========== 代码列表 ==========
 #list-of-code()
+
+// ========== 主要符号对照表 ==========
+#notation[
+  / $upright(a), upright(b)$: 常量
+  / $x, y$: 变量
+
+  / $gamma$: 比热比
+  / $delta$: 误差
+
+  / Typst: 一种基于标记的排版系统
+  / PDF: 便携式文档格式
+]
 
 // ========== 正文部分 ==========
 #show: body-wrap

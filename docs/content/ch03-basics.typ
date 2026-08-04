@@ -515,6 +515,60 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 与公式列表类似，使用代码列表时，需要编号的代码块应统一用 `code-block` 包装。
 
+== 主要符号对照表
+
+当论文中使用了大量的符号、标志、缩略词、专门计量单位、自定义名词和术语时，可按北大《写作指南》要求编写"主要符号对照表"，放在目录之后、正文之前。模板提供了 `notation` 页面函数来实现这一功能。
+
+内容使用 Typst 原生的术语语法 `/ 符号: 说明`，默认双栏排布（每行两对"符号+说明"并排）；空行用于分组（如符号、希腊字母、缩略词等）：
+
+#code-preview(
+  ```typ
+  #notation[
+    / $x, y$: 变量
+    / $a$: 常量
+
+    / $gamma$: 比热比
+    / $delta$: 误差
+
+    / CPU: 中央处理器
+    / GPU: 图形处理器
+  ]
+  ```,
+  [
+    #let mock = [
+      / $x, y$: 变量
+      / $a$: 常量
+
+      / $gamma$: 比热比
+      / $delta$: 误差
+
+      / CPU: 中央处理器
+      / GPU: 图形处理器
+    ]
+    #let cell(it) = if it.func() == terms.item {
+      (it.term, it.description)
+    } else {
+      grid.cell(none, colspan: 4, inset: (y: 5pt))
+    }
+    #grid(
+      columns: (auto, 1fr, auto, 1fr),
+      row-gutter: 8pt,
+      ..mock.children
+        .filter(it => it.func() == parbreak or it.func() == terms.item)
+        .map(cell)
+        .flatten(),
+    )
+  ],
+)
+
+使用方法：
+
++ 在 `config()` 返回值中解构 `notation`
++ 在列表之后、正文之前调用 `#notation[...]`
++ 用 `/ 符号: 说明` 语法书写条目，空行分组
+
+`notation` 页面标题默认显示"主要符号对照表"，可通过 `supplements: (符号表: "...")` 自定义。若论文中符号与缩略词数量不多，可省略此页，在正文中随即说明即可。
+
 == 字数统计
 
 如需统计正文与附录的字数，在 `config()` 中设置 `word-count: true`，并在正文任意位置解构出 `total-words`（CJK 字数）或 `total-characters`（字符数）来显示：
