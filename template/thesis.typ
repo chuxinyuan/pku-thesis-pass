@@ -28,6 +28,7 @@
   body-wrap,
   bibliography,
   appendix,
+  achievement,
   acknowledgements,
   declaration,
   font,
@@ -62,7 +63,9 @@
   always-start-odd: false,
   clean-declaration: true,
   outline-depth: 3,
-  supplements: (:),
+  word-count: true,
+  achievement-outlined: true,
+  supplements: (成果表: "攻读学位期间发表的论文"),
   use-latexref: true,
   latexref-prefixes: ("fig:", "tbl:", "eqt:"),
   codly-args: (:),
@@ -142,6 +145,9 @@
 = 实验数据
 
 在此处添加实验数据...
+
+// ========== 攻读学位期间发表的论文 ==========
+#achievement[#include "content/achievement.typ"]
 
 // ========== 致谢部分 ==========
 #acknowledgements[#include "content/acknowledgements.typ"]

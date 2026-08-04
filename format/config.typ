@@ -36,6 +36,7 @@
 #import "outline.typ": chineseoutline
 #import "listoffigures.typ": listoffigures
 #import "notation.typ": notation-page
+#import "achievement.typ": achievement-page
 
 // 页面
 #import "covers.typ": cover-page-blind, cover-page-normal
@@ -95,11 +96,12 @@
 ///   always-start-odd — 章节从奇数页开始（默认 true）
 ///   clean-declaration — 声明页清除页眉页码（默认 false）
 ///   outline-depth — 目录深度（默认 3）
+///   word-count — 统计正文字数（默认 true，正文任意处可用 total-words / total-characters 显示）
+///   achievement-outlined — "攻读学位期间发表的论文"页是否出现在目录（默认 true）
 ///   supplements — 自定义引用记号
 ///   use-latexref — 是否启用 LaTeX 引用兼容（默认 false）
 ///   latexref-prefixes — LaTeX 引用剥离前缀列表（默认 ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:")）
 ///   codly-args — 控制代码块行号、背景色、语言图标等
-///   word-count — 统计正文字数（默认 true，正文任意处可用 total-words / total-characters 显示）
 ///   logo — 封面校徽图片路径，`path` 类型（如 `path("assets/logo.svg")`，默认 none 显示占位框）
 ///   wordmark — 封面校名字标图片路径，`path` 类型（如 `path("assets/wordmark.svg")`，默认 none 显示占位框）
 ///
@@ -159,15 +161,17 @@
   use-latexref: false,
   // use-latexref 时尝试剥离的前缀列表
   latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
+  // "攻读学位期间发表的论文"页是否出现在目录中（与致谢、声明一致，默认 true）
+  achievement-outlined: true,
+  // 统计正文字数（CJK 字数 / 总字符数），可用 total-words / total-characters 显示，如不需要可设为 false
+  word-count: true,
+  // 代码块参数：行号、语言图标、斑马条纹等
   codly-args: (
     display-icon: true,      // 语言图标
     // number-format: none,  // 代码行号
     // lang-format: none,    // 语言名称
     // zebra-fill: none,     // 斑马条纹
   ),
-  // 统计正文字数（CJK 字数 / 总字符数），可用 total-words / total-characters 显示
-  // 如不需要可设为 false
-  word-count: true,
   // 封面校徽、字标图片文件路径，参数值为 none 时封面显示灰色占位框
   // 示例：logo: path("assets/logo.svg"), wordmark: path("assets/wordmark.svg")
   logo: none,
@@ -389,7 +393,19 @@
     )
   }
 
-  // ========== 致谢 ==========
+  // ========== 攻读学位期间发表的论文 ==========
+  let achievement = (body) => {
+    if blind {
+      return
+    }
+    set align(left + top)
+    achievement-page(
+      title: merged-supplements.成果表,
+      outlined: achievement-outlined,
+    )[#body]
+  }
+
+  // ========== 致谢部分 ==========
   let acknowledgements = (body) => {
     if blind {
       return
@@ -424,6 +440,7 @@
     body-wrap: body-wrap,
     bibliography: bibliography,
     appendix: appendix,
+    achievement: achievement,
     acknowledgements: acknowledgements,
     declaration: declaration,
     font: font,
@@ -431,6 +448,7 @@
     preview: preview,
     always-start-odd: always-start-odd,
     first-line-indent: first-line-indent,
+    achievement-outlined: achievement-outlined,
     smartpagebreak: smartpagebreak,
     total-words: total-words,
     total-characters: total-characters,

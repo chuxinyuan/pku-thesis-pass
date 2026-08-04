@@ -221,6 +221,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 - `outline()`：中文目录
 - `list-of-figures()` / `list-of-tables()` / `list-of-code()` / `list-of-equations()`：插图/表格/代码/公式列表
 - `notation(body)`：主要符号对照表（`/ 符号: 说明` 语法，空行分组）
+- `achievement(body)`：攻读学位期间发表的论文（`+` 条目自动编号，作者姓名加粗）
 - `body-wrap(body)`：正文段落样式，作为 `#show: body-wrap` 调用
 - `bibliography(body)`：参考文献渲染，作为 `#show: bibliography` 调用
 - `acknowledgements(body)`：致谢

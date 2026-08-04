@@ -569,6 +569,32 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 `notation` 页面标题默认显示"主要符号对照表"，可通过 `supplements: (符号表: "...")` 自定义。若论文中符号与缩略词数量不多，可省略此页，在正文中随即说明即可。
 
+== 攻读学位期间发表的论文
+
+北大工学院等院系要求博士论文在附录之后、致谢之前列出攻读学位期间发表的论文。条目格式与参考文献列表基本一致，但需将作者本人姓名加粗，并标注论文是否为 SCI/EI 收录期刊、SCI 收录号及期刊影响因子。模板提供了 `achievement` 页面函数：
+
+#code-preview(
+  ```typ
+  #achievement[
+    + *张三*, 李四, 王五. 论文题目[J]. 期刊名, 2025, 60(3): 123-130. （SCI 收录期刊；SCI 收录号 601JP；IF=9.432）
+    + *Zhang, S.*, Li, S., Wang, W. Paper title[J]. Journal Name, 2024, 55(2): 45-52. （SCI 收录期刊；SCI 收录号 5W1A；IF=8.123）
+  ]
+  ```,
+  [
+    #set enum(indent: 0pt, numbering: "[1]", body-indent: 1.2em, spacing: 1.14em)
+    + *张三*, 李四, 王五. 论文题目[J]. 期刊名, 2025, 60(3): 123-130. （SCI 收录期刊；SCI 收录号 601JP；IF=9.432）
+    + *Zhang, S.*, Li, S., Wang, W. Paper title[J]. Journal Name, 2024, 55(2): 45-52. （SCI 收录期刊；SCI 收录号 5W1A；IF=8.123）
+  ],
+)
+
+使用方法：
+
++ 在 `config()` 返回值中解构 `achievement`
++ 在附录之后、致谢之前调用 `#achievement[...]`
++ 用 `+` 书写条目（自动编号 `[1]`、`[2]`…），作者本人姓名用 `*...*` 加粗，并按参考文献格式附上检索类型（SCI/EI）、SCI 收录号与影响因子
+
+`achievement` 页面标题默认显示"攻读学位期间发表的论文"，可通过 `supplements: (成果表: "...")` 自定义；该页默认出现在目录中（与致谢、声明一致），如需隐藏，在 `config()` 中设置 `achievement-outlined: false` 即可。
+
 == 字数统计
 
 如需统计正文与附录的字数，在 `config()` 中设置 `word-count: true`，并在正文任意位置解构出 `total-words`（CJK 字数）或 `total-characters`（字符数）来显示：

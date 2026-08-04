@@ -61,8 +61,8 @@ typst watch thesis.typ
 
   #let (
     setup, cover, copyright, abstract-zh, abstract-en,
-    outline, list-of-figures, list-of-tables, list-of-code, list-of-equations,
-    notation, body-wrap, bibliography, appendix, acknowledgements,
+    outline, list-of-figures, list-of-tables, list-of-equations, list-of-code,
+    notation, body-wrap, bibliography, appendix, achievement, acknowledgements,
     declaration, font, blind
   ) = config(
     author-zh: "张三",
@@ -89,6 +89,9 @@ typst watch thesis.typ
 
   这里是附录内容...
 
+  #achievement[
+    + *张三*, 李四, 王五. 论文题目[J]. 期刊名, 2025, 60(3): 123-130. （SCI 收录期刊；SCI 收录号 601JP；IF=9.432）
+  ]
   #acknowledgements[致谢内容...]
   #declaration()
   ```,

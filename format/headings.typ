@@ -64,11 +64,12 @@
   title,
   pagebreak: true,
   show-header: true,
+  outlined: true,
   ..extra-meta,
 ) = {
   heading(
     numbering: none,
-    outlined: true,
+    outlined: outlined,
     supplement: [#metadata((
       pagebreak: pagebreak,
       show-header: show-header,

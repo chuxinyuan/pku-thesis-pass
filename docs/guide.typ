@@ -26,6 +26,7 @@
   body-wrap,
   bibliography,
   appendix,
+  achievement,
   acknowledgements,
   declaration,
   font,
@@ -60,9 +61,12 @@
   always-start-odd: false,
   clean-declaration: true,
   outline-depth: 3,
-  supplements: (:),
-  codly-args: (number-format: none),
+  word-count: true,
+  achievement-outlined: true,
+  supplements: (成果表: "攻读学位期间发表的论文"),
   use-latexref: true,
+  latexref-prefixes: ("fig:", "tbl:", "eqt:"),
+  codly-args: (:),
   logo: path("assets/pkulogo.pdf"),
   wordmark: path("assets/pkuword.pdf"),
 
@@ -139,6 +143,9 @@
 = 关于 Typst <about>
 
 #include "content/appendix-about.typ"
+
+// ========== 攻读学位期间发表的论文 ==========
+#achievement[#include "content/achievement.typ"]
 
 // ========== 致谢部分 ==========
 #acknowledgements[#include "content/acknowledgements.typ"]

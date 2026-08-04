@@ -94,7 +94,7 @@
   [*说明*],
   [`system`],
   [`"default"`],
-  [系统字体方案：`"default"`/`"mac"`/`"windows"`/`"linux"`],
+  [字体方案：`"default"`/`"mac"`/`"windows"`/`"linux"`],
   [`blind`],
   [`false`],
   [是否为盲审模式，盲审模式隐藏作者、导师等信息],
@@ -113,20 +113,19 @@
   [`outline-depth`],
   [`3`],
   [目录显示的最大标题层级],
+  [`word-count`],
+  [`true`],
+  [统计正文与附录字数（CJK 字数 / 总字符数），正文中可用 `total-words` / `total-characters` 显示统计结果],
+  [`achievement-outlined`],
+  [`true`],
+  ["攻读学位期间发表的论文"页是否出现在目录中；设为 `false` 时该页不进入目录],
   [`supplements`],
   [`(:)`],
   [自定义引用记号和列表标题。可用字段及默认值：\
     引用前缀：`图`（"图"）、`表`（"表"）、`代码`（"代码"）、`公式`（"式"）、`节`（"节"）；\
     `图表`（"图表"，未知 figure kind 的 fallback）；\
-    列表页标题：`插图列表`（"插图"）、`表格列表`（"表格"）、`代码列表`（"代码"）、`公式列表`（"公式"）、`符号表`（"主要符号对照表"）。\
+    列表页标题：`插图列表`（"插图"）、`表格列表`（"表格"）、`代码列表`（"代码"）、`公式列表`（"公式"）、`符号表`（"主要符号对照表"）、`成果表`（"攻读学位期间发表的论文"）。\
     示例：`supplements: (图: "Figure", 插图列表: "List of Figures")`],
-  [`codly-args`],
-  [`(:)`],
-  [传递给 `codly` 包的额外参数，用于自定义代码块样式。常用选项：\
-    `number-format: none`  关闭代码行号；\
-    `display-icon: false`  关闭语言图标；\
-    `lang-format: none`    关闭语言名称；\
-    `zebra-fill: none`     关闭交替背景色],
   [`use-latexref`],
   [`false`],
   [LaTeX 引用兼容：`@fig:xxx` 等带前缀的引用解析失败时，自动剥离前缀后重试 `@xxx`。\
@@ -135,6 +134,13 @@
   [`latexref-prefixes`],
   [`("fig:", ..)`],
   [`use-latexref` 为 `true` 时尝试剥离的前缀列表，可按需增删，如 `("图:", "表:")`],
+  [`codly-args`],
+  [`(:)`],
+  [传递给 `codly` 包的额外参数，用于自定义代码块样式。常用选项：\
+    `number-format: none`  关闭代码行号；\
+    `display-icon: false`  关闭语言图标；\
+    `lang-format: none`    关闭语言名称；\
+    `zebra-fill: none`     关闭交替背景色],
   [`logo`],
   [`none`],
   [封面校徽图片路径，`path` 类型，如 `path("assets/logo.svg")`；为 `none` 时封面显示灰色占位框],
