@@ -1,4 +1,4 @@
-#import "../../format/components.typ": booktab
+#import "../../format/components.typ": booktab, eq-block
 
 本模板提供了丰富的配置选项，在 `config()` 函数中以命名参数的方式传入。下面详细介绍各个配置项的含义和用法。
 
@@ -36,15 +36,15 @@
   [`title-en`],
   [--],
   [论文英文标题，可用 `\n` 控制换行；盲审模式下 `\n` 会被忽略],
+  [`degree-type`],
+  [`"academic"`],
+  [学位类型：`"academic"`（学术学位）或 `"professional"`（专业学位）],
   [`year`],
   [`2026`],
   [论文提交年份],
   [`month`],
   [`6`],
   [论文提交月份],
-  [`degree-type`],
-  [`"academic"`],
-  [学位类型：`"academic"`（学术学位）或 `"professional"`（专业学位）],
 ) <config-author>
 
 其中 `title-zh` 与 `author-zh` 除了显示在封面外，还会写入 PDF 文档属性（元数据）：`title-zh` 作为标题，`author-zh` 作为作者。盲审模式（`blind: true`）下作者会被隐藏，仅保留标题。详见 @pdf-meta。
@@ -118,7 +118,7 @@
   [自定义引用记号和列表标题。可用字段及默认值：\
     引用前缀：`图`（"图"）、`表`（"表"）、`代码`（"代码"）、`公式`（"式"）、`节`（"节"）；\
     `图表`（"图表"，未知 figure kind 的 fallback）；\
-    列表页标题：`插图列表`（"插图"）、`表格列表`（"表格"）、`代码列表`（"代码"）。\
+    列表页标题：`插图列表`（"插图"）、`表格列表`（"表格"）、`代码列表`（"代码"）、`公式列表`（"公式"）。\
     示例：`supplements: (图: "Figure", 插图列表: "List of Figures")`],
   [`codly-args`],
   [`(:)`],
@@ -183,10 +183,10 @@
 - `first-line-indent`：首行缩进值（供自定义页面使用）
 - `blind` / `preview` / `always-start-odd`：当前配置值，可由 `--input` CLI 参数覆盖
 
-模板还导出了 `booktab`、`as-booktab`、`codeblock` 三个组件函数，可直接导入使用：
+模板还导出了 `booktab`、`as-booktab`、`code-block` 三个组件函数，可直接导入使用：
 
 ```typ
-#import "@preview/pku-thesis-pass:0.3.0": booktab, as-booktab, codeblock
+#import "@preview/pku-thesis-pass:0.3.0": booktab, as-booktab, code-block
 ```
 
 === booktab — 三线表
@@ -226,12 +226,12 @@
 
 若 table 已包含 `table.hline`，则仅包裹不修改，保留手动样式。
 
-=== codeblock — 代码块
+=== code-block — 代码块
 
-`codeblock` 包装 raw 为带标题的可引用 `figure(kind: "code")`：
+`code-block` 包装 raw 为带标题的可引用 `figure(kind: "code")`：
 
 ````typ
-#codeblock(
+#code-block(
   ```python
   def fibonacci(n):
       if n <= 1:
@@ -243,3 +243,17 @@
 ````
 
 省略 `caption` 则只显示代码，无标题无编号、不入图列表、不可被 `@` 引用。
+
+=== eq-block — 公式块
+
+`eq-block` 将行间公式包装为带标题的可引用 `figure(kind: "equation")`，支持公式目录：
+
+```typ
+#eq-block(caption: [勾股定理])[
+  $ a^2 + b^2 = c^2 $
+] <eq-pythagoras>
+```
+
+- 省略 `caption` 时原样返回公式，不编号、不入公式目录
+- 使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突
+- 不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`

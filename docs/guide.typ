@@ -21,6 +21,7 @@
   list-of-figures,
   list-of-tables,
   list-of-code,
+  list-of-equations,
   body-wrap,
   bibliography,
   appendix,
@@ -97,6 +98,9 @@
 
 // ========== 表格列表 ==========
 #list-of-tables()
+
+// ========== 公式列表 ==========
+#list-of-equations()
 
 // ========== 代码列表 ==========
 #list-of-code()

@@ -23,6 +23,7 @@
   list-of-figures,
   list-of-tables,
   list-of-code,
+  list-of-equations,
   body-wrap,
   bibliography,
   appendix,
@@ -101,8 +102,11 @@
 // ========== 表格列表 ==========
 #list-of-tables()
 
+// ========== 公式列表 ==========
+#list-of-equations()
+
 // ========== 代码列表 ==========
-#list-of-code()  // 如不需要注释掉即可
+#list-of-code()  // 如不需要删除或者注释掉本行即可
 
 // ========== 正文部分 ==========
 #show: body-wrap

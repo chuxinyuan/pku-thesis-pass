@@ -1,7 +1,7 @@
 // ============================================================
 // components.typ — 论文组件
 //   1. 三线表（booktab、as-booktab）
-//   2. 代码块（codeblock）
+//   2. 代码块（code-block）
 //   3. 字数统计（word-count-cjk、total-words、total-characters）
 //   4. 定理环境（theorem、definition、lemma、corollary、proposition、
 //      property、example、remark、proof）
@@ -163,13 +163,51 @@
   _booktab-block(table-args, table.header(..header-cells), body, width: width)
 }
 
+// ========== 公式块组件 ==========
+
+/// 公式块组件
+/// 将行间公式包装为 figure(kind: "equation")，支持 caption 描述和公式目录
+/// 省略 caption 时原样返回公式，按 math.equation 原生方式编号，不入公式目录
+///
+/// 使用公式目录时，所有需要编号的公式应统一用 eq-block，
+/// 避免与普通 $ ... $ 的 math.equation 计数器冲突。
+/// 不需要编号的公式可用 #math.equation($...$, numbering: none, block: true)
+///
+/// 示例：
+///   #eq-block(caption: [勾股定理])[
+///     $ a^2 + b^2 = c^2 $
+///   ] <eq-pythagoras>
+#let eq-block(body, caption: none) = {
+  if caption != none {
+    figure(
+      {
+        set math.equation(numbering: none)
+        body
+      },
+      caption: caption,
+      kind: "equation",
+      supplement: [式],
+      numbering: (..nums) => context {
+        chinesenumbering(
+          chaptercounter.at(here()).first(),
+          ..nums,
+          location: here(),
+          brackets: true,
+        )
+      },
+    )
+  } else {
+    body
+  }
+}
+
 // ========== 代码块组件 ==========
 
 /// 代码块组件
 /// raw: 由 ``` 标记的 raw 代码块
 /// caption: 代码标题（可选，有标题时可被 @label 引用）
 /// 省略 caption 时仅显示代码，不编号、不入列表、不可引用
-#let codeblock(raw, caption: none) = {
+#let code-block(raw, caption: none) = {
   if caption != none {
     figure(
       {

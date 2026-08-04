@@ -1,4 +1,4 @@
-#import "../../format/components.typ": codeblock
+#import "../../format/components.typ": code-block
 
 == 安装与环境配置
 
@@ -55,13 +55,13 @@ typst watch thesis.typ
 
 一个使用本模板的论文文件基本结构如下：
 
-#codeblock(
+#code-block(
   ```typ
   #import "@preview/pku-thesis-pass:0.3.0": config
 
   #let (
     setup, cover, copyright, abstract-zh, abstract-en,
-    outline, list-of-figures, list-of-tables, list-of-code,
+    outline, list-of-figures, list-of-tables, list-of-code, list-of-equations,
     body-wrap, bibliography, appendix, acknowledgements,
     declaration, font, blind
   ) = config(

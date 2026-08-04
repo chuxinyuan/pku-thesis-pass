@@ -1,4 +1,4 @@
-#import "../../format/components.typ": as-booktab, codeblock
+#import "../../format/components.typ": as-booktab, code-block
 #import "@preview/gribouille:0.6.0": *
 
 撰写学位论文是每个研究生必须完成的功课。在 LaTeX 还是 Typst 的选择上，过去几年我们几乎没有悬念——LaTeX 是唯一的专业排版工具。然而，Typst 的出现正在改变这个局面。
@@ -117,7 +117,7 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
 
 附录中也可以插入代码块，如 @appendix-code。
 
-#codeblock(
+#code-block(
   ```rust
   fn main() {
       println!("Hello from Rust!");

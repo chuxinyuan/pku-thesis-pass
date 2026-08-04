@@ -219,7 +219,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 - `copyright()`：版权声明页
 - `abstract-zh` / `abstract-en`：中英文摘要
 - `outline()`：中文目录
-- `list-of-figures()` / `list-of-tables()` / `list-of-code()`：插图/表格/代码列表
+- `list-of-figures()` / `list-of-tables()` / `list-of-code()` / `list-of-equations()`：插图/表格/代码/公式列表
 - `body-wrap(body)`：正文段落样式，作为 `#show: body-wrap` 调用
 - `bibliography(body)`：参考文献渲染，作为 `#show: bibliography` 调用
 - `acknowledgements(body)`：致谢
@@ -234,9 +234,9 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 可直接导入的组件：
 
 ```typ
-#import "@preview/pku-thesis-pass:0.x.0": booktab, as-booktab, codeblock
+#import "@preview/pku-thesis-pass:0.x.0": booktab, as-booktab, code-block
 ```
 
 - `#booktab(...)`：生成三线表，第一行自动加粗为表头，支持 `outlined: false` 生成纯表格
 - `#as-booktab(table)`：将原生 `table` 装饰为三线表样式，便于和 `figure` 组合使用
-- `#codeblock(...)`：生成带标题和编号的可引用代码块
+- `#code-block(...)`：生成带标题和编号的可引用代码块

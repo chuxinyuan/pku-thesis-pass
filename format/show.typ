@@ -31,6 +31,15 @@
       #it.caption.body
     ]
     it.body
+  } else if it.kind == "equation" {
+    set align(center)
+    block(width: 100%, {
+      grid(
+        columns: (1fr, auto),
+        it.body,
+        context { it.counter.display(it.numbering) },
+      )
+    })
   } else if it.kind in theorem-kinds {
     set align(left)
     it.body
@@ -63,6 +72,8 @@
         link(el_loc, [#supplements.表 #chinesenumbering(chaptercounter.at(el_loc).first(), tablecounter.at(el_loc).first(), location: el_loc)])
       } else if el.kind == "code" {
         link(el_loc, [#supplements.代码 #chinesenumbering(chaptercounter.at(el_loc).first(), rawcounter.at(el_loc).first(), location: el_loc)])
+      } else if el.kind == "equation" {
+        link(el_loc, [#supplements.公式 #chinesenumbering(chaptercounter.at(el_loc).first(), counter(figure.where(kind: "equation")).at(el_loc).first(), location: el_loc, brackets: true)])
       } else if el.kind in theorem-kinds {
         link(el_loc, [#el.supplement #chinesenumbering(
           chaptercounter.at(el_loc).first(),

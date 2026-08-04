@@ -11,14 +11,15 @@
 - 封面（含盲审版）
 - 版权声明页
 - 中英文摘要
-- 自动目录（含图、表、代码列表）
+- 自动目录（含图、表、公式、代码列表）
 - 中文章节编号（第X章 + 附录 A/B）
 - GB/T 7714 参考文献（2015 / 2025 标准）
-- 三线表、代码高亮
+- 三线表、公式、代码高亮
 - 页眉页脚自动切换
 - 脚注
 - 附录
 - 致谢、原创性声明
+- LaTeX 语法风格引用
 - 正文字数统计（wordometer，标题不计入）
 - 自动设置 PDF 元数据（标题 / 作者，盲审版隐藏作者）
 - 命令行参数控制（`blind` / `preview` / `system`）
@@ -81,6 +82,8 @@ cd pku-thesis-pass
 | `outline-depth` | int | 目录深度（默认 `3`） |
 | `supplements` | dict | 自定义引用记号（图/表/代码/公式前缀） |
 | `codly-args` | dict | 代码块样式参数（行号、语言图标等） |
+| `use-latexref` | bool | LaTeX 引用兼容（默认 `false`） |
+| `latexref-prefixes` | array | `use-latexref` 为 `true` 时尝试剥离的前缀列表 |
 | `word-count` | bool | 统计正文与附录字数（默认 `true`），正文中可用 `total-words` / `total-characters` 显示统计结果 |
 | `logo` | path | 封面校徽图片路径，如 `path("assets/logo.svg")`（默认 `none`，显示占位框） |
 | `wordmark` | path | 封面校名字标图片路径（默认 `none`，显示占位框） |

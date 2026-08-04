@@ -1,4 +1,4 @@
-#import "../../format/components.typ": as-booktab, booktab, codeblock, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
+#import "../../format/components.typ": as-booktab, booktab, code-block, eq-block, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
 
 #let code-preview(code, result) = {
   booktab(
@@ -305,6 +305,47 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
   ],
 )
 
+=== 公式目录
+
+当论文中公式较多时，可使用公式目录（公式列表）方便读者查找。模板提供了 `eq-block` 组件和 `list-of-equations` 函数来实现这一功能。
+
+`eq-block` 将公式包装为带描述文字的可引用单元，使其出现在公式目录中：
+#code-preview(
+  ```typ
+  #eq-block(caption: [欧拉公式])[
+    $ e^(i pi) + 1 = 0 $
+  ] <eq-euler>
+  ```,
+  [
+    #eq-block(caption: [欧拉公式])[
+      $ e^(i pi) + 1 = 0 $
+    ] <eq-euler>
+  ],
+)
+
+#code-preview(
+  ```typ
+  #eq-block(caption: [高斯积分])[
+    $ integral_(-infinity)^infinity e^(-x^2) dif x = sqrt(pi) $
+  ] <eq-gauss>
+  ```,
+  [
+    #eq-block(caption: [高斯积分])[
+      $ integral_(-infinity)^infinity e^(-x^2) dif x = sqrt(pi) $
+    ] <eq-gauss>
+  ],
+)
+
+如 @eq-euler 和 @eq-gauss 所示，这些公式会自动出现在公式目录中。
+
+使用方法：
+
++ 在 `config()` 返回值中解构 `list-of-equations`
++ 在目录之后、正文之前调用 `#list-of-equations()`
++ 用 `#eq-block(caption: [描述])[公式]` 替代普通行间公式
+
+#strong[注意]：使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突。不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`。
+
 === 常用数学符号
 
 #code-preview(
@@ -408,9 +449,9 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 本模板使用 codly 包提供代码块的语法高亮和样式增强。默认启用行号、语言图标、语言名称和交替背景色。可以通过 `codly-args` 配置项自定义样式。
 
-如果需要给代码块加标题并在文章中引用，可以使用本模板提供的 `codeblock` 命令：
+如果需要给代码块加标题并在文章中引用，可以使用本模板提供的 `code-block` 命令：
 
-#codeblock(
+#code-block(
   ```python
   def fibonacci(n):
       if n <= 1:
@@ -421,6 +462,58 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 ) <fib>
 
 @fib 展示了斐波那契数列的递归实现。
+
+省略 `caption` 时 `code-block` 原样返回代码块，不编号、不入代码列表、不可被 `@` 引用：
+
+#code-preview(
+  ````typ
+  ```python
+  # 普通代码块，无标题无编号
+  x = 1
+  ```
+  ````,
+  [
+    ```python
+    # 普通代码块，无标题无编号
+    x = 1
+    ```
+  ],
+)
+
+=== 代码列表
+
+当论文中代码较多时，可使用代码列表方便读者查找。模板提供了 `list-of-code` 函数来生成代码列表。
+
+用 `code-block` 包装并提供 `caption` 的代码块会自动出现在代码列表中：
+
+#code-preview(
+  ````typ
+  #code-block(
+    ```R
+    sum(1:100)
+    ```,
+  caption: "R 语言入门示例",
+  ) <r-hello>
+  ````,
+  [
+    #code-block(
+      ```R
+      sum(1:100)
+      ```,
+      caption: "R 语言入门示例",
+    ) <r-hello>
+  ],
+)
+
+如 @fib 和 @r-hello 所示，这些代码块会自动出现在代码列表中。而上方未使用 `#code-block` 包裹提供 `caption` 的普通代码块则不会出现在目录后面的代码列表里。
+
+使用方法：
+
++ 在 `config()` 返回值中解构 `list-of-code`
++ 在目录之后、正文之前调用 `#list-of-code()`
++ 用 `#code-block(raw, caption: [标题])` 包装需要入列表的代码块
+
+与公式列表类似，使用代码列表时，需要编号的代码块应统一用 `code-block` 包装。
 
 == 字数统计
 
@@ -456,7 +549,7 @@ Typst 支持 BibLaTeX 格式的 `.bib` 文件。在文档中引用文献使用 `
 
 使用本模板时，只需在 `config()` 函数中配置 `bib-file` 等参数即可：
 
-#codeblock(
+#code-block(
   ```typ
   #let (setup, ..., body-wrap, bibliography) = config(
     bib-file: path("ref.bib"),
@@ -478,7 +571,7 @@ Typst 支持 BibLaTeX 格式的 `.bib` 文件。在文档中引用文献使用 `
 
 gb7714-bilingual 会自动检测文献语言。如果自动检测不准确，可以在 `.bib` 文件中显式指定 `language` 字段：
 
-#codeblock(
+#code-block(
   ```bib
   @book{kopka2004guide,
     title     = {Guide to LATEX},

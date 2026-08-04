@@ -28,7 +28,7 @@
 // 基础定义
 #import "style.typ": supplement, font-set
 #import "utils.typ": skippedstate, appendix, _resolve-path
-#import "components.typ": booktab, as-booktab, codeblock, word-count-cjk, total-words, total-characters
+#import "components.typ": booktab, as-booktab, code-block, eq-block, word-count-cjk, total-words, total-characters
 
 // 基础设施
 #import "page.typ": page-setup
@@ -341,6 +341,15 @@
     )
   }
 
+  // ========== 公式列表 ==========
+  let list-of-equations = () => {
+    listoffigures(
+      title: merged-supplements.公式列表,
+      kind: "equation",
+      supplements: merged-supplements,
+    )
+  }
+
   // ========== 正文段落样式 ==========
   let body-wrap = (body) => {
     set align(left + top)
@@ -402,6 +411,7 @@
     list-of-figures: list-of-figures,
     list-of-tables: list-of-tables,
     list-of-code: list-of-code,
+    list-of-equations: list-of-equations,
     body-wrap: body-wrap,
     bibliography: bibliography,
     appendix: appendix,
