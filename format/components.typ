@@ -1,9 +1,11 @@
 // ============================================================
 // components.typ — 论文组件
 //   1. 三线表（booktab、as-booktab）
-//   2. 代码块（code-block）
-//   3. 字数统计（word-count-cjk、total-words、total-characters）
-//   4. 定理环境（theorem、definition、lemma、corollary、proposition、
+//   2. 公式块（eq-block）
+//   3. 代码块（code-block）
+//   4. 子图（subfigure）
+//   5. 字数统计（word-count-cjk、total-words、total-characters）
+//   6. 定理环境（theorem、definition、lemma、corollary、proposition、
 //      property、example、remark、proof）
 // ============================================================
 
@@ -223,6 +225,54 @@
   }
 }
 
+// ========== 子图组件 ==========
+
+/// 子图组件
+/// body: 子图内容（通常是 image(...)）
+/// caption: 子图题注（显示为 "(a) 子图描述"，可选）
+/// lbl: 子图标签（可选，供 @lbl 引用，显示为 "图 2.1(a)"）
+/// 子图用独立 kind "subfigure" 编号，随主图出现从 (a)(b)(c)... 重新编号。
+/// 子图需放置于主图 figure（#figure(#grid(...), kind: image, caption)）内部。
+#let subfigure(body, caption: none, lbl: none, ..args) = {
+  let fig = figure(
+    body,
+    caption: caption,
+    kind: "subfigure",
+    supplement: [图],
+    numbering: "(a)",
+    ..args,
+  )
+  if lbl == none { fig } else { [#fig #label(lbl)] }
+}
+
+// ========== 字数统计组件 ==========
+
+/// 字数统计 show 规则：排除标题，累计 CJK 字数 / 总词数 / 字符数
+/// 统计结果写入三个 state，供 total-words / total-characters 读取
+/// 由 config() 的 body-wrap 在 word-count: true 时应用（统计正文与附录）
+#let word-count-cjk(content, ..options) = {
+  let stats = word-count-of(
+    content,
+    exclude: (heading),
+    counter: s => (
+      characters: s.replace(regex("\s+"), "").clusters().len(),
+      words: s.matches(regex("\b[\w'’.,\-]+\b")).len(),
+      words-cjk: s.matches(regex("[\p{Han}]|[\p{Latin}'’.,\-]+")).len(),
+    ),
+    ..options,
+  )
+  state("total-words-cjk").update(prev => prev + stats.words-cjk)
+  state("total-words").update(prev => prev + stats.words)
+  state("total-characters").update(prev => prev + stats.characters)
+  content
+}
+
+/// 正文 CJK 字数（含中文标点附近的汉字与拉丁词），显示为内容
+#let total-words = context state("total-words-cjk").final()
+
+/// 正文字符数（去空白后）
+#let total-characters = context state("total-characters").final()
+
 // ========== 定理环境组件 ==========
 
 /// 编号定理的标签与正文构建
@@ -307,31 +357,3 @@
 #let proof(body) = par(
   [#strong[证明] #h(0.5em) #body #h(0.5em) #text(size: 0.7em)[#sym.square]],
 )
-
-// ========== 字数统计组件 ==========
-
-/// 字数统计 show 规则：排除标题，累计 CJK 字数 / 总词数 / 字符数
-/// 统计结果写入三个 state，供 total-words / total-characters 读取
-/// 由 config() 的 body-wrap 在 word-count: true 时应用（统计正文与附录）
-#let word-count-cjk(content, ..options) = {
-  let stats = word-count-of(
-    content,
-    exclude: (heading),
-    counter: s => (
-      characters: s.replace(regex("\s+"), "").clusters().len(),
-      words: s.matches(regex("\b[\w'’.,\-]+\b")).len(),
-      words-cjk: s.matches(regex("[\p{Han}]|[\p{Latin}'’.,\-]+")).len(),
-    ),
-    ..options,
-  )
-  state("total-words-cjk").update(prev => prev + stats.words-cjk)
-  state("total-words").update(prev => prev + stats.words)
-  state("total-characters").update(prev => prev + stats.characters)
-  content
-}
-
-/// 正文 CJK 字数（含中文标点附近的汉字与拉丁词），显示为内容
-#let total-words = context state("total-words-cjk").final()
-
-/// 正文字符数（去空白后）
-#let total-characters = context state("total-characters").final()

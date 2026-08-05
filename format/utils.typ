@@ -18,6 +18,7 @@
 #let footnotecounter = counter(footnote)
 #let rawcounter = counter(figure.where(kind: "code"))
 #let imagecounter = counter(figure.where(kind: image))
+#let subfigurecounter = counter(figure.where(kind: "subfigure"))
 #let tablecounter = counter(figure.where(kind: table))
 #let equationcounter = counter(math.equation)
 #let theoremcounter = counter(figure.where(kind: "theorem"))

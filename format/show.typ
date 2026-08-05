@@ -13,6 +13,7 @@
 #let _figure-show-rule(it, supplements) = {
   set align(center)
   if it.kind == image {
+    counter(figure.where(kind: "subfigure")).update(0)
     it.body
     [
       #set text(size: size.图题)
@@ -24,13 +25,6 @@
       #it.caption
     ]
     it.body
-  } else if it.kind == "code" {
-    [
-      #set text(size: size.代码块标题)
-      #context { supplements.代码 + it.counter.display(it.numbering) + "   " }
-      #it.caption.body
-    ]
-    it.body
   } else if it.kind == "equation" {
     set align(center)
     block(width: 100%, {
@@ -40,6 +34,21 @@
         context { it.counter.display(it.numbering) },
       )
     })
+  } else if it.kind == "code" {
+    [
+      #set text(size: size.代码块标题)
+      #context { supplements.代码 + it.counter.display(it.numbering) + "   " }
+      #it.caption.body
+    ]
+    it.body
+  } else if it.kind == "subfigure" {
+    it.body
+    [
+      #set text(size: size.图题)
+      #context { numbering("(a)", counter(figure.where(kind: "subfigure")).at(here()).first()) }
+      #h(0.5em)
+      #it.caption.body
+    ]
   } else if it.kind in theorem-kinds {
     set align(left)
     it.body
@@ -68,6 +77,9 @@
     } else if el.func() == figure {
       if el.kind == image {
         link(el_loc, [#supplements.图 #chinesenumbering(chaptercounter.at(el_loc).first(), imagecounter.at(el_loc).first(), location: el_loc)])
+      } else if el.kind == "subfigure" {
+        // 子图引用：主图编号（imagecounter 已含当前主图序号）+ 子图字母，如 "图 1.1(a)"
+        link(el_loc, text(str(supplements.图) + " " + chinesenumbering(chaptercounter.at(el_loc).first(), imagecounter.at(el_loc).first(), location: el_loc) + str(numbering("(a)", counter(figure.where(kind: "subfigure")).at(el_loc).first()))))
       } else if el.kind == table {
         link(el_loc, [#supplements.表 #chinesenumbering(chaptercounter.at(el_loc).first(), tablecounter.at(el_loc).first(), location: el_loc)])
       } else if el.kind == "code" {

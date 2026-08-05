@@ -1,6 +1,6 @@
-#import "../../format/components.typ": as-booktab, booktab, code-block, eq-block, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
+#import "../../format/components.typ": as-booktab, booktab, code-block, eq-block, subfigure, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
 // 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
-// #import "@preview/pku-thesis-pass:0.3.0": as-booktab, booktab, code-block, eq-block, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
+// #import "@preview/pku-thesis-pass:0.3.0": as-booktab, booktab, code-block, eq-block, subfigure, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
 
 #let code-preview(code, result) = {
   booktab(
@@ -166,6 +166,75 @@ Typst 支持无序列表和有序列表：
 )
 
 @logo 展示了北京大学校徽。代码中的 `<logo>` 是标签，可以在文中通过 `@logo` 来引用。
+
+=== 子图
+
+当需要在一张图中展示多张子图时，使用 `subfigure` 组件将各子图放进一个 `grid`，并整体放入 `figure`。子图会自动按 `(a)(b)(c)` 编号，编号与主图编号无关，例如下面的校徽和字标排成与封面相同的效果：
+
+#code-preview(
+  ```typ
+  #figure(
+    grid(
+      columns: (1fr, 1fr),
+      gutter: 1em,
+      subfigure(
+        align(center + horizon, image("../assets/pkulogo.pdf", height: 2.4em, fit: "contain")),
+        caption: "北京大学校徽",
+        lbl: "sub-logo",
+      ),
+      subfigure(
+        align(center + horizon, image("../assets/pkuword.pdf", height: 1.6em, fit: "contain")),
+        caption: "北京大学字标",
+        lbl: "sub-wordmark",
+      ),
+    ),
+    caption: "北京大学校徽与字标",
+  ) <sub-logo-wordmark>
+  ```,
+  [
+    #figure(
+      grid(
+        columns: (1fr, 1fr),
+        gutter: 1em,
+        subfigure(
+          align(center + horizon, image("../assets/pkulogo.pdf", height: 2.4em, fit: "contain")),
+          caption: "北京大学校徽",
+          lbl: "sub-logo",
+        ),
+        subfigure(
+          align(center + horizon, image("../assets/pkuword.pdf", height: 1.6em, fit: "contain")),
+          caption: "北京大学字标",
+          lbl: "sub-wordmark",
+        ),
+      ),
+      caption: "北京大学校徽与字标",
+    ) <sub-logo-wordmark>
+  ],
+)
+
+通过 `lbl` 参数可为子图添加标签，文中使用 `@sub-logo`、`@sub-wordmark` 这样的形式引用，会显示为"@sub-logo"和"@sub-wordmark"。@sub-logo-wordmark 两个子图的高度比例与封面一致（校徽较高、字标较矮）。主图编号沿用大纲序号，插图列表中也只列出主图，不会单独列出子图。
+
+子图除了左右并排，也可以上下排列。只需让 `grid` 使用 `rows` 参数（而非 `columns`）即可，此处设置 `rows(auto, auto)` 让两行高度自适应，`gutter` 设置为 1em，显示效果如 @sub-logo-wordmark2 所示：
+
+#figure(
+  grid(
+    rows: (auto, auto),
+    gutter: 1em,
+    subfigure(
+      align(center + horizon, image("../assets/pkulogo.pdf", height: 3.2em, fit: "contain")),
+      caption: "北京大学校徽",
+      lbl: "sub-logo2",
+    ),
+    subfigure(
+      align(center + horizon, image("../assets/pkuword.pdf", height: 2em, fit: "contain")),
+      caption: "北京大学字标",
+      lbl: "sub-wordmark2",
+    ),
+  ),
+  caption: "上下排列的校徽与字标",
+) <sub-logo-wordmark2>
+
+子图会从 `(a)` 开始依次编号，与排列方向无关。引用方式与前述相同，使用 `@sub-logo2`、`@sub-wordmark2`，会显示为"@sub-logo2"和"@sub-wordmark2"。
 
 == 表格
 
