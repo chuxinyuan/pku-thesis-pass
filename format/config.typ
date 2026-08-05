@@ -40,6 +40,7 @@
 
 // 页面
 #import "covers.typ": cover-page-blind, cover-page-normal
+#import "spine.typ": spine-page
 #import "copyright.typ": copyright-page
 #import "abstract-zh.typ": abstract-page-zh
 #import "abstract-en.typ": abstract-page-en
@@ -282,6 +283,18 @@
     smartpagebreak()
   }
 
+  // ========== 书脊页 ==========
+  // 打印装订用，非规范强制要求；默认不启用，需在 thesis.typ 显式调用
+  let spine = () => {
+    spine-page(
+      title: title-zh,
+      author: author-zh,
+      font: font,
+      blind: blind,
+    )
+    smartpagebreak()
+  }
+
   // ========== 版权声明 ==========
   let copyright = () => {
     copyright-page()
@@ -428,6 +441,7 @@
   (
     setup: setup,
     cover: cover,
+    spine: spine,
     copyright: copyright,
     abstract-zh: abstract-zh,
     abstract-en: abstract-en,

@@ -16,6 +16,7 @@
 #let (
   setup,
   cover,
+  spine,
   copyright,
   abstract-zh,
   abstract-en,
@@ -86,6 +87,9 @@
 
 // ========== 论文封面 ==========
 #cover()
+
+// ========== 论文书脊 ==========
+#spine()
 
 // ========== 版权声明 ==========
 #copyright()
