@@ -11,14 +11,19 @@
 - 封面（含盲审版）
 - 版权声明页
 - 中英文摘要
-- 自动目录（含图、表、代码列表）
+- 自动目录（含图、表、公式、代码列表）
+- 主要符号对照表
+- 攻读学位期间发表的论文（作者加粗 + SCI/EI/IF 标注）
 - 中文章节编号（第X章 + 附录 A/B）
 - GB/T 7714 参考文献（2015 / 2025 标准）
-- 三线表、代码高亮
+- 三线表、公式、代码高亮
 - 页眉页脚自动切换
 - 脚注
 - 附录
 - 致谢、原创性声明
+- LaTeX 语法风格引用
+- 正文字数统计（wordometer，标题不计入）
+- 自动设置 PDF 元数据（标题 / 作者，盲审版隐藏作者）
 - 命令行参数控制（`blind` / `preview` / `system`）
 - 跨平台字体方案（macOS / Windows / Linux）
 
@@ -27,7 +32,7 @@
 ### 方式一：从 Typst Universe 创建（推荐）
 
 ```bash
-typst init @preview/pku-thesis-pass:0.2.0 my-thesis
+typst init @preview/pku-thesis-pass:0.3.0 my-thesis
 cd my-thesis
 ```
 
@@ -77,7 +82,11 @@ cd pku-thesis-pass
 | `always-start-odd` | bool | 章节从奇数页开始（默认 `true`） |
 | `clean-declaration` | bool | 声明页隐藏页眉页脚（默认 `false`） |
 | `outline-depth` | int | 目录深度（默认 `3`） |
-| `supplements` | dict | 自定义引用记号（图/表/代码/公式前缀） |
+| `word-count` | bool | 统计正文与附录字数（默认 `true`），正文中可用 `total-words` / `total-characters` 显示统计结果 |
+| `achievement-outlined` | bool | "攻读学位期间发表的论文"页是否出现在目录（默认 `true`） |
+| `supplements` | dict | 自定义引用记号（图/表/代码/公式前缀）及列表标题（插图/表格/代码/公式列表、符号表、成果表） |
+| `use-latexref` | bool | LaTeX 引用兼容（默认 `false`） |
+| `latexref-prefixes` | array | `use-latexref` 为 `true` 时尝试剥离的前缀列表 |
 | `codly-args` | dict | 代码块样式参数（行号、语言图标等） |
 | `logo` | path | 封面校徽图片路径，如 `path("assets/logo.svg")`（默认 `none`，显示占位框） |
 | `wordmark` | path | 封面校名字标图片路径（默认 `none`，显示占位框） |
@@ -87,21 +96,6 @@ cd pku-thesis-pass
 | `bib-version` | str | `"2015"` 或 `"2025"` |
 | `bib-cn-first` | bool | 中文文献优先（默认 `true`） |
 | `bib-pinyin-override` | dict | 多音字校正，如 `("重": "chong2")` |
-
-## 校徽和字标配置
-
-出于版权考虑，这里**不包含**北京大学的官方校徽和字标，封面默认显示灰色占位框。
-
-官方校徽和字标 pdf 文件建议请您自行从 CTAN 的 [pkuthss](https://ctan.org/pkg/pkuthss) 包获取，将相关文件放在项目根目录的 `assets` 路径下，然后在 `config()` 中配置，例如：
-
-```typst
-#let (.., cover) = config(
-  logo: path("assets/pkulogo.pdf"),
-  wordmark: path("assets/pkuword.pdf"),
-)
-```
-
-注：CTAN 提供 eps 和 pdf 两种格式。Typst 目前仅支持 png/jpg/gif/webp/svg/pdf，暂不支持 eps 格式，建议直接用 pkuthss 包里的 pdf 格式文件，或者转换为 svg 等支持的格式。
 
 ## 字体配置
 
@@ -179,8 +173,14 @@ typst compile thesis.typ --input system=linux
 
 ## 致谢
 
-感谢 [pkuthss-typst](https://github.com/pku-typst/pkuthss-typst) 项目成员前期的伟大贡献，让论文排版这项工作变得简单而有趣，我在此模板的基础上，借助 AI 的力量做了一点点调整。
+感谢 [pkuthss-typst](https://github.com/pku-typst/pkuthss-typst) 项目成员的杰出贡献，正是他们的卓越工作让北京大学学位论文排版变得简单而优雅。本模板在充分借鉴其理念与实现的基础上，借助 AI 辅助微调，最终形成了当前的论文模板。
 
-## License
+## 许可证（License）
 
-MIT License
+本项目中的 Typst 模板源代码依据 MIT 许可证进行授权。
+
+模板内置的校徽（`assets/pkulogo.pdf`）和校名字标（`assets/pkuword.pdf`）文件取自 CTAN 的 [pkuthss](https://ctan.org/pkg/pkuthss) 包，属于受商标权、著作权保护的资源文件，不在 MIT 许可证授权范围内，其知识产权归相关权利人所有。上述资源仅限用于学位论文排版的学术、非商业用途，除法律法规另有规定或已获得相关授权外，不得对上述资源进行再分发、修改或用于其他用途。使用者需自行确认其对资源的使用符合北京大学的有关规定及适用法律法规。
+
+The Typst template source code is licensed under the MIT License.
+
+The Peking University emblem logo (`assets/pkulogo.pdf`) and name wordmark (`assets/pkuword.pdf`) files bundled with this template are taken from the [pkuthss](https://ctan.org/pkg/pkuthss) package on CTAN. They are trademarked and copyrighted assets, excluded from the MIT license, and remain the property of their respective owners. They may be used only for academic, non-commercial purposes such as thesis formatting. Unless otherwise permitted by law or authorized by the rights holders, these assets must not be redistributed, modified, or used for any other purpose. Users are responsible for ensuring that their use of these assets complies with the relevant policies of Peking University and applicable laws and regulations.

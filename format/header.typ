@@ -1,29 +1,24 @@
 // ============================================================
 // header.typ — 页眉生成
-// 根据 partcounter 所处的阶段（封面/前置/正文）自动选择页眉内容
+// 根据 partcounter 所处的部分（封面/前置/正文/附录）自动选择页眉内容
 // 偶数页显示 header-text（如"北京大学博士学位论文"）
 // 奇数页显示当前章节标题（或自定义 header 元数据）
 // ============================================================
 
-#import "const.typ": size
+#import "style.typ": size
 #import "utils.typ": chinesenumbering, partcounter, skippedstate
-#import "headings.typ": get-heading-meta
+#import "headings.typ": get-heading-meta, get-page-headings
 
 /// 生成页眉内容（作为 place 元素放置在页面顶部）
 /// header-text: 偶数页统一显示的页眉文本
 #let make-header(header-text: none) = context {
+  // 脚注序号按页编排：每页页眉求值时重置脚注计数器
+  counter(footnote).update(0)
   let part = partcounter.at(here()).first()
   let logical-page = counter(page).at(here()).first()
-  let physical-page = here().page()
 
-  // 查找当前页上/下最近的 1 级标题
-  let headings-after = query(selector(heading.where(level: 1)).after(here()))
-  let headings-before = query(selector(heading.where(level: 1)).before(here()))
-
-  let current-page-heading = if headings-after.len() > 0 {
-    let next = headings-after.first()
-    if next.location().page() == physical-page { next } else { none }
-  } else { none }
+  let page-headings = get-page-headings(here())
+  let current-page-heading = page-headings.current
 
   // 检测是否为前置/正文的首个 heading（此时奇数页也应显示页眉）
   let is-front-first = if current-page-heading != none {
@@ -50,11 +45,8 @@
   if skippedstate.at(here()) and is-even { return }
 
   // 确定显示的章节元素
-  let el = if current-page-heading != none {
-    current-page-heading
-  } else if headings-before.len() > 0 {
-    headings-before.last()
-  } else { return }
+  let el = page-headings.governing
+  if el == none { return }
 
   let meta = get-heading-meta(el)
   if not meta.at("show-header", default: true) { return }

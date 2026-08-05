@@ -1,11 +1,11 @@
 // ============================================================
 // show.typ — 跨元素 show 规则
-// 被 config.typ 通过 #show figure / #show ref 等引用
+// 被 page.typ 的 page-setup 通过 #show figure / #show ref 等引用
 // 职责：图/表/代码块的展示布局、交叉引用链接生成
 // ============================================================
 
-#import "const.typ": size
-#import "utils.typ": chinesenumbering, chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter
+#import "style.typ": size
+#import "utils.typ": chinesenumbering, chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter, theorem-kinds
 
 /// 图、表、代码块的 show 规则
 /// 图片：caption 在下方；表格：caption 在上方；代码块：caption 在上方
@@ -13,6 +13,7 @@
 #let _figure-show-rule(it, supplements) = {
   set align(center)
   if it.kind == image {
+    counter(figure.where(kind: "subfigure")).update(0)
     it.body
     [
       #set text(size: size.图题)
@@ -24,6 +25,15 @@
       #it.caption
     ]
     it.body
+  } else if it.kind == "equation" {
+    set align(center)
+    block(width: 100%, {
+      grid(
+        columns: (1fr, auto),
+        it.body,
+        context { it.counter.display(it.numbering) },
+      )
+    })
   } else if it.kind == "code" {
     [
       #set text(size: size.代码块标题)
@@ -31,8 +41,24 @@
       #it.caption.body
     ]
     it.body
+  } else if it.kind == "subfigure" {
+    it.body
+    [
+      #set text(size: size.图题)
+      #context { numbering("(a)", counter(figure.where(kind: "subfigure")).at(here()).first()) }
+      #h(0.5em)
+      #it.caption.body
+    ]
+  } else if it.kind in theorem-kinds {
+    set align(left)
+    it.body
   } else {
-    it
+    it.body
+    [
+      #set text(size: size.图题)
+      #context { supplements.图表 + it.counter.display(it.numbering) + "   " }
+      #it.caption.body
+    ]
   }
 }
 
@@ -51,11 +77,30 @@
     } else if el.func() == figure {
       if el.kind == image {
         link(el_loc, [#supplements.图 #chinesenumbering(chaptercounter.at(el_loc).first(), imagecounter.at(el_loc).first(), location: el_loc)])
+      } else if el.kind == "subfigure" {
+        // 子图引用：主图编号（imagecounter 已含当前主图序号）+ 子图字母，如 "图 1.1(a)"
+        link(el_loc, text(str(supplements.图) + " " + chinesenumbering(chaptercounter.at(el_loc).first(), imagecounter.at(el_loc).first(), location: el_loc) + str(numbering("(a)", counter(figure.where(kind: "subfigure")).at(el_loc).first()))))
       } else if el.kind == table {
         link(el_loc, [#supplements.表 #chinesenumbering(chaptercounter.at(el_loc).first(), tablecounter.at(el_loc).first(), location: el_loc)])
       } else if el.kind == "code" {
         link(el_loc, [#supplements.代码 #chinesenumbering(chaptercounter.at(el_loc).first(), rawcounter.at(el_loc).first(), location: el_loc)])
-      } else { it }
+      } else if el.kind == "equation" {
+        link(el_loc, [#supplements.公式 #chinesenumbering(chaptercounter.at(el_loc).first(), counter(figure.where(kind: "equation")).at(el_loc).first(), location: el_loc, brackets: true)])
+      } else if el.kind in theorem-kinds {
+        link(el_loc, [#el.supplement #chinesenumbering(
+          chaptercounter.at(el_loc).first(),
+          counter(figure.where(kind: el.kind)).at(el_loc).first(),
+          location: el_loc,
+        )])
+      } else {
+        // 未知 figure kind 的 fallback：前缀用 supplements.图表，编号取该 kind 的
+        // 子计数器（未随章节重置而跨章累计，与 _figure-show-rule 的图题编号一致）
+        link(el_loc, [#supplements.图表 #chinesenumbering(
+          chaptercounter.at(el_loc).first(),
+          counter(figure.where(kind: el.kind)).at(el_loc).first(),
+          location: el_loc,
+        )])
+      }
     } else if el.func() == heading {
       if el.level == 1 {
         link(el_loc, chinesenumbering(..counter(heading).at(el_loc), location: el_loc))

@@ -1,4 +1,6 @@
-#import "../../format/utils.typ": as-booktab, codeblock
+#import "../../format/components.typ": as-booktab, code-block
+// 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
+// #import "@preview/pku-thesis-pass:0.3.0": as-booktab, code-block
 #import "@preview/gribouille:0.6.0": *
 
 撰写学位论文是每个研究生必须完成的功课。在 LaTeX 还是 Typst 的选择上，过去几年我们几乎没有悬念——LaTeX 是唯一的专业排版工具。然而，Typst 的出现正在改变这个局面。
@@ -27,19 +29,19 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
 最简单的插入方式：
 
 ```typ
-#image("../assets/placeholder-wordmark.svg", width: 60%)
+#image("../assets/pkuword.pdf", width: 60%)
 ```
 
 如果是写论文，那么有必要给图片一个 Figure 类、标题和标签，方便自动编号和交叉引用。
 
 #figure(
-  image("../assets/placeholder-wordmark.svg", width: 60%),
+  image("../assets/pkuword.pdf", width: 60%),
   caption: [
-    北京大学字标（占位图）
+    北京大学字标
   ],
 ) <fig-wordmark>
 
-同一类对象会自动编号，给一个标签是为了交叉引用。@fig-wordmark 展示的是校名字标的占位图：出于版权考虑，这里不包含北京大学官方校徽和字标。封面上的校徽可通过 `config()` 的 `logo` / `wordmark` 参数导入，官方校徽和字标（`pkulogo` / `pkuword`）可从 CTAN 的 `pkuthss` 包获取：#link("https://ctan.org/pkg/pkuthss")，CTAN 提供 eps 和 pdf 两种格式，Typst 的 `image()` 不支持 eps 格式，请使用其中的 pdf 格式文件或自行转换为 svg 等支持的格式。
+同一类对象会自动编号，给一个标签是为了交叉引用。@fig-wordmark 展示的是北京大学的校名字标，本模板已内置（取自 CTAN 的 #link("https://ctan.org/pkg/pkuthss")[pkuthss] 包），封面通过 `config()` 的 `logo` / `wordmark` 参数导入。
 
 == 代码生成图片
 
@@ -117,7 +119,7 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
 
 附录中也可以插入代码块，如 @appendix-code。
 
-#codeblock(
+#code-block(
   ```rust
   fn main() {
       println!("Hello from Rust!");

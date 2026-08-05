@@ -7,8 +7,8 @@
 //   - heading-show-rule：全局 show rule，处理分页、状态转换、计数器步进
 // ============================================================
 
-#import "const.typ": size
-#import "utils.typ": partcounter, chaptercounter, footnotecounter, imagecounter, tablecounter, rawcounter, equationcounter
+#import "style.typ": size
+#import "utils.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
 
 /// 根据标题等级返回对应字号（用于 2–4 级标题）
 #let get-heading-size(level) = {
@@ -29,7 +29,7 @@
 
 // Heading supplement 中可嵌入的元数据字段：
 //   pagebreak: bool         - 是否在此 heading 前分页（默认 true）
-//   part: int | none        - 状态转换目标 (0/1/2/none)
+//   part: int | none         - 状态转换目标 (0/1/2/3/none)
 //   reset-page: bool        - 是否重置页码为 1（默认 false）
 //   show-header: bool       - 是否显示页眉（默认 true）
 //   header: content | none  - 自定义页眉文本（替换标题）
@@ -64,11 +64,12 @@
   title,
   pagebreak: true,
   show-header: true,
+  outlined: true,
   ..extra-meta,
 ) = {
   heading(
     numbering: none,
-    outlined: true,
+    outlined: outlined,
     supplement: [#metadata((
       pagebreak: pagebreak,
       show-header: show-header,
@@ -85,6 +86,29 @@
   } else {
     (:)
   }
+}
+
+/// 查找与指定位置相关的 1 级标题
+/// - current: 与 location 同一物理页、位于其后的第一个 1 级标题
+///   （页眉位于页首、标题在其后时使用）
+/// - governing: 本页应遵循的标题 = current，否则为 location 之前最后一个
+///   1 级标题，都没有则为 none。页眉/页脚取 governing 的元数据做显示决策。
+/// 注意：本函数内部使用 query / location 等 context 操作，须在 context 内调用；
+/// 不加 `context` 关键字，使返回值保持为可直接取字段的普通字典。
+#let get-page-headings(location) = {
+  let physical-page = location.page()
+  let after = query(selector(heading.where(level: 1)).after(location))
+  let before = query(selector(heading.where(level: 1)).before(location))
+  let current = if after.len() > 0 {
+    let next = after.first()
+    if next.location().page() == physical-page { next } else { none }
+  } else { none }
+  let governing = if current != none {
+    current
+  } else if before.len() > 0 {
+    before.last()
+  } else { none }
+  (current: current, governing: governing)
 }
 
 /// 渲染标题正文（不重新触发 show heading）
@@ -154,11 +178,18 @@
 
   if it.numbering != none {
     chaptercounter.step()
-    footnotecounter.update(())
     imagecounter.update(())
     tablecounter.update(())
     rawcounter.update(())
     equationcounter.update(())
+    theoremcounter.update(())
+    definitioncounter.update(())
+    lemmacounter.update(())
+    corollarycounter.update(())
+    propositioncounter.update(())
+    propertycounter.update(())
+    examplecounter.update(())
+    remarkcounter.update(())
   }
 
   set align(center)

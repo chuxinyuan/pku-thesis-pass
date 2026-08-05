@@ -26,17 +26,21 @@
 // ========== 子模块导入 ==========
 
 // 基础定义
-#import "const.typ": supplement, font-set
-#import "utils.typ": skippedstate, appendix, booktab, as-booktab, codeblock, _resolve-path
+#import "style.typ": supplement, font-set
+#import "utils.typ": skippedstate, appendix, _resolve-path
+#import "components.typ": booktab, as-booktab, eq-block, code-block, subfigure, word-count-cjk, total-words, total-characters
 
 // 基础设施
 #import "page.typ": page-setup
 #import "bibliography.typ": render-bibliography
 #import "outline.typ": chineseoutline
 #import "listoffigures.typ": listoffigures
+#import "notation.typ": notation-page
+#import "achievement.typ": achievement-page
 
 // 页面
 #import "covers.typ": cover-page-blind, cover-page-normal
+#import "spine.typ": spine-page
 #import "copyright.typ": copyright-page
 #import "abstract-zh.typ": abstract-page-zh
 #import "abstract-en.typ": abstract-page-en
@@ -93,7 +97,11 @@
 ///   always-start-odd — 章节从奇数页开始（默认 true）
 ///   clean-declaration — 声明页清除页眉页码（默认 false）
 ///   outline-depth — 目录深度（默认 3）
+///   word-count — 统计正文字数（默认 true，正文任意处可用 total-words / total-characters 显示）
+///   achievement-outlined — "攻读学位期间发表的论文"页是否出现在目录（默认 true）
 ///   supplements — 自定义引用记号
+///   use-latexref — 是否启用 LaTeX 引用兼容（默认 false）
+///   latexref-prefixes — LaTeX 引用剥离前缀列表（默认 ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:")）
 ///   codly-args — 控制代码块行号、背景色、语言图标等
 ///   logo — 封面校徽图片路径，`path` 类型（如 `path("assets/logo.svg")`，默认 none 显示占位框）
 ///   wordmark — 封面校名字标图片路径，`path` 类型（如 `path("assets/wordmark.svg")`，默认 none 显示占位框）
@@ -149,11 +157,21 @@
   // 引用记号自定义（图、表、代码、公式、节）
   // 示例：supplements: (图: "Figure", 表: "Table")
   supplements: (:),
+  // LaTeX 引用兼容：@fig:xxx 等带前缀引用解析失败时，剥离前缀重试 @xxx
+  // 用于从 LaTeX 迁移的文档（LaTeX 习惯写 \ref{fig:xxx}）。默认关闭
+  use-latexref: false,
+  // use-latexref 时尝试剥离的前缀列表
+  latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
+  // "攻读学位期间发表的论文"页是否出现在目录中（与致谢、声明一致，默认 true）
+  achievement-outlined: true,
+  // 统计正文字数（CJK 字数 / 总字符数），可用 total-words / total-characters 显示，如不需要可设为 false
+  word-count: true,
+  // 代码块参数：行号、语言图标、斑马条纹等
   codly-args: (
-    number-format: none,  // 代码行号
-    display-icon: true,   // 语言图标
-    lang-format: none,    // 语言名称
-    zebra-fill: none,     // 斑马条纹
+    display-icon: true,      // 语言图标
+    // number-format: none,  // 代码行号
+    // lang-format: none,    // 语言名称
+    // zebra-fill: none,     // 斑马条纹
   ),
   // 封面校徽、字标图片文件路径，参数值为 none 时封面显示灰色占位框
   // 示例：logo: path("assets/logo.svg"), wordmark: path("assets/wordmark.svg")
@@ -218,6 +236,12 @@
       smartpagebreak: smartpagebreak,
       merged-supplements: merged-supplements,
       codly-args: codly-args,
+      use-latexref: use-latexref,
+      latexref-prefixes: latexref-prefixes,
+      // PDF 元数据：盲审时隐藏作者，避免在文件属性中泄露
+      // 文档日期（CreationDate）由 Typst 原生写入编译时间，无需在此设置
+      document-title: title-zh,
+      document-author: if blind { none } else { author-zh },
       body: body,
     )
   }
@@ -256,6 +280,18 @@
         wordmark: wordmark,
       )
     }
+    smartpagebreak()
+  }
+
+  // ========== 书脊页 ==========
+  // 打印装订用，非规范强制要求；默认不启用，需在 thesis.typ 显式调用
+  let spine = () => {
+    spine-page(
+      title: title-zh,
+      author: author-zh,
+      font: font,
+      blind: blind,
+    )
     smartpagebreak()
   }
 
@@ -314,6 +350,15 @@
     )
   }
 
+  // ========== 公式列表 ==========
+  let list-of-equations = () => {
+    listoffigures(
+      title: merged-supplements.公式列表,
+      kind: "equation",
+      supplements: merged-supplements,
+    )
+  }
+
   // ========== 代码列表 ==========
   let list-of-code = () => {
     listoffigures(
@@ -321,6 +366,13 @@
       kind: "code",
       supplements: merged-supplements,
     )
+  }
+
+  // ========== 主要符号对照表 ==========
+  let notation = (body) => {
+    notation-page(
+      title: merged-supplements.符号表,
+    )[#body]
   }
 
   // ========== 正文段落样式 ==========
@@ -332,7 +384,13 @@
       leading: 10.5pt,
       spacing: 10.5pt,
     )
-    body
+    // 字数统计：统计正文与附录（show 规则必须与 body 处于同一作用域才生效）
+    if word-count {
+      show: word-count-cjk
+      body
+    } else {
+      body
+    }
   }
 
   // ========== 参考文献 ==========
@@ -348,7 +406,19 @@
     )
   }
 
-  // ========== 致谢 ==========
+  // ========== 攻读学位期间发表的论文 ==========
+  let achievement = (body) => {
+    if blind {
+      return
+    }
+    set align(left + top)
+    achievement-page(
+      title: merged-supplements.成果表,
+      outlined: achievement-outlined,
+    )[#body]
+  }
+
+  // ========== 致谢部分 ==========
   let acknowledgements = (body) => {
     if blind {
       return
@@ -371,16 +441,20 @@
   (
     setup: setup,
     cover: cover,
+    spine: spine,
     copyright: copyright,
     abstract-zh: abstract-zh,
     abstract-en: abstract-en,
     outline: outline,
     list-of-figures: list-of-figures,
     list-of-tables: list-of-tables,
+    list-of-equations: list-of-equations,
     list-of-code: list-of-code,
+    notation: notation,
     body-wrap: body-wrap,
     bibliography: bibliography,
     appendix: appendix,
+    achievement: achievement,
     acknowledgements: acknowledgements,
     declaration: declaration,
     font: font,
@@ -388,6 +462,9 @@
     preview: preview,
     always-start-odd: always-start-odd,
     first-line-indent: first-line-indent,
+    achievement-outlined: achievement-outlined,
     smartpagebreak: smartpagebreak,
+    total-words: total-words,
+    total-characters: total-characters,
   )
 }

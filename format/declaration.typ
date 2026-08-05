@@ -7,10 +7,10 @@
 
 #import "headings.typ": back-heading
 #import "@preview/cuti:0.4.0": show-cn-fakebold
-#import "const.typ": size
+#import "style.typ": size
 
 /// 原创性声明与授权说明页
-/// clean-declaration: 为 true 时清除该页的页眉和页码（通过 <__clean_declaration__> 标签）
+/// clean-declaration: 为 true 时清除该页的页眉和页码（通过 back-heading 的 show-header 元数据）
 #let declaration-page(clean-declaration: false) = {
   set par(first-line-indent: 2em)
   back-heading(
@@ -18,10 +18,6 @@
     pagebreak: true,
     show-header: not clean-declaration,
   )
-
-  if clean-declaration {
-    [#[]<__clean_declaration__>]
-  }
 
   align(center)[#text(
     size: size.四号,

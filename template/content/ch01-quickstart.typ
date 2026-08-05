@@ -1,4 +1,6 @@
-#import "../../format/utils.typ": codeblock
+#import "../../format/components.typ": code-block
+// 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
+// #import "@preview/pku-thesis-pass:0.3.0": code-block
 
 == 安装与环境配置
 
@@ -22,7 +24,7 @@ Typst 是一个现代化的排版系统，可以通过以下方式使用：
 模板已发布到 Typst Universe，可以直接创建新项目：
 
 ```bash
-typst init @preview/pku-thesis-pass:0.2.0 my-thesis
+typst init @preview/pku-thesis-pass:0.3.0 my-thesis
 cd my-thesis
 ```
 
@@ -55,14 +57,14 @@ typst watch thesis.typ
 
 一个使用本模板的论文文件基本结构如下：
 
-#codeblock(
+#code-block(
   ```typ
-  #import "@preview/pku-thesis-pass:0.2.0": config
+  #import "@preview/pku-thesis-pass:0.3.0": config
 
   #let (
     setup, cover, copyright, abstract-zh, abstract-en,
-    outline, list-of-figures, list-of-tables, list-of-code,
-    body-wrap, bibliography, appendix, acknowledgements,
+    outline, list-of-figures, list-of-tables, list-of-equations, list-of-code,
+    notation, body-wrap, bibliography, appendix, achievement, acknowledgements,
     declaration, font, blind
   ) = config(
     author-zh: "张三",
@@ -89,6 +91,9 @@ typst watch thesis.typ
 
   这里是附录内容...
 
+  #achievement[
+    + *张三*, 李四, 王五. 论文题目[J]. 期刊名, 2025, 60(3): 123-130. （SCI 收录期刊；SCI 收录号 601JP；IF=9.432）
+  ]
   #acknowledgements[致谢内容...]
   #declaration()
   ```,

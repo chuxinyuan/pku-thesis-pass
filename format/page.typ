@@ -8,12 +8,38 @@
 #import "@preview/codly:1.3.0": codly-init, codly
 #import "@preview/codly-languages:0.1.10": codly-languages
 
-#import "const.typ": font, size
-#import "utils.typ": appendixcounter, chaptercounter, chinesenumbering, sym-circle, sym-square, sym-rhombus
+#import "style.typ": font, size
+#import "utils.typ": in-appendix, chaptercounter, chinesenumbering, show-latexref
 #import "headings.typ": heading-show-rule
 #import "header.typ": make-header
 #import "footer.typ": make-footer
 #import "show.typ": _figure-show-rule, _ref-show-rule
+
+// ========== 列表符号 ==========
+
+#let sym-circle(size) = box(
+  width: 1em,
+  align(
+    center + horizon,
+    circle(radius: size / 2, fill: black)
+  ),
+)
+
+#let sym-square(size) = box(
+  width: 1em,
+  align(
+    center + horizon,
+    square(size: size, fill: black)
+  ),
+)
+
+#let sym-rhombus(size) = box(
+  width: 1em,
+  align(
+    center + horizon,
+    rotate(45deg, square(size: size, fill: black))
+  ),
+)
 
 /// 页面基础设置函数
 /// 在 #show: setup 处被 config() 调用，作用于全文
@@ -26,6 +52,10 @@
   smartpagebreak: none,
   merged-supplements: (:),
   codly-args: (:),
+  document-title: none,
+  document-author: none,
+  use-latexref: false,
+  latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
   body: none,
 ) = {
   set page(
@@ -35,11 +65,17 @@
     footer: make-footer(),
   )
   set text(font: font.宋体, size: size.正文, lang: "zh")
+  set document(
+    title: document-title,
+  )
+  if document-author != none {
+    set document(author: document-author)
+  }
   set heading(numbering: chinesenumbering)
 
   set figure(
     numbering: (..nums) => context {
-      if appendixcounter.at(here()).first() < 10 {
+      if not in-appendix(here()) {
         numbering("1.1", chaptercounter.at(here()).first(), ..nums)
       } else {
         numbering("A.1", chaptercounter.at(here()).first(), ..nums)
@@ -50,7 +86,7 @@
   set math.equation(
     numbering: (..nums) => context {
       set text(font: font.宋体)
-      if appendixcounter.at(here()).first() < 10 {
+      if not in-appendix(here()) {
         numbering("(1.1)", chaptercounter.at(here()).first(), ..nums)
       } else {
         numbering("(A.1)", chaptercounter.at(here()).first(), ..nums)
@@ -99,6 +135,15 @@
   show figure: set block(breakable: true)
   show figure: it => _figure-show-rule(it, merged-supplements)
   show ref: it => _ref-show-rule(it, merged-supplements)
+
+  // LaTeX 引用兼容：@fig:xxx 解析失败时剥离前缀重试 @xxx
+  // 注意：show: 不能写在 if 块内部，否则不会作用于函数体返回的内容
+  let latexref-wrapper = if use-latexref {
+    show-latexref.with(latexref-prefixes)
+  } else {
+    it => it
+  }
+  show: latexref-wrapper
 
   body
 }

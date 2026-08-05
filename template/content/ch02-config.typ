@@ -1,4 +1,6 @@
-#import "../../format/utils.typ": booktab
+#import "../../format/components.typ": booktab, eq-block
+// 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
+// #import "@preview/pku-thesis-pass:0.3.0": booktab, eq-block
 
 本模板提供了丰富的配置选项，在 `config()` 函数中以命名参数的方式传入。下面详细介绍各个配置项的含义和用法。
 
@@ -36,16 +38,18 @@
   [`title-en`],
   [--],
   [论文英文标题，可用 `\n` 控制换行；盲审模式下 `\n` 会被忽略],
+  [`degree-type`],
+  [`"academic"`],
+  [学位类型：`"academic"`（学术学位）或 `"professional"`（专业学位）],
   [`year`],
   [`2026`],
   [论文提交年份],
   [`month`],
   [`6`],
   [论文提交月份],
-  [`degree-type`],
-  [`"academic"`],
-  [学位类型：`"academic"`（学术学位）或 `"professional"`（专业学位）],
 ) <config-author>
+
+其中 `title-zh` 与 `author-zh` 除了显示在封面外，还会写入 PDF 文档属性（元数据）：`title-zh` 作为标题，`author-zh` 作为作者。盲审模式（`blind: true`）下作者会被隐藏，仅保留标题。详见 @pdf-meta。
 
 == 院系与专业信息
 
@@ -92,7 +96,7 @@
   [*说明*],
   [`system`],
   [`"default"`],
-  [系统字体方案：`"default"`/`"mac"`/`"windows"`/`"linux"`],
+  [字体方案：`"default"`/`"mac"`/`"windows"`/`"linux"`],
   [`blind`],
   [`false`],
   [是否为盲审模式，盲审模式隐藏作者、导师等信息],
@@ -111,13 +115,27 @@
   [`outline-depth`],
   [`3`],
   [目录显示的最大标题层级],
+  [`word-count`],
+  [`true`],
+  [统计正文与附录字数（CJK 字数 / 总字符数），正文中可用 `total-words` / `total-characters` 显示统计结果],
+  [`achievement-outlined`],
+  [`true`],
+  ["攻读学位期间发表的论文"页是否出现在目录中；设为 `false` 时该页不进入目录],
   [`supplements`],
   [`(:)`],
   [自定义引用记号和列表标题。可用字段及默认值：\
     引用前缀：`图`（"图"）、`表`（"表"）、`代码`（"代码"）、`公式`（"式"）、`节`（"节"）；\
     `图表`（"图表"，未知 figure kind 的 fallback）；\
-    列表页标题：`插图列表`（"插图"）、`表格列表`（"表格"）、`代码列表`（"代码"）。\
+    列表页标题：`插图列表`（"插图"）、`表格列表`（"表格"）、`代码列表`（"代码"）、`公式列表`（"公式"）、`符号表`（"主要符号对照表"）、`成果表`（"攻读学位期间发表的论文"）。\
     示例：`supplements: (图: "Figure", 插图列表: "List of Figures")`],
+  [`use-latexref`],
+  [`false`],
+  [LaTeX 引用兼容：`@fig:xxx` 等带前缀的引用解析失败时，自动剥离前缀后重试 `@xxx`。\
+    适合从 LaTeX 迁移的文档（LaTeX 习惯用 `\ref{fig:xxx}`），开启后无需改动原有标签写法。\
+    详见 "进阶"一章的 @latexref 小节],
+  [`latexref-prefixes`],
+  [`("fig:", ..)`],
+  [`use-latexref` 为 `true` 时尝试剥离的前缀列表，可按需增删，如 `("图:", "表:")`],
   [`codly-args`],
   [`(:)`],
   [传递给 `codly` 包的额外参数，用于自定义代码块样式。常用选项：\
@@ -132,6 +150,10 @@
   [`none`],
   [封面校名字标图片路径，`path` 类型；为 `none` 时封面显示灰色占位框],
 ) <config-layout>
+
+=== 书脊页
+
+书脊页用于打印装订时在书脊上显示论文标题与作者，北大规范未强制要求，但博士论文装订常见。如需启用，在 `thesis.typ` 中封面之后取消注释 `#spine()` 即可。书脊页会竖排显示 `title-zh`（页面右侧上方）与 `author-zh`（页面右侧下方）；盲审模式（`blind: true`）下自动隐藏作者，只保留标题。
 
 == 参考文献配置
 
@@ -173,10 +195,10 @@
 - `first-line-indent`：首行缩进值（供自定义页面使用）
 - `blind` / `preview` / `always-start-odd`：当前配置值，可由 `--input` CLI 参数覆盖
 
-模板还导出了 `booktab`、`as-booktab`、`codeblock` 三个组件函数，可直接导入使用：
+模板还导出了 `booktab`、`as-booktab`、`code-block` 三个组件函数，可直接导入使用：
 
 ```typ
-#import "@preview/pku-thesis-pass:0.2.0": booktab, as-booktab, codeblock
+#import "@preview/pku-thesis-pass:0.3.0": booktab, as-booktab, code-block
 ```
 
 === booktab — 三线表
@@ -216,12 +238,12 @@
 
 若 table 已包含 `table.hline`，则仅包裹不修改，保留手动样式。
 
-=== codeblock — 代码块
+=== code-block — 代码块
 
-`codeblock` 包装 raw 为带标题的可引用 `figure(kind: "code")`：
+`code-block` 包装 raw 为带标题的可引用 `figure(kind: "code")`：
 
 ````typ
-#codeblock(
+#code-block(
   ```python
   def fibonacci(n):
       if n <= 1:
@@ -233,3 +255,17 @@
 ````
 
 省略 `caption` 则只显示代码，无标题无编号、不入图列表、不可被 `@` 引用。
+
+=== eq-block — 公式块
+
+`eq-block` 将行间公式包装为带标题的可引用 `figure(kind: "equation")`，支持公式目录：
+
+```typ
+#eq-block(caption: [勾股定理])[
+  $ a^2 + b^2 = c^2 $
+] <eq-pythagoras>
+```
+
+- 省略 `caption` 时原样返回公式，不编号、不入公式目录
+- 使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突
+- 不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`

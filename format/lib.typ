@@ -12,4 +12,5 @@
 //   --input system=default|mac|windows|linux    系统字体方案
 // ============================================================
 
-#import "config.typ": config, booktab, as-booktab, codeblock
+#import "config.typ": config
+#import "components.typ": booktab, as-booktab, eq-block, code-block, subfigure, word-count-cjk, total-words, total-characters, theorem, definition, lemma, corollary, proposition, property, example, remark, proof

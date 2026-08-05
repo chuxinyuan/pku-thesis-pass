@@ -1,12 +1,13 @@
 // ============================================================
 // footer.typ — 页脚生成
-// 根据 partcounter 阶段显示罗马数字（前置部分）或阿拉伯数字（正文）
-// 封面阶段（part == 0）不显示页脚
-// 声明页启用 clean-declaration 后清除页码
+// 根据 partcounter 部分显示罗马数字（前置部分）或阿拉伯数字（正文/附录）
+// 封面部分（part == 0）不显示页脚
+// 本页管辖标题的 show-header 元数据为 false 时清除页码（如声明页 clean-declaration）
 // ============================================================
 
-#import "const.typ": size
+#import "style.typ": size
 #import "utils.typ": partcounter, skippedstate
+#import "headings.typ": get-heading-meta, get-page-headings
 
 /// 生成页脚页码（作为 place 元素放置在页面底部）
 #let make-footer() = context {
@@ -16,11 +17,14 @@
   let logical-page = counter(page).at(here()).first()
   if skippedstate.at(here()) and calc.even(logical-page) { return }
 
-  // clean-declaration 检测：若在声明页之后且无更多 heading，隐藏页码
-  if (
-    query(selector(heading).after(here())).len() == 0
-      and query(selector(<__clean_declaration__>)).len() > 0
-  ) { return }
+  // clean-declaration 检测：本页管辖标题的 show-header 为 false 时隐藏页码
+  let governing = get-page-headings(here()).governing
+  if governing != none {
+    let meta = get-heading-meta(governing)
+    if not meta.at("show-header", default: true) {
+      return
+    }
+  }
 
   set text(size: size.页码)
   set align(center)

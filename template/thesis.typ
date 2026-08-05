@@ -1,6 +1,6 @@
 // ============================================================
-// 北京大学学位论文模板
-// 渲染文档：typst compile thesis.typ --font-path fonts
+// 北京大学学位论文 Typst 模板使用指南
+// 渲染文档：typst compile thesis.typ --root .
 //
 // 命令行参数（--input key=value）：
 //   --input blind=true|false                    盲审模式
@@ -9,25 +9,32 @@
 //   --input system=default|mac|windows|linux    系统字体方案
 // ============================================================
 
-#import "@preview/pku-thesis-pass:0.2.0": config
+#import "../format/lib.typ": config
+// 注意：本地测试时，注释掉下一行，并取消注释上一行
+// #import "@preview/pku-thesis-pass:0.3.0": config
 
 #let (
   setup,
   cover,
+  spine,
   copyright,
   abstract-zh,
   abstract-en,
   outline,
   list-of-figures,
   list-of-tables,
+  list-of-equations,
   list-of-code,
+  notation,
   body-wrap,
   bibliography,
   appendix,
+  achievement,
   acknowledgements,
   declaration,
   font,
   blind,
+  total-words,
 ) = config(
   // ========== 基本信息 ==========
   author-zh: "张三",
@@ -36,13 +43,13 @@
   blind-id: "L2023XXXXX",
   thesis-name: "博士研究生学位论文",
   header-text: "北京大学博士学位论文",
-  title-zh: "论文中文题目",
-  title-en: "English Title of the Thesis",
+  title-zh: "北京大学学位论文 \nTypst 模板使用指南",
+  title-en: "User Guide for PKU Dissertation \nTypst Template",
   school: "信息科学技术学院",
   first-major: "计算机科学与技术",
   major-zh: "计算机软件与理论",
   major-en: "Computer Software and Theory",
-  direction: "研究方向",
+  direction: "程序设计语言与编译技术",
   supervisor-zh: "李四 教授",
   supervisor-en: "Prof. Si Li",
   degree-type: "academic",
@@ -57,21 +64,22 @@
   always-start-odd: false,
   clean-declaration: true,
   outline-depth: 3,
-  supplements: (:),
+  word-count: true,
+  achievement-outlined: true,
+  supplements: (成果表: "攻读学位期间发表的论文"),
+  use-latexref: true,
+  latexref-prefixes: ("fig:", "tbl:", "eqt:"),
   codly-args: (:),
-  // 1.封面校徽和字标：因版权原因，参数默认值为 none，封面显示灰色占位框
-  // 2.官方校徽和字标 pdf 文件建议从 CTAN 的 pkuthss 包获取：
-  //  https://ctan.org/pkg/pkuthss
-  // 3.请您将相关文件放在项目根目录的 `assets` 路径下，设置 `path` 指向该文件即可，例如：
-  //   logo: path("assets/pkulogo.pdf"),
-  //   wordmark: path("assets/pkuword.pdf"),
-  logo: none,
-  wordmark: none,
+  logo: path("assets/pkulogo.pdf"),
+  wordmark: path("assets/pkuword.pdf"),
 
   // ========== 参考文献 ==========
+  override-bib: false,
   bib-file: path("ref.bib"),
   bib-style: "numeric",
   bib-version: "2025",
+  bib-cn-first: true,
+  bib-pinyin-override: (:),
 )
 
 // ========== 页面设置 ==========
@@ -80,18 +88,21 @@
 // ========== 论文封面 ==========
 #cover()
 
+// ========== 论文书脊 ==========
+// #spine()
+
 // ========== 版权声明 ==========
 #copyright()
 
 // ========== 中文摘要 ==========
-#abstract-zh(keywords-zh: ("关键词1", "关键词2"))[
-  #include "content/abstract-zh.typ"
-]
+#abstract-zh(
+  keywords-zh: ("Typst", "模板", "学位论文", "北京大学")
+)[#include "content/abstract-zh.typ"]
 
 // ========== 英文摘要 ==========
-#abstract-en(keywords-en: ("Keyword 1", "Keyword 2"))[
-  #include "content/abstract-en.typ"
-]
+#abstract-en(
+  keywords-en: ("Typst", "Template", "Dissertation", "Peking University")
+)[#include "content/abstract-en.typ"]
 
 // ========== 论文目录 ==========
 #outline()
@@ -102,39 +113,48 @@
 // ========== 表格列表 ==========
 #list-of-tables()
 
+// ========== 公式列表 ==========
+#list-of-equations()
+
 // ========== 代码列表 ==========
-#list-of-code()  // 如不需要注释掉即可
+#list-of-code()
+
+// ========== 主要符号对照表 ==========
+#notation[#include "content/notation.typ"]
 
 // ========== 正文部分 ==========
 #show: body-wrap
 #show: bibliography
 
-= 引言 <intro>
+= 快速开始 <quickstart>
 
-#include "content/ch01-intro.typ"
+#include "content/ch01-quickstart.typ"
 
-= 文献综述 <litrev>
+= 模板配置选项 <config-ref>
 
-#include "content/ch02-litrev.typ"
+#include "content/ch02-config.typ"
 
-= 研究方法
+= Typst 基本功能 <basics>
 
-在此处撰写研究方法...
+#include "content/ch03-basics.typ"
 
-= 实验与结果
+= 常见问题与解决方案 <faq>
 
-在此处撰写实验和结果...
+#include "content/ch04-faq.typ"
 
-= 总结与展望
+= 进阶使用技巧 <advanced>
 
-在此处撰写总结和展望...
+#include "content/ch05-advanced.typ"
 
 // ========== 附录部分 ==========
 #appendix()
 
-= 实验数据
+= 关于 Typst <about>
 
-在此处添加实验数据...
+#include "content/appendix-about.typ"
+
+// ========== 攻读学位期间发表的论文 ==========
+#achievement[#include "content/achievement.typ"]
 
 // ========== 致谢部分 ==========
 #acknowledgements[#include "content/acknowledgements.typ"]

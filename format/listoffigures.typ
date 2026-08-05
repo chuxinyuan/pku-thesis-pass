@@ -1,10 +1,10 @@
 // ============================================================
-// listoffigures.typ — 图/表/代码的列表
+// listoffigures.typ — 图/表/代码/公式的列表
 // 提供统一的图表列表生成函数 listoffigures
 // ============================================================
 
 #import "headings.typ": front-heading
-#import "const.typ": supplement
+#import "style.typ": supplement
 #import "utils.typ": chaptercounter, chinesenumbering
 
 /// 从 figure caption 中提取纯文本，用于图表列表条目。
@@ -25,9 +25,9 @@
   }
 }
 
-/// 图/表/代码列表
+/// 图/表/代码/公式列表
 /// title: 列表标题
-/// kind: image / table / "code"
+/// kind: image / table / "code" / "equation"
 /// supplements: 引用记号字典（用于前缀标签）。
 #let listoffigures(title: "插图", kind: image, supplements: supplement) = {
   front-heading(title)
@@ -40,15 +40,23 @@
       supplements.图
     } else if kind == table {
       supplements.表
+    } else if kind == "equation" {
+      supplements.公式
     } else if kind == "code" {
       supplements.代码
     } else { "" }
+
+    // 公式用 figure 子计数器，编号带括号；其余同理
+    let kind-counter = counter(figure.where(kind: kind))
+    let brackets = kind == "equation"
+
     let maybe_number = {
       prefix
       chinesenumbering(
         chaptercounter.at(el_loc).first(),
-        counter(figure.where(kind: kind)).at(el_loc).first(),
+        kind-counter.at(el_loc).first(),
         location: el_loc,
+        brackets: brackets,
       )
       h(0.5em)
     }
