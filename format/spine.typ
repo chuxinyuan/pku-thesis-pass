@@ -26,10 +26,17 @@
   set page(margin: (x: 1cm, y: 5.4cm))
   set text(font: font.at(text-font), size: text-size)
 
+  // 标题去除 \n 换行（封面标题可手动换行，书脊标题需保持连续），与封面盲审标题处理一致
+  let clean-title = if type(title) == str {
+    title.split("\n").map(it => it.trim()).join(" ")
+  } else {
+    title
+  }
+
   // 标题：页面右侧上方，竖排（整体转 90° 后中文逐字再转 -90° 保持正立）
   place(right + top, {
     show regex("[\p{script=Han}]"): it => box(rotate(it, -90deg))
-    rotate(title, 90deg, origin: right + top, reflow: true)
+    rotate(clean-title, 90deg, origin: right + top, reflow: true)
   })
 
   // 作者：页面右侧下方；盲审时不显示
