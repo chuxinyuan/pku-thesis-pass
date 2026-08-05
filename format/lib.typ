@@ -14,3 +14,4 @@
 
 #import "config.typ": config
 #import "components.typ": booktab, as-booktab, eq-block, code-block, subfigure, word-count-cjk, total-words, total-characters, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
+#import "style.typ": font-set
