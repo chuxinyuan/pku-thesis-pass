@@ -6,13 +6,13 @@
 
 Typst 是一个现代化的排版系统，可以通过以下方式使用：
 
-*在线使用*：访问 typst.app，注册账号后即可在线编辑。在线版本无需安装，支持实时预览和协作编辑。
+#strong[在线使用]：访问 typst.app，注册账号后即可在线编辑。在线版本无需安装，支持实时预览和协作编辑。
 
-*本地安装*：
-- 从 GitHub Releases 下载对应平台的可执行文件
+#strong[本地安装]：
+- 从 #link("https://github.com/typst/typst/releases")[GitHub Releases] 下载对应平台的可执行文件
 - 使用包管理器安装：`brew install typst`（macOS）或 `cargo install typst-cli`（通用）
 
-*编辑器支持*：
+#strong[编辑器支持]：
 - VS Code 和 Positron：安装 Tinymist 插件
 - Neovim：使用 typst.vim 或 typst-preview.nvim
 - 其他编辑器：大多数现代编辑器都有社区维护的 Typst 支持
@@ -28,20 +28,7 @@ typst init @preview/pku-thesis-pass:0.3.0 my-thesis
 cd my-thesis
 ```
 
-这会创建一个包含 `thesis.typ` 和 `ref.bib` 的干净项目，直接编辑即可开始写作。
-
-=== 方式二：克隆仓库
-
-如果需要完整的示例和文档，可以克隆仓库：
-
-```bash
-git clone https://github.com/chuxinyuan/pku-thesis-pass.git
-cd pku-thesis-pass
-```
-
-获取模板后，可以直接编辑 `thesis.typ` 文件开始写作。
-
-=== 编译
+这会在 `my-thesis` 目录下创建一个包含 `assets`、`content`、 `ref.bib` 和 `thesis.typ` 的干净项目，你可以通过如下命令编译文档：
 
 ```bash
 typst compile thesis.typ
@@ -53,6 +40,25 @@ typst compile thesis.typ
 typst watch thesis.typ
 ```
 
+自带的 `thesis.typ` 文件，渲染为 `thesis.pdf` 就是一份完整的论文示例文档和用户指南。
+
+=== 方式二：克隆仓库
+
+如果需要完整的源代码对论文模板进行更多的定制，可以克隆仓库：
+
+```bash
+git clone https://github.com/chuxinyuan/pku-thesis-pass.git
+cd pku-thesis-pass
+```
+
+进入 `pku-thesis-pass` 目录后，使用以下命令编译文档：
+
+```bash
+typst compile template/thesis.typ --root .
+```
+
+无论哪种方式，获取模板后，你都可以直接编辑 `thesis.typ` 文件开始写作。
+
 == 基本结构
 
 一个使用本模板的论文文件基本结构如下：
@@ -62,10 +68,8 @@ typst watch thesis.typ
   #import "@preview/pku-thesis-pass:0.3.0": config
 
   #let (
-    setup, cover, copyright, abstract-zh, abstract-en,
-    outline, list-of-figures, list-of-tables, list-of-equations, list-of-code,
-    notation, body-wrap, bibliography, appendix, achievement, acknowledgements,
-    declaration, font, blind
+    setup, cover, copyright, abstract-zh, outline, body-wrap, 
+    bibliography, appendix, acknowledgements, declaration,
   ) = config(
     author-zh: "张三",
     title-zh: "论文中文题目",
@@ -91,9 +95,6 @@ typst watch thesis.typ
 
   这里是附录内容...
 
-  #achievement[
-    + *张三*, 李四, 王五. 论文题目[J]. 期刊名, 2025, 60(3): 123-130. （SCI 收录期刊；SCI 收录号 601JP；IF=9.432）
-  ]
   #acknowledgements[致谢内容...]
   #declaration()
   ```,

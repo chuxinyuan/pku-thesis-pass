@@ -4,13 +4,13 @@
 
 本模板提供了丰富的配置选项，在 `config()` 函数中以命名参数的方式传入。下面详细介绍各个配置项的含义和用法。
 
-== 作者与论文信息
+== 基本信息
 
 #booktab(
   width: 100%,
   columns: (auto, auto, 1fr),
   align: (left, left, left),
-  caption: "作者与论文信息配置项",
+  caption: "基本信息配置项",
   [*参数名*],
   [*默认值*],
   [*说明*],
@@ -38,29 +38,6 @@
   [`title-en`],
   [--],
   [论文英文标题，可用 `\n` 控制换行；盲审模式下 `\n` 会被忽略],
-  [`degree-type`],
-  [`"academic"`],
-  [学位类型：`"academic"`（学术学位）或 `"professional"`（专业学位）],
-  [`year`],
-  [`2026`],
-  [论文提交年份],
-  [`month`],
-  [`6`],
-  [论文提交月份],
-) <config-author>
-
-其中 `title-zh` 与 `author-zh` 除了显示在封面外，还会写入 PDF 文档属性（元数据）：`title-zh` 作为标题，`author-zh` 作为作者。盲审模式（`blind: true`）下作者会被隐藏，仅保留标题。详见 @pdf-meta。
-
-== 院系与专业信息
-
-#booktab(
-  width: 100%,
-  columns: 3,
-  align: left,
-  caption: "院系与专业信息配置项",
-  [*参数名*],
-  [*默认值*],
-  [*说明*],
   [`school`],
   [`"某个院系"`],
   [院系名称],
@@ -82,15 +59,152 @@
   [`supervisor-en`],
   [`"Si Li"`],
   [导师英文姓名],
-) <config-school>
+  [`degree-type`],
+  [`"academic"`],
+  [学位类型：`"academic"`（学术学位）或 `"professional"`（专业学位）],
+  [`year`],
+  [`2026`],
+  [论文提交年份],
+  [`month`],
+  [`6`],
+  [论文提交月份],
+) <config-author>
 
-== 排版选项
+=== `author-zh`
+
+- #strong[作用]：论文作者的中文姓名，用于非盲审封面及 PDF 文档属性（元数据）的作者字段。
+- #strong[可填值]：任意中文字符串。
+- #strong[默认值]：`"张三"`。
+- #strong[填写示例]：`author-zh: "张三"`
+- #strong[注意事项]：盲审模式（`blind: true`）下此值不会写入 PDF 元数据，封面也改显 `blind-id`，以保护作者身份	。此值也会在书脊页显示（若启用书脊页），盲审模式下书脊页会自动隐藏作者。
+
+=== `author-en`
+
+- #strong[作用]：论文作者的英文姓名，用于英文摘要页。
+- #strong[可填值]：任意英文字符串。
+- #strong[默认值]：`"San Zhang"`。
+- #strong[填写示例]：`author-en: "San Zhang"`
+
+=== `student-id`
+
+- #strong[作用]：学号，显示在非盲审封面。
+- #strong[可填值]：字符串（学号通常为数字与字母）。
+- #strong[默认值]：`"23000xxxxx"`。
+- #strong[注意事项]：盲审模式（`blind: true`）下自动隐藏，不显示在封面上。
+
+=== `blind-id`
+
+- #strong[作用]：盲审论文编号，显示在盲审封面。
+- #strong[可填值]：字符串。
+- #strong[默认值]：`"L2023XXXXX"`。
+- #strong[注意事项]：仅在 `blind: true` 时被使用；非盲审模式下忽略此参数。
+
+=== `thesis-name`
+
+- #strong[作用]：论文类型名称，显示在论文封面。
+- #strong[可填值]：字符串，如 `"博士研究生学位论文"` 或 `"硕士研究生学位论文"`。
+- #strong[默认值]：`"博士研究生学位论文"`。
+- #strong[填写示例]：`thesis-name: "硕士研究生学位论文"`
+
+=== `header-text`
+
+- #strong[作用]：页眉统一文本（偶数页显示）。
+- #strong[可填值]：字符串，如 `"北京大学博士学位论文"` 或 `"北京大学硕士学位论文"`。
+- #strong[默认值]：`"北京大学博士学位论文"`。
+- #strong[填写示例]：`header-text: "北京大学硕士学位论文"`
+- #strong[注意事项]：奇数页页眉自动显示当前章节标题，故此参数主要影响偶数页。
+
+=== `title-zh`
+
+- #strong[作用]：论文中文标题，用于封面、书脊页及 PDF 文档属性标题字段。
+- #strong[可填值]：字符串，可用 `\n` 控制非盲审封面的换行点。
+- #strong[默认值]：需用户填写（示例为 `"北京大学学位论文 \nTypst 模板使用指南"`）。
+- #strong[注意事项]：盲审封面（`blind: true`）会忽略手工插入的 `\n`，将标题合并为连续显示，避免盲审版排版错位。
+
+=== `title-en`
+
+- #strong[作用]：论文英文标题，用于英文摘要页和盲审封面。
+- #strong[可填值]：字符串，可用 `\n` 控制换行。
+- #strong[默认值]：需用户填写。
+- #strong[注意事项]：北大模板无英文封面，故该值仅出现在英文摘要和盲审封面；PDF 标题元数据仍取 `title-zh`。
+
+=== `school`
+
+- #strong[作用]：院系名称，显示于非盲审封面。
+- #strong[可填值]：中文字符串。
+- #strong[默认值]：`"某个院系"`。
+- #strong[填写示例]：`school: "信息科学技术学院"`
+- #strong[注意事项]：盲审模式（`blind: true`）下封面不显示院系信息。
+
+=== `first-major`
+
+- #strong[作用]：一级学科名称，显示于封面。
+- #strong[可填值]：中文字符串。
+- #strong[默认值]：`"某个一级学科"`。
+- #strong[填写示例]：`first-major: "计算机科学与技术"`
+
+=== `major-zh`
+
+- #strong[作用]：专业中文名称，显示于封面。
+- #strong[可填值]：中文字符串。
+- #strong[默认值]：`"某个专业"`。
+- #strong[填写示例]：`major-zh: "计算机软件与理论"`
+
+=== `major-en`
+
+- #strong[作用]：专业英文名称，用于英文摘要页。
+- #strong[可填值]：英文字符串。
+- #strong[默认值]：`"Some Major"`。
+- #strong[填写示例]：`major-en: "Computer Software and Theory"`
+
+=== `direction`
+
+- #strong[作用]：研究方向，显示于非盲审封面。
+- #strong[可填值]：中文字符串。
+- #strong[默认值]：`"某个研究方向"`。
+- #strong[填写示例]：`direction: "程序设计语言与编译技术"`
+
+=== `supervisor-zh`
+
+- #strong[作用]：导师中文姓名及职称，显示于非盲审封面。
+- #strong[可填值]：中文字符串，可含职称。
+- #strong[默认值]：`"李四 教授"`。
+- #strong[填写示例]：`supervisor-zh: "李四 教授"`
+- #strong[注意事项]：盲审模式（`blind: true`）下保密不显示。
+
+=== `supervisor-en`
+
+- #strong[作用]：导师英文姓名，用于英文摘要页。
+- #strong[可填值]：英文字符串。
+- #strong[默认值]`"Prof. San Zhang"`。
+- #strong[填写示例]：`supervisor-en: "Prof. San Zhang"`
+- #strong[注意事项]：盲审模式（`blind: true`）下保密不显示。
+
+=== `degree-type`
+
+- #strong[作用]：学位类型，决定封面学术学位/专业学位☑打在哪里。
+- #strong[可填值]：`"academic"`（学术学位）或 `"professional"`（专业学位）。
+- #strong[默认值]：`"academic"`。
+- #strong[填写示例]：`degree-type: "professional"`
+
+=== `year`
+
+- #strong[作用]：论文提交年份，显示于封面。
+- #strong[可填值]：整数（int）。
+- #strong[默认值]：`2026`。
+
+=== `month`
+- #strong[作用]：论文提交月份，显示于封面。
+- #strong[可填值]：整数（int），范围 1–12。
+- #strong[默认值]：`6`。
+
+== 排版配置
 
 #booktab(
   width: 100%,
   columns: (auto, auto, 1fr),
   align: (left, left, left),
-  caption: "排版选项配置项",
+  caption: "排版配置项",
   [*参数名*],
   [*默认值*],
   [*说明*],
@@ -117,7 +231,7 @@
   [目录显示的最大标题层级],
   [`word-count`],
   [`true`],
-  [统计正文与附录字数（CJK 字数 / 总字符数），正文中可用 `total-words` / `total-characters` 显示统计结果],
+  [统计正文与附录字数（CJK 字数 / 总字符数），正文中可用 `#total-words` / `#total-characters` 显示统计结果],
   [`achievement-outlined`],
   [`true`],
   ["攻读学位期间发表的论文"页是否出现在目录中；设为 `false` 时该页不进入目录],
@@ -151,11 +265,120 @@
   [封面校名字标图片路径，`path` 类型；为 `none` 时封面显示灰色占位框],
 ) <config-layout>
 
-=== 书脊页
+=== `system`
 
-书脊页用于打印装订时在书脊上显示论文标题与作者，北大规范未强制要求，但博士论文装订常见。如需启用，在 `thesis.typ` 中封面之后取消注释 `#spine()` 即可。书脊页会竖排显示 `title-zh`（页面右侧上方）与 `author-zh`（页面右侧下方）；盲审模式（`blind: true`）下自动隐藏作者，只保留标题。
+- #strong[作用]：系统字体方案，决定中文与西文字体的 fallback 顺序。
+- #strong[可填值]：`"default"` / `"mac"` / `"windows"` / `"linux"`。
+- #strong[默认值]：`"default"`。
+- #strong[填写示例]：`system: "linux"`
+- #strong[注意事项]：可被命令行 `--input system=linux` 覆盖，优先级高于此配置。各方案的字体对照见 README"字体配置"一节。
 
-== 参考文献配置
+=== `blind`
+
+- #strong[作用]：盲审模式开关。
+- #strong[可填值]：布尔值（`true` / `false`）。
+- #strong[默认值]：`false`。
+- #strong[注意事项]：开启后自动隐藏作者、导师、学号、致谢、"攻读学位期间发表的论文"页及原创性声明，封面替换为盲审版，PDF 元数据隐藏作者。可被命令行编译模式下的 `--input blind=true` 参数覆盖。
+
+=== `preview`
+
+- #strong[作用]：预览模式，链接文本显示为蓝色。
+- #strong[可填值]：布尔值。
+- #strong[默认值]：`true`。
+- #strong[注意事项]：生成打印版时应设为 `false`（链接不着色）。可被命令行编译模式下的 `--input preview=false` 参数覆盖。
+
+=== `first-line-indent`
+
+- #strong[作用]：正文首行缩进宽度。
+- #strong[可填值]：长度值（length），如 `2em`。
+- #strong[默认值]：`2em`。
+- #strong[注意事项]：Word 模板固定为 `1.77em`，如需严格对照 Word，请设为 `1.77em`。
+
+=== `always-start-odd`
+
+- #strong[作用]：章节是否总是从奇数页开始。
+- #strong[可填值]：布尔值。
+- #strong[默认值]：`true`。
+- #strong[注意事项]：置 `false` 可减少因奇偶页产生的空白页，适合线上阅读或精简打印。可被命令行编译模式下的 `--input always-start-odd=false` 参数覆盖。
+
+=== `clean-declaration`
+
+- #strong[作用]：原创性声明页是否隐藏页眉和页码。
+- #strong[可填值]：布尔值。
+- #strong[默认值]：`false`。
+- #strong[注意事项]：Word 模板的声明页包含页眉与页码，故默认 `false`；若需去除可设为 `true`。
+
+=== `outline-depth`
+
+- #strong[作用]：目录显示的最大标题层级。
+- #strong[可填值]：整数（int）。
+- #strong[默认值]：`3`。
+- #strong[填写示例]：`outline-depth: 2`（只显示到二级标题）
+
+=== `word-count`
+
+- #strong[作用]：是否统计正文与附录字数。
+- #strong[可填值]：布尔值。
+- #strong[默认值]：`true`。
+- #strong[注意事项]：开启后正文中可用 `#total-words`（CJK 字数）与 `#total-characters`（总字符数）显示统计结果；如不需要可设置 `false` 关闭统计以提升编译速度。
+
+=== `achievement-outlined`
+
+- #strong[作用]："攻读学位期间发表的论文"页是否进入目录。
+- #strong[可填值]：布尔值。
+- #strong[默认值]：`true`。
+- #strong[注意事项]：设为 `false` 时该页仍出现在论文中，但不在目录中列出。盲审模式下不显示，与致谢、原创性声明页行为一致。
+
+=== `supplements`
+
+- #strong[作用]：自定义引用记号和列表页标题。
+- #strong[可填值]：字典（dict）。
+- #strong[默认值]：`(:)`（使用模板内置默认）。
+- #strong[填写示例]：`supplements: (图: "Figure", 插图列表: "List of Figures")`
+- #strong[注意事项]：可覆写的键包括——引用前缀 `图`/`表`/`代码`/`公式`/`节` 及 `图表`（未知 kind 的 fallback）；列表标题 `插图列表`/`表格列表`/`代码列表`/`公式列表`/`符号表`/`成果表`。传入的键会覆盖默认值，未传入的沿用默认。例如：设置 `supplements: (成果表: "攻读学位期间发表的论文")` 可自定义成果表标题，其他列表标题仍使用默认值。
+
+=== `use-latexref`
+
+- #strong[作用]：LaTeX 引用兼容开关。
+- #strong[可填值]：布尔值。
+- #strong[默认值]：`false`。
+- #strong[注意事项]：开启后，`@fig:xxx` 等带前缀的引用若解析失败，会自动剥离前缀重试 `@xxx`，适配从 LaTeX 迁移的文档（LaTeX 习惯写 `\ref{fig:xxx}`）。详见"进阶"一章的 @latexref 小节。
+
+=== `latexref-prefixes`
+
+- #strong[作用]：`use-latexref` 为 `true` 时尝试剥离的前缀列表。
+- #strong[可填值]：字符串数组（array）。
+- #strong[默认值]：`("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:")`。
+- #strong[填写示例]：`latexref-prefixes: ("图:", "表:")`
+- #strong[注意事项]：可按需增删前缀，模板按列表顺序尝试剥离。
+
+=== `codly-args`
+
+- #strong[作用]：传递给 `codly` 包的代码块样式参数。
+- #strong[可填值]：字典（dict）。
+- #strong[默认值]：`(:)`。
+- #strong[常见选项]：
+  - `number-format: none`   关闭代码行号
+  - `display-icon: false`   关闭语言图标
+  - `lang-format: none`     关闭语言名称
+  - `zebra-fill: none`      关闭交替斑马条纹背景色
+- #strong[填写示例]：`codly-args: (number-format: none, zebra-fill: none)`
+
+=== `logo`
+
+- #strong[作用]：封面校徽图片路径。
+- #strong[可填值]：`path` 类型，如 `path("assets/pkulogo.pdf")`。
+- #strong[默认值]：`none`（封面显示灰色占位框）。
+- #strong[注意事项]：北大校徽资源取自 CTAN 的 `pkuthss` 包，使用北大校名字标须遵守相关授权规定，详见 README"许可证"一节。
+
+=== `wordmark`
+
+- #strong[作用]：封面校名字标图片路径。
+- #strong[可填值]：`path` 类型，如 `path("assets/pkuword.pdf")`。
+- #strong[默认值]：`none`（封面显示灰色占位框）。
+- #strong[注意事项]：同 `logo`，使用北大校名字标须遵守相关授权规定。
+
+== 参考文献
 
 本模板集成了 gb7714-bilingual 包，提供符合 GB/T 7714 标准的参考文献格式，并自动根据文献语言切换中英文术语。
 
@@ -167,6 +390,9 @@
   [*参数名*],
   [*默认值*],
   [*说明*],
+  [`override-bib`],
+  [`false`],
+  [是否自定义参考文献引用样式。设为 `true` 时忽略下述参数，用户需自行处理参考文献],
   [`bib-file`],
   [`none`],
   [BibTeX 文件路径，`path` 类型，如 `path("ref.bib")`],
@@ -182,90 +408,122 @@
   [`bib-pinyin-override`],
   [`(:)`],
   [仅 `author-date` 且中文作者。多音字校正字典，如 `("重": "chong2")`],
-  [`override-bib`],
-  [`false`],
-  [是否自定义参考文献引用样式。设为 `true` 时忽略上述参数，用户需自行处理参考文献],
 ) <config-bib>
 
-== 补充说明
+=== `override-bib`
 
-除了上述配置参数，`config()` 函数还返回若干额外字段：
-- `font`：解析后的字体方案字典，可直接用于自定义页面（如 `#set text(font: font.仿宋)`）
-- `smartpagebreak`：智能分页函数（支持 `always-start-odd`）
-- `first-line-indent`：首行缩进值（供自定义页面使用）
-- `blind` / `preview` / `always-start-odd`：当前配置值，可由 `--input` CLI 参数覆盖
+- #strong[作用]：是否完全自定义参考文献样式。
+- #strong[可填值]：布尔值。
+- #strong[默认值]：`false`。
+- #strong[注意事项]：设为 `true` 时忽略下述 `bib-*` 参数，用户需在论文中自行编写 `#bibliography(...)` 或自定义渲染逻辑。
 
-模板还导出了 `booktab`、`as-booktab`、`code-block` 三个组件函数，可直接导入使用：
+=== `bib-file`
 
-```typ
-#import "@preview/pku-thesis-pass:0.3.0": booktab, as-booktab, code-block
-```
+- #strong[作用]：BibTeX 参考文献文件路径。
+- #strong[可填值]：`path` 类型，如 `path("ref.bib")`。
+- #strong[默认值]：`none`（无参考文献时忽略）。
+- #strong[填写示例]：`bib-file: path("ref.bib")`
 
-=== booktab — 三线表
+=== `bib-style`
 
-`booktab` 从零创建学术三线表，第一行位置参数自动作为表头（加粗），支持 `figure` 包装和 `@label` 引用：
+- #strong[作用]：参考文献引用风格。
+- #strong[可填值]：`"numeric"`（顺序编码制）或 `"author-date"`（著者—出版年制）。
+- #strong[默认值]：`"numeric"`。
+- #strong[注意事项]：`"author-date"` 时正文引用显示作者与年份，`"numeric"` 显示方括号编号。
 
-```typ
-#booktab(
-  columns: (1fr, 1fr, 1fr),
-  caption: [实验数据],
-  [组别], [数值], [备注],
-  [A], [1.0], [对照组],
-  [B], [2.5], [实验组],
-)
-```
+=== `bib-version`
 
-- `caption`：表格标题，省略时不编号
-- `outlined: false`：不包装为 `figure`，生成纯表格
-- 其他命名参数（`columns`、`align` 等）透传给 `table`
+- #strong[作用]：GB/T 7714 标准版本。
+- #strong[可填值]：`"2015"` 或 `"2025"`。
+- #strong[默认值]：`"2015"`。
+- #strong[注意事项]：GB/T 7714-2025 标准从 2026 年 7 月 1 日开始实施，若学校明确要求采用新标准请选 `"2025"`。
 
-=== as-booktab — 表格装饰器
+=== `bib-cn-first`
 
-`as-booktab` 将现有原生 `table` 装饰为三线表，自动识别 `table.header` 或前 N 个单元格作为表头。更适合与 `figure` 组合，易被格式化工具整理：
+- #strong[作用]：（仅 `bib-style: "author-date"`）中文文献是否排在外文之前。
+- #strong[可填值]：布尔值。
+- #strong[默认值]：`true`。
+- #strong[注意事项]：`true` 时中文条目在前、外文在后，中文按作者姓氏拼音排序；`false` 时外文在前。
 
-```typ
-#figure(
-  as-booktab(table(
-    columns: (1fr, 1fr, 1fr),
-    table.header([左对齐], [居中], [右对齐]),
-    [4], [5], [6],
-    [7], [8], [9],
-  )),
-  caption: [三线表示例],
-  kind: table,
-) <my-table>
-```
+=== `bib-pinyin-override`
 
-若 table 已包含 `table.hline`，则仅包裹不修改，保留手动样式。
+- #strong[作用]：（仅 `author-date` 且为中文作者）多音字发音校正字典。
+- #strong[可填值]：字典，键为汉字，值为 `tone-num-end` 音节串。
+- #strong[默认值]：`(:)`。
+- #strong[填写示例]：`bib-pinyin-override: ("重": "chong2")`
+- #strong[注意事项]：用于拼音排序时对多音字的读音校正，避免排序错乱。
 
-=== code-block — 代码块
+== 其它事项
 
-`code-block` 包装 raw 为带标题的可引用 `figure(kind: "code")`：
+=== 论文书脊页
 
-````typ
-#code-block(
-  ```python
-  def fibonacci(n):
-      if n <= 1:
-          return n
-      return fibonacci(n-1) + fibonacci(n-2)
-  ```,
-  caption: [斐波那契数列],
-) <fib>
-````
+书脊页用于打印装订时在书脊上显示论文标题与作者，北大规范未强制要求，但博士论文装订常见。如打印论文时需启用，在 `thesis.typ` 中取消注释 `#spine()` 即可#footnote("建议打印时同时设置章节总是从奇数页开始。")。
 
-省略 `caption` 则只显示代码，无标题无编号、不入图列表、不可被 `@` 引用。
+书脊页会竖排显示 `title-zh`（页面右侧上方）与 `author-zh`（页面右侧下方）；盲审模式（`blind: true`）下自动隐藏作者，只保留标题。
 
-=== eq-block — 公式块
+=== 插图、表格、公式、代码列表
 
-`eq-block` 将行间公式包装为带标题的可引用 `figure(kind: "equation")`，支持公式目录：
+根据《北京大学研究生学位论文写作指南》（2004 版）#footnote("https://grs.pku.edu.cn/docs/2019-05/20190524160158375113.pdf")，论文的图表一般不用专门制作目录，如确有必要，可另起一页放到本目录之后。因此，如果不需要在目录后显示插图、表格、公式、代码列表，可以删除或注释掉如下代码：
 
 ```typ
-#eq-block(caption: [勾股定理])[
-  $ a^2 + b^2 = c^2 $
-] <eq-pythagoras>
+// ========== 插图列表 ==========
+#list-of-figures()
+
+// ========== 表格列表 ==========
+#list-of-tables()
+
+// ========== 公式列表 ==========
+#list-of-equations()
+
+// ========== 代码列表 ==========
+#list-of-code()
 ```
 
-- 省略 `caption` 时原样返回公式，不编号、不入公式目录
-- 使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突
-- 不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`
+如果论文目录后需要，但是它们出现的顺序需要调整，比如需要将代码列表放在公式列表之前，只需要调整上述代码的顺序即可，例如：
+
+```typ
+// ========== 代码列表 ==========
+#list-of-code()
+
+// ========== 公式列表 ==========
+#list-of-equations()
+```
+
+=== 主要符号对照表
+
+根据指南规定，如果论文中使用了大量的符号、标志、缩略词、专门计量单位、自定义名词和术
+语等，应编写“主要符号对照表”。如果上述符号和缩略词数量不多，可以不设专门的
+“主要符号对照表”，在论文中出现时随即加以说明即可。“主要符号对照表”放目录之后、正文之前。
+
+如果论文中需要“主要符号对照表”，可以在 `thesis.typ` 中取消注释 `#notion`所在行即可。例如：
+
+```typ
+// ========== 主要符号对照表 ==========
+#notation[
+  / $pi$: 圆周率
+  / $infinity$: 无穷大
+  / $sum$: 求和符号
+  / $integral$: 积分符号
+  / $partial$: 偏导数符号
+  / $bold(A)$: 矩阵
+
+  / $g$: 重力加速度
+  / $lambda$: 波长
+  / $c$: 光速
+]
+```
+
+但是我更推荐你把 `[]` 中的内容放到 `content/notation.typ` 文件中，这样可以让 `thesis.typ` 更加简洁，并且方便符号表的维护。
+
+```typ
+// ========== 主要符号对照表 ==========
+#notation[#include "content/notation.typ"]
+```
+
+如果你希望修改“主要符号对照表”的标题名称，比如你希望它显示为“符号对照表”，那么你只需要在`config()` 中设置 `supplements: (符号表: "主要符号对照表")` 来修改标题名称。
+
+=== 盲审模式
+
+盲生模式下（`blind: true`），论文封面会自动切换为盲审版，隐藏作者、导师、学号、"攻读学位期间发表的论文"、致谢、及原创性声明，PDF 元数据隐藏作者。盲审模式下封面显示 `blind-id`，而非 `author-zh`。
+
+因此你不需要手动删除或者注释以上要素的代码，只需要在 `config()` 中设置 `blind: true` 即可。

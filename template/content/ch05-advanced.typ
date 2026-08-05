@@ -242,3 +242,86 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 - `#booktab(...)`：生成三线表，第一行自动加粗为表头，支持 `outlined: false` 生成纯表格
 - `#as-booktab(table)`：将原生 `table` 装饰为三线表样式，便于和 `figure` 组合使用
 - `#code-block(...)`：生成带标题和编号的可引用代码块
+
+== 补充说明
+
+除了上述配置参数，`config()` 函数还返回若干额外字段：
+- `font`：解析后的字体方案字典，可直接用于自定义页面（如 `#set text(font: font.仿宋)`）
+- `smartpagebreak`：智能分页函数（支持 `always-start-odd`）
+- `first-line-indent`：首行缩进值（供自定义页面使用）
+- `blind` / `preview` / `always-start-odd`：当前配置值，可由 `--input` CLI 参数覆盖
+
+模板还导出了 `booktab`、`as-booktab`、`code-block` 三个组件函数，可直接导入使用：
+
+```typ
+#import "@preview/pku-thesis-pass:0.3.0": booktab, as-booktab, code-block
+```
+
+=== booktab — 三线表
+
+`booktab` 从零创建学术三线表，第一行位置参数自动作为表头（加粗），支持 `figure` 包装和 `@label` 引用：
+
+```typ
+#booktab(
+  columns: (1fr, 1fr, 1fr),
+  caption: [实验数据],
+  [组别], [数值], [备注],
+  [A], [1.0], [对照组],
+  [B], [2.5], [实验组],
+)
+```
+
+- `caption`：表格标题，省略时不编号
+- `outlined: false`：不包装为 `figure`，生成纯表格
+- 其他命名参数（`columns`、`align` 等）透传给 `table`
+
+=== as-booktab — 表格装饰器
+
+`as-booktab` 将现有原生 `table` 装饰为三线表，自动识别 `table.header` 或前 N 个单元格作为表头。更适合与 `figure` 组合，易被格式化工具整理：
+
+```typ
+#figure(
+  as-booktab(table(
+    columns: (1fr, 1fr, 1fr),
+    table.header([左对齐], [居中], [右对齐]),
+    [4], [5], [6],
+    [7], [8], [9],
+  )),
+  caption: [三线表示例],
+  kind: table,
+) <my-table>
+```
+
+若 table 已包含 `table.hline`，则仅包裹不修改，保留手动样式。
+
+=== 公式自动编号
+
+`eq-block` 将行间公式包装为带标题的可引用 `figure(kind: "equation")`，支持公式目录：
+
+```typ
+#eq-block(caption: [勾股定理])[
+  $ a^2 + b^2 = c^2 $
+] <eq-pythagoras>
+```
+
+- 省略 `caption` 时原样返回公式，不编号、不入公式目录
+- 使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突
+- 不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`
+
+=== code-block — 代码块
+
+`code-block` 包装 raw 为带标题的可引用 `figure(kind: "code")`：
+
+````typ
+#code-block(
+  ```python
+  def fibonacci(n):
+      if n <= 1:
+          return n
+      return fibonacci(n-1) + fibonacci(n-2)
+  ```,
+  caption: [斐波那契数列],
+) <fib>
+````
+
+省略 `caption` 则只显示代码，无标题无编号、不入图列表、不可被 `@` 引用。

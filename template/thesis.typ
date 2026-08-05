@@ -4,7 +4,7 @@
 //
 // 命令行参数（--input key=value）：
 //   --input blind=true|false                    盲审模式
-//   --input preview=true|false                  预览模式（默认 true，链接显示蓝色，打印时请设置为 false）
+//   --input preview=true|false                  预览模式（默认 true，链接显示蓝色）
 //   --input always-start-odd=true|false         章节是否总是从奇数页开始
 //   --input system=default|mac|windows|linux    系统字体方案
 // ============================================================
@@ -56,7 +56,7 @@
   year: 2026,
   month: 6,
 
-  // ========== 样式参数 ==========
+  // ========== 排版配置 ==========
   system: "default",
   blind: false,
   preview: true,
@@ -77,7 +77,7 @@
   override-bib: false,
   bib-file: path("ref.bib"),
   bib-style: "numeric",
-  bib-version: "2025",
+  bib-version: "2015",
   bib-cn-first: true,
   bib-pinyin-override: (:),
 )
@@ -107,7 +107,7 @@
 // ========== 论文目录 ==========
 #outline()
 
-// ========== 图片列表 ==========
+// ========== 插图列表 ==========
 #list-of-figures()
 
 // ========== 表格列表 ==========
@@ -130,7 +130,7 @@
 
 #include "content/ch01-quickstart.typ"
 
-= 模板配置选项 <config-ref>
+= 模板配置 <config>
 
 #include "content/ch02-config.typ"
 

@@ -89,7 +89,7 @@
 ///   year — 论文提交年份
 ///   month — 论文提交月份
 ///
-/// 样式参数：
+/// 排版配置：
 ///   system — 系统字体方案："default"/"mac"/"windows"/"linux"（默认 "default"）
 ///   blind — 盲审模式（默认 false）
 ///   preview — 预览模式（链接显示蓝色，默认 true）
@@ -106,7 +106,7 @@
 ///   logo — 封面校徽图片路径，`path` 类型（如 `path("assets/logo.svg")`，默认 none 显示占位框）
 ///   wordmark — 封面校名字标图片路径，`path` 类型（如 `path("assets/wordmark.svg")`，默认 none 显示占位框）
 ///
-/// 参考文献参数：
+/// 参考文献：
 ///   override-bib — 使用 Typst 原生 bibliography（默认 false）
 ///   bib-file — BibTeX 文件（如：`path("path/to/xxxx.bib")`，`path` 类型）
 ///   bib-style — "numeric"(顺序编码) / "author-date"(著者-出版年)
@@ -137,7 +137,7 @@
   degree-type: "academic", // "academic" 或 "professional"
   year: 2026,
   month: 6,
-  // ========== 样式参数 ==========
+  // ========== 排版配置 ==========
   system: "default",       // "default" / "mac" / "windows" / "linux"
   blind: false,            // 盲审模式
   // 预览模式下会将链接文本显示为蓝色
@@ -177,7 +177,7 @@
   // 示例：logo: path("assets/logo.svg"), wordmark: path("assets/wordmark.svg")
   logo: none,
   wordmark: none,
-  // ========== 参考文献参数 ==========
+  // ========== 参考文献 ==========
   // 完全自定义参考文献样式，忽略以下参数
   override-bib: false,    // 自定义引用样式时设为 true
   bib-file: none,

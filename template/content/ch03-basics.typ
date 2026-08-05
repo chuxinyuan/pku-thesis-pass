@@ -668,7 +668,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 == 字数统计
 
-如需统计正文与附录的字数，在 `config()` 中设置 `word-count: true`，并在正文任意位置解构出 `total-words`（CJK 字数）或 `total-characters`（字符数）来显示：
+如需统计正文与附录的字数，在 `config()` 中设置 `word-count: true`，并在正文任意位置解构出 `#total-words`（CJK 字数）或 `#total-characters`（字符数）来显示：
 
 #code-preview(
   ```typ
