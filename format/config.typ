@@ -28,7 +28,11 @@
 // 基础定义
 #import "style.typ": supplement, font-set
 #import "utils.typ": skippedstate, appendix, _resolve-path
-#import "components.typ": booktab, as-booktab, eq-block, code-block, subfigure, word-count-cjk, total-words, total-characters
+#import "booktab.typ": booktab, as-booktab
+#import "eqblock.typ": eq-block
+#import "codeblock.typ": code-block
+#import "subfigure.typ": subfigure
+#import "wordcount.typ": word-count-cjk, total-words, total-characters
 
 // 基础设施
 #import "page.typ": page-setup
