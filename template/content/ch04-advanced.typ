@@ -1,17 +1,6 @@
-#import "../../format/components.typ": booktab
+#import "../../format/components.typ": booktab, code-preview
 // 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
-// #import "@preview/pku-thesis-pass:0.3.0": booktab
-
-#let code-preview(code, result) = {
-  booktab(
-    columns: (1fr, 1fr),
-    outlined: false,
-    align(center)[*代码*],
-    align(center)[*渲染结果*],
-    code,
-    result,
-  )
-}
+// #import "@preview/pku-thesis-pass:0.3.0": booktab, code-preview
 
 == 自定义页眉页脚
 

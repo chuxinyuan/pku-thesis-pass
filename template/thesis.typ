@@ -14,27 +14,27 @@
 // #import "@preview/pku-thesis-pass:0.3.0": config
 
 #let (
-  setup,
-  cover,
-  spine,
-  copyright,
-  abstract-zh,
-  abstract-en,
-  outline,
-  list-of-figures,
-  list-of-tables,
-  list-of-equations,
-  list-of-code,
-  notation,
-  body-wrap,
-  bibliography,
-  appendix,
-  achievement,
-  acknowledgements,
-  declaration,
-  font,
-  blind,
-  total-words,
+  setup,             // 全局页面与字体设置（#show: setup）
+  cover,             // 论文封面（盲审/正常版）
+  spine,             // 书脊页
+  copyright,         // 版权声明页
+  abstract-zh,       // 中文摘要页
+  abstract-en,       // 英文摘要页
+  outline,           // 中文目录
+  list-of-figures,   // 插图列表
+  list-of-tables,    // 表格列表
+  list-of-equations, // 公式列表
+  list-of-code,      // 代码列表
+  notation,          // 主要符号对照表
+  body-wrap,         // 正文全局样式（#show: body-wrap）
+  bibliography,      // 参考文献（#show: bibliography）
+  appendix,          // 进入附录部分（重置为"附录 A"编号）
+  achievement,       // 攻读学位期间发表的论文
+  acknowledgements,  // 致谢
+  declaration,       // 原创性声明和授权说明
+  font,              // 当前系统字体方案
+  blind,             // 盲审模式是否开启
+  total-words,       // 正文 CJK 字数统计结果
 ) = config(
   // ========== 基本信息 ==========
   author-zh: "张三",

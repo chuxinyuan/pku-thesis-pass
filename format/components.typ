@@ -165,6 +165,26 @@
   _booktab-block(table-args, table.header(..header-cells), body, width: width)
 }
 
+/// 代码渲染对比表：两列三线表，分别显示代码与渲染结果
+/// 用于文档编写时的"代码 + 结果"并排示例
+/// 示例：
+///   #code-preview(
+///     ```typ
+///     *粗体* 与 _斜体_
+///     ```,
+///     [*粗体* 与 _斜体_],
+///   )
+#let code-preview(code, result) = {
+  booktab(
+    columns: (1fr, 1fr),
+    outlined: false,
+    align(center)[*代码*],
+    align(center)[*渲染结果*],
+    code,
+    result,
+  )
+}
+
 // ========== 公式块组件 ==========
 
 /// 公式块组件

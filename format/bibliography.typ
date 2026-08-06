@@ -26,8 +26,12 @@
 }
 
 /// 渲染参考文献
-/// 非 override-bib 且有 bib-content 时：通过 gb7714-bilingual 处理 doc 全文
-/// 否则回落为 Typst 原生 bibliography 加 show 规则
+/// 有两条渲染路径：
+///   - override-bib=true                    → 完全自定义样式，此处不做任何处理
+///   - override-bib=false 且有 bib-content  → 走 gb7714-bilingual（推荐，符合 GB/T 7714）
+///   - override-bib=false 且无 bib-content  → 回落 Typst 原生 bibliography + bibliography-show-rule
+/// 示例：改用 author-date 风格
+///   config(bib-style: "author-date", bib-file: path("ref.bib"))
 #let render-bibliography(
   bib-content: none,
   bib-style: "numeric",
