@@ -195,8 +195,7 @@ typst compile template/thesis.typ --root .
 需要特别注意的是，编译前需要仔细检查模板各模块的导入路径，例如，对于 `template/content/ch01-quickstart.typ`，它的文件头如下：
 
 ```typ
-#import "../../format/lib.typ": code-block, booktab
-#import "../../format/utils/font.typ": font-set
+#import "../../format/lib.typ": code-block, booktab, font-set
 // #import "@preview/pku-thesis-pass:0.3.0": code-block, booktab, font-set
 ```
 

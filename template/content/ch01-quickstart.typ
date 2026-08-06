@@ -1,5 +1,4 @@
-#import "../../format/lib.typ": code-block, booktab
-#import "../../format/utils/font.typ": font-set
+#import "../../format/lib.typ": code-block, booktab, font-set
 // 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
 // #import "@preview/pku-thesis-pass:0.3.0": code-block, booktab, font-set
 

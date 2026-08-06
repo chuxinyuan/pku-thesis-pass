@@ -17,6 +17,9 @@
 // 入口
 #import "config.typ": config
 
+// 字体方案
+#import "utils/font.typ": font-set
+
 // 组件
 #import "components/booktab.typ": booktab, as-booktab, code-preview
 #import "components/eqblock.typ": eq-block
