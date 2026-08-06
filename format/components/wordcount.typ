@@ -3,7 +3,7 @@
 // 提供正文/附录的字数、字符数统计：word-count-cjk 与统计结果读取
 // ============================================================
 
-#import "@preview/wordometer:0.1.5": *
+#import "../imports.typ": word-count-of
 
 /// 字数统计 show 规则：排除标题，累计 CJK 字数 / 总词数 / 字符数
 /// 统计结果写入三个 state，供 total-words / total-characters 读取

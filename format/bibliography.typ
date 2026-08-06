@@ -4,7 +4,7 @@
 // ============================================================
 
 #import "style.typ": size
-#import "@preview/gb7714-bilingual:0.2.3": gb7714-bibliography, init-gb7714
+#import "imports.typ": gb7714-bibliography, init-gb7714
 
 /// 原生 bibliography 的 show 规则（override-bib 时使用）
 /// 设置五号字、悬挂缩进 1.66em，并提升方括号编号的垂直位置

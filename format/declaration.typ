@@ -6,7 +6,7 @@
 // ============================================================
 
 #import "headings.typ": back-heading
-#import "@preview/cuti:0.4.0": show-cn-fakebold
+#import "imports.typ": show-cn-fakebold
 #import "style.typ": size
 
 /// 原创性声明与授权说明页

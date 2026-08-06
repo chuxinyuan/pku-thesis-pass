@@ -4,9 +4,7 @@
 // 全局排版基础设施，供 config.typ 编排时调用
 // ============================================================
 
-#import "@preview/itemize:0.2.0" as itemize
-#import "@preview/codly:1.3.0": codly-init, codly
-#import "@preview/codly-languages:0.1.10": codly-languages
+#import "imports.typ": itemize, codly-init, codly, codly-languages
 
 #import "style.typ": font, size
 #import "utils.typ": in-appendix, chaptercounter, chinesenumbering, show-latexref
