@@ -37,16 +37,16 @@
 #import "components/wordcount.typ": word-count-cjk, total-words, total-characters
 
 // 页面
-#import "pages/bibliography.typ": render-bibliography
-#import "pages/outline.typ": chineseoutline
-#import "pages/listoffigures.typ": listoffigures
-#import "pages/notation.typ": notation-page
-#import "pages/achievement.typ": achievement-page
 #import "pages/covers.typ": cover-page-blind, cover-page-normal
 #import "pages/spine.typ": spine-page
 #import "pages/copyright.typ": copyright-page
 #import "pages/abstract-zh.typ": abstract-page-zh
 #import "pages/abstract-en.typ": abstract-page-en
+#import "pages/outline.typ": chineseoutline
+#import "pages/listoffigures.typ": listoffigures
+#import "pages/notation.typ": notation-page
+#import "pages/bibliography.typ": render-bibliography
+#import "pages/achievement.typ": achievement-page
 #import "pages/acknowledgements.typ": acknowledgements-page
 #import "pages/declaration.typ": declaration-page
 
