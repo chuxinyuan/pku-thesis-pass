@@ -125,7 +125,7 @@
   // 可以用 \n 控制中英文标题在非盲审封面 (blind=false) 中的换行点
   // 在盲审封面 (blind=true) 中，手工插入的 \n 会被忽略，以确保标题连续
   title-zh: "北京大学学位论文 Typst 模板",
-  title-en: "Typst Template for Peking University Dissertations",
+  title-en: "Typst Template for Peking University Thesis",
   school: "某个院系",
   first-major: "某个一级学科",
   major-zh: "某个专业",

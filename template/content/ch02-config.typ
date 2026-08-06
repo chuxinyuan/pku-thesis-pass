@@ -12,7 +12,7 @@
   align: (left, left, left),
   caption: "基本信息配置项",
   [*参数名*],
-  [*默认值*],
+  [*系统默认值*],
   [*说明*],
   [`author-zh`],
   [`"张三"`],
@@ -90,6 +90,7 @@
 - #strong[作用]：学号，显示在非盲审封面。
 - #strong[可填值]：字符串（学号通常为数字与字母）。
 - #strong[默认值]：`"23000xxxxx"`。
+- #strong[填写示例]：`student-id: "23000xxxxx"`
 - #strong[注意事项]：盲审模式（`blind: true`）下自动隐藏，不显示在封面上。
 
 === `blind-id`
@@ -97,6 +98,7 @@
 - #strong[作用]：盲审论文编号，显示在盲审封面。
 - #strong[可填值]：字符串。
 - #strong[默认值]：`"L2023XXXXX"`。
+- #strong[填写示例]：`blind-id: "L2023XXXXX"`
 - #strong[注意事项]：仅在 `blind: true` 时被使用；非盲审模式下忽略此参数。
 
 === `thesis-name`
@@ -118,14 +120,16 @@
 
 - #strong[作用]：论文中文标题，用于封面、书脊页及 PDF 文档属性标题字段。
 - #strong[可填值]：字符串，可用 `\n` 控制非盲审封面的换行点。
-- #strong[默认值]：`"北京大学学位论文 \nTypst 模板使用指南"`。
+- #strong[默认值]：`"北京大学学位论文 Typst 模板"`。
+- #strong[填写示例]：`title-zh: "北京大学学位论文 \nTypst 模板使用指南"`
 - #strong[注意事项]：盲审封面（`blind: true`）会忽略手工插入的 `\n`，将标题合并为连续显示，避免盲审版排版错位。
 
 === `title-en`
 
 - #strong[作用]：论文英文标题，用于英文摘要页和盲审封面。
 - #strong[可填值]：字符串，可用 `\n` 控制换行。
-- #strong[默认值]：`"A Guide to Using the Typst Template for \nPKU Theses"`。
+- #strong[默认值]：`"Typst Template for Peking University Thesis"`。
+- #strong[填写示例]：`title-en: "A Guide to Using the Typst Template for \nPeking University Theses"`
 - #strong[注意事项]：北大模板无英文封面，故该值仅出现在英文摘要和盲审封面；PDF 标题元数据仍取 `title-zh`。
 
 === `school`
@@ -168,7 +172,7 @@
 
 - #strong[作用]：导师中文姓名及职称，显示于非盲审封面。
 - #strong[可填值]：中文字符串，可含职称。
-- #strong[默认值]：`"李四 教授"`。
+- #strong[默认值]：`"李四"`。
 - #strong[填写示例]：`supervisor-zh: "李四 教授"`
 - #strong[注意事项]：盲审模式（`blind: true`）下保密不显示。
 
@@ -176,7 +180,7 @@
 
 - #strong[作用]：导师英文姓名，用于英文摘要页。
 - #strong[可填值]：英文字符串。
-- #strong[默认值]：`"Prof. Si Li"`。
+- #strong[默认值]：`"Si Li"`。
 - #strong[填写示例]：`supervisor-en: "Prof. Si Li"`
 - #strong[注意事项]：盲审模式（`blind: true`）下保密不显示。
 
@@ -192,11 +196,13 @@
 - #strong[作用]：论文提交年份，显示于封面。
 - #strong[可填值]：整数（int）。
 - #strong[默认值]：`2026`。
+-#strong[填写示例]：`year: 2026`
 
 === `month`
 - #strong[作用]：论文提交月份，显示于封面。
 - #strong[可填值]：整数（int），范围 1–12。
 - #strong[默认值]：`6`。
+-#strong[填写示例]：`month: 6`
 
 == 排版配置
 
@@ -206,7 +212,7 @@
   align: (left, left, left),
   caption: "排版配置项",
   [*参数名*],
-  [*默认值*],
+  [*系统默认值*],
   [*说明*],
   [`system`],
   [`"default"`],
@@ -278,13 +284,15 @@
 - #strong[作用]：盲审模式开关。
 - #strong[可填值]：布尔值（`true` / `false`）。
 - #strong[默认值]：`false`。
+- #strong[填写示例]：`blind: false`
 - #strong[注意事项]：开启后自动隐藏作者、导师、学号、致谢、"攻读学位期间发表的论文"页及原创性声明，封面替换为盲审版，PDF 元数据隐藏作者。可被命令行编译模式下的 `--input blind=true` 参数覆盖。
 
 === `preview`
 
 - #strong[作用]：预览模式，链接文本显示为蓝色。
-- #strong[可填值]：布尔值。
+- #strong[可填值]：布尔值（`true` / `false`）。
 - #strong[默认值]：`true`。
+- #strong[填写示例]：`preview: true`
 - #strong[注意事项]：生成打印版时应设为 `false`（链接不着色）。可被命令行编译模式下的 `--input preview=false` 参数覆盖。
 
 === `first-line-indent`
@@ -292,20 +300,23 @@
 - #strong[作用]：正文首行缩进宽度。
 - #strong[可填值]：长度值（length），如 `2em`。
 - #strong[默认值]：`2em`。
+- #strong[填写示例]：`first-line-indent: 1.77em`
 - #strong[注意事项]：Word 模板固定为 `1.77em`，如需严格对照 Word，请设为 `1.77em`。
 
 === `always-start-odd`
 
 - #strong[作用]：章节是否总是从奇数页开始。
-- #strong[可填值]：布尔值。
+- #strong[可填值]：布尔值（`true` / `false`）。
 - #strong[默认值]：`true`。
+- #strong[填写示例]：`always-start-odd: false`
 - #strong[注意事项]：置 `false` 可减少因奇偶页产生的空白页，适合线上阅读或精简打印。可被命令行编译模式下的 `--input always-start-odd=false` 参数覆盖。
 
 === `clean-declaration`
 
 - #strong[作用]：原创性声明页是否隐藏页眉和页码。
-- #strong[可填值]：布尔值。
+- #strong[可填值]：布尔值（`true` / `false`）。
 - #strong[默认值]：`false`。
+- #strong[填写示例]：`clean-declaration: true`
 - #strong[注意事项]：Word 模板的声明页包含页眉与页码，故默认 `false`；若需去除可设为 `true`。
 
 === `outline-depth`
@@ -313,35 +324,39 @@
 - #strong[作用]：目录显示的最大标题层级。
 - #strong[可填值]：整数（int）。
 - #strong[默认值]：`3`。
-- #strong[填写示例]：`outline-depth: 2`（只显示到二级标题）
+- #strong[填写示例]：`outline-depth: 3`
+- #strong[注意事项]：只显示到三级标题（`===`）时设为 `3`，四级及以上标题不显示在目录里。
 
 === `word-count`
 
 - #strong[作用]：是否统计正文与附录字数。
-- #strong[可填值]：布尔值。
+- #strong[可填值]：布尔值（`true` / `false`）。
 - #strong[默认值]：`true`。
+- #strong[填写示例]：`word-count: false`
 - #strong[注意事项]：开启后正文中可用 `#total-words`（CJK 字数）与 `#total-characters`（总字符数）显示统计结果；如不需要可设置 `false` 关闭统计以提升编译速度。
 
 === `achievement-outlined`
 
 - #strong[作用]："攻读学位期间发表的论文"页是否进入目录。
-- #strong[可填值]：布尔值。
+- #strong[可填值]：布尔值（`true` / `false`）。
 - #strong[默认值]：`true`。
-- #strong[注意事项]：设为 `false` 时该页仍出现在论文中，但不在目录中列出。盲审模式下不显示，与致谢、原创性声明页行为一致。
+- #strong[填写示例]：`achievement-outlined: false`
+- #strong[注意事项]：设为 `false` 时该页仍出现在论文中，但不在目录中列出。盲审模式下成果页不显示，与致谢、原创性声明页行为一致。
 
 === `supplements`
 
 - #strong[作用]：自定义引用记号和列表页标题。
 - #strong[可填值]：字典（dict）。
 - #strong[默认值]：`(:)`（使用模板内置默认）。
-- #strong[填写示例]：`supplements: (图: "Figure", 插图列表: "List of Figures")`
+- #strong[填写示例]：`supplements: (成果表: "攻读学位期间发表的论文")`
 - #strong[注意事项]：可覆写的键包括——引用前缀 `图`/`表`/`代码`/`公式`/`节` 及 `图表`（未知 kind 的 fallback）；列表标题 `插图列表`/`表格列表`/`代码列表`/`公式列表`/`符号表`/`成果表`。传入的键会覆盖默认值，未传入的沿用默认。例如：设置 `supplements: (成果表: "攻读学位期间发表的论文")` 可自定义成果表标题，其他列表标题仍使用默认值。
 
 === `use-latexref`
 
 - #strong[作用]：LaTeX 引用兼容开关。
-- #strong[可填值]：布尔值。
+- #strong[可填值]：布尔值（`true` / `false`）。
 - #strong[默认值]：`false`。
+- #strong[填写示例]：`use-latexref: true`
 - #strong[注意事项]：开启后，`@fig:xxx` 等带前缀的引用若解析失败，会自动剥离前缀重试 `@xxx`，适配从 LaTeX 迁移的文档（LaTeX 习惯写 `\ref{fig:xxx}`）。详见"进阶"一章的 @latexref 小节。
 
 === `latexref-prefixes`
@@ -367,15 +382,17 @@
 === `logo`
 
 - #strong[作用]：封面校徽图片路径。
-- #strong[可填值]：`path` 类型，如 `path("assets/pkulogo.pdf")`。
+- #strong[可填值]：`path` 类型，如 `path("path/to/file")`。
 - #strong[默认值]：`none`（封面显示灰色占位框）。
-- #strong[注意事项]：北大校徽资源取自 CTAN 的 `pkuthss` 包，使用北大校名字标须遵守相关授权规定，详见 README"许可证"一节。
+- #strong[填写示例]：`logo: path("assets/pkulogo.pdf")`
+- #strong[注意事项]：北大校徽资源取自 CTAN 的 `pkuthss` 包，使用北大校名字标须遵守相关授权规定，详见 README 许可证一节。
 
 === `wordmark`
 
 - #strong[作用]：封面校名字标图片路径。
-- #strong[可填值]：`path` 类型，如 `path("assets/pkuword.pdf")`。
+- #strong[可填值]：`path` 类型，如 `path("path/to/file")`。
 - #strong[默认值]：`none`（封面显示灰色占位框）。
+- #strong[填写示例]：`wordmark: path("assets/pku-wordmark.pdf")`
 - #strong[注意事项]：同 `logo`，使用北大校名字标须遵守相关授权规定。
 
 == 参考文献
@@ -388,7 +405,7 @@
   align: (left, left, left),
   caption: "参考文献配置项",
   [*参数名*],
-  [*默认值*],
+  [*系统默认值*],
   [*说明*],
   [`override-bib`],
   [`false`],
@@ -413,15 +430,16 @@
 === `override-bib`
 
 - #strong[作用]：是否完全自定义参考文献样式。
-- #strong[可填值]：布尔值。
+- #strong[可填值]：布尔值（`true` / `false`）。
 - #strong[默认值]：`false`。
+- #strong[填写示例]：`override-bib: false`
 - #strong[注意事项]：设为 `true` 时忽略下述 `bib-*` 参数，用户需在论文中自行编写 `#bibliography(...)` 或自定义渲染逻辑。
 
 === `bib-file`
 
 - #strong[作用]：BibTeX 参考文献文件路径。
-- #strong[可填值]：`path` 类型，如 `path("ref.bib")`。
-- #strong[默认值]：`none`（无参考文献时忽略）。
+- #strong[可填值]：`path` 类型，如 `path("path/to/a-bib-file")`。
+- #strong[默认值]：`none`。
 - #strong[填写示例]：`bib-file: path("ref.bib")`
 
 === `bib-style`
@@ -429,6 +447,7 @@
 - #strong[作用]：参考文献引用风格。
 - #strong[可填值]：`"numeric"`（顺序编码制）或 `"author-date"`（著者—出版年制）。
 - #strong[默认值]：`"numeric"`。
+- #strong[填写示例]：`bib-style: "author-date"`
 - #strong[注意事项]：`"author-date"` 时正文引用显示作者与年份，`"numeric"` 显示方括号编号。
 
 === `bib-version`
@@ -436,13 +455,15 @@
 - #strong[作用]：GB/T 7714 标准版本。
 - #strong[可填值]：`"2015"` 或 `"2025"`。
 - #strong[默认值]：`"2015"`。
+- #strong[填写示例]：`bib-version: "2025"`
 - #strong[注意事项]：GB/T 7714-2025 标准从 2026 年 7 月 1 日开始实施，若学校明确要求采用新标准请选 `"2025"`。
 
 === `bib-cn-first`
 
 - #strong[作用]：（仅 `bib-style: "author-date"`）中文文献是否排在外文之前。
-- #strong[可填值]：布尔值。
+- #strong[可填值]：布尔值（`true` / `false`）。
 - #strong[默认值]：`true`。
+- #strong[填写示例]：`bib-cn-first: false`
 - #strong[注意事项]：`true` 时中文条目在前、外文在后，中文按作者姓氏拼音排序；`false` 时外文在前。
 
 === `bib-pinyin-override`

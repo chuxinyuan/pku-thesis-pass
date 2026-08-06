@@ -44,7 +44,7 @@
   thesis-name: "博士研究生学位论文",
   header-text: "北京大学博士学位论文",
   title-zh: "北京大学学位论文 \nTypst 模板使用指南",
-  title-en: "A Guide to Using the Typst Template for \nPKU Theses",
+  title-en: "A Guide to Using the Typst Template for \nPeking University Theses",
   school: "信息科学技术学院",
   first-major: "计算机科学与技术",
   major-zh: "计算机软件与理论",
