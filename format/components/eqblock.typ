@@ -3,7 +3,6 @@
 // 提供行间公式的编号与题注：eq-block
 // ============================================================
 
-#import "../utils/size.typ": size
 #import "../utils/number.typ": chinesenumbering
 #import "../utils/counter.typ": chaptercounter
 
