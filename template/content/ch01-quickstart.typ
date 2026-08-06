@@ -34,7 +34,7 @@ typst init @preview/pku-thesis-pass:0.3.0 my-thesis
 cd my-thesis
 ```
 
-这会在 `my-thesis` 目录下创建一个包含 `assets`、`content`、 `ref.bib` 和 `thesis.typ` 的干净项目，你可以通过如下命令编译文档：
+这会在 `my-thesis` 目录下创建一个包含 `assets`、`content`、`ref.bib` 和 `thesis.typ` 的干净项目，你可以通过如下命令编译文档：
 
 ```bash
 typst compile thesis.typ
@@ -50,12 +50,14 @@ typst watch thesis.typ
 
 === 方式二：克隆仓库
 
-如果需要完整的源代码对论文模板进行更多的定制，可以克隆仓库：
+如果需要完整的源代码对论文模板进行更多的定制，可以选择克隆仓库：
 
 ```bash
 git clone https://github.com/chuxinyuan/pku-thesis-pass.git
 cd pku-thesis-pass
 ```
+
+其中，控制论文格式的源代码放在 `format` 目录下，模板放在 `template` 目录下。
 
 进入 `pku-thesis-pass` 目录后，使用以下命令编译文档：
 

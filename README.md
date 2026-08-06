@@ -33,7 +33,7 @@
 - 命令行参数控制（`blind` / `preview` / `always-start-odd` / `system`）
 - 跨平台字体方案（default / macOS / Windows / Linux）
 
-## 使用方式
+## 获取模板
 
 ### 方式一：从 Typst Universe 创建（推荐）
 
@@ -42,24 +42,30 @@ typst init @preview/pku-thesis-pass:0.3.0 my-thesis
 cd my-thesis
 ```
 
-### 方式二：本地使用
+这会在 `my-thesis` 目录下创建一个包含 `assets`、`content`、`ref.bib` 和 `thesis.typ` 的干净项目。
+
+### 方式二：克隆 GitHub 仓库
 
 ```bash
 git clone https://github.com/chuxinyuan/pku-thesis-pass.git
 cd pku-thesis-pass
 ```
 
+如果需要完整的源代码对论文模板进行更多的定制，可以选择克隆仓库。其中，控制论文格式的源代码放在 `format` 目录下，模板放在 `template` 目录下。
+
 ## 配置说明
 
-在 `thesis.typ` 中调用 `config()` 函数配置论文信息，返回的字典解构后可按任意顺序编排：
+在 `thesis.typ` 中调用 `config()` 函数配置论文信息，返回值按固定顺序排列，解构出的各组件可按任意顺序编排：
 
 ```typst
-#let (setup, cover, body-wrap, bibliography, ..) = config(
+#let (setup, cover, ..) = config(
   author-zh: "张三",
   title-zh: "论文中文题目",
   system: "default",
 )
 ```
+
+如需精简，可用 `..` 跳过并收集其余组件，但注意位置解构必须与 `config()` 的返回顺序一致，否则组件会绑定错误。完整示例见 `template/thesis.typ`。
 
 | 参数 | 类型 | 说明 |
 |------|------|------|
@@ -160,6 +166,8 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 ## 编译文档
 
+这里以模板获取方式一（从 Typst Universe 创建）为例，代码如下：
+
 ```bash
 # 普通版本
 typst compile thesis.typ
@@ -176,6 +184,23 @@ typst compile thesis.typ --input always-start-odd=false
 # 指定系统字体方案（macOS/Windows/Linux）
 typst compile thesis.typ --input system=linux
 ```
+
+对于方式二（克隆 GitHub 仓库）的用户，进入 `pku-thesis-pass` 目录后，使用以下命令编译文档：
+
+```bash
+# 普通版本
+typst compile template/thesis.typ --root .
+```
+
+需要特别注意的是，编译前需要仔细检查模板各模块的导入路径，例如，对于 `template/content/ch01-quickstart.typ`，它的文件头如下：
+
+```typ
+#import "../../format/components.typ": code-block, booktab
+#import "../../format/style.typ": font-set
+// #import "@preview/pku-thesis-pass:0.3.0": code-block, booktab, font-set
+```
+
+未发布到官方仓库的改动需用本地相对导入（如上述 `../../format/...`），以免 `@preview` 包与本地源码不一致。
 
 ## 致谢
 
