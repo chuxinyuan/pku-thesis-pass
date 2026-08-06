@@ -1,6 +1,6 @@
-#import "../../format/lib.typ": as-booktab, code-block
+#import "../../format/lib.typ": as-booktab, code-block, eq-block
 // 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
-// #import "@preview/pku-thesis-pass:0.3.0": as-booktab, code-block
+// #import "@preview/pku-thesis-pass:0.3.0": as-booktab, code-block, eq-block
 
 撰写学位论文是每个研究生必须完成的功课。在 LaTeX 还是 Typst 的选择上，过去几年我们几乎没有悬念——LaTeX 是唯一的专业排版工具。然而，Typst 的出现正在改变这个局面。
 
@@ -40,27 +40,16 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
 
 #figure(
   {
-    let n = 24
-    let w = 6cm
-    let h = 3cm
-    let pts = range(n).map(i => (
-      (w / (n - 1)) * i,
-      h / 2 - (calc.sin(2 * calc.pi * i / (n - 1)) * h / 2),
-    ))
-    stack(
-      dir: ltr,
-      ..range(n - 1).map(i => box(
-        width: w / (n - 1),
-        height: h,
-        line(
-          start: pts.at(i),
-          end: pts.at(i + 1),
-          stroke: 1pt + rgb("#1f77b4"),
-        ),
-      )),
+    polygon(
+      fill: blue.lighten(80%),
+      stroke: blue,
+      (20%, 0pt),
+      (60%, 0pt),
+      (80%, 2cm),
+      (0%,  2cm),
     )
   },
-  caption: "原生 Typst 绘制的一条正弦曲线",
+  caption: "原生 Typst 绘制的多边形",
 ) <appendix-fig>
 
 专门的绘图包（如 gribouille）使用方式与原生 `figure` 一致，仍需在 `figure` 中包装才能编号和引用。
@@ -96,11 +85,11 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
   爱因斯坦的质能方程：$E=m c^2$
 + 行间公式
 
-  $
-    f(x) = frac(1, sigma sqrt(2 pi)) e^(- frac((x - mu)^2, 2 sigma^2))
-  $ <eq-normal>
+  #eq-block(caption: [正态分布密度函数])[
+    $ f(x) = frac(1, sigma sqrt(2 pi)) e^(- frac((x - mu)^2, 2 sigma^2)) $
+  ] <eq-normal>
 
-@eq-normal 是正态分布公式。公式自动编号与引用见 @basics 公式一节。
+@eq-normal 是正态分布密度函数。公式自动编号与引用见 @basics 公式一节。
 
 === 代码块
 

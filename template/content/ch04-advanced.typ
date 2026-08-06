@@ -1,6 +1,6 @@
-#import "../../format/lib.typ": booktab, code-preview
+#import "../../format/lib.typ": code-preview, booktab, eq-block, code-block
 // 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
-// #import "@preview/pku-thesis-pass:0.3.0": booktab, code-preview
+// #import "@preview/pku-thesis-pass:0.3.0": code-preview, booktab, eq-block, code-block
 
 == 自定义页眉页脚
 
@@ -317,13 +317,26 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 
 ==== eq-block — 公式自动编号
 
-`eq-block` 将行间公式包装为带标题的可引用 `figure(kind: "equation")`，支持公式目录：
+`eq-block` 将行间公式包装为带标题的可引用 `figure(kind: "equation")`，支持公式目录。下面左边是代码，右边是实际渲染结果：
 
-```typ
-#eq-block(caption: [勾股定理])[
-  $ a^2 + b^2 = c^2 $
-] <eq-pythagoras>
-```
+#code-preview(
+  ```typ
+  #eq-block(caption: [勾股定理])[
+    $ a^2 + b^2 = c^2 $
+  ] <eq-pythagoras>
+
+  如 @eq-pythagoras 所示，两条直角边的平方和等于斜边平方。
+  ```,
+  [
+    #eq-block(caption: [勾股定理])[
+      $ a^2 + b^2 = c^2 $
+    ] <eq-pythagoras>
+
+    如 @eq-pythagoras 所示，两条直角边的平方和等于斜边平方。
+  ],
+)
+
+使用要点：
 
 - 省略 `caption` 时原样返回公式，不编号、不入公式目录
 - 使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突
@@ -331,18 +344,35 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 
 ==== code-block — 代码块
 
-`code-block` 包装 raw 为带标题的可自动引用 `figure(kind: "code")`：
+`code-block` 包装 raw 为带标题的可自动引用 `figure(kind: "code")`。同理，左边是代码，右边是实际渲染结果：
 
-````typ
-#code-block(
-  ```python
-  def fibonacci(n):
-      if n <= 1:
-          return n
-      return fibonacci(n-1) + fibonacci(n-2)
-  ```,
-  caption: [斐波那契数列],
-) <fib>
-````
+#code-preview(
+  ````typ
+  #code-block(
+    ```python
+    def fibonacci(n):
+        if n <= 1:
+            return n
+        return fibonacci(n-1) + fibonacci(n-2)
+    ```,
+    caption: [斐波那契数列],
+  ) <fib2>
+
+  如 @fib2 所示，斐波那契数列可用递归实现。
+  ````,
+  [
+    #code-block(
+      ```python
+      def fibonacci(n):
+          if n <= 1:
+              return n
+          return fibonacci(n-1) + fibonacci(n-2)
+      ```,
+      caption: [斐波那契数列],
+    ) <fib2>
+
+    如 @fib2 所示，斐波那契数列可用递归实现。
+  ],
+)
 
 省略 `caption` 则只显示代码，无标题无编号、不入图列表、不可被 `@` 引用。

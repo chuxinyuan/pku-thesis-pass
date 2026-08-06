@@ -16,6 +16,7 @@
 #let subfigurecounter = counter(figure.where(kind: "subfigure"))
 #let tablecounter = counter(figure.where(kind: table))
 #let equationcounter = counter(math.equation)
+#let equationfigurecounter = counter(figure.where(kind: "equation"))
 #let theoremcounter = counter(figure.where(kind: "theorem"))
 #let definitioncounter = counter(figure.where(kind: "definition"))
 #let lemmacounter = counter(figure.where(kind: "lemma"))
