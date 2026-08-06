@@ -3,7 +3,7 @@
 // 提供编号的定理类环境（定理/定义/引理/推论/命题/性质/例/注）及证明
 // ============================================================
 
-#import "utils.typ": chinesenumbering, chaptercounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
+#import "../utils.typ": chinesenumbering, chaptercounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
 
 /// 编号定理的标签与正文构建
 /// 生成"定理 3.1（标题）"标签并置入正文

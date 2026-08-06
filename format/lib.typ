@@ -13,10 +13,10 @@
 // ============================================================
 
 #import "config.typ": config
-#import "booktab.typ": booktab, as-booktab, code-preview
-#import "eqblock.typ": eq-block
-#import "codeblock.typ": code-block
-#import "subfigure.typ": subfigure
-#import "wordcount.typ": word-count-cjk, total-words, total-characters
-#import "theorem.typ": theorem, definition, lemma, corollary, proposition, property, example, remark, proof
+#import "components/booktab.typ": booktab, as-booktab, code-preview
+#import "components/eqblock.typ": eq-block
+#import "components/codeblock.typ": code-block
+#import "components/subfigure.typ": subfigure
+#import "components/wordcount.typ": word-count-cjk, total-words, total-characters
+#import "components/theorem.typ": theorem, definition, lemma, corollary, proposition, property, example, remark, proof
 #import "style.typ": font-set
