@@ -14,16 +14,10 @@
 
 // ========== 公开 API ==========
 
-/// ----- ///
-/// 入口  ///
-/// ----- ///
-
+// 入口
 #import "config.typ": config
 
-/// ------- ///
-/// 组件  ///
-/// ------- ///
-
+// 组件
 #import "components/booktab.typ": booktab, as-booktab, code-preview
 #import "components/eqblock.typ": eq-block
 #import "components/codeblock.typ": code-block
