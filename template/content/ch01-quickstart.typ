@@ -25,39 +25,31 @@ Typst 是一个现代化的排版系统，可以通过以下方式使用：
 
 == 获取模板
 
-=== 方式一：通过 Typst Universe（推荐）
-
-模板已发布到 Typst Universe，可以直接创建新项目：
+=== 方式一：从 Typst Universe 创建（推荐）
 
 ```bash
 typst init @preview/pku-thesis-pass:0.3.0 my-thesis
 cd my-thesis
 ```
 
-这会在 `my-thesis` 目录下创建一个包含 `assets`、`content`、`ref.bib` 和 `thesis.typ` 的干净项目，你可以通过如下命令编译文档：
+这会在 `my-thesis` 目录下创建一个包含 `assets`、`content`、`ref.bib` 和 `thesis.typ` 的干净项目。
+
+进入 `my-thesis` 目录后，使用以下命令编译文档：
 
 ```bash
 typst compile thesis.typ
 ```
 
-或使用实时预览模式：
-
-```bash
-typst watch thesis.typ
-```
-
-自带的 `thesis.typ` 文件，渲染为 `thesis.pdf` 就是一份完整的论文示例文档和用户指南。
+自带的 `thesis.typ` 文件渲染为 `thesis.pdf`，就是一份完整的论文示例文档和用户指南。
 
 === 方式二：克隆仓库
-
-如果需要完整的源代码对论文模板进行更多的定制，可以选择克隆仓库：
 
 ```bash
 git clone https://github.com/chuxinyuan/pku-thesis-pass.git
 cd pku-thesis-pass
 ```
 
-其中，控制论文格式的源代码放在 `format` 目录下，模板放在 `template` 目录下。
+如果需要完整的源代码对论文模板进行更多的定制，可以选择克隆仓库。其中，控制论文格式的源代码放在 `format` 目录下，模板放在 `template` 目录下。
 
 进入 `pku-thesis-pass` 目录后，使用以下命令编译文档：
 
@@ -65,7 +57,7 @@ cd pku-thesis-pass
 typst compile template/thesis.typ --root .
 ```
 
-无论哪种方式，获取模板后，你都可以直接编辑目录下的 `thesis.typ` 文件（方式一： `thesis.typ`，方式二： `template/thesis.typ`）开始写作。
+无论哪种方式，获取模板后，你都可以直接编辑对应位置的 `thesis.typ`（方式一：`thesis.typ`；方式二：`template/thesis.typ`）即可开始写作。
 
 == 字体配置
 
@@ -155,8 +147,16 @@ typst compile template/thesis.typ --root .
   #import "@preview/pku-thesis-pass:0.3.0": config
 
   #let (
-    setup, cover, copyright, abstract-zh, outline, body-wrap,
-    bibliography, appendix, acknowledgements, declaration,
+    setup: setup,
+    cover: cover,
+    copyright: copyright,
+    abstract-zh: abstract-zh,
+    outline: outline,
+    body-wrap: body-wrap,
+    bibliography: bibliography,
+    appendix: appendix,
+    acknowledgements: acknowledgements,
+    declaration: declaration,
   ) = config(
     author-zh: "张三",
     title-zh: "论文中文题目",
