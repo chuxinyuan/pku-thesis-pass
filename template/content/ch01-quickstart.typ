@@ -63,7 +63,7 @@ cd pku-thesis-pass
 typst compile template/thesis.typ --root .
 ```
 
-无论哪种方式，获取模板后，你都可以直接编辑 `thesis.typ` 文件开始写作。
+无论哪种方式，获取模板后，你都可以直接编辑目录下的 `thesis.typ` 文件（方式一： `thesis.typ`，方式二： `template/thesis.typ`）开始写作。
 
 == 字体配置
 
@@ -108,7 +108,7 @@ typst compile template/thesis.typ --root .
     ("楷体", fonts.楷体),
     ("代码", fonts.代码),
   )
-let fam-cell(fam, normal-sample, bold-sample) = box(width: 100%, {
+  let fam-cell(fam, normal-sample, bold-sample) = box(width: 100%, {
     set text(font: fam)
     normal-sample
     linebreak()
@@ -153,7 +153,7 @@ let fam-cell(fam, normal-sample, bold-sample) = box(width: 100%, {
   #import "@preview/pku-thesis-pass:0.3.0": config
 
   #let (
-    setup, cover, copyright, abstract-zh, outline, body-wrap, 
+    setup, cover, copyright, abstract-zh, outline, body-wrap,
     bibliography, appendix, acknowledgements, declaration,
   ) = config(
     author-zh: "张三",
