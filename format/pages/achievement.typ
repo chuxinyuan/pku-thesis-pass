@@ -6,7 +6,7 @@
 // SCI 收录号及期刊影响因子（IF）。
 // ============================================================
 
-#import "headings.typ": back-heading
+#import "../headings.typ": back-heading
 
 /// 攻读学位期间发表的论文
 /// title: 页面标题（默认"攻读学位期间发表的论文"）

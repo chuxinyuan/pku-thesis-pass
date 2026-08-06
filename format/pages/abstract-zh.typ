@@ -4,7 +4,7 @@
 // 显示摘要正文及关键词
 // ============================================================
 
-#import "headings.typ": front-heading
+#import "../headings.typ": front-heading
 
 /// 中文摘要页
 /// keywords-zh: 中文关键词数组，以"关键词："为前缀、顿号分隔

@@ -4,8 +4,8 @@
 // 盲审模式下隐藏作者和导师信息
 // ============================================================
 
-#import "style.typ": size
-#import "headings.typ": front-heading
+#import "../style.typ": size
+#import "../headings.typ": front-heading
 
 /// 英文摘要页
 /// title-en: 英文论文题目（自动 upper 全大写）

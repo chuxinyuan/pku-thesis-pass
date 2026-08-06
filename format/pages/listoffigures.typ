@@ -3,9 +3,9 @@
 // 提供统一的图表列表生成函数 listoffigures
 // ============================================================
 
-#import "headings.typ": front-heading
-#import "style.typ": supplement
-#import "utils.typ": chaptercounter, chinesenumbering
+#import "../headings.typ": front-heading
+#import "../style.typ": supplement
+#import "../utils.typ": chaptercounter, chinesenumbering
 
 /// 从 figure caption 中提取纯文本，用于图表列表条目。
 #let caption-to-text(a) = {

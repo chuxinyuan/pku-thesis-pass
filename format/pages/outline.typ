@@ -4,8 +4,8 @@
 // 图/表/代码列表见 listoffigures.typ
 // ============================================================
 
-#import "headings.typ": front-heading
-#import "utils.typ": partcounter, chinesenumbering
+#import "../headings.typ": front-heading
+#import "../utils.typ": partcounter, chinesenumbering
 
 /// 中文目录
 /// title: 目录标题（默认"目录"）

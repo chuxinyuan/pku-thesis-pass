@@ -6,7 +6,7 @@
 // 盲审（blind: true）时不显示作者，只保留标题。
 // ============================================================
 
-#import "style.typ": font, size
+#import "../style.typ": font, size
 
 /// 书脊页
 /// title: 论文中文标题

@@ -5,9 +5,9 @@
 //   - cover-page-normal：正常提交用（显示校徽、作者、导师等信息）
 // ============================================================
 
-#import "imports.typ": show-cn-fakebold
-#import "style.typ": font, size
-#import "utils.typ": chinesenumber, chineseyear, _resolve-path, _ensure-not-eps
+#import "../imports.typ": show-cn-fakebold
+#import "../style.typ": font, size
+#import "../utils.typ": chinesenumber, chineseyear, _resolve-path, _ensure-not-eps
 
 // ========== 封面排版工具 ==========
 

@@ -4,8 +4,8 @@
 // 紧跟封面页之后、摘要之前
 // ============================================================
 
-#import "headings.typ": front-heading
-#import "style.typ": size
+#import "../headings.typ": front-heading
+#import "../style.typ": size
 
 /// 版权声明页
 /// 内容为固定的法律声明文字，无参数

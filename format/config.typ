@@ -32,20 +32,20 @@
 
 // 基础设施
 #import "page.typ": page-setup
-#import "bibliography.typ": render-bibliography
-#import "outline.typ": chineseoutline
-#import "listoffigures.typ": listoffigures
-#import "notation.typ": notation-page
-#import "achievement.typ": achievement-page
+#import "pages/bibliography.typ": render-bibliography
+#import "pages/outline.typ": chineseoutline
+#import "pages/listoffigures.typ": listoffigures
+#import "pages/notation.typ": notation-page
+#import "pages/achievement.typ": achievement-page
 
 // 页面
-#import "covers.typ": cover-page-blind, cover-page-normal
-#import "spine.typ": spine-page
-#import "copyright.typ": copyright-page
-#import "abstract-zh.typ": abstract-page-zh
-#import "abstract-en.typ": abstract-page-en
-#import "acknowledgements.typ": acknowledgements-page
-#import "declaration.typ": declaration-page
+#import "pages/covers.typ": cover-page-blind, cover-page-normal
+#import "pages/spine.typ": spine-page
+#import "pages/copyright.typ": copyright-page
+#import "pages/abstract-zh.typ": abstract-page-zh
+#import "pages/abstract-en.typ": abstract-page-en
+#import "pages/acknowledgements.typ": acknowledgements-page
+#import "pages/declaration.typ": declaration-page
 
 // ========== 命令行参数支持 ==========
 

@@ -3,8 +3,8 @@
 // 封装 GB/T 7714 参考文献的两种渲染路径
 // ============================================================
 
-#import "style.typ": size
-#import "imports.typ": gb7714-bibliography, init-gb7714
+#import "../style.typ": size
+#import "../imports.typ": gb7714-bibliography, init-gb7714
 
 /// 原生 bibliography 的 show 规则（override-bib 时使用）
 /// 设置五号字、悬挂缩进 1.66em，并提升方括号编号的垂直位置
