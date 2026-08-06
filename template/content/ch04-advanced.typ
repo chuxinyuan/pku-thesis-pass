@@ -43,7 +43,7 @@
 `config()` 的 `blind` 参数控制盲审模式：
 
 ```typ
-#let (setup, cover, blind, ..) = config(
+#let (setup: setup, cover: cover, blind: blind, ..) = config(
   blind: true,
   ...
 )
@@ -131,7 +131,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 在 `config()` 中设置 `use-latexref: true`：
 
 ```typ
-#let (setup, ...) = config(
+#let (setup, ..) = config(
   ...
   use-latexref: true,
 )
@@ -177,7 +177,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 分别对应图、表、公式、代码、图片、算法。如需增删，用 `latexref-prefixes` 参数覆盖，例如支持中文前缀：
 
 ```typ
-#let (setup, ...) = config(
+#let (setup, ..) = config(
   use-latexref: true,
   latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:", "图:", "表:"),
 )
@@ -209,11 +209,52 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 #include "content/ch01-quickstart.typ"
 ```
 
-== 模板提供的辅助函数
+== 页面调用顺序
 
-`config()` 返回以下函数和字段：
+本模板采用 DI（依赖注入）模式，`config()` 返回一组页面函数与工具值，用户在 `thesis.typ` 中自行编排调用顺序。推荐顺序如下：
 
-*页面函数*：
+#booktab(
+  columns: (auto, 1fr),
+  align: (left, left),
+  caption: "推荐页面调用顺序",
+  [*顺序*],
+  [*调用*],
+  [1],
+  [`#show: setup` 页面设置（字号、行距、页眉页脚、show 规则）],
+  [2],
+  [`#cover()` 封面（按 `blind` 自动选择正常/盲审版）],
+  [3],
+  [`#copyright()` 版权声明页],
+  [4],
+  [`#abstract-zh(...)` / `#abstract-en(...)` 中英文摘要],
+  [5],
+  [`#outline()` 中文目录],
+  [6],
+  [`#list-of-figures()` / `#list-of-tables()` / `#list-of-equations()` / `#list-of-code()` 各列表（按需）],
+  [7],
+  [`#notation[...]` 主要符号对照表（按需）],
+  [8],
+  [`#show: body-wrap` + 正文章节内容],
+  [9],
+  [`#show: bibliography` 参考文献（也可在正文中按需引用）],
+  [10],
+  [`#appendix()` 开始附录，之后章节编号切换为字母格式],
+  [11],
+  [`#achievement[...]` 攻读学位期间发表的论文（按需）],
+  [12],
+  [`#acknowledgements[...]` 致谢],
+  [13],
+  [`#declaration()` 原创性声明],
+)
+
+上述顺序与示例 `thesis.typ` 完全一致，可直接参照其编排。
+
+== 组件与辅助函数参考
+
+`config()` 返回若干页面函数、工具值，同时模板还导出一组可直接导入的组件。
+
+=== config() 返回的页面函数
+
 - `setup(body)`：页面设置（字号、行距、页眉页脚、show 规则），作为 `#show: setup` 调用
 - `cover()`：生成封面（根据 `blind` 自动选择正常/盲审版）
 - `copyright()`：版权声明页
@@ -228,36 +269,27 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 - `declaration()`：原创性声明
 - `appendix()`：开始附录部分，后续章节编号切换为字母格式
 
-*工具值*：
-- `font`：解析后的字体方案字典
-- `smartpagebreak`：智能分页函数（支持 `always-start-odd`）
-- `blind` / `preview` / `always-start-odd` / `first-line-indent`：当前配置值
+=== config() 返回的工具值
 
-可直接导入的组件：
-
-```typ
-#import "@preview/pku-thesis-pass:0.x.0": booktab, as-booktab, code-block
-```
-
-- `#booktab(...)`：生成三线表，第一行自动加粗为表头，支持 `outlined: false` 生成纯表格
-- `#as-booktab(table)`：将原生 `table` 装饰为三线表样式，便于和 `figure` 组合使用
-- `#code-block(...)`：生成带标题和编号的可引用代码块
-
-== 补充说明
-
-除了上述配置参数，`config()` 函数还返回若干额外字段：
 - `font`：解析后的字体方案字典，可直接用于自定义页面（如 `#set text(font: font.仿宋)`）
 - `smartpagebreak`：智能分页函数（支持 `always-start-odd`）
 - `first-line-indent`：首行缩进值（供自定义页面使用）
 - `blind` / `preview` / `always-start-odd`：当前配置值，可由 `--input` CLI 参数覆盖
 
-模板还导出了 `booktab`、`as-booktab`、`code-block` 三个组件函数，可直接导入使用：
+=== 可直接导入的组件
+
+模板导出了 `booktab`、`as-booktab`、`eq-block`、`code-block` 等组件，用法示例见 @basics，以下为各组件说明与 API：
 
 ```typ
-#import "@preview/pku-thesis-pass:0.3.0": booktab, as-booktab, code-block
+#import "@preview/pku-thesis-pass:0.3.0": booktab, as-booktab, eq-block, code-block
 ```
 
-=== booktab — 三线表
+- `#booktab(...)`：生成三线表，第一行自动加粗为表头，支持 `outlined: false` 生成纯表格
+- `#as-booktab(table)`：将原生 `table` 装饰为三线表样式，便于和 `figure` 组合使用
+- `#eq-block(...)`：生成带标题和编号的可引用公式
+- `#code-block(...)`：生成带标题和编号的可引用代码块
+
+==== booktab — 三线表
 
 `booktab` 从零创建学术三线表，第一行位置参数自动作为表头（加粗），支持 `figure` 包装和 `@label` 引用：
 
@@ -275,7 +307,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 - `outlined: false`：不包装为 `figure`，生成纯表格
 - 其他命名参数（`columns`、`align` 等）透传给 `table`
 
-=== as-booktab — 表格装饰器
+==== as-booktab — 表格装饰器
 
 `as-booktab` 将现有原生 `table` 装饰为三线表，自动识别 `table.header` 或前 N 个单元格作为表头。更适合与 `figure` 组合，易被格式化工具整理：
 
@@ -294,7 +326,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 
 若 table 已包含 `table.hline`，则仅包裹不修改，保留手动样式。
 
-=== 公式自动编号
+==== eq-block — 公式自动编号
 
 `eq-block` 将行间公式包装为带标题的可引用 `figure(kind: "equation")`，支持公式目录：
 
@@ -308,9 +340,9 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 - 使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突
 - 不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`
 
-=== code-block — 代码块
+==== code-block — 代码块
 
-`code-block` 包装 raw 为带标题的可引用 `figure(kind: "code")`：
+`code-block` 包装 raw 为带标题的可自动引用 `figure(kind: "code")`：
 
 ````typ
 #code-block(

@@ -101,7 +101,7 @@
 
 // ========== 英文摘要 ==========
 #abstract-en(
-  keywords-en: ("Typst", "Template", "Dissertation", "Peking University")
+  keywords-en: ("Typst", "Template", "Thesis", "Peking University")
 )[#include "content/abstract-en.typ"]
 
 // ========== 论文目录 ==========
@@ -138,13 +138,13 @@
 
 #include "content/ch03-basics.typ"
 
-= 常见问题与解决方案 <faq>
-
-#include "content/ch04-faq.typ"
-
 = 进阶使用技巧 <advanced>
 
-#include "content/ch05-advanced.typ"
+#include "content/ch04-advanced.typ"
+
+= 常见问题与解决方案 <faq>
+
+#include "content/ch05-faq.typ"
 
 // ========== 附录部分 ==========
 #appendix()

@@ -246,7 +246,7 @@ Typst 中定义表格使用 `table` 函数。如需标题和引用功能，同�
   - 仅当 `outlined = true`（默认）时，`booktab` 才会包装为 `figure`，此时 `caption` 生效、表格可被 `@label` 引用。
   - 设 `outlined: false` 时为纯表格，`caption` 不生效，且不能使用 `@` 引用。
 
-*注意*：本模板默认允许表格跨页显示（`show figure: set block(breakable: true)`）。长表跨页时会自动重复表头，并在续表页右上角标注"续表"，无需手动控制。如果不希望某个表格被分割，可以在表格前手动插入 `#pagebreak()` 进行调整。
+*注意*：本模板默认允许表格跨页显示（`show figure: set block(breakable: true)`）。长表跨页时会自动重复表头，并在续表页右上角标注"续表"，无需手动控制。如果不希望某个表格被分割，可以在表格前手动插入 `#pagebreak()` 进行调整。详细 API 见 @advanced 的「组件与辅助函数参考」。
 
 @booktab-example 展示了 `booktab` 的示例效果：
 
@@ -415,7 +415,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 + 在目录之后、正文之前调用 `#list-of-equations()`
 + 用 `#eq-block(caption: [描述])[公式]` 替代普通行间公式
 
-#strong[注意]：使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突。不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`。
+#strong[注意]：使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突。不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`。`eq-block` 的详细 API 见 @advanced 的「组件与辅助函数参考」。
 
 === 常用数学符号
 
@@ -584,9 +584,13 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 + 在目录之后、正文之前调用 `#list-of-code()`
 + 用 `#code-block(raw, caption: [标题])` 包装需要入列表的代码块
 
-与公式列表类似，使用代码列表时，需要编号的代码块应统一用 `code-block` 包装。
+与公式列表类似，使用代码列表时，需要编号的代码块应统一用 `code-block` 包装。`code-block` 的详细 API 见 @advanced 的「组件与辅助函数参考」。
 
-== 主要符号对照表
+== 论文特殊页面
+
+除正文外，论文还常包含主要符号对照表、攻读学位期间发表的论文、字数统计等特殊页面，模板分别提供 `notation`、`achievement`、`total-words` 等函数。它们的使用方式一致：先在 `config()` 返回值中解构对应函数，再在指定位置调用。
+
+=== 主要符号对照表
 
 当论文中使用了大量的符号、标志、缩略词、专门计量单位、自定义名词和术语时，可按北大《写作指南》要求编写"主要符号对照表"，放在目录之后、正文之前。模板提供了 `notation` 页面函数来实现这一功能。
 
@@ -640,7 +644,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 `notation` 页面标题默认显示"主要符号对照表"，可通过 `supplements: (符号表: "...")` 自定义。若论文中符号与缩略词数量不多，可省略此页，在正文中随即说明即可。
 
-== 攻读学位期间发表的论文
+=== 攻读学位期间发表的论文
 
 北大工学院等院系要求博士论文在附录之后、致谢之前列出攻读学位期间发表的论文。条目格式与参考文献列表基本一致，但需将作者本人姓名加粗，并标注论文是否为 SCI/EI 收录期刊、SCI 收录号及期刊影响因子。模板提供了 `achievement` 页面函数：
 
@@ -666,13 +670,13 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 `achievement` 页面标题默认显示"攻读学位期间发表的论文"，可通过 `supplements: (成果表: "...")` 自定义；该页默认出现在目录中（与致谢、声明一致），如需隐藏，在 `config()` 中设置 `achievement-outlined: false` 即可。
 
-== 字数统计
+=== 字数统计
 
 如需统计正文与附录的字数，在 `config()` 中设置 `word-count: true`，并在正文任意位置解构出 `#total-words`（CJK 字数）或 `#total-characters`（字符数）来显示：
 
 #code-preview(
   ```typ
-  #let (setup, ..., total-words) = config(
+  #let (setup: setup, total-words: total-words, ..) = config(
     word-count: true, // 统计正文与附录的字数
   )
 
@@ -702,7 +706,7 @@ Typst 支持 BibLaTeX 格式的 `.bib` 文件。在文档中引用文献使用 `
 
 #code-block(
   ```typ
-  #let (setup, ..., body-wrap, bibliography) = config(
+  #let (setup: setup, body-wrap: body-wrap, bibliography: bibliography, ..) = config(
     bib-file: path("ref.bib"),
     bib-style: "numeric",
     bib-version: "2015",
@@ -740,7 +744,7 @@ gb7714-bilingual 会自动检测文献语言。如果自动检测不准确，可
 如果需要使用其他引用样式（如 APA、IEEE 等），可以设置 `override-bib: true`，此时模板会跳过 gb7714-bilingual，改用 Typst 原生 `bibliography` 函数：
 
 ```typ
-#let (setup, ..., body-wrap, bibliography) = config(
+#let (setup: setup, body-wrap: body-wrap, bibliography: bibliography, ..) = config(
   bib-file: path("ref.bib"),
   override-bib: true,
   ...
@@ -833,7 +837,7 @@ $ a^2 + b^2 = c^2 $ <eq-pythagoras>
 引用前缀可通过 `supplements` 参数自定义：
 
 ```typ
-#let (setup, ...) = config(
+#let (setup, ..) = config(
   supplements: (图: "Figure", 表: "Table"),
 )
 ```

@@ -1,7 +1,6 @@
 #import "../../format/components.typ": as-booktab, code-block
 // 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
 // #import "@preview/pku-thesis-pass:0.3.0": as-booktab, code-block
-#import "@preview/gribouille:0.6.0": *
 
 撰写学位论文是每个研究生必须完成的功课。在 LaTeX 还是 Typst 的选择上，过去几年我们几乎没有悬念——LaTeX 是唯一的专业排版工具。然而，Typst 的出现正在改变这个局面。
 
@@ -24,65 +23,51 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
 + *脚本能力*：内置图灵完备的脚本语言，支持复杂的排版逻辑
 + *现代设计*：原生支持 Unicode、OpenType 字体等现代排版技术
 
-== 插入现有图片
+== 综合示例
 
-最简单的插入方式：
+前面的章节分别介绍了各组件与页面函数的用法，这里以一个综合示例串联起来，展示如何将它们组合成一个完整的附录页面。各组件 API 的详细用法见 @basics 与 @advanced 的「组件与辅助函数参考」。
 
-```typ
-#image("../assets/pkuword.pdf", width: 60%)
-```
+=== 插图
 
-如果是写论文，那么有必要给图片一个 Figure 类、标题和标签，方便自动编号和交叉引用。
+最简单的插图方式直接放入图片即可。写论文时有必要给图片一个 `figure` 类、标题和标签，方便自动编号和交叉引用：
 
 #figure(
   image("../assets/pkuword.pdf", width: 60%),
-  caption: [
-    北京大学字标
-  ],
+  caption: [北京大学字标],
 ) <fig-wordmark>
 
-同一类对象会自动编号，给一个标签是为了交叉引用。@fig-wordmark 展示的是北京大学的校名字标，本模板已内置（取自 CTAN 的 #link("https://ctan.org/pkg/pkuthss")[pkuthss] 包），封面通过 `config()` 的 `logo` / `wordmark` 参数导入。
-
-== 代码生成图片
-
-附录中也可以插入图片，如 @appendix-fig。
-
-#let df = ((x: -calc.pi, y: -1.2), (x: calc.pi, y: 1.2))
+同一类对象会自动编号，给一个标签是为了交叉引用。@fig-wordmark 展示的是北京大学的校名字标，本模板已内置（取自 CTAN 的 #link("https://ctan.org/pkg/pkuthss")[pkuthss] 包），论文封面通过 `config()` 的 `logo` / `wordmark` 参数导入。附图亦可用原生 Typst 图形绘制，如 @appendix-fig 所示：
 
 #figure(
-  plot(
-    data: df,
-    mapping: aes(x: "x", y: "y"),
-    layers: (
-      geom-blank(),
-      geom-line(
-        stat: stat-function(fun: x => calc.sin(x), x-limits: (-calc.pi, calc.pi)),
-        colour: rgb("#1f77b4"),
-        stroke: 1.2pt,
-      ),
-      geom-line(
-        stat: stat-function(fun: x => calc.cos(x), x-limits: (-calc.pi, calc.pi)),
-        colour: rgb("#d62728"),
-        stroke: 1.2pt,
-        linetype: "dashed",
-      ),
-    ),
-    scales: scales(x: scale-continuous(breaks: (-3, -1.5, 0, 1.5, 3))),
-    labels: labels(
-      title: "Two Analytic Curves",
-      x: "X",
-      y: "f(x)",
-    ),
-    theme: theme-minimal(),
-    width: 12cm,
-    height: 9cm,
-  ),
-  caption: "gribouille 包绘制的正弦余弦曲线",
+  {
+    let n = 24
+    let w = 6cm
+    let h = 3cm
+    let pts = range(n).map(i => (
+      (w / (n - 1)) * i,
+      h / 2 - (calc.sin(2 * calc.pi * i / (n - 1)) * h / 2),
+    ))
+    stack(
+      dir: ltr,
+      ..range(n - 1).map(i => box(
+        width: w / (n - 1),
+        height: h,
+        line(
+          start: pts.at(i),
+          end: pts.at(i + 1),
+          stroke: 1pt + rgb("#1f77b4"),
+        ),
+      )),
+    )
+  },
+  caption: "原生 Typst 绘制的一条正弦曲线",
 ) <appendix-fig>
 
-== 表格
+专门的绘图包（如 gribouille）使用方式与原生 `figure` 一致，仍需在 `figure` 中包装才能编号和引用。
 
-@table-example 是一张很常见的三线表。
+=== 表格
+
+三线表可直接用 `as-booktab` 包装原生 `table` 得到，@table-example 便是一张常见的三线表：
 
 #figure(
   as-booktab(table(
@@ -103,7 +88,9 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
   caption: [城市 A、B、C 的 GDP 和人口情况],
 ) <table-example>
 
-== 公式
+表格样式说明见 @basics 的表格一节。
+
+=== 公式
 
 + 行内公式
   爱因斯坦的质能方程：$E=m c^2$
@@ -113,11 +100,11 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
     f(x) = frac(1, sigma sqrt(2 pi)) e^(- frac((x - mu)^2, 2 sigma^2))
   $ <eq-normal>
 
-@eq-normal 是正态分布公式。
+@eq-normal 是正态分布公式。公式自动编号与引用见 @basics 公式一节。
 
-== 代码块
+=== 代码块
 
-附录中也可以插入代码块，如 @appendix-code。
+附录中也可以插入代码块，@appendix-code 是一个 Rust 示例：
 
 #code-block(
   ```rust
@@ -127,3 +114,5 @@ Typst 是一个现代化的排版系统，相比 LaTeX 有诸多优势：
   ```,
   caption: "Rust Hello World",
 ) <appendix-code>
+
+代码块同样支持编号、入代码列表与 `@` 引用，详见 @basics 代码块一节。
