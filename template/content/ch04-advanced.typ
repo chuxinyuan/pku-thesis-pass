@@ -4,7 +4,7 @@
 
 == 自定义页眉页脚
 
-本模板的页眉页脚通过 `format/header.typ` 和 `format/footer.typ` 控制。页眉规则：
+本模板的页眉页脚通过 `format/layouts/header.typ` 和 `format/layouts/footer.typ` 控制。页眉规则：
 - 奇数页显示当前章节标题
 - 偶数页显示论文标题（`header-text` 参数）
 - 封面区域无页眉

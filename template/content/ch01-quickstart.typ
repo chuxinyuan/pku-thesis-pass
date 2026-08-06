@@ -61,7 +61,7 @@ typst compile template/thesis.typ --root .
 
 == 字体配置
 
-本模板的字体配置在 `format/style.typ` 中定义，支持四套字体方案，通过 `system` 参数切换。默认使用跨平台的 `default` 方案：
+本模板的字体配置在 `format/utils/font.typ` 中定义，支持四套字体方案，通过 `system` 参数切换。默认使用跨平台的 `default` 方案：
 
 #booktab(
   width: 100%,
@@ -136,7 +136,7 @@ typst compile template/thesis.typ --root .
 - 下载对应字体（如思源宋体、思源黑体等）
   - 将字体安装到系统中
   - 或在编译时加上 `--font-path` 参数指定字体文件所在目录
-- 开发者可以编辑 `format/style.typ` 中的字体配置
+- 开发者可以编辑 `format/utils/font.typ` 中的字体配置
 
 == 基本结构
 
