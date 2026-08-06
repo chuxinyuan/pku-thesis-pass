@@ -196,7 +196,7 @@ typst compile template/thesis.typ --root .
 
 ```typ
 #import "../../format/lib.typ": code-block, booktab
-#import "../../format/style.typ": font-set
+#import "../../format/utils/font.typ": font-set
 // #import "@preview/pku-thesis-pass:0.3.0": code-block, booktab, font-set
 ```
 
