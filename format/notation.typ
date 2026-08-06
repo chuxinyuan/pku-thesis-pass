@@ -50,9 +50,11 @@
     }
   })
 
-  align(center, block(width: 100%, grid(
+  block(width: 100%, grid(
     columns: columns,
+    align: left,
+    column-gutter: 4em,
     row-gutter: row-gutter,
     ..out,
-  )))
+  ))
 }
