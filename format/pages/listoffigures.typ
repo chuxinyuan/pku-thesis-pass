@@ -4,8 +4,9 @@
 // ============================================================
 
 #import "../layouts/headings.typ": front-heading
-#import "../style.typ": supplement
-#import "../utils.typ": chaptercounter, chinesenumbering
+#import "../utils/supplement.typ": supplement
+#import "../utils/counter.typ": chaptercounter
+#import "../utils/number.typ": chinesenumbering
 
 /// 从 figure caption 中提取纯文本，用于图表列表条目。
 #let caption-to-text(a) = {

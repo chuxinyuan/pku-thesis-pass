@@ -4,8 +4,9 @@
 // 以及依赖 booktab 的代码渲染对比表 code-preview
 // ============================================================
 
-#import "../style.typ": size
-#import "../utils.typ": chinesenumbering, chaptercounter
+#import "../utils/size.typ": size
+#import "../utils/number.typ": chinesenumbering
+#import "../utils/counter.typ": chaptercounter
 
 /// 续表标记状态：表格渲染前重置，跨页续表时在表头右上显示"续表"
 #let _booktab-xubiao = state("booktab-xubiao")

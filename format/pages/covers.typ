@@ -6,8 +6,10 @@
 // ============================================================
 
 #import "../imports.typ": show-cn-fakebold
-#import "../style.typ": font, size
-#import "../utils.typ": chinesenumber, chineseyear, _resolve-path, _ensure-not-eps
+#import "../utils/font.typ": font
+#import "../utils/size.typ": size
+#import "../utils/number.typ": chinesenumber, chineseyear
+#import "../utils/util.typ": _resolve-path, _ensure-not-eps
 
 // ========== 封面排版工具 ==========
 

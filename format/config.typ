@@ -26,8 +26,11 @@
 // ========== 子模块导入 ==========
 
 // 基础定义
-#import "style.typ": supplement, font-set
-#import "utils.typ": skippedstate, appendix, _resolve-path
+#import "utils/supplement.typ": supplement
+#import "utils/font.typ": font-set
+#import "utils/counter.typ": skippedstate
+#import "utils/number.typ": appendix
+#import "utils/util.typ": _resolve-path
 #import "components/wordcount.typ": word-count-cjk, total-words, total-characters
 
 // 基础设施

@@ -5,7 +5,8 @@
 // ============================================================
 
 #import "../layouts/headings.typ": front-heading
-#import "../utils.typ": partcounter, chinesenumbering
+#import "../utils/counter.typ": partcounter
+#import "../utils/number.typ": chinesenumbering
 
 /// 中文目录
 /// title: 目录标题（默认"目录"）

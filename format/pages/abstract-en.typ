@@ -4,7 +4,7 @@
 // 盲审模式下隐藏作者和导师信息
 // ============================================================
 
-#import "../style.typ": size
+#import "../utils/size.typ": size
 #import "../layouts/headings.typ": front-heading
 
 /// 英文摘要页

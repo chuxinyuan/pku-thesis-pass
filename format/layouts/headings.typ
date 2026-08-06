@@ -7,8 +7,8 @@
 //   - heading-show-rule：全局 show rule，处理分页、状态转换、计数器步进
 // ============================================================
 
-#import "../style.typ": size
-#import "../utils.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
+#import "../utils/size.typ": size
+#import "../utils/counter.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
 
 /// 根据标题等级返回对应字号（用于 2–4 级标题）
 #let get-heading-size(level) = {

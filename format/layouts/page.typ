@@ -6,8 +6,11 @@
 
 #import "../imports.typ": itemize, codly-init, codly, codly-languages
 
-#import "../style.typ": font, size
-#import "../utils.typ": in-appendix, chaptercounter, chinesenumbering, show-latexref
+#import "../utils/font.typ": font
+#import "../utils/size.typ": size
+#import "../utils/number.typ": in-appendix, chinesenumbering
+#import "../utils/counter.typ": chaptercounter
+#import "../utils/util.typ": show-latexref
 #import "headings.typ": heading-show-rule
 #import "header.typ": make-header
 #import "footer.typ": make-footer

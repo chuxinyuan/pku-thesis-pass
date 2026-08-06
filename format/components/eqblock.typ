@@ -3,8 +3,9 @@
 // 提供行间公式的编号与题注：eq-block
 // ============================================================
 
-#import "../style.typ": size
-#import "../utils.typ": chinesenumbering, chaptercounter
+#import "../utils/size.typ": size
+#import "../utils/number.typ": chinesenumbering
+#import "../utils/counter.typ": chaptercounter
 
 /// 公式块组件
 /// 将行间公式包装为 figure(kind: "equation")，支持 caption 描述和公式目录
