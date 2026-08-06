@@ -16,7 +16,9 @@
 #import "show.typ": _figure-show-rule, _ref-show-rule
 
 // ========== 列表符号 ==========
+// 无序列表用的实心符号：圆形、方形、菱形，供列表分层循环使用
 
+/// 实心圆符号，边长按 size 控制
 #let sym-circle(size) = box(
   width: 1em,
   align(
@@ -25,6 +27,7 @@
   ),
 )
 
+/// 实心方符号，按 size 控制大小
 #let sym-square(size) = box(
   width: 1em,
   align(
@@ -33,6 +36,7 @@
   ),
 )
 
+/// 实心菱符号（旋转 45° 的方），按 size 控制大小
 #let sym-rhombus(size) = box(
   width: 1em,
   align(
@@ -58,21 +62,31 @@
   latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
   body: none,
 ) = {
+  // ========== 页面尺寸与页眉页脚 ==========
+  // A4 纸 + 学校规定的页边距；页眉页脚由 header.typ / footer.typ 按部分自动生成
   set page(
     paper: "a4",
     margin: (top: 3cm, bottom: 2.5cm, left: 2.6cm, right: 2.6cm),
     header: make-header(header-text: header-text),
     footer: make-footer(),
   )
+  // 正文默认字体：宋体小四、中文断行
   set text(font: font.宋体, size: size.正文, lang: "zh")
+
+  // ========== PDF 元数据 ==========
+  // 盲审时 document-author 为 none，跳过作者字段，避免在文件属性中泄露作者信息
   set document(
     title: document-title,
   )
   if document-author != none {
     set document(author: document-author)
   }
+
+  // 正文标题统一使用中文章节编号（chinesenumbering）
   set heading(numbering: chinesenumbering)
 
+  // ========== 图/表编号 ==========
+  // 编号随章重置（如 "图 3.1"），进入附录后切换为 "图 A.1"
   set figure(
     numbering: (..nums) => context {
       if not in-appendix(here()) {
@@ -83,6 +97,8 @@
     },
   )
 
+  // ========== 公式编号 ==========
+  // 与 figure 同理：随章编号、附录切换 "A.1"；编号中的中文用宋体渲染
   set math.equation(
     numbering: (..nums) => context {
       set text(font: font.宋体)
@@ -94,6 +110,8 @@
     },
   )
 
+  // ========== 脚注 ==========
+  // "①"式编号、上标缩小、悬挂缩进排版
   set footnote(numbering: "①")
   show footnote: set super(size: 0.65em)
   show footnote.entry: it => {
@@ -111,16 +129,25 @@
     it.note.body
   }
 
+  // ========== 正文强调样式 ==========
+  // 加粗用黑体、斜体用楷体，代码用等宽字体
   show strong: it => text(font: font.黑体, weight: "bold", it.body)
   show emph: it => text(font: font.楷体, style: "italic", it.body)
   show raw: set text(font: font.代码, size: size.五号, top-edge: "ascender")
+
+  // ========== 代码块高亮 ==========
+  // codly 渲染代码块（行号、语言图标等由 codly-args 控制）
   show: codly-init.with()
   codly(languages: codly-languages, ..codly-args)
 
+  // ========== 链接样式 ==========
+  // 预览模式（preview=true）下链接显示为蓝色，打印版关闭以保持纯黑
   show link: it => if type(it.dest) == str and preview {
     text(fill: blue)[#it]
   } else { it }
 
+  // ========== 列表符号 ==========
+  // 三级无序列表符号依次循环为 圆/方/菱
   show: itemize.default-enum-list.with(
     indent: (first-line-indent, 0.5em),
     label-baseline: "center",
@@ -131,13 +158,18 @@
     ),
   )
 
+  // ========== 跨元素 show 委托 ==========
+  // 标题、图/表/代码块、交叉引用分别委托 headings.typ / show.typ 渲染
   show heading: it => heading-show-rule(it, smartpagebreak)
   show figure: set block(breakable: true)
   show figure: it => _figure-show-rule(it, merged-supplements)
   show ref: it => _ref-show-rule(it, merged-supplements)
 
-  // LaTeX 引用兼容：@fig:xxx 解析失败时剥离前缀重试 @xxx
-  // 注意：show: 不能写在 if 块内部，否则不会作用于函数体返回的内容
+  // ========== LaTeX 引用兼容 ==========
+  // use-latexref=true 时：@fig:xxx 等带前缀引用解析失败时，剥离前缀重试 @xxx，
+  // 方便从 LaTeX 迁移的文档沿用 \ref{fig:xxx} 写法。
+  // 注意：若 use-latexref 预置的剥离前缀不覆盖实际前缀，可自行把前缀加入 latexref-prefixes。
+  // 注意：show: 不能写在 if 块内部，否则不会作用于函数体返回的内容，故先用变量收拢再 show
   let latexref-wrapper = if use-latexref {
     show-latexref.with(latexref-prefixes)
   } else {
