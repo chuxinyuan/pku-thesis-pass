@@ -5,8 +5,8 @@
 // 奇数页显示当前章节标题（或自定义 header 元数据）
 // ============================================================
 
-#import "style.typ": size
-#import "utils.typ": chinesenumbering, partcounter, skippedstate
+#import "../style.typ": size
+#import "../utils.typ": chinesenumbering, partcounter, skippedstate
 #import "headings.typ": get-heading-meta, get-page-headings
 
 /// 生成页眉内容（作为 place 元素放置在页面顶部）

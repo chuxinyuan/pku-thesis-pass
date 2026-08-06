@@ -5,7 +5,7 @@
 // 空行用于分组（如符号、希腊字母、缩略词等）。
 // ============================================================
 
-#import "../headings.typ": front-heading
+#import "../layouts/headings.typ": front-heading
 
 /// 主要符号对照表
 /// title: 页面标题（默认"主要符号对照表"）

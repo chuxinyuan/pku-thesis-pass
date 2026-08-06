@@ -4,7 +4,7 @@
 // 图/表/代码列表见 listoffigures.typ
 // ============================================================
 
-#import "../headings.typ": front-heading
+#import "../layouts/headings.typ": front-heading
 #import "../utils.typ": partcounter, chinesenumbering
 
 /// 中文目录

@@ -3,7 +3,7 @@
 // 提供统一的图表列表生成函数 listoffigures
 // ============================================================
 
-#import "../headings.typ": front-heading
+#import "../layouts/headings.typ": front-heading
 #import "../style.typ": supplement
 #import "../utils.typ": chaptercounter, chinesenumbering
 

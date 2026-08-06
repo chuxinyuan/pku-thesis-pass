@@ -4,8 +4,8 @@
 // 职责：图/表/代码块的展示布局、交叉引用链接生成
 // ============================================================
 
-#import "style.typ": size
-#import "utils.typ": chinesenumbering, chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter, theorem-kinds
+#import "../style.typ": size
+#import "../utils.typ": chinesenumbering, chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter, theorem-kinds
 
 /// 图、表、代码块的 show 规则
 /// 图片：caption 在下方；表格：caption 在上方；代码块：caption 在上方

@@ -31,7 +31,7 @@
 #import "components/wordcount.typ": word-count-cjk, total-words, total-characters
 
 // 基础设施
-#import "page.typ": page-setup
+#import "layouts/page.typ": page-setup
 #import "pages/bibliography.typ": render-bibliography
 #import "pages/outline.typ": chineseoutline
 #import "pages/listoffigures.typ": listoffigures

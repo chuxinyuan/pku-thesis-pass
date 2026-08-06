@@ -4,10 +4,10 @@
 // 全局排版基础设施，供 config.typ 编排时调用
 // ============================================================
 
-#import "imports.typ": itemize, codly-init, codly, codly-languages
+#import "../imports.typ": itemize, codly-init, codly, codly-languages
 
-#import "style.typ": font, size
-#import "utils.typ": in-appendix, chaptercounter, chinesenumbering, show-latexref
+#import "../style.typ": font, size
+#import "../utils.typ": in-appendix, chaptercounter, chinesenumbering, show-latexref
 #import "headings.typ": heading-show-rule
 #import "header.typ": make-header
 #import "footer.typ": make-footer

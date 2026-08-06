@@ -5,7 +5,7 @@
 // ============================================================
 
 #import "../style.typ": size
-#import "../headings.typ": front-heading
+#import "../layouts/headings.typ": front-heading
 
 /// 英文摘要页
 /// title-en: 英文论文题目（自动 upper 全大写）

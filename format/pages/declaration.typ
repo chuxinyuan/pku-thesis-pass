@@ -5,7 +5,7 @@
 //   2. 学位论文使用授权说明
 // ============================================================
 
-#import "../headings.typ": back-heading
+#import "../layouts/headings.typ": back-heading
 #import "../imports.typ": show-cn-fakebold
 #import "../style.typ": size
 

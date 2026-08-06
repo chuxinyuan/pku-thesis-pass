@@ -3,7 +3,7 @@
 // 使用 back-heading 生成无编号标题，在参考文献之后出现
 // ============================================================
 
-#import "../headings.typ": back-heading
+#import "../layouts/headings.typ": back-heading
 
 /// 致谢页
 /// first-line-indent: 段落首行缩进
