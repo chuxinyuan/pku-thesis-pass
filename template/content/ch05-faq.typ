@@ -1,3 +1,5 @@
+#import "../../format/lib.typ": code-block, code-preview, eq-block
+
 == 为什么行距和 Word 对不上？
 
 本模板的行距已针对 Word 模板进行了校准。Word 中的"行距"指的是基线到基线的距离，而 Typst 的 `leading` 指行与行之间的间距（不含字符高度）。
@@ -38,6 +40,21 @@ config(
 
 需要关闭某可选功能时，应查看对应参数的默认值说明，传合理的关闭值（如 `blind: false`、`override-bib: false`、`word-count: false`），而非直接传 `none`。
 
+== 封面标题如何换行？
+
+`config()` 的 `title-zh` 和 `title-en` 参数支持在字符串中插入 `\n` 手动换行，方便控制非盲审封面（`blind: false`）的标题排版：
+
+```typ
+config(
+  title-zh: "北京大学学位论文 \nTypst 模板使用指南",
+  title-en: "A Guide to Using the Typst Template for \nPeking University Theses",
+)
+```
+
+非盲审封面会按实际宽度自动换行，`\n` 则作为显式断行点优先于自动换行生效。较长标题建议合理使用 `\n` 控制封面视觉效果。
+
+#strong[注意]：盲审封面（`blind: true`）会自动把 `\n` 替换为空格，避免手工换行导致排版错位。
+
 == 出现 unknown font family 警告怎么办？
 
 该警告说明系统未安装对应字体，参考如下方式处理：
@@ -55,6 +72,95 @@ config(
 本模板默认允许表格跨页（`show figure: set block(breakable: true)`）。长表跨页会自动重复表头，并在续表页右上角标注"续表"，无需手动控制；`booktab` 会自动完成这些。
 
 如果某个表格不希望被分割，可在表格前手动插入 `#pagebreak()` 调整。详见 @basics 的表格一节。
+
+== `booktab` 和 `as-booktab` 该用哪个？
+
+- #strong[`booktab(...)`]：从零创建三线表。第一个位置参数自动作为表头（加粗），给 `caption` 时自动包装为 `figure(kind: table)`，支持 `@label` 引用。简单表格推荐使用。
+- #strong[`as-booktab(table(...))`]：将已有原生 `table` 装饰为三线表样式，不自动包装 `figure`。适合需要手动控制图题、编号的场景，如使用了 `table.hline`、`table.cell(rowspan:)` 等复杂单元格。
+
+简单来说：直接造表用 `booktab`，已有原生表想"套上"三线样式用 `as-booktab`。详细 API 见 @advanced 的「组件与辅助函数参考」。
+
+== 代码块用裸反引号和用 `code-block` 的区别？
+
+普通的反引号代码块会通过 codly 渲染语法高亮、行号与语言图标，但不会显示标题与编号，也不支持 `@label` 交叉引用或出现在代码列表（`#list-of-code()`）中：
+
+#code-preview(
+  `````typ
+  ```python
+  def hello():
+      print("Hello, world!")
+  ```
+  `````,
+  [
+    ```python
+    def hello():
+        print("Hello, world!")
+    ```
+  ],
+)
+
+如需给代码块添加标题、编号并支持 `@label` 引用，应使用 `code-block` 包装：
+
+#code-preview(
+  `````typ
+  #code-block(
+    ```python
+    def hello():
+        print("Hello, world!")
+    ```,
+    caption: "Hello World 程序",
+  ) <hello>
+  `````,
+  [
+    #code-block(
+      ```python
+      def hello():
+          print("Hello, world!")
+      ```,
+      caption: "Hello World 程序",
+    ) <hello>
+  ],
+)
+
+带 `caption` 的 `code-block` 会自动进入代码列表；省略 `caption` 时等价于裸代码块，不编号、不入列表、不可引用。详细用法见 @basics 的代码块一节。
+
+== 公式用裸行间公式和用 `eq-block` 的区别？
+
+行间公式（`$ ... $`）会自动按章编号并支持 `@label` 引用，但不会显示描述文字，也不出现在公式列表（`#list-of-equations()`）中：
+
+#code-preview(
+  `````typ
+  $ E = m c^2 $ <emc>
+
+  如 @emc 所示，质能关系揭示了质量与能量的等价性。
+  `````,
+  [
+    $ E = m c^2 $ <emc>
+
+    如 @emc 所示，质能关系揭示了质量与能量的等价性。
+  ],
+)
+
+如需给公式添加描述文字（如"质能方程"）并使其出现在公式目录中，应使用 `eq-block` 包装：
+
+#code-preview(
+  `````typ
+  #eq-block(caption: [质能方程])[
+    $ E = m c^2 $
+  ] <emc-block>
+
+  如 @emc-block 所示，质能关系揭示了质量与能量的等价性。
+  `````,
+  [
+    #eq-block(caption: [质能方程])[
+      $ E = m c^2 $
+    ] <emc-block>
+
+    如 @emc-block 所示，质能关系揭示了质量与能量的等价性。
+  ],
+)
+
+#strong[注意]：使用公式列表时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突。不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`。详细 API 见 @advanced 的「组件与辅助函数参考」。
 
 == 参考文献中英文混排、多音字排序不对？
 
