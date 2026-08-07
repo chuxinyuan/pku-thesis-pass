@@ -106,9 +106,9 @@ jobs:
             <p>北京大学学位论文 Typst 模板（博士 / 硕士）</p>
             <div class="downloads">
               <a href="thesis.pdf">📄 下载示例论文 — 精简输出 (PDF)</a>
-              <a href="thesis-odd.pdf">📄 下载示例论文 — 双面打印 (PDF)</a>
+              <a href="thesis-odd.pdf">📄 下载示例论文 — 奇页启章 (PDF)</a>
               <a href="thesis-blind.pdf">📄 下载盲审版本 — 精简输出 (PDF)</a>
-              <a href="thesis-blind-odd.pdf">📄 下载盲审版本 — 双面打印 (PDF)</a>
+              <a href="thesis-blind-odd.pdf">📄 下载盲审版本 — 奇页启章 (PDF)</a>
             </div>
             <h2>快速开始</h2>
             <pre><code>typst init @preview/pku-thesis-pass:0.3.0 my-thesis
