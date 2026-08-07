@@ -40,7 +40,7 @@
     宋体: ("Times New Roman", "Noto Serif CJK SC", "Source Han Serif"),
     黑体: ("Times New Roman", "WenQuanYi Micro Hei", "Noto Sans CJK SC", "Source Han Sans"),
     楷体: ("Times New Roman", "AR PL UKai"),
-    代码: ("New Computer Modern Mono", "Courier New", "Noto Serif CJK SC", "Source Han Serif"),
+    代码: ("DejaVu Sans Mono", "Courier New", "Noto Serif CJK SC", "Source Han Serif"),
   ),
 )
 
