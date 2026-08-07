@@ -86,7 +86,7 @@
     let el = it.element
     let el_loc = el.location()
     if el.func() == math.equation {
-      link(el_loc, [#supplements.公式 #_kind-numbering(equationcounter, el_loc, brackets: true)])
+      link(el_loc, [#supplements.公式 #_kind-numbering(counter(math.equation), el_loc, brackets: true)])
       h(0.25em, weak: true)
     } else if el.func() == figure {
       if el.kind == image {
@@ -103,7 +103,7 @@
       } else if el.kind == "code" {
         link(el_loc, [#supplements.代码 #_kind-numbering(rawcounter, el_loc)])
       } else if el.kind == "equation" {
-        link(el_loc, [#supplements.公式 #_kind-numbering(counter(figure.where(kind: "equation")), el_loc, brackets: true)])
+        link(el_loc, [#supplements.公式 #_kind-numbering(equationcounter, el_loc, brackets: true)])
       } else if el.kind in theorem-kinds {
         link(el_loc, [#el.supplement #_kind-numbering(counter(figure.where(kind: el.kind)), el_loc)])
       } else {
