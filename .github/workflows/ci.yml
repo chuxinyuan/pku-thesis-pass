@@ -40,17 +40,17 @@ jobs:
           mkdir -p build
           typst compile template/thesis.typ build/thesis.pdf --root . --input system=linux
 
-      - name: Compile thesis.typ (always-start-odd=false)
+      - name: Compile thesis.typ (always-start-odd=true)
         run: |
-          typst compile template/thesis.typ build/thesis-noodd.pdf --root . --input system=linux --input always-start-odd=false
+          typst compile template/thesis.typ build/thesis-odd.pdf --root . --input system=linux --input always-start-odd=true
 
       - name: Compile thesis.typ (blind mode)
         run: |
           typst compile template/thesis.typ build/thesis-blind.pdf --root . --input system=linux --input blind=true
 
-      - name: Compile thesis.typ (blind + always-start-odd=false)
+      - name: Compile thesis.typ (blind + always-start-odd=true)
         run: |
-          typst compile template/thesis.typ build/thesis-blind-noodd.pdf --root . --input system=linux --input blind=true --input always-start-odd=false
+          typst compile template/thesis.typ build/thesis-blind-odd.pdf --root . --input system=linux --input blind=true --input always-start-odd=true
 
       - name: Upload PDF artifacts
         uses: actions/upload-artifact@v4
@@ -58,18 +58,18 @@ jobs:
           name: thesis-pdfs
           path: |
             build/thesis.pdf
-            build/thesis-noodd.pdf
+            build/thesis-odd.pdf
             build/thesis-blind.pdf
-            build/thesis-blind-noodd.pdf
+            build/thesis-blind-odd.pdf
           retention-days: 30
 
       - name: Prepare GitHub Pages
         run: |
           mkdir -p docs
           cp build/thesis.pdf docs/thesis.pdf
-          cp build/thesis-noodd.pdf docs/thesis-noodd.pdf
+          cp build/thesis-odd.pdf docs/thesis-odd.pdf
           cp build/thesis-blind.pdf docs/thesis-blind.pdf
-          cp build/thesis-blind-noodd.pdf docs/thesis-blind-noodd.pdf
+          cp build/thesis-blind-odd.pdf docs/thesis-blind-odd.pdf
           cat > docs/index.html << 'HTML'
           <!DOCTYPE html>
           <html lang="zh-CN">
@@ -105,10 +105,10 @@ jobs:
             <h1>pku-thesis-pass</h1>
             <p>北京大学学位论文 Typst 模板（博士 / 硕士）</p>
             <div class="downloads">
-              <a href="thesis.pdf">📄 下载示例论文 — 双面打印 (PDF)</a>
-              <a href="thesis-noodd.pdf">📄 下载示例论文 — 精简输出 (PDF)</a>
-              <a href="thesis-blind.pdf">📄 下载盲审版本 — 双面打印 (PDF)</a>
-              <a href="thesis-blind-noodd.pdf">📄 下载盲审版本 — 精简输出 (PDF)</a>
+              <a href="thesis.pdf">📄 下载示例论文 — 精简输出 (PDF)</a>
+              <a href="thesis-odd.pdf">📄 下载示例论文 — 双面打印 (PDF)</a>
+              <a href="thesis-blind.pdf">📄 下载盲审版本 — 精简输出 (PDF)</a>
+              <a href="thesis-blind-odd.pdf">📄 下载盲审版本 — 双面打印 (PDF)</a>
             </div>
             <h2>快速开始</h2>
             <pre><code>typst init @preview/pku-thesis-pass:0.3.0 my-thesis
