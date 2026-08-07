@@ -68,7 +68,7 @@ typst compile template/thesis.typ --root .
   [*用途*],
   [*字体列表*],
   [仿宋],
-  [Times New Roman, FangSong, STFangsong, FandolFang],
+  [Times New Roman, FangSong, STFangsong],
   [宋体],
   [Times New Roman, SimSun, STSong, Noto Serif CJK SC, Source Han Serif],
   [黑体],
@@ -85,7 +85,7 @@ typst compile template/thesis.typ --root .
 
 === 字体族校验
 
-下面按当前生效的字体方案（`system: default` 或 `--input system=default`）实时渲染各字体族示例，请核对本机是否正确安装与渲染：
+下面按当前生效的字体方案实时渲染各字体族示例，请核对本机是否正确安装与渲染：
 
 #{
   let sys = sys.inputs.at("system", default: none)

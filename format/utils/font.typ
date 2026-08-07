@@ -9,7 +9,7 @@
 #let font-set = (
   // 跨平台通用（优先 Windows 字体，次选 Noto/Source Han，无 macOS 独占字体）
   default: (
-    仿宋: ("Times New Roman", "FangSong", "STFangsong", "FandolFang"),
+    仿宋: ("Times New Roman", "FangSong", "STFangsong"),
     宋体: ("Times New Roman", "SimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
     黑体: ("Times New Roman", "SimHei", "STHeiti", "WenQuanYi Micro Hei", "Noto Sans CJK SC", "Source Han Sans"),
     楷体: ("Times New Roman", "KaiTi", "STKaiti", "AR PL UKai"),

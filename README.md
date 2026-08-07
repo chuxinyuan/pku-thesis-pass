@@ -122,7 +122,7 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 | 用途 | 字体列表 |
 |------|----------|
-| 仿宋 | Times New Roman, FangSong, STFangsong, FandolFang |
+| 仿宋 | Times New Roman, FangSong, STFangsong |
 | 宋体 | Times New Roman, SimSun, STSong, Noto Serif CJK SC, Source Han Serif |
 | 黑体 | Times New Roman, SimHei, STHeiti, WenQuanYi Micro Hei, Noto Sans CJK SC, Source Han Sans |
 | 楷体 | Times New Roman, KaiTi, STKaiti, AR PL UKai |
