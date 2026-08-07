@@ -16,7 +16,7 @@ json:
   @typst c --root . template/thesis.typ --timings record.json
 
 # switch imports to @preview mode (for publishing to Typst Universe)
-release:
+preview:
   @python3 scripts/release.py publish
 
 # switch imports back to local dev mode
@@ -26,3 +26,9 @@ dev:
 # bump version references in doc examples to match typst.toml
 bump:
   @python3 scripts/bump.py
+
+# collect packaged files into release/<version>/ for Typst Universe submission
+publish: preview bump
+  @python3 scripts/publish.py
+  @git checkout template/
+  @echo "  template/ restored to dev mode"
