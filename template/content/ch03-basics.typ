@@ -665,7 +665,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 #code-preview(
   ```typ
-  #let (setup: setup, total-words: total-words, ..) = config(
+  #let (setup, cover, ..) = config(
     word-count: true, // 统计正文与附录的字数
   )
 

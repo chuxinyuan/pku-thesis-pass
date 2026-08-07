@@ -143,7 +143,7 @@ typst compile template/thesis.typ --root .
 
 #code-block(
   ```typ
-  #import "@preview/pku-thesis-pass:0.3.0": config
+  #import "@preview/pku-thesis-pass:0.3.0": config, booktab, as-booktab, eq-block, code-block
 
   #let (
     setup: setup,
@@ -188,3 +188,44 @@ typst compile template/thesis.typ --root .
 )
 
 模板采用 DI（依赖注入）模式：`config()` 返回一组闭包，用户解构后自行编排论文流程，不受固定模板限制。
+
+== 调用模块
+
+`config()` 返回一组页面函数（封面、摘要、目录等），这些通过解构直接使用。但表格、公式块、代码块、定理环境等排版组件需要额外从模板中导入。
+
+实际论文写作过程中大概率需要用到表格，这里仅以导入表格模块为例：
+
+```typ
+#import "@preview/pku-thesis-pass:0.3.0": config, booktab, as-booktab
+```
+
+未发布到官方仓库的改动需用本地相对导入，以免 `@preview` 包与本地源码不一致导致报错，上述代码要相应地改为：
+
+```typ
+#import "../../format/lib.typ": config, booktab, as-booktab
+```
+
+本模板提供如下模块可供导入：
+
+- `config` — 论文配置入口，返回页面函数闭包字典（核心模块）
+- `font-set` — 跨平台字体方案字典（`font-set.default` / `.mac` / `.windows` / `.linux`）
+- `booktab` — 学术三线表组件
+- `as-booktab` — 将原生 `table` 装饰为三线表样式
+- `code-preview` — 代码与渲染效果左右对照组件（主要用于本使用指南）
+- `eq-block` — 带标题与编号的可引用公式块
+- `code-block` — 带标题与编号的可引用代码块
+- `subfigure` — 子图组件，自动按 `(a)(b)(c)` 编号
+- `theorem` — 定理环境（随章编号，支持 `@label` 交叉引用）
+- `definition` — 定义环境（随章编号，支持 `@label` 交叉引用）
+- `lemma` — 引理环境（随章编号，支持 `@label` 交叉引用）
+- `corollary` — 推论环境（随章编号，支持 `@label` 交叉引用）
+- `proposition` — 命题环境（随章编号，支持 `@label` 交叉引用）
+- `property` — 性质环境（随章编号，支持 `@label` 交叉引用）
+- `example` — 例环境（随章编号，支持 `@label` 交叉引用）
+- `remark` — 注环境（随章编号，支持 `@label` 交叉引用）
+- `proof` — 证明环境（不编号，末尾带空心方框收尾符号）
+- `word-count-cjk` — CJK 字数统计算子（用户通常不直接调用，使用下面的 `total-words` / `total-characters` 即可）
+- `total-words` — CJK 字数统计结果（也可从 `config()` 返回值直接解构）
+- `total-characters` — 总字符数统计结果（也可从 `config()` 返回值直接解构）
+
+不建议通过 `#import "@preview/pku-thesis-pass:0.3.0": *` 或者 `#import "../../format/lib.typ": *` 导入所有模块，因为这样会引入不必要的依赖，污染环境且增加编译时间。
