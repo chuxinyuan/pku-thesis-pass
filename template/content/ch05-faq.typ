@@ -162,6 +162,60 @@ config(
 
 #strong[注意]：使用公式列表时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突。不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`。详细 API 见 @advanced 的「组件与辅助函数参考」。
 
+== 可以不用 `eq-block`，直接用原生公式吗？
+
+视情况而定。核心在于 #strong[公式列表]：Typst 的 `outline` 只能索引 `figure`，无法索引 `math.equation`。因此需要入表的公式必须走 `#figure(kind: "equation")`，不需要的可以用 `$...$`。
+
+#strong[方案一：纯 `math.equation`]——用 `$...$ <label>` 编号和引用都正常，模板已支持：
+
+#code-block(
+  `````typ
+  $ E = m c^2 $ <emc>
+
+  如 @emc 所示。
+  `````
+)
+
+但该类公式 #strong[不会进入公式列表]，因为 `outline(target: figure.where(kind: "equation"))` 找不到它们。适合没有 caption 需求的公式。
+
+#strong[方案二：全用 `#figure(kind: "equation")`]——所有公式都入列表、都支持 caption，前提是全局关掉原生计数器：
+
+#code-block(
+  `````typ
+  #set math.equation(numbering: none)
+
+  #figure(
+    $ E = m c^2 $,
+    caption: [质能方程],
+    kind: "equation",
+    numbering: (..nums) => context {
+      chinesenumbering(chaptercounter.at(here()).first(), ..nums,
+                       location: here(), brackets: true)
+    },
+  ) <eq:emc>
+  `````
+)
+
+`supplement: [式]` 不必手写——config 的 `supplements` 参数已全局提供。代价是每个公式都要复制 `kind`、`numbering` 这一段。
+
+#strong[方案三：混用（`eq-block`）]——需要 caption / 入表的用 `eq-block`，不需要的用裸 `$...$`：
+
+#code-block(
+  `````typ
+  // 入表、带 caption
+  #eq-block(caption: [质能方程])[
+    $ E = m c^2 $
+  ] <emc-block>
+
+  // 不入表、纯编号
+  $ a^2 + b^2 = c^2 $ <pythagoras>
+  `````
+)
+
+`eq-block` 本质是方案二的语法糖：有 `caption` 时升级为 `#figure(kind: "equation")`（内部 `set math.equation(numbering: none)`），省略时退化为裸 `$...$`。
+
+#strong[总结]：三种方案都能正确编号与引用，差别只是公式是否入表、以及每处写多少代码。选你偏好的即可。
+
 == 参考文献中英文混排、多音字排序不对？
 
 参考文献列表默认先中文、后外文；中文条目按作者姓氏拼音排序。若个别姓氏的多音字排序不符合预期，可通过 `bib-pinyin-override` 指定读音；中英文顺序可用 `bib-cn-first` 调整。
