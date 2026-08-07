@@ -22,3 +22,7 @@ release:
 # switch imports back to local dev mode
 dev:
   @python3 scripts/release.py dev
+
+# bump version references in doc examples to match typst.toml
+bump:
+  @python3 scripts/bump.py
