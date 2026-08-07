@@ -10,8 +10,6 @@
 // ============================================================
 
 #import "../format/lib.typ": config
-// 注意：本地测试时，注释掉下一行，并取消注释上一行
-// #import "@preview/pku-thesis-pass:0.3.0": config
 
 #let (
   setup,             // 全局页面与字体设置（#show: setup）

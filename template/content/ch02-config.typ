@@ -1,6 +1,4 @@
 #import "../../format/lib.typ": booktab, eq-block
-// 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
-// #import "@preview/pku-thesis-pass:0.3.0": booktab, eq-block
 
 本模板提供了丰富的配置选项，在 `config()` 函数中以命名参数的方式传入。下面详细介绍各个配置项的含义和用法。
 

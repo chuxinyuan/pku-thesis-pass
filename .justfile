@@ -14,3 +14,11 @@ pdf:
 # export profile
 json:
   @typst c --root . template/thesis.typ --timings record.json
+
+# switch imports to @preview mode (for publishing to Typst Universe)
+release:
+  @python3 scripts/release.py publish
+
+# switch imports back to local dev mode
+dev:
+  @python3 scripts/release.py dev

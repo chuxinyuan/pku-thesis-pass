@@ -1,6 +1,4 @@
 #import "../../format/lib.typ": as-booktab, booktab, code-block, code-preview, eq-block, subfigure, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
-// 注意：本地测试时保留上一行；发布（typst init 生成工程）时删除上一行，并取消注释下一行
-// #import "@preview/pku-thesis-pass:0.3.0": as-booktab, booktab, code-block, code-preview, eq-block, subfigure, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
 
 本章介绍 Typst 的基本语法和功能，帮助用户快速上手。
 
