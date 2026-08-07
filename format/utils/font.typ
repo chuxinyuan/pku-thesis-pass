@@ -36,7 +36,7 @@
 
   // Linux：优先 Noto / Source Han，包含 Linux 常见字体
   linux: (
-    仿宋: ("Times New Roman", "FandolFang"),
+    仿宋: ("Times New Roman", "FangSong"),
     宋体: ("Times New Roman", "Noto Serif CJK SC", "Source Han Serif"),
     黑体: ("Times New Roman", "WenQuanYi Micro Hei", "Noto Sans CJK SC", "Source Han Sans"),
     楷体: ("Times New Roman", "AR PL UKai"),

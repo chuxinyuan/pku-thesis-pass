@@ -31,7 +31,7 @@ jobs:
           sudo apt update
           sudo apt install -y fonts-noto-cjk fonts-wqy-microhei fonts-arphic-ukai
           sudo mkdir -p /usr/local/share/fonts
-          curl -sSL https://mirrors.tuna.tsinghua.edu.cn/CTAN/fonts/fandol/FandolFang-Regular.otf -o /tmp/FandolFang-Regular.otf
+          curl -sSL https://raw.githubusercontent.com/DoveOutland/Common-Chinese-office-fonts-font-library-/refs/heads/main/%E4%BB%BF%E5%AE%8B.ttf -o /tmp/FangSong.ttf
           sudo cp /tmp/FandolFang-Regular.otf /usr/local/share/fonts/
           sudo fc-cache -fv
 
@@ -117,7 +117,7 @@ jobs:
             <h2>链接</h2>
             <ul>
               <li><a href="https://github.com/chuxinyuan/pku-thesis-pass">GitHub 仓库</a></li>
-              <li><a href="https://typst.app">Typst 官网</a></li>
+              <li><a href="https://typst.app/universe/package/pku-thesis-pass">Typst 官网</a></li>
             </ul>
           </body>
           </html>
