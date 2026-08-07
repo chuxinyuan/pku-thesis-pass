@@ -17,7 +17,7 @@ json:
 
 # switch imports to @preview mode (for publishing to Typst Universe)
 preview:
-  @python3 scripts/release.py publish
+  @python3 scripts/release.py preview
 
 # switch imports back to local dev mode
 dev:
