@@ -9,35 +9,38 @@
 #let font-set = (
   // 跨平台通用（优先 Windows 字体，次选 Noto/Source Han，无 macOS 独占字体）
   default: (
-    仿宋: ("Times New Roman", "FangSong", "STFangsong"),
+    仿宋: ("Times New Roman", "FangSong", "STFangsong", "FandolFang"),
     宋体: ("Times New Roman", "SimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
-    黑体: ("Times New Roman", "SimHei", "STHeiti", "Noto Sans CJK SC", "Source Han Sans"),
+    黑体: ("Times New Roman", "SimHei", "STHeiti", "WenQuanYi Micro Hei", "Noto Sans CJK SC", "Source Han Sans"),
     楷体: ("Times New Roman", "KaiTi", "STKaiti", "AR PL UKai"),
     代码: ("Consolas", "Courier New", "SimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
   ),
-  // macOS：Apple 自带字体，精简不留冗余 fallback
-  mac: (
-    仿宋: ("Times New Roman", "STFangsong"),
-    宋体: ("Times New Roman", "STSong"),
-    黑体: ("Arial", "PingFang SC", "STHeiti"),
-    楷体: ("Times New Roman", "STKaiti"),
-    代码: ("Menlo", "Courier New", "STSong"),
-  ),
+
   // Windows：优先 SimSun / SimHei
   windows: (
     仿宋: ("Times New Roman", "FangSong"),
     宋体: ("Times New Roman", "SimSun"),
     黑体: ("Times New Roman", "SimHei"),
     楷体: ("Times New Roman", "KaiTi"),
-    代码: ("Consolas", "SimSun"),
+    代码: ("Consolas", "Courier New", "SimSun"),
   ),
-  // Linux：优先 Noto / Source Han，仅含 Linux 常见字体
+
+  // macOS：苹果自带字体，精简不留冗余 fallback
+  mac: (
+    仿宋: ("Times New Roman", "STFangsong"),
+    宋体: ("Times New Roman", "STSong"),
+    黑体: ("Times New Roman", "PingFang SC", "STHeiti"),
+    楷体: ("Times New Roman", "STKaiti"),
+    代码: ("Menlo", "Courier New", "STSong"),
+  ),
+
+  // Linux：优先 Noto / Source Han，包含 Linux 常见字体
   linux: (
-    仿宋: ("Times New Roman", "FangSong", "STFangsong"),
-    宋体: ("Times New Roman", "Noto Serif CJK SC", "Source Han Serif", "SimSun"),
-    黑体: ("Times New Roman", "SimHei", "Noto Sans CJK SC", "Source Han Sans"),
-    楷体: ("Times New Roman", "KaiTi", "STKaiti", "AR PL UKai"),
-    代码: ("Consolas", "Courier New", "Noto Serif CJK SC", "Source Han Serif", "SimSun"),
+    仿宋: ("Times New Roman", "FandolFang"),
+    宋体: ("Times New Roman", "Noto Serif CJK SC", "Source Han Serif"),
+    黑体: ("Times New Roman", "WenQuanYi Micro Hei", "Noto Sans CJK SC", "Source Han Sans"),
+    楷体: ("Times New Roman", "AR PL UKai"),
+    代码: ("New Computer Modern Mono", "Courier New", "Noto Serif CJK SC", "Source Han Serif"),
   ),
 )
 

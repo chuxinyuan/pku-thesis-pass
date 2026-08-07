@@ -122,21 +122,21 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 | 用途 | 字体列表 |
 |------|----------|
-| 仿宋 | Times New Roman, FangSong, STFangsong |
+| 仿宋 | Times New Roman, FangSong, STFangsong, FandolFang |
 | 宋体 | Times New Roman, SimSun, STSong, Noto Serif CJK SC, Source Han Serif |
-| 黑体 | Times New Roman, SimHei, STHeiti, Noto Sans CJK SC, Source Han Sans |
+| 黑体 | Times New Roman, SimHei, STHeiti, WenQuanYi Micro Hei, Noto Sans CJK SC, Source Han Sans |
 | 楷体 | Times New Roman, KaiTi, STKaiti, AR PL UKai |
 | 代码 | Consolas, Courier New, SimSun, STSong, Noto Serif CJK SC, Source Han Serif |
 
 ### macOS（system: "mac"）
 
-使用 Apple 自带字体，无冗余 fallback。
+使用苹果电脑自带字体，无冗余 fallback。
 
 | 用途 | 字体列表 |
 |------|----------|
 | 仿宋 | Times New Roman, STFangsong |
 | 宋体 | Times New Roman, STSong |
-| 黑体 | Arial, PingFang SC, STHeiti |
+| 黑体 | Times New Roman, PingFang SC, STHeiti |
 | 楷体 | Times New Roman, STKaiti |
 | 代码 | Menlo, Courier New, STSong |
 
@@ -150,19 +150,19 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 | 宋体 | Times New Roman, SimSun |
 | 黑体 | Times New Roman, SimHei |
 | 楷体 | Times New Roman, KaiTi |
-| 代码 | Consolas, SimSun |
+| 代码 | Consolas, Courier New, SimSun |
 
 ### Linux（system: "linux"）
 
-优先 Noto / Source Han 系列开源字体。
+优先 Fandol / Noto / WenQuanYi / Source Han 等开源字体。
 
 | 用途 | 字体列表 |
 |------|----------|
-| 仿宋 | Times New Roman, FangSong, STFangsong |
-| 宋体 | Times New Roman, Noto Serif CJK SC, Source Han Serif, SimSun |
-| 黑体 | Times New Roman, SimHei, Noto Sans CJK SC, Source Han Sans |
-| 楷体 | Times New Roman, KaiTi, STKaiti, AR PL UKai |
-| 代码 | Consolas, Courier New, Noto Serif CJK SC, Source Han Serif, SimSun |
+| 仿宋 | Times New Roman, FandolFang |
+| 宋体 | Times New Roman, Noto Serif CJK SC, Source Han Serif |
+| 黑体 | Times New Roman, WenQuanYi Micro Hei, Noto Sans CJK SC, Source Han Sans |
+| 楷体 | Times New Roman, AR PL UKai |
+| 代码 | New Computer Modern Mono, Courier New, Noto Serif CJK SC, Source Han Serif |
 
 ## 编译文档
 
