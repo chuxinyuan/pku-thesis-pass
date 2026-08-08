@@ -112,13 +112,13 @@ cd pku-thesis-pass
 ## 字体配置
 
 模板为每个平台预定义了字体方案，通过 `system` 参数切换：
-`"default"` / `"mac"` / `"windows"` / `"linux"`。
+`"default"` / `"windows"` / `"mac"` / `"linux"`。
 
 Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 ### 跨平台通用（system: "default"）
 
-优先 Windows 字体，次选 Noto / Source Han，无 macOS 独占字体。
+优先使用 Windows 字体，Noto / Source Han 等开源字体兜底。
 
 | 用途 | 字体列表 |
 |------|----------|
@@ -128,21 +128,9 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 | 楷体 | Times New Roman, KaiTi, STKaiti, AR PL UKai |
 | 代码 | Consolas, Courier New, SimSun, STSong, Noto Serif CJK SC, Source Han Serif |
 
-### macOS（system: "mac"）
-
-使用苹果电脑自带字体，无冗余 fallback。
-
-| 用途 | 字体列表 |
-|------|----------|
-| 仿宋 | Times New Roman, STFangsong |
-| 宋体 | Times New Roman, STSong |
-| 黑体 | Times New Roman, PingFang SC, STHeiti |
-| 楷体 | Times New Roman, STKaiti |
-| 代码 | Menlo, Courier New, STSong |
-
 ### Windows（system: "windows"）
 
-使用 Windows 自带中文字体（SimSun / SimHei / KaiTi 等）。
+使用自带字体（FangSong / SimSun / SimHei / KaiTi）。
 
 | 用途 | 字体列表 |
 |------|----------|
@@ -152,13 +140,25 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 | 楷体 | Times New Roman, KaiTi |
 | 代码 | Consolas, Courier New, SimSun |
 
-### Linux（system: "linux"）
+### macOS（system: "mac"）
 
-优先 Fandol / Noto / WenQuanYi / Source Han 等开源字体。
+使用苹果电脑自带字体，精简不留冗余 fallback。
 
 | 用途 | 字体列表 |
 |------|----------|
-| 仿宋 | Times New Roman, FangSong |
+| 仿宋 | Times New Roman, STFangsong |
+| 宋体 | Times New Roman, STSong |
+| 黑体 | Times New Roman, PingFang SC, STHeiti |
+| 楷体 | Times New Roman, STKaiti |
+| 代码 | Menlo, Courier New, STSong |
+
+### Linux（system: "linux"）
+
+优先使用 Noto / Source Han / WenQuanYi 等常见开源字体。
+
+| 用途 | 字体列表 |
+|------|----------|
+| 仿宋 | Times New Roman, Zhuque Fangsong, FangSong |
 | 宋体 | Times New Roman, Noto Serif CJK SC, Source Han Serif |
 | 黑体 | Times New Roman, WenQuanYi Micro Hei, Noto Sans CJK SC, Source Han Sans |
 | 楷体 | Times New Roman, AR PL UKai |

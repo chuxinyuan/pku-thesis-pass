@@ -58,7 +58,7 @@ typst compile template/thesis.typ --root .
 
 == 字体配置
 
-本模板的字体配置在 `format/utils/font.typ` 中定义，支持四套字体方案，通过 `system` 参数切换。默认使用跨平台的 `default` 方案：
+本模板的字体配置在 `format/utils/font.typ` 中定义，支持四套字体方案，通过 `system` 参数切换。默认使用跨平台通用的 `default` 方案：
 
 #booktab(
   width: 100%,
@@ -79,7 +79,7 @@ typst compile template/thesis.typ --root .
   [Consolas, Courier New, SimSun, STSong, Noto Serif CJK SC, Source Han Serif],
 )
 
-其他方案（`mac` / `windows` / `linux`）针对各平台预优化，无冗余 fallback，编译时零 warning。
+其他方案（`mac` / `windows` / `linux`）针对各平台预优化，基本无冗余 fallback，编译时零 warning。
 
 #strong[注意]：中文粗体默认用黑体显示。如果需要对黑体再额外加粗，或对宋体、楷体等进行加粗，模板已集成 `cuti` 包的伪粗体功能，会自动处理。
 

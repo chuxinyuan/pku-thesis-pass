@@ -30,9 +30,11 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y fonts-noto-cjk fonts-wqy-microhei fonts-arphic-ukai
+          # Install 'Zhuque Fangsong' font
           sudo mkdir -p /usr/local/share/fonts
-          curl -sSL https://raw.githubusercontent.com/DoveOutland/Common-Chinese-office-fonts-font-library-/refs/heads/main/%E4%BB%BF%E5%AE%8B.ttf -o /tmp/FangSong.ttf
-          sudo cp /tmp/FangSong.ttf /usr/local/share/fonts/
+          curl -sSL https://github.com/TrionesType/zhuque/releases/download/v0.212/ZhuqueFangsong-v0.212.zip -o /tmp/zhuque.zip
+          unzip -o /tmp/zhuque.zip -d /tmp
+          sudo cp /tmp/ZhuqueFangsong-Regular.ttf /usr/local/share/fonts/
           sudo fc-cache -fv
 
       - name: Compile thesis.typ
