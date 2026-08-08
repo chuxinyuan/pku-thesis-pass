@@ -199,10 +199,8 @@
   let always-start-odd = if _cli-always-start-odd != none { _cli-always-start-odd } else { always-start-odd }
 
   // 解析系统字体方案：CLI 参数优先，否则用 config() 参数
-  let font = {
-    let sys = if _cli-system != none { _cli-system } else { system }
-    font-set.at(sys, default: font-set.default)
-  }
+  let resolved-system = if _cli-system != none { _cli-system } else { system }
+  let font = font-set.at(resolved-system, default: font-set.default)
 
   // 读取参考文献文件；路径应使用 path 类型（在调用处解析，可穿透包沙箱），
   // 字符串路径则按本地模式处理（相对项目根目录）
@@ -461,6 +459,7 @@
     acknowledgements: acknowledgements,
     declaration: declaration,
     font: font,
+    system: resolved-system,
     blind: blind,
     preview: preview,
     always-start-odd: always-start-odd,

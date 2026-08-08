@@ -31,6 +31,7 @@
   acknowledgements,  // 致谢
   declaration,       // 原创性声明和授权说明
   font,              // 当前系统字体方案
+  system,            // 当前系统名称（default/mac/windows/linux）
   blind,             // 盲审模式是否开启
   total-words,       // 正文 CJK 字数统计结果
 ) = config(
@@ -55,7 +56,7 @@
   month: 6,
 
   // ========== 排版配置 ==========
-  system: "default",
+  system: "linux",
   blind: false,
   preview: true,
   first-line-indent: 2em,

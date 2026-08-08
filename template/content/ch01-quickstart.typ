@@ -88,10 +88,7 @@ typst compile template/thesis.typ --root .
 下面按当前生效的字体方案实时渲染各字体族示例，请核对本机是否正确安装与渲染：
 
 #{
-  let sys = sys.inputs.at("system", default: none)
-  let fonts = if sys != none {
-    font-set.at(sys, default: font-set.default)
-  } else { font-set.default }
+  let fonts = font-set.at(system, default: font-set.default)
   let lines = (
     ("仿宋", fonts.仿宋),
     ("宋体", fonts.宋体),
