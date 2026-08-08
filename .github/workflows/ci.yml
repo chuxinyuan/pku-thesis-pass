@@ -32,7 +32,7 @@ jobs:
           sudo apt install -y fonts-noto-cjk fonts-wqy-microhei fonts-arphic-ukai
           # Install 'FandolFang' font
           sudo mkdir -p /usr/local/share/fonts
-          curl -sSL https://mirrors.tuna.tsinghua.edu.cn/CTAN/fonts/fandol/FandolFang-Regular.otf -o /tmp/FandolFang-Regular.otf
+          curl -sSL https://mirrors.ctan.org/fonts/fandol/FandolFang-Regular.otf -o /tmp/FandolFang-Regular.otf
           sudo cp /tmp/FandolFang-Regular.otf /usr/local/share/fonts/
           sudo fc-cache -fv
 
