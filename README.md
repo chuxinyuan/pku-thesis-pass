@@ -1,6 +1,6 @@
 # pku-thesis-pass
 
-北京大学学位论文 Typst 模板（博士 / 硕士） / Dissertation Thesis Typst Template (Doctoral / Master) for Peking University.
+北京大学学位论文 Typst 模板（博士 / 硕士） | Typst Template (Doctoral / Master) for Peking University Thesis
 
 <p align="center">
   <img src="thumbnail.png" alt="Cover of an example thesis" width="80%">
