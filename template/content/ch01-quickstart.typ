@@ -1,4 +1,4 @@
-#import "../../format/lib.typ": code-block, booktab, font-set, system-state
+#import "../../format/lib.typ": code-block, booktab, font-set, system-state, show-cn-fakebold
 
 == 安装与环境配置
 
@@ -68,15 +68,15 @@ typst compile template/thesis.typ --root .
   [*用途*],
   [*字体列表*],
   [仿宋],
-  [Times New Roman, FangSong, STFangsong],
+  [Times New Roman, FangSong, STFangsong, FandolFang R],
   [宋体],
-  [Times New Roman, SimSun, STSong, Noto Serif CJK SC, Source Han Serif],
+  [Times New Roman, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif],
   [黑体],
-  [Times New Roman, SimHei, STHeiti, WenQuanYi Micro Hei, Noto Sans CJK SC, Source Han Sans],
+  [Times New Roman, SimHei, PingFang SC, Noto Sans CJK SC, Source Han Sans],
   [楷体],
   [Times New Roman, KaiTi, STKaiti, AR PL UKai],
   [代码],
-  [Consolas, Courier New, SimSun, STSong, Noto Serif CJK SC, Source Han Serif],
+  [Consolas, DejaVu Sans Mono, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif],
 )
 
 其他方案（`mac` / `windows` / `linux`）针对各平台预优化，基本无冗余 fallback，编译时零 warning。
@@ -103,20 +103,22 @@ typst compile template/thesis.typ --root .
     linebreak()
     bold-sample
   })
-  booktab(
-    width: 100%,
-    columns: (auto, 2fr, 1fr, 1fr),
-    align: (left, left, left, left),
-    [#strong[字体族]], [#strong[字体列表]], [#strong[中文字形]], [#strong[西文字形]],
-    ..(for (name, fam) in lines {
-      (
-        [#strong[#name]],
-        [#fam.join("、")],
-        fam-cell(fam, [为中华崛起而读书], [#strong[为中华崛起而读书]]),
-        fam-cell(fam, [I love China.], [#strong[I love China.]]),
-      )
-    }),
-    caption: "当前生效的字体族示例",
+  show-cn-fakebold(
+    booktab(
+      width: 100%,
+      columns: (auto, 2fr, 1fr, 1fr),
+      align: (left, left, left, left),
+      [#strong[字体族]], [#strong[字体列表]], [#strong[中文字形]], [#strong[西文字形]],
+      ..(for (name, fam) in lines {
+        (
+          [#strong[#name]],
+          [#fam.join("、")],
+          fam-cell(fam, [为中华崛起而读书], [#strong[为中华崛起而读书]]),
+          fam-cell(fam, [I love China.], [#strong[I love China.]]),
+        )
+      }),
+      caption: "当前生效的字体族示例",
+    )
   )
 }
 

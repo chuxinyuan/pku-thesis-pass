@@ -20,6 +20,9 @@
 // 字体方案
 #import "utils/font.typ": font-set
 
+// 工具
+#import "imports.typ": show-cn-fakebold
+
 // 组件
 #import "components/booktab.typ": booktab, as-booktab, code-preview
 #import "components/eqblock.typ": eq-block

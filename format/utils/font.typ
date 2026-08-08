@@ -9,11 +9,11 @@
 #let font-set = (
   // 跨平台通用：优先使用 Windows 字体，Noto / Source Han 等开源字体兜底
   default: (
-    仿宋: ("Times New Roman", "FangSong", "STFangsong"),
+    仿宋: ("Times New Roman", "FangSong", "STFangsong", "FandolFang R"),
     宋体: ("Times New Roman", "NSimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
-    黑体: ("Times New Roman", "SimHei", "PingFang SC", "WenQuanYi Micro Hei", "Noto Sans CJK SC", "Source Han Sans"),
+    黑体: ("Times New Roman", "SimHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans"),
     楷体: ("Times New Roman", "KaiTi", "STKaiti", "AR PL UKai"),
-    代码: ("Consolas", "Courier New", "NSimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
+    代码: ("Consolas", "DejaVu Sans Mono", "NSimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
   ),
 
   // Windows：使用自带字体（FangSong / NSimSun / SimHei / KaiTi）
@@ -22,7 +22,7 @@
     宋体: ("Times New Roman", "NSimSun"),
     黑体: ("Times New Roman", "SimHei"),
     楷体: ("Times New Roman", "KaiTi"),
-    代码: ("Consolas", "Courier New", "NSimSun"),
+    代码: ("Consolas", "NSimSun"),
   ),
 
   // macOS：使用苹果电脑自带字体，精简不留冗余 fallback
@@ -38,7 +38,7 @@
   linux: (
     仿宋: ("Times New Roman", "FandolFang R", "Zhuque Fangsong (technical preview)"),
     宋体: ("Times New Roman", "Noto Serif CJK SC", "Source Han Serif"),
-    黑体: ("Times New Roman", "WenQuanYi Micro Hei", "Noto Sans CJK SC", "Source Han Sans"),
+    黑体: ("Times New Roman", "Noto Sans CJK SC", "Source Han Sans"),
     楷体: ("Times New Roman", "AR PL UKai"),
     代码: ("DejaVu Sans Mono", "Noto Serif CJK SC", "Source Han Serif"),
   ),
