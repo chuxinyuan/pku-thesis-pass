@@ -30,6 +30,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y fonts-noto-cjk fonts-wqy-microhei fonts-arphic-ukai
+          # Install Microsoft core fonts
+          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+          sudo apt install -y ttf-mscorefonts-installer
           # Install 'FandolFang' font
           sudo mkdir -p /usr/local/share/fonts
           curl -sSL https://mirrors.aliyun.com/CTAN/fonts/fandol/FandolFang-Regular.otf -o /tmp/FandolFang-Regular.otf

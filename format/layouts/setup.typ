@@ -131,9 +131,11 @@
   }
 
   // ========== 正文强调样式 ==========
-  // 加粗用黑体、斜体用楷体，代码用等宽字体
+  // 加粗用黑体（pkuthss 惯例）
   show strong: it => text(font: font.黑体, weight: "bold", it.body)
+  // 斜体用楷体（pkuthss 惯例）
   show emph: it => text(font: font.楷体, style: "italic", it.body)
+  // 代码用等宽字体
   show raw: set text(font: font.代码, size: size.五号, top-edge: "ascender")
 
   // ========== 代码块高亮 ==========
