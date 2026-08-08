@@ -14,42 +14,42 @@
 
 #let build(font) = (
   // ── 1.1 封面 ──
-  // "博士研究生学位论文"：小初（36pt）黑体居中
-  封面题头: (font: font.黑体, size: size.小初, align: center),
-  // 题目：一号（26pt）黑体居中
-  封面题目: (font: font.黑体, size: size.一号, align: center),
-  // "题目：" 前缀标签：二号（22pt）
-  封面题目标签: (font: font.宋体, size: size.二号),
-  // 作者/导师/院系：三号（16pt）仿宋
-  封面信息: (font: font.仿宋, size: size.三号),
-  // 日期：三号（16pt）宋体，中文数字
-  封面日期: (font: font.宋体, size: size.三号),
+  // "博士研究生学位论文"：小初（36pt）黑体居中加粗
+  封面题头: (font: font.黑体, size: size.小初, align: center, weight: "bold"),
+  // 题目：一号（26pt）黑体居中加粗
+  封面题目: (font: font.黑体, size: size.一号, align: center, weight: "bold"),
+  // "题目：" 前缀标签：二号（22pt）宋体 regular
+  封面题目标签: (font: font.宋体, size: size.二号, weight: "regular"),
+  // 作者/导师/院系：三号（16pt）仿宋 regular
+  封面信息: (font: font.仿宋, size: size.三号, weight: "regular"),
+  // 日期：三号（16pt）宋体 regular
+  封面日期: (font: font.宋体, size: size.三号, weight: "regular"),
   // 校徽/字标占位框文字字号
   封面占位符: (字号: 0.6em),
   // 盲审封面正文段落
   封面盲审: (leading: 1em, spacing: 1.5em),
 
   // ── 1.3 中文摘要 ──
-  // 标题：三号（16pt）黑体居中，段前 24bp 后 18bp
-  摘要标题: (font: font.黑体, size: size.三号, align: center, spacing-before: 24pt, spacing-after: 18pt),
+  // 标题：三号（16pt）黑体居中加粗
+  摘要标题: (font: font.黑体, size: size.三号, align: center, spacing-before: 24pt, spacing-after: 18pt, weight: "bold"),
   // 内容：小四（12pt）宋体。PKU 指南规定行距固定 20bp，实测 10.5pt 更接近 Word
   摘要内容: (font: font.宋体, size: size.小四, align: left, first-line-indent: 2em, leading: 10.5pt, spacing: 10.5pt),
   // 关键词：小四（12pt）宋体
   关键词: (font: font.宋体, size: size.小四),
 
   // ── 1.4 英文摘要 ──
-  // 英文题目：三号（16pt）居中
-  英文题目: (font: font.英文无衬线, size: size.三号, align: center, spacing-before: 24pt, spacing-after: 18pt, linespacing: 2em),
+  // 英文题目：三号（16pt）居中加粗
+  英文题目: (font: font.英文无衬线, size: size.三号, align: center, spacing-before: 24pt, spacing-after: 18pt, linespacing: 2em, weight: "bold"),
   // 作者/专业/导师：小四（12pt）居中
   英文作者信息: (font: font.英文衬线, size: size.小四, align: center, leading: 20pt),
-  // "ABSTRACT"：小四（12pt）居中，段前 8bp 后 6bp
-  英文摘要标题: (font: font.英文无衬线, size: size.小四, align: center, spacing-before: 8pt, spacing-after: 6pt),
+  // "ABSTRACT"：小四（12pt）居中加粗
+  英文摘要标题: (font: font.英文无衬线, size: size.小四, align: center, spacing-before: 8pt, spacing-after: 6pt, weight: "bold"),
   // 内容：小四（12pt），首行缩进 0.74cm。PKU 指南规定 20bp，实测 12.5pt 更接近 Word
   英文摘要内容: (font: font.英文衬线, size: size.小四, align: left, first-line-indent: 0.74cm, leading: 12.5pt, spacing-before: 8pt, spacing-after: 6pt),
 
   // ── 1.5 目录 ──
-  // 章标题行：小四（12pt）黑体，行距 20bp，段前 6bp
-  目录章标题: (font: font.黑体, size: size.小四, leading: 20pt, spacing-before: 6pt, spacing-after: 0pt),
+  // 章标题行：小四（12pt）黑体加粗，行距 20bp，段前 6bp
+  目录章标题: (font: font.黑体, size: size.小四, leading: 20pt, spacing-before: 6pt, spacing-after: 0pt, weight: "bold"),
   // 节标题等：小四（12pt）宋体，行距 20bp
   目录其他: (font: font.宋体, size: size.小四, leading: 20pt),
 
@@ -59,14 +59,14 @@
 
   // ── 1.7 正文 ──
   // ── 1.7.1 标题 ──
-  // 章标题：三号（16pt）黑体居中，单倍行距，段前 24bp 后 18bp
-  章标题: (font: font.黑体, size: size.三号, align: center, spacing-before: 24pt, spacing-after: 18pt),
-  // 一级节标题：四号（14pt）黑体居左，行距 20bp
-  一级节标题: (font: font.黑体, size: size.四号, align: left, leading: 20pt, spacing-before: 24pt, spacing-after: 6pt),
-  // 二级节标题：13pt 黑体居左（指南直接指定，非传统字号名）
-  二级节标题: (font: font.黑体, size: 13pt, align: left, leading: 20pt, spacing-before: 12pt, spacing-after: 6pt),
-  // 三级节标题：小四（12pt）黑体居左
-  三级节标题: (font: font.黑体, size: size.小四, align: left, leading: 20pt, spacing-before: 12pt, spacing-after: 6pt),
+  // 章标题：三号（16pt）黑体居中加粗，段前 24bp 后 18bp
+  章标题: (font: font.黑体, size: size.三号, align: center, spacing-before: 24pt, spacing-after: 18pt, weight: "bold"),
+  // 一级节标题：四号（14pt）黑体居左加粗，行距 20bp
+  一级节标题: (font: font.黑体, size: size.四号, align: left, leading: 20pt, spacing-before: 24pt, spacing-after: 6pt, weight: "bold"),
+  // 二级节标题：13pt 黑体居左加粗（指南直接指定，非传统字号名）
+  二级节标题: (font: font.黑体, size: 13pt, align: left, leading: 20pt, spacing-before: 12pt, spacing-after: 6pt, weight: "bold"),
+  // 三级节标题：小四（12pt）黑体居左加粗
+  三级节标题: (font: font.黑体, size: size.小四, align: left, leading: 20pt, spacing-before: 12pt, spacing-after: 6pt, weight: "bold"),
 
   // ── 1.7.2 段落文字 ──
   // 正文：小四（12pt）宋体。PKU 指南规定行距固定 20bp，实测 10.5pt 更接近 Word
@@ -101,8 +101,8 @@
   // ── 1.9 附录与后置部分 ──
   // 致谢/后记/说明：格式同正文
   致谢: (font: font.宋体, size: size.小四, leading: 10.5pt, spacing: 10.5pt),
-  // 原创性声明与授权说明：固定法律文书
-  声明: (font: font.宋体, size: size.小四, leading: 0.95em, spacing: 0.95em),
+  // 原创性声明与授权说明：固定法律文书，标题加粗
+  声明: (font: font.宋体, size: size.小四, leading: 0.95em, spacing: 0.95em, weight: "bold"),
   // 攻读学位期间发表的论文列表
   成果列表: (font: font.宋体, size: size.小四, spacing: 1.14em),
   // 书脊页：仿宋 12pt，左右窄边距

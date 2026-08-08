@@ -29,7 +29,7 @@
     spacing-before: style.英文题目.spacing-before,
     spacing-after: style.英文题目.spacing-after,
     linespacing: style.英文题目.linespacing,
-    font: (size: style.英文题目.size, font: style.英文题目.font, weight: "regular"),
+    font: (size: style.英文题目.size, font: style.英文题目.font, weight: style.英文题目.weight),
   )
 
   // 英文摘要内容已有样式调整（leading 12.5pt 较 PKU 标准 20pt 更接近 Word）
@@ -44,7 +44,7 @@
   // Word 模板中英文摘要的首行缩进固定为 0.74cm
   set par(first-line-indent: style.英文摘要内容.first-line-indent, justify: true)
   v(style.英文摘要标题.spacing-before)
-  align(center)[#text(font: style.英文摘要标题.font, weight: "regular")[ABSTRACT]]
+  align(center)[#text(font: style.英文摘要标题.font, size: style.英文摘要标题.size, weight: style.英文摘要标题.weight)[ABSTRACT]]
   v(style.英文摘要标题.spacing-after)
   body
   v(1fr)

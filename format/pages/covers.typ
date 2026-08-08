@@ -118,7 +118,7 @@
     let value-parts = split-text-by-width(value, value-width)
     for (i, part) in value-parts.enumerate() {
       if i == 0 {
-        grid-contents.push([#strong(name)#v(0.5em)])
+        grid-contents.push([#text(font: s.封面题目.font)[#strong(name)]#v(0.5em)])
       } else {
         grid-contents.push([])
       }
@@ -210,7 +210,7 @@
 ) = {
   let s = if style != none { style } else { _style }
   set align(center + horizon)
-  set text(size: s.封面题目.size)
+  set text(font: s.封面题目.font, size: s.封面题目.size)
   box(
     grid(
       columns: (auto, auto),
@@ -228,7 +228,7 @@
     ),
   )
   linebreak()
-  text(size: s.封面题头.size)[#strong(thesis-name)]
+  text(font: s.封面题头.font, size: s.封面题头.size, weight: s.封面题头.weight)[#thesis-name]
   v(1fr)
   context {
     set text(weight: "bold")
@@ -237,7 +237,7 @@
     let grid-contents = (
       [
         #set align(center)
-        #text(size: s.封面题目标签.size)[题目：]
+        #text(font: s.封面题目标签.font, size: s.封面题目标签.size, weight: s.封面题目标签.weight)[题目：]
       ],
     )
     for (i, part) in title-zh-parts.enumerate() {
@@ -256,7 +256,7 @@
     )
   }
   v(5fr)
-  set text(size: s.封面信息.size)
+  set text(font: s.封面信息.font, size: s.封面信息.size)
   build-field-grid(
     (
       (text("姓") + h(2em) + text("名："), author-zh),

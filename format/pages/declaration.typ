@@ -21,7 +21,7 @@
 
   align(center)[#text(
     size: style.声明.size,
-    weight: "bold",
+    weight: style.声明.weight,
     show-cn-fakebold[原创性声明],
   )]
   v(1fr)
@@ -46,7 +46,7 @@
     #v(1fr)
     #align(center)[#text(
       size: style.声明.size,
-      weight: "bold",
+      weight: style.声明.weight,
       show-cn-fakebold[学位论文使用授权说明],
     )]
     #align(center)[#text(size: style.声明.size)[（必须装订在提交学校图书馆的印刷本）]]
