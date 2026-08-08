@@ -63,11 +63,19 @@
 /// 系统字体方案状态，供内容文件字体校验时读取当前生效的方案
 #let system-state = state("sys", "default")
 
-#let _cli-blind = _parse-bool(sys.inputs.at("blind", default: none), none)
-#let _cli-preview = _parse-bool(sys.inputs.at("preview", default: none), none)
-#let _cli-always-start-odd = _parse-bool(sys.inputs.at("always-start-odd", default: none), none)
+// CLI 参数解析
+// 
+// 解析命令行传入的配置参数，支持覆盖默认配置，值为 none 表示未传入。
+// 每个 _cli-* 对应一个 --input 参数，值为 none 表示未传入
+// 用法示例：typst compile --input blind=true --input system=windows
 
-// CLI 可覆盖系统字体方案，如 --input system=linux
+/// --input blind=true|false
+#let _cli-blind = _parse-bool(sys.inputs.at("blind", default: none), none)
+/// --input preview=true|false
+#let _cli-preview = _parse-bool(sys.inputs.at("preview", default: none), none)
+/// --input always-start-odd=true|false
+#let _cli-always-start-odd = _parse-bool(sys.inputs.at("always-start-odd", default: none), none)
+/// --input system=default|mac|windows|linux
 #let _cli-system = sys.inputs.at("system", default: none)
 
 // ========== 参数化配置入口 ==========
