@@ -15,11 +15,13 @@
 #let build(font) = (
   // ── 1.1 封面 ──
   // "博士研究生学位论文"：小初（36pt）黑体居中加粗
-  封面题头: (font: font.黑体, size: size.小初, align: center, weight: "bold"),
-  // 题目：一号（26pt）黑体居中加粗
-  封面题目: (font: font.黑体, size: size.一号, align: center, weight: "bold"),
+  封面题头: (font: font.黑体, size: size.小初, align: center, weight: "regular"),
   // "题目：" 前缀标签：二号（22pt）宋体 regular
   封面题目标签: (font: font.宋体, size: size.二号, weight: "regular"),
+  // 题目：一号（26pt）黑体居中加粗
+  封面题目: (font: font.黑体, size: size.一号, align: center, weight: "bold"),
+  // 字段标签（"姓  名："等）：黑体 regular，与仿宋值形成对比
+  封面字段标签: (font: font.黑体, size: size.三号, weight: "regular"),
   // 作者/导师/院系：三号（16pt）仿宋 regular
   封面信息: (font: font.仿宋, size: size.三号, weight: "regular"),
   // 日期：三号（16pt）宋体 regular

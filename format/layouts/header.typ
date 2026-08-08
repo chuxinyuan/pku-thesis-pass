@@ -56,7 +56,7 @@
   set par(spacing: 0pt)
   set align(center)
 
-  place(top + center, dy: 2cm)[
+  place(top + center, dy: style.页眉.垂直位置)[
     #block(width: 100%)[
       #stack(
         dir: ttb,

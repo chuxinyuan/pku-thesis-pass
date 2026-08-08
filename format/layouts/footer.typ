@@ -38,6 +38,6 @@
     } else {
       str(page-num)
     }
-    #v(1.75cm)
+    #v(style.页码.垂直位置)
   ]
 }

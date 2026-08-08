@@ -4,18 +4,15 @@
 // ============================================================
 
 #import "../utils/size.typ": size
-#import "../utils/style.typ": style
 #import "../imports.typ": gb7714-bibliography, init-gb7714
 
 /// 原生 bibliography 的 show 规则（override-bib 时使用）
 /// 设置五号字、悬挂缩进 1.66em，并提升方括号编号的垂直位置
-#let bibliography-show-rule(it) = {
-  let s = if style != none { style } else { _style }
-  let s = { _style }
-  set text(size: s.参考文献内容.size)
+#let bibliography-show-rule(it, style) = {
+  set text(size: style.参考文献内容.size)
   set par(
-    leading: 6.5pt,
-    spacing: 6.5pt + 3pt,
+    leading: style.参考文献内容.leading,
+    spacing: style.参考文献内容.para-spacing,
     hanging-indent: 1.66em,
     first-line-indent: 0em,
   )
@@ -42,19 +39,19 @@
   bib-cn-first: true,
   bib-pinyin-override: (:),
   override-bib: false,
+  style: none,
   body,
 ) = {
-  let s = if style != none { style } else { _style }
   let use-gb7714 = not override-bib and bib-content != none
   if use-gb7714 {
     let make-bib = () => gb7714-bibliography(
       title: heading(numbering: none)[参考文献],
       full-control: entries => {
-        set text(size: s.参考文献内容.size)
+        set text(size: style.参考文献内容.size)
         let extra-spacing = if bib-version == "2015" { 1pt } else { 0pt }
         set par(
-          leading: s.参考文献内容.leading + extra-spacing,
-          spacing: s.参考文献内容.para-spacing + extra-spacing,
+          leading: style.参考文献内容.leading + extra-spacing,
+          spacing: style.参考文献内容.para-spacing + extra-spacing,
           hanging-indent: 1.66em,
           first-line-indent: 0em,
           justify: true,
@@ -78,7 +75,7 @@
       }
     }
   } else {
-    show bibliography: it => bibliography-show-rule(it)
+    show bibliography: it => bibliography-show-rule(it, style)
     body
   }
 }

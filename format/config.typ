@@ -419,14 +419,14 @@
   // ========== 参考文献 ==========
   let bibliography = (body) => {
     render-bibliography(
+      style: style,
       bib-content: _bib-content,
       bib-style: bib-style,
       bib-version: bib-version,
       bib-cn-first: bib-cn-first,
       bib-pinyin-override: bib-pinyin-override,
       override-bib: override-bib,
-      body,
-    )
+    )[#body]
   }
 
   // ========== 攻读学位期间发表的论文 ==========

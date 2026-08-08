@@ -5,8 +5,6 @@
 // ============================================================
 
 #import "../layouts/headings.typ": front-heading
-#import "../utils/size.typ": size
-#import "../utils/style.typ": style
 
 /// 版权声明页
 /// 内容为固定的法律声明文字，无参数

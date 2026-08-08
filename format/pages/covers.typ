@@ -118,7 +118,7 @@
     let value-parts = split-text-by-width(value, value-width)
     for (i, part) in value-parts.enumerate() {
       if i == 0 {
-        grid-contents.push([#text(font: s.封面题目.font)[#strong(name)]#v(0.5em)])
+        grid-contents.push([#text(font: s.封面字段标签.font, weight: s.封面字段标签.weight)[#name]#v(0.5em)])
       } else {
         grid-contents.push([])
       }
@@ -231,7 +231,7 @@
   text(font: s.封面题头.font, size: s.封面题头.size, weight: s.封面题头.weight)[#thesis-name]
   v(1fr)
   context {
-    set text(weight: "bold")
+    set text(weight: s.封面题目.weight)
     show: show-cn-fakebold
     let title-zh-parts = split-text-by-width(title-zh, 10.16cm)
     let grid-contents = (
@@ -241,7 +241,7 @@
       ],
     )
     for (i, part) in title-zh-parts.enumerate() {
-      grid-contents.push(strong(part))
+      grid-contents.push(part)
       if i < title-zh-parts.len() - 1 {
         grid-contents.push([])
       }
@@ -298,9 +298,9 @@
 ) = {
   let s = if style != none { style } else { _style }
   set align(center + top)
-  text(size: s.封面题头.size, font: font.黑体)[
+  text(size: s.封面题头.size, font: font.黑体, weight: s.封面题头.weight)[
     #show: show-cn-fakebold
-    #strong(header-text)
+    #header-text
   ]
   linebreak()
   set text(size: s.封面信息.size, font: font.仿宋)
