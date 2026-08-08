@@ -36,7 +36,7 @@
 
   // Linux：优先使用 Noto / Source Han / WenQuanYi 等常见开源字体
   linux: (
-    仿宋: ("Times New Roman", "FandolFang", "FangSong"),
+    仿宋: ("Times New Roman", "FandolFang R", "FangSong"),
     宋体: ("Times New Roman", "Noto Serif CJK SC", "Source Han Serif"),
     黑体: ("Times New Roman", "WenQuanYi Micro Hei", "Noto Sans CJK SC", "Source Han Sans"),
     楷体: ("Times New Roman", "AR PL UKai"),
