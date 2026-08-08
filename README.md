@@ -158,7 +158,7 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 | 用途 | 字体列表 |
 |------|----------|
-| 仿宋 | Times New Roman, Zhuque Fangsong, FangSong |
+| 仿宋 | Times New Roman, FandolFang, FangSong |
 | 宋体 | Times New Roman, Noto Serif CJK SC, Source Han Serif |
 | 黑体 | Times New Roman, WenQuanYi Micro Hei, Noto Sans CJK SC, Source Han Sans |
 | 楷体 | Times New Roman, AR PL UKai |
