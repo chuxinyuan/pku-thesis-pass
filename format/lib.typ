@@ -15,7 +15,7 @@
 // ========== 公开 API ==========
 
 // 入口
-#import "config.typ": config
+#import "config.typ": config, system-state
 
 // 字体方案
 #import "utils/font.typ": font-set

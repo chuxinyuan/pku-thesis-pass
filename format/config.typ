@@ -60,6 +60,9 @@
   else { default }
 }
 
+/// 系统字体方案状态，供内容文件字体校验时读取当前生效的方案
+#let system-state = state("sys", "default")
+
 #let _cli-blind = _parse-bool(sys.inputs.at("blind", default: none), none)
 #let _cli-preview = _parse-bool(sys.inputs.at("preview", default: none), none)
 #let _cli-always-start-odd = _parse-bool(sys.inputs.at("always-start-odd", default: none), none)
@@ -229,6 +232,7 @@
 
   // ========== 页面基础设置 ==========
   let setup = (body) => {
+    system-state.update(resolved-system)
     page-setup(
       font: font,
       header-text: header-text,

@@ -1,4 +1,4 @@
-#import "../../format/lib.typ": code-block, booktab, font-set
+#import "../../format/lib.typ": code-block, booktab, font-set, system-state
 
 == 安装与环境配置
 
@@ -87,8 +87,9 @@ typst compile template/thesis.typ --root .
 
 下面按当前生效的字体方案实时渲染各字体族示例，请核对本机是否正确安装与渲染：
 
-#{
-  let fonts = font-set.at(system, default: font-set.default)
+#context {
+  let sys = system-state.get()
+  let fonts = font-set.at(sys, default: font-set.default)
   let lines = (
     ("仿宋", fonts.仿宋),
     ("宋体", fonts.宋体),
