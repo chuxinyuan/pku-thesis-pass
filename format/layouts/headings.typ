@@ -8,18 +8,19 @@
 // ============================================================
 
 #import "../utils/size.typ": size
+#import "../utils/style.typ": style
 #import "../utils/counter.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
 
 /// 根据标题等级返回对应字号（用于 2–4 级标题）
 #let get-heading-size(level) = {
   if level == 1 {
-    size.一级标题
+    style.章标题.size
   } else if level == 2 {
-    size.二级标题
+    style.一级节标题.size
   } else if level == 3 {
-    size.三级标题
+    style.二级节标题.size
   } else {
-    size.正文
+    style.正文.size
   }
 }
 

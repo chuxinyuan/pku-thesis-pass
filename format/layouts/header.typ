@@ -6,6 +6,7 @@
 // ============================================================
 
 #import "../utils/size.typ": size
+#import "../utils/style.typ": style
 #import "../utils/number.typ": chinesenumbering
 #import "../utils/counter.typ": partcounter, skippedstate
 #import "headings.typ": get-heading-meta, get-page-headings
@@ -52,7 +53,7 @@
   let meta = get-heading-meta(el)
   if not meta.at("show-header", default: true) { return }
 
-  set text(size: size.页眉)
+  set text(size: style.页眉.size)
   set par(spacing: 0pt)
   set align(center)
 

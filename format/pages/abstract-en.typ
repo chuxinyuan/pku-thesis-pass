@@ -4,10 +4,11 @@
 // 盲审模式下隐藏作者和导师信息
 // ============================================================
 
-#import "../utils/size.typ": size
 #import "../layouts/headings.typ": front-heading
+#import "../utils/style.typ": style as _style
 
 /// 英文摘要页
+/// style: 由 style.build(font) 构建的样式字典
 /// title-en: 英文论文题目（自动 upper 全大写）
 /// author-en / major-en / supervisor-en: 作者姓名、专业、导师（盲审时隐藏）
 /// keywords-en: 英文关键词数组，以 "KEY WORDS:" 为前缀
@@ -20,20 +21,21 @@
   supervisor-en: none,
   keywords-en: (),
   blind: false,
+  style: none,
   body,
 ) = {
+  let s = if style != none { style } else { _style }
   front-heading(
     upper(title-en),
     header: "ABSTRACT",
-    spacing-before: 24pt,
-    spacing-after: 18pt,
+    spacing-before: s.英文题目.spacing-before,
+    spacing-after: s.英文题目.spacing-after,
     linespacing: 2em,
-    font: (size: size.英文摘要标题, font: "Arial", weight: "regular"),
+    font: (size: s.英文题目.size, font: s.英文题目.font, weight: "regular"),
   )
 
-  // Word 模板中正文仍然是 20pt 行距
-  // 对于纯英文字体，测试下来 12.5pt 的匹配效果较好
-  set par(spacing: 12.5pt, leading: 12.5pt, justify: true)
+  // 英文摘要内容已有样式调整（leading 12.5pt 较 PKU 标准 20pt 更接近 Word）
+  set par(spacing: s.英文摘要内容.leading, leading: s.英文摘要内容.leading, justify: true)
   if not blind {
     [
       #set align(center)
@@ -43,9 +45,9 @@
   }
   // Word 模板中英文摘要的首行缩进固定为 0.74cm
   set par(first-line-indent: 0.74cm, justify: true)
-  v(8pt)
-  align(center)[#text(font: "Arial", weight: "bold")[ABSTRACT]]
-  v(6pt)
+  v(s.英文摘要标题.spacing-before)
+  align(center)[#text(font: s.英文摘要标题.font, weight: "regular")[ABSTRACT]]
+  v(s.英文摘要标题.spacing-after)
   body
   v(1fr)
   let keyword-prefix = if keywords-en.len() == 1 {

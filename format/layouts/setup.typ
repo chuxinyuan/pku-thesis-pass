@@ -8,6 +8,7 @@
 
 #import "../utils/font.typ": font
 #import "../utils/size.typ": size
+#import "../utils/style.typ": style as _style
 #import "../utils/number.typ": in-appendix, chinesenumbering
 #import "../utils/counter.typ": chaptercounter
 #import "../utils/util.typ": show-latexref
@@ -62,6 +63,7 @@
   use-latexref: false,
   latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
   body: none,
+  style: _style,
 ) = {
   // ========== 页面尺寸与页眉页脚 ==========
   // A4 纸 + 学校规定的页边距；页眉页脚由 header.typ / footer.typ 按部分自动生成
@@ -72,7 +74,7 @@
     footer: make-footer(),
   )
   // 正文默认字体：宋体小四、中文断行
-  set text(font: font.宋体, size: size.正文, lang: "zh")
+  set text(font: font.宋体, size: style.正文.size, lang: "zh")
 
   // ========== PDF 元数据 ==========
   // 盲审时 document-author 为 none，跳过作者字段，避免在文件属性中泄露作者信息
@@ -117,7 +119,7 @@
   show footnote: set super(size: 0.65em)
   show footnote.entry: it => {
     let loc = it.note.location()
-    set text(font: font.宋体, size: size.脚注)
+    set text(font: font.宋体, size: style.脚注.size)
     set par(
       justify: true,
       leading: 1.2em,  // 模拟单倍行距

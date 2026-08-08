@@ -6,6 +6,7 @@
 // ============================================================
 
 #import "../utils/size.typ": size
+#import "../utils/style.typ": style
 #import "../utils/counter.typ": partcounter, skippedstate
 #import "headings.typ": get-heading-meta, get-page-headings
 
@@ -26,7 +27,7 @@
     }
   }
 
-  set text(size: size.页码)
+  set text(size: style.页码.size)
   set align(center)
 
   let page-num = counter(page).at(here()).first()

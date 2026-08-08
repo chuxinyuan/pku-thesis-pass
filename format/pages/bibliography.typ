@@ -4,12 +4,13 @@
 // ============================================================
 
 #import "../utils/size.typ": size
+#import "../utils/style.typ": style
 #import "../imports.typ": gb7714-bibliography, init-gb7714
 
 /// 原生 bibliography 的 show 规则（override-bib 时使用）
 /// 设置五号字、悬挂缩进 1.66em，并提升方括号编号的垂直位置
 #let bibliography-show-rule(it) = {
-  set text(size: size.参考文献正文)
+  set text(size: style.参考文献内容.size)
   set par(
     leading: 6.5pt,
     spacing: 6.5pt + 3pt,
@@ -46,7 +47,7 @@
     let make-bib = () => gb7714-bibliography(
       title: heading(numbering: none)[参考文献],
       full-control: entries => {
-        set text(size: size.参考文献正文)
+        set text(size: style.参考文献内容.size)
         let extra-spacing = if bib-version == "2015" { 1pt } else { 0pt }
         set par(
           leading: 6.5pt + extra-spacing,

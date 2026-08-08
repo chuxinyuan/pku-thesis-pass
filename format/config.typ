@@ -28,6 +28,7 @@
 // 基础定义
 #import "utils/supplement.typ": supplement
 #import "utils/font.typ": font-set
+#import "utils/style.typ": build
 #import "utils/counter.typ": skippedstate
 #import "utils/number.typ": appendix
 #import "utils/util.typ": _resolve-path
@@ -212,6 +213,7 @@
   // 解析系统字体方案：CLI 参数优先，否则用 config() 参数
   let resolved-system = if _cli-system != none { _cli-system } else { system }
   let font = font-set.at(resolved-system, default: font-set.default)
+  let style = build(font)
 
   // 读取参考文献文件；路径应使用 path 类型（在调用处解析，可穿透包沙箱），
   // 字符串路径则按本地模式处理（相对项目根目录）
@@ -242,6 +244,7 @@
   let setup = (body) => {
     system-state.update(resolved-system)
     page-setup(
+      style: style,
       font: font,
       header-text: header-text,
       preview: preview,
@@ -327,6 +330,7 @@
   let abstract-en = (body, keywords-en: ()) => {
     set align(left + top)
     abstract-page-en(
+      style: style,
       title-en: title-en,
       author-en: author-en,
       major-en: major-en,
@@ -471,6 +475,7 @@
     acknowledgements: acknowledgements,
     declaration: declaration,
     font: font,
+    style: style,
     system: resolved-system,
     blind: blind,
     preview: preview,

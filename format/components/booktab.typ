@@ -5,6 +5,7 @@
 // ============================================================
 
 #import "../utils/size.typ": size
+#import "../utils/style.typ": style
 
 /// 续表标记状态：表格渲染前重置，跨页续表时在表头右上显示"续表"
 #let _booktab-xubiao = state("booktab-xubiao")
@@ -25,7 +26,7 @@
   {
     _booktab-xubiao.update(false)
     let col-count = _booktab-column-count(table-args.at("columns", default: 1))
-    set text(size: size.表文)
+    set text(size: style.表单元格.size)
     table(
       stroke: none,
       ..table-args,
@@ -100,7 +101,7 @@
   width: width,
   breakable: true,
   {
-    set text(size: size.表文)
+    set text(size: style.表单元格.size)
     it
   },
 )

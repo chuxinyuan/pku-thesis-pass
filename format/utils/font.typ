@@ -14,6 +14,8 @@
     黑体: ("Times New Roman", "SimHei", "STHeiti", "Noto Sans CJK SC", "Source Han Sans"),
     楷体: ("Times New Roman", "KaiTi", "STKaiti", "AR PL UKai"),
     代码: ("Consolas", "DejaVu Sans Mono", "NSimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
+    英文衬线: ("Times New Roman", "Liberation Serif"),
+    英文无衬线: ("Arial", "Liberation Sans"),
   ),
 
   // Windows：使用自带字体（FangSong / NSimSun / SimHei / KaiTi）
@@ -23,6 +25,8 @@
     黑体: ("Times New Roman", "SimHei"),
     楷体: ("Times New Roman", "KaiTi"),
     代码: ("Consolas", "NSimSun"),
+    英文衬线: ("Times New Roman"),
+    英文无衬线: ("Arial"),
   ),
 
   // macOS：使用苹果电脑自带字体，精简不留冗余 fallback
@@ -32,15 +36,19 @@
     黑体: ("Times New Roman", "PingFang SC"),
     楷体: ("Times New Roman", "STKaiti"),
     代码: ("Menlo", "STSong"),
+    英文衬线: ("Times New Roman"),
+    英文无衬线: ("Arial"),
   ),
 
-  // Linux：优先使用 Noto / Source Han / WenQuanYi 等常见开源字体
+  // Linux：优先使用 Noto / Source Han / Fandol 等常见开源字体
   linux: (
     仿宋: ("Times New Roman", "FandolFang R", "Zhuque Fangsong (technical preview)"),
     宋体: ("Times New Roman", "Noto Serif CJK SC", "Source Han Serif"),
     黑体: ("Times New Roman", "Noto Sans CJK SC", "Source Han Sans"),
     楷体: ("Times New Roman", "AR PL UKai"),
     代码: ("DejaVu Sans Mono", "Noto Serif CJK SC", "Source Han Serif"),
+    英文衬线: ("Times New Roman", "Liberation Serif"),
+    英文无衬线: ("Arial", "Liberation Sans"),
   ),
 )
 

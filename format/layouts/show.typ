@@ -5,6 +5,7 @@
 // ============================================================
 
 #import "../utils/size.typ": size
+#import "../utils/style.typ": style
 #import "../utils/number.typ": chinesenumbering
 #import "../utils/counter.typ": chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter, theorem-kinds
 
@@ -17,12 +18,12 @@
     counter(figure.where(kind: "subfigure")).update(0)
     it.body
     [
-      #set text(size: size.图题)
+      #set text(size: style.图序图名.size)
       #it.caption
     ]
   } else if it.kind == table {
     [
-      #set text(size: size.表题)
+      #set text(size: style.表序表名.size)
       #it.caption
     ]
     it.body
@@ -37,7 +38,7 @@
     })
   } else if it.kind == "code" {
     [
-      #set text(size: size.代码块标题)
+      #set text(size: style.代码块标题.size)
       #context { supplements.代码 + it.counter.display(it.numbering) + "   " }
       #it.caption.body
     ]
@@ -45,7 +46,7 @@
   } else if it.kind == "subfigure" {
     it.body
     [
-      #set text(size: size.图题)
+      #set text(size: style.图序图名.size)
       #context {
         numbering("(a)", counter(figure.where(kind: "subfigure")).at(here()).first())
       }
@@ -58,7 +59,7 @@
   } else {
     it.body
     [
-      #set text(size: size.图题)
+      #set text(size: style.图序图名.size)
       #context { supplements.图表 + it.counter.display(it.numbering) + "   " }
       #it.caption.body
     ]
