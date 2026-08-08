@@ -33,8 +33,10 @@ jobs:
           # Install 'FandolFang' font
           sudo mkdir -p /usr/local/share/fonts
           curl -sSL https://mirrors.aliyun.com/CTAN/fonts/fandol/FandolFang-Regular.otf -o /tmp/FandolFang-Regular.otf
+          ls -lh /tmp/FandolFang-Regular.otf
           sudo cp /tmp/FandolFang-Regular.otf /usr/local/share/fonts/
           sudo fc-cache -fv
+          fc-list | grep -i fandol
 
       - name: Compile thesis.typ
         run: |
