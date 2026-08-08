@@ -112,8 +112,8 @@
 }
 
 /// 渲染标题正文（不重新触发 show heading）
-/// fs: 字号；meta: 通过 ..args 传入的元数据覆盖。
-#let sizedheading(it, fs, ..meta) = {
+/// fs: 字号；heading-font: 标题默认字体；meta: 通过 ..args 传入的元数据覆盖。
+#let sizedheading(it, fs, heading-font: none, ..meta) = {
   if it.body == none or it.body == [] { return }
 
   let spacing-before = meta.at(
@@ -130,15 +130,18 @@
   show heading: set block(above: 0pt, below: 0pt)
   set par(first-line-indent: 0em, leading: linespacing - 1em, spacing: 0pt)
   v(spacing-before)
+  if heading-font != none {
+    set text(font: heading-font)
+  }
   if it.numbering != none {
-    strong(counter(heading).display())
+    counter(heading).display()
     h(1em)
   }
   if font != (:) {
     set text(..font)
     it.body
   } else {
-    strong(it.body)
+    it.body
   }
   v(spacing-after)
 }
@@ -146,11 +149,12 @@
 /// heading show rule：处理第 1 级标题的分页、状态转换、计数器步进，
 /// 然后委托 sizedheading 渲染
 /// smartpagebreak: 由 config() 传入的分页函数（处理 always-start-odd）
-#let heading-show-rule(it, smartpagebreak) = {
+/// heading-font: 标题默认字体
+#let heading-show-rule(it, smartpagebreak, heading-font: none) = {
   set par(first-line-indent: 0em)
 
   if it.level != 1 {
-    return sizedheading(it, get-heading-size(it.level))
+    return sizedheading(it, get-heading-size(it.level), heading-font: heading-font)
   }
 
   let meta = get-heading-meta(it)
@@ -194,5 +198,5 @@
   }
 
   set align(center)
-  sizedheading(it, size.三号, ..meta)
+  sizedheading(it, size.三号, heading-font: heading-font, ..meta)
 }

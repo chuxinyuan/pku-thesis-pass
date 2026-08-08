@@ -4,7 +4,7 @@
 // 全局排版基础设施，供 config.typ 编排时调用
 // ============================================================
 
-#import "../imports.typ": itemize, codly-init, codly, codly-languages
+#import "../imports.typ": itemize, codly-init, codly, codly-languages, show-cn-fakebold
 
 #import "../utils/font.typ": font
 #import "../utils/size.typ": size
@@ -131,8 +131,8 @@
   }
 
   // ========== 正文强调样式 ==========
-  // 加粗用黑体（pkuthss 惯例）
-  show strong: it => text(font: font.黑体, weight: "bold", it.body)
+  // 粗体用伪粗体描边（保证跨字体一致，避免真粗体不可用或过重）
+  show: show-cn-fakebold
   // 斜体用楷体（pkuthss 惯例）
   show emph: it => text(font: font.楷体, style: "italic", it.body)
   // 代码用等宽字体
@@ -163,7 +163,7 @@
 
   // ========== 跨元素 show 委托 ==========
   // 标题、图/表/代码块、交叉引用分别委托 headings.typ / show.typ 渲染
-  show heading: it => heading-show-rule(it, smartpagebreak)
+  show heading: it => heading-show-rule(it, smartpagebreak, heading-font: font.黑体)
   show figure: set block(breakable: true)
   show figure: it => _figure-show-rule(it, merged-supplements)
   show ref: it => _ref-show-rule(it, merged-supplements)
