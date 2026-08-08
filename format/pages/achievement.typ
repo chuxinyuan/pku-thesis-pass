@@ -18,7 +18,6 @@
   style: none,
   body,
 ) = {
-  let s = if style != none { style } else { _style }
   back-heading(title, outlined: outlined)
 
   set par(first-line-indent: 0em)
@@ -26,7 +25,7 @@
     indent: 0pt,
     numbering: "[1]",
     body-indent: 1.2em,
-    spacing: s.成果列表.spacing,
+    spacing: style.成果列表.spacing,
   )
 
   body

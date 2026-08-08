@@ -11,21 +11,20 @@
 /// 版权声明页
 /// 内容为固定的法律声明文字，无参数
 #let copyright-page(style: none) = {
-  let s = if style != none { style } else { _style }
   set align(left + top)
-  set text(size: s.正文.size)
+  set text(size: style.正文.size)
   front-heading(
     "版权声明",
     pagebreak: false,
-    linespacing: s.章标题.size * 1.3 * 2,
+    linespacing: style.章标题.size * 1.3 * 2,
     spacing-before: 0pt,
     spacing-after: 0pt,
   )
   linebreak()
   set par(
     first-line-indent: 2em,
-    leading: s.正文.size * 1.3,
-    spacing: s.正文.size * 1.3,
+    leading: style.正文.size * 1.3,
+    spacing: style.正文.size * 1.3,
   )
   [
     任何收存和保管本论文各种版本的单位和个人，未经本论文作者同意，不得将本论文转借他人，亦不得随意复制、抄录、拍照或以任何方式传播。否则，引起有碍作者著作权之问题，将可能承担法律责任。

@@ -13,13 +13,12 @@
 /// depth: 目录深度（默认 none 表示全部）
 /// indent: 是否按标题等级缩进
 #let chineseoutline(title: "目录", depth: none, indent: false, style: none) = {
-  let s = if style != none { style } else { _style }
   front-heading(title)
 
   set par(
     first-line-indent: 0em,
-    leading: s.目录其他.leading,
-    spacing: s.目录其他.leading,
+    leading: style.目录其他.leading,
+    spacing: style.目录其他.leading,
     justify: true,
   )
 
@@ -49,7 +48,7 @@
     }
 
     if el.level == 1 {
-      v(s.目录章标题.spacing-before)
+      v(style.目录章标题.spacing-before)
     }
 
     if maybe_number != none {

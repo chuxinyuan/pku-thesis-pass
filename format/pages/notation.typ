@@ -20,7 +20,6 @@
   style: none,
   body,
 ) = {
-  let s = if style != none { style } else { _style }
   front-heading(title)
 
   set par(first-line-indent: 0em)
@@ -39,7 +38,7 @@
       (o + (it.term, it.description), calc.rem(used + 2, col-count))
     } else if it.func() == parbreak {
       let rest = col-count - used
-      let gap = grid.cell(none, colspan: col-count, inset: (y: (s.符号表.group-gutter - s.符号表.row-gutter) / 2))
+      let gap = grid.cell(none, colspan: col-count, inset: (y: (style.符号表.group-gutter - style.符号表.row-gutter) / 2))
       if rest == col-count {
         (o + (gap,), 0)
       } else {
@@ -54,7 +53,7 @@
     columns: columns,
     align: left,
     column-gutter: 4em,
-    row-gutter: s.符号表.row-gutter,
+    row-gutter: style.符号表.row-gutter,
     ..out,
   ))
 }

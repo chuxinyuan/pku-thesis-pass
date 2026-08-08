@@ -12,7 +12,6 @@
 /// 原创性声明与授权说明页
 /// clean-declaration: 为 true 时清除该页的页眉和页码（通过 back-heading 的 show-header 元数据）
 #let declaration-page(clean-declaration: false, style: none) = {
-  let s = if style != none { style } else { _style }
   set par(first-line-indent: 2em)
   back-heading(
     "北京大学学位论文原创性声明和使用授权说明",
@@ -21,13 +20,13 @@
   )
 
   align(center)[#text(
-    size: s.声明.size,
+    size: style.声明.size,
     weight: "bold",
     show-cn-fakebold[原创性声明],
   )]
   v(1fr)
   [
-    #set par(leading: s.声明.leading, spacing: s.声明.spacing)
+    #set par(leading: style.声明.leading, spacing: style.声明.spacing)
     本人郑重声明：所呈交的学位论文，是本人在导师的指导下，独立进行研究工作所取得的成果。除文中已经注明引用的内容外，本论文不含任何其他个人或集体已经发表或撰写过的作品或成果。对本文的研究做出重要贡献的个人和集体，均已在文中以明确方式标明。本声明的法律结果由本人承担。
 
     #v(1fr)
@@ -46,14 +45,14 @@
 
     #v(1fr)
     #align(center)[#text(
-      size: s.声明.size,
+      size: style.声明.size,
       weight: "bold",
       show-cn-fakebold[学位论文使用授权说明],
     )]
-    #align(center)[#text(size: s.声明.size)[（必须装订在提交学校图书馆的印刷本）]]
+    #align(center)[#text(size: style.声明.size)[（必须装订在提交学校图书馆的印刷本）]]
     #v(1fr)
 
-    #set par(leading: s.声明.leading, spacing: s.声明.spacing)
+    #set par(leading: style.声明.leading, spacing: style.声明.spacing)
     本人完全了解北京大学关于收集、保存、使用学位论文的规定，即：
     #[
       #set list(

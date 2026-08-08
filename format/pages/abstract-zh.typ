@@ -5,7 +5,6 @@
 // ============================================================
 
 #import "../layouts/headings.typ": front-heading
-#import "../utils/style.typ": style as _style
 
 /// 中文摘要页
 /// style: 由 style.build(font) 构建的样式字典
@@ -18,9 +17,7 @@
   style: none,
   body,
 ) = {
-  let s = if style != none { style } else { _style }
-  let s = if style != none { style } else { _style }
-  set par(leading: s.摘要内容.leading, spacing: s.摘要内容.spacing, justify: true)
+  set par(leading: style.摘要内容.leading, spacing: style.摘要内容.spacing, justify: true)
   front-heading("摘要", enter-front: true, header: "摘要")
   set par(first-line-indent: first-line-indent)
   body

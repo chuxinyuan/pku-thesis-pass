@@ -5,7 +5,6 @@
 // ============================================================
 
 #import "../layouts/headings.typ": front-heading
-#import "../utils/style.typ": style as _style
 
 /// 英文摘要页
 /// style: 由 style.build(font) 构建的样式字典
@@ -24,19 +23,17 @@
   style: none,
   body,
 ) = {
-  let s = if style != none { style } else { _style }
-  let s = if style != none { style } else { _style }
   front-heading(
     upper(title-en),
     header: "ABSTRACT",
-    spacing-before: s.英文题目.spacing-before,
-    spacing-after: s.英文题目.spacing-after,
-    linespacing: s.英文题目.linespacing,
-    font: (size: s.英文题目.size, font: s.英文题目.font, weight: "regular"),
+    spacing-before: style.英文题目.spacing-before,
+    spacing-after: style.英文题目.spacing-after,
+    linespacing: style.英文题目.linespacing,
+    font: (size: style.英文题目.size, font: style.英文题目.font, weight: "regular"),
   )
 
   // 英文摘要内容已有样式调整（leading 12.5pt 较 PKU 标准 20pt 更接近 Word）
-  set par(spacing: s.英文摘要内容.leading, leading: s.英文摘要内容.leading, justify: true)
+  set par(spacing: style.英文摘要内容.leading, leading: style.英文摘要内容.leading, justify: true)
   if not blind {
     [
       #set align(center)
@@ -45,10 +42,10 @@
     ]
   }
   // Word 模板中英文摘要的首行缩进固定为 0.74cm
-  set par(first-line-indent: s.英文摘要内容.first-line-indent, justify: true)
-  v(s.英文摘要标题.spacing-before)
-  align(center)[#text(font: s.英文摘要标题.font, weight: "regular")[ABSTRACT]]
-  v(s.英文摘要标题.spacing-after)
+  set par(first-line-indent: style.英文摘要内容.first-line-indent, justify: true)
+  v(style.英文摘要标题.spacing-before)
+  align(center)[#text(font: style.英文摘要标题.font, weight: "regular")[ABSTRACT]]
+  v(style.英文摘要标题.spacing-after)
   body
   v(1fr)
   let keyword-prefix = if keywords-en.len() == 1 {

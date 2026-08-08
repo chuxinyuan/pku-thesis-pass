@@ -6,13 +6,11 @@
 // ============================================================
 
 #import "../utils/size.typ": size
-#import "../utils/style.typ": style as _style
 #import "../utils/counter.typ": partcounter, skippedstate
 #import "headings.typ": get-heading-meta, get-page-headings
 
 /// 生成页脚页码（作为 place 元素放置在页面底部）
 #let make-footer(style: none) = context {
-  let s = if style != none { style } else { _style }
   let part = partcounter.at(here()).first()
   if part == 0 { return }
 
