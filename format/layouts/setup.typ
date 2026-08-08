@@ -165,7 +165,7 @@
 
   // ========== 跨元素 show 委托 ==========
   // 标题、图/表/代码块、交叉引用分别委托 headings.typ / show.typ 渲染
-  show heading: it => heading-show-rule(it, smartpagebreak, heading-font: font.黑体, style: style)
+  show heading: it => heading-show-rule(it, smartpagebreak, style: style)
   show figure: set block(breakable: true)
   show figure: it => _figure-show-rule(it, merged-supplements, style: style)
   show ref: it => _ref-show-rule(it, merged-supplements)

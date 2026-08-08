@@ -112,8 +112,8 @@
 }
 
 /// 渲染标题正文（不重新触发 show heading）
-/// fs: 字号；heading-font: 标题默认字体；weight: 标题 weight；meta: 通过 ..args 传入的元数据覆盖。
-#let sizedheading(it, fs, heading-font: none, weight: auto, ..meta) = {
+/// fs: 字号；font: 标题字体与 weight；meta: 通过 ..args 传入的元数据覆盖。
+#let sizedheading(it, fs, font: (:), ..meta) = {
   if it.body == none or it.body == [] { return }
 
   let spacing-before = meta.at(
@@ -125,46 +125,35 @@
     default: default-heading-spacing-after.at(calc.min(it.level - 1, 3)),
   )
   let linespacing = meta.at("linespacing", default: size.三号 * 1.3 * 2.41)
-  let font = meta.at("font", default: (:))
+  let meta-font = meta.at("font", default: (:))
 
   show heading: set block(above: 0pt, below: 0pt)
   set par(first-line-indent: 0em, leading: linespacing - 1em, spacing: 0pt)
   v(spacing-before)
-  if heading-font != none {
-    set text(font: heading-font)
-  }
-  if weight != auto {
-    set text(weight: weight)
-  }
-  if it.numbering != none {
-    counter(heading).display()
-    h(1em)
-  }
-  if font != (:) {
-    set text(..font)
-    it.body
+  let f = if meta-font != (:) { meta-font } else { font }
+  let body = if it.numbering != none {
+    counter(heading).display() + h(1em) + it.body
   } else {
     it.body
   }
+  text(..f, body)
   v(spacing-after)
 }
 
 /// heading show rule：处理第 1 级标题的分页、状态转换、计数器步进，
 /// 然后委托 sizedheading 渲染
 /// smartpagebreak: 由 config() 传入的分页函数（处理 always-start-odd）
-/// heading-font: 标题默认字体
 /// style: 由 style.build(font) 构建的样式字典
-#let heading-show-rule(it, smartpagebreak, heading-font: none, style: none) = {
+#let heading-show-rule(it, smartpagebreak, style: none) = {
   set par(first-line-indent: 0em)
 
-  // 根据 level 获取对应样式条目，用于 weight 查找
   let h-style = if it.level == 1 { style.章标题 }
     else if it.level == 2 { style.一级节标题 }
     else if it.level == 3 { style.二级节标题 }
     else { style.三级节标题 }
 
   if it.level != 1 {
-    return sizedheading(it, get-heading-size(it.level, style: style), heading-font: heading-font, weight: h-style.weight)
+    return sizedheading(it, get-heading-size(it.level, style: style), font: (font: h-style.font, weight: h-style.weight))
   }
 
   let meta = get-heading-meta(it)
@@ -208,5 +197,5 @@
   }
 
   set align(center)
-  sizedheading(it, style.章标题.size, heading-font: heading-font, weight: style.章标题.weight, ..meta)
+  sizedheading(it, style.章标题.size, font: (font: h-style.font, weight: h-style.weight), ..meta)
 }
