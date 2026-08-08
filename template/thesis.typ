@@ -56,7 +56,7 @@
   month: 6,
 
   // ========== 排版配置 ==========
-  system: "linux",
+  system: "default",
   blind: false,
   preview: true,
   first-line-indent: 2em,
