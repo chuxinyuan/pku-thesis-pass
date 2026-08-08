@@ -17,10 +17,10 @@
 #let notation-page(
   title: "主要符号对照表",
   columns: (auto, 1fr, auto, 1fr),
-  row-gutter: 10pt,
-  group-gutter: 20pt,
+  style: none,
   body,
 ) = {
+  let s = if style != none { style } else { _style }
   front-heading(title)
 
   set par(first-line-indent: 0em)
@@ -39,7 +39,7 @@
       (o + (it.term, it.description), calc.rem(used + 2, col-count))
     } else if it.func() == parbreak {
       let rest = col-count - used
-      let gap = grid.cell(none, colspan: col-count, inset: (y: (group-gutter - row-gutter) / 2))
+      let gap = grid.cell(none, colspan: col-count, inset: (y: (s.符号表.group-gutter - s.符号表.row-gutter) / 2))
       if rest == col-count {
         (o + (gap,), 0)
       } else {
@@ -54,7 +54,7 @@
     columns: columns,
     align: left,
     column-gutter: 4em,
-    row-gutter: row-gutter,
+    row-gutter: s.符号表.row-gutter,
     ..out,
   ))
 }

@@ -6,14 +6,15 @@
 // ============================================================
 
 #import "../utils/size.typ": size
-#import "../utils/style.typ": style
+#import "../utils/style.typ": style as _style
 #import "../utils/number.typ": chinesenumbering
 #import "../utils/counter.typ": partcounter, skippedstate
 #import "headings.typ": get-heading-meta, get-page-headings
 
 /// 生成页眉内容（作为 place 元素放置在页面顶部）
 /// header-text: 偶数页统一显示的页眉文本
-#let make-header(header-text: none) = context {
+#let make-header(header-text: none, style: none) = context {
+  let s = if style != none { style } else { _style }
   // 脚注序号按页编排：每页页眉求值时重置脚注计数器
   counter(footnote).update(0)
   let part = partcounter.at(here()).first()

@@ -25,12 +25,13 @@
   body,
 ) = {
   let s = if style != none { style } else { _style }
+  let s = if style != none { style } else { _style }
   front-heading(
     upper(title-en),
     header: "ABSTRACT",
     spacing-before: s.英文题目.spacing-before,
     spacing-after: s.英文题目.spacing-after,
-    linespacing: 2em,
+    linespacing: s.英文题目.linespacing,
     font: (size: s.英文题目.size, font: s.英文题目.font, weight: "regular"),
   )
 
@@ -44,7 +45,7 @@
     ]
   }
   // Word 模板中英文摘要的首行缩进固定为 0.74cm
-  set par(first-line-indent: 0.74cm, justify: true)
+  set par(first-line-indent: s.英文摘要内容.first-line-indent, justify: true)
   v(s.英文摘要标题.spacing-before)
   align(center)[#text(font: s.英文摘要标题.font, weight: "regular")[ABSTRACT]]
   v(s.英文摘要标题.spacing-after)

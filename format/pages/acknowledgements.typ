@@ -8,12 +8,13 @@
 /// 致谢页
 /// first-line-indent: 段落首行缩进
 /// acknowledgements: 致谢正文（body 参数）
-#let acknowledgements-page(first-line-indent: 2em, acknowledgements) = {
+#let acknowledgements-page(first-line-indent: 2em, style: none, acknowledgements) = {
+  let s = if style != none { style } else { _style }
   back-heading("致谢")
   set par(
     first-line-indent: first-line-indent,
-    leading: 10.5pt,
-    spacing: 10.5pt,
+    leading: s.致谢.leading,
+    spacing: s.致谢.spacing,
   )
   acknowledgements
 }

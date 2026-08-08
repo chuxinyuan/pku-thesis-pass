@@ -4,6 +4,7 @@
 // ============================================================
 
 #import "../utils/number.typ": chinesenumbering
+#import "../utils/style.typ": style as _style
 #import "../utils/counter.typ": chaptercounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
 
 /// 编号定理的标签与正文构建
@@ -86,5 +87,5 @@
 
 /// 证明环境：不编号，"证明"开头，正文后接空心方框 □ 收尾
 #let proof(body) = par(
-  [#strong[证明] #h(0.5em) #body #h(0.5em) #text(size: 0.7em)[#sym.square]],
+  [#strong[证明] #h(0.5em) #body #h(0.5em) #text(size: _style.证明.标记字号)[#sym.square]],
 )

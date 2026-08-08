@@ -19,6 +19,7 @@
   body,
 ) = {
   let s = if style != none { style } else { _style }
+  let s = if style != none { style } else { _style }
   set par(leading: s.摘要内容.leading, spacing: s.摘要内容.spacing, justify: true)
   front-heading("摘要", enter-front: true, header: "摘要")
   set par(first-line-indent: first-line-indent)

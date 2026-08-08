@@ -266,7 +266,8 @@
   // front-heading 以外的自定义页面，闭包内含换页
   let cover = () => {
     if blind {
-      cover-page-blind(
+      cover-page-blind(style: style,
+        
         font: font,
         header-text: header-text,
         title-zh: title-zh,
@@ -279,7 +280,8 @@
         degree-type: degree-type,
       )
     } else {
-      cover-page-normal(
+      cover-page-normal(style: style,
+        
         font: font,
         thesis-name: thesis-name,
         title-zh: title-zh,
@@ -302,7 +304,8 @@
   // ========== 书脊页 ==========
   // 打印装订用，非规范强制要求；默认不启用，需在 thesis.typ 显式调用
   let spine = () => {
-    spine-page(
+    spine-page(style: style,
+        
       title: title-zh,
       author: author-zh,
       font: font,
@@ -313,7 +316,7 @@
 
   // ========== 版权声明 ==========
   let copyright = () => {
-    copyright-page()
+    copyright-page(style: style)
     smartpagebreak()
   }
 
@@ -343,7 +346,8 @@
 
   // ========== 论文目录 ==========
   let outline = () => {
-    chineseoutline(
+    chineseoutline(style: style,
+        
       title: "目录",
       depth: outline-depth,
       indent: true
@@ -388,7 +392,8 @@
 
   // ========== 主要符号对照表 ==========
   let notation = (body) => {
-    notation-page(
+    notation-page(style: style,
+        
       title: merged-supplements.符号表,
     )[#body]
   }
@@ -399,8 +404,8 @@
     set par(
       justify: true,
       first-line-indent: (amount: first-line-indent, all: true),
-      leading: 10.5pt,
-      spacing: 10.5pt,
+      leading: style.正文.leading,
+      spacing: style.正文.spacing,
     )
     // 字数统计：统计正文与附录（show 规则必须与 body 处于同一作用域才生效）
     if word-count {
@@ -430,7 +435,8 @@
       return
     }
     set align(left + top)
-    achievement-page(
+    achievement-page(style: style,
+        
       title: merged-supplements.成果表,
       outlined: achievement-outlined,
     )[#body]
@@ -442,7 +448,8 @@
       return
     }
     set align(left + top)
-    acknowledgements-page(
+    acknowledgements-page(style: style,
+        
       first-line-indent: first-line-indent,
     )[#body]
   }
@@ -452,7 +459,7 @@
     if blind {
       return
     }
-    declaration-page(clean-declaration: clean-declaration)
+    declaration-page(clean-declaration: clean-declaration, style: style)
   }
 
   // ========== 返回字典 ==========

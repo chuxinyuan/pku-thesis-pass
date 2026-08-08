@@ -8,6 +8,7 @@
 #import "../imports.typ": show-cn-fakebold
 #import "../utils/font.typ": font
 #import "../utils/size.typ": size
+#import "../utils/style.typ": style as _style
 #import "../utils/number.typ": chinesenumber, chineseyear
 #import "../utils/util.typ": _resolve-path, _ensure-not-eps
 
@@ -109,7 +110,8 @@
 /// fields: 数组，每项为 (字段名, 字段值) 元组
 /// name-width / value-width: 两列宽度
 /// row-height: 每行高度
-#let build-field-grid(fields, name-width, value-width, row-height, font: font) = context {
+#let build-field-grid(fields, name-width, value-width, row-height, font: font, style: none) = context {
+  let s = if style != none { style } else { _style }
   let grid-contents = ()
 
   for (name, value) in fields {
@@ -122,7 +124,7 @@
       }
       grid-contents.push([
         #set align(center)
-        #set text(size: size.三号, font: font.仿宋)
+        #set text(size: s.封面信息.size, font: font.仿宋)
         #part
         #v(0.5em)
       ])
@@ -170,7 +172,7 @@
   inset: 0.15em,
 )[
   #set align(center + horizon)
-  #text(size: 0.6em, fill: luma(120), font: font.黑体)[校徽]
+  #text(size: _style.封面占位符.字号, fill: luma(120), font: font.黑体)[校徽]
 ]
 
 /// 校名字标灰色占位框：未提供字标图片时显示，提示用户自行配置
@@ -182,7 +184,7 @@
   inset: 0.15em,
 )[
   #set align(center + horizon)
-  #text(size: 0.6em, fill: luma(120), font: font.黑体)[字标]
+  #text(size: _style.封面占位符.字号, fill: luma(120), font: font.黑体)[字标]
 ]
 
 /// 正常版封面
@@ -204,9 +206,11 @@
   month: none,
   logo: none,
   wordmark: none,
+  style: none,
 ) = {
+  let s = if style != none { style } else { _style }
   set align(center + horizon)
-  set text(size: size.一号)
+  set text(size: s.封面题目.size)
   box(
     grid(
       columns: (auto, auto),
@@ -224,7 +228,7 @@
     ),
   )
   linebreak()
-  text(size: size.小初)[#strong(thesis-name)]
+  text(size: s.封面题头.size)[#strong(thesis-name)]
   v(1fr)
   context {
     set text(weight: "bold")
@@ -233,7 +237,7 @@
     let grid-contents = (
       [
         #set align(center)
-        #text(size: size.二号, weight: "regular")[题目：]
+        #text(size: s.封面题目标签.size)[题目：]
       ],
     )
     for (i, part) in title-zh-parts.enumerate() {
@@ -252,7 +256,7 @@
     )
   }
   v(5fr)
-  set text(size: size.三号)
+  set text(size: s.封面信息.size)
   build-field-grid(
     (
       (text("姓") + h(2em) + text("名："), author-zh),
@@ -266,11 +270,12 @@
     7.63cm,
     1.5em,
     font: font,
+    style: style,
   )
   v(2fr)
-  text(font: font.仿宋)[#degree-type-checkbox(degree-type)]
+  text(font: s.封面信息.font)[#degree-type-checkbox(degree-type)]
   v(1fr)
-  text(font: font.宋体)[
+  text(font: s.封面日期.font)[
     #chineseyear(year) *年* #chinesenumber(month) *月*
   ]
 }
@@ -289,20 +294,22 @@
   year: none,
   month: none,
   degree-type: "academic",
+  style: none,
 ) = {
+  let s = if style != none { style } else { _style }
   set align(center + top)
-  text(size: size.小初, font: font.黑体)[
+  text(size: s.封面题头.size, font: font.黑体)[
     #show: show-cn-fakebold
     #strong(header-text)
   ]
   linebreak()
-  set text(size: size.三号, font: font.仿宋)
-  set par(justify: true, leading: 1em)
+  set text(size: s.封面信息.size, font: font.仿宋)
+  set par(justify: true, leading: s.封面盲审.leading)
   [（匿名评阅论文封面）]
   v(1fr)
   [
     #set align(left)
-    #set par(spacing: 1.5em)
+    #set par(spacing: s.封面盲审.spacing)
     中文题目：#title-zh.split("\n").map(it => it.trim()).join(" ")
 
     英文题目：#title-en.split("\n").map(it => it.trim()).join(" ")

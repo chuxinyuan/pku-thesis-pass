@@ -8,11 +8,12 @@
 // ============================================================
 
 #import "../utils/size.typ": size
-#import "../utils/style.typ": style
+#import "../utils/style.typ": style as _style
 #import "../utils/counter.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
 
 /// 根据标题等级返回对应字号（用于 2–4 级标题）
-#let get-heading-size(level) = {
+#let get-heading-size(level, style: none) = {
+  let s = if style != none { style } else { _style }
   if level == 1 {
     style.章标题.size
   } else if level == 2 {
@@ -151,11 +152,12 @@
 /// 然后委托 sizedheading 渲染
 /// smartpagebreak: 由 config() 传入的分页函数（处理 always-start-odd）
 /// heading-font: 标题默认字体
-#let heading-show-rule(it, smartpagebreak, heading-font: none) = {
+#let heading-show-rule(it, smartpagebreak, heading-font: none, style: none) = {
+  let s = if style != none { style } else { _style }
   set par(first-line-indent: 0em)
 
   if it.level != 1 {
-    return sizedheading(it, get-heading-size(it.level), heading-font: heading-font)
+    return sizedheading(it, get-heading-size(it.level, style: style), heading-font: heading-font)
   }
 
   let meta = get-heading-meta(it)
@@ -199,5 +201,5 @@
   }
 
   set align(center)
-  sizedheading(it, size.三号, heading-font: heading-font, ..meta)
+  sizedheading(it, s.章标题.size, heading-font: heading-font, ..meta)
 }

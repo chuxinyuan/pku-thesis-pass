@@ -20,12 +20,12 @@
   title: none,
   author: none,
   font: font,
-  text-font: "仿宋",
-  text-size: size.三号,
+  style: none,
   blind: false,
 ) = {
-  set page(margin: (x: 1cm, y: 5.4cm))
-  set text(font: font.at(text-font), size: text-size)
+  let s = if style != none { style } else { _style }
+  set page(margin: s.书脊.margin)
+  set text(font: s.书脊.font, size: s.书脊.size)
 
   // 标题去除 \n 换行（封面标题可手动换行，书脊标题需保持连续），与封面盲审标题处理一致
   let clean-title = if type(title) == str {

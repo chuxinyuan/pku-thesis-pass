@@ -69,9 +69,9 @@
   // A4 纸 + 学校规定的页边距；页眉页脚由 header.typ / footer.typ 按部分自动生成
   set page(
     paper: "a4",
-    margin: (top: 3cm, bottom: 2.5cm, left: 2.6cm, right: 2.6cm),
-    header: make-header(header-text: header-text),
-    footer: make-footer(),
+    margin: (top: style.页边距.top, bottom: style.页边距.bottom, left: style.页边距.left, right: style.页边距.right),
+    header: make-header(header-text: header-text, style: style),
+    footer: make-footer(style: style),
   )
   // 正文默认字体：宋体小四、中文断行
   set text(font: font.宋体, size: style.正文.size, lang: "zh")
@@ -116,13 +116,13 @@
   // ========== 脚注 ==========
   // "①"式编号、上标缩小、悬挂缩进排版
   set footnote(numbering: "①")
-  show footnote: set super(size: 0.65em)
+  show footnote: set super(size: style.脚注.super-size)
   show footnote.entry: it => {
     let loc = it.note.location()
     set text(font: font.宋体, size: style.脚注.size)
     set par(
       justify: true,
-      leading: 1.2em,  // 模拟单倍行距
+      leading: style.脚注.leading,
       spacing: 0pt,
       hanging-indent: 1.5em,
       first-line-indent: 0pt,
@@ -158,16 +158,16 @@
     label-baseline: "center",
     list-config: (
       label-format: it => [#(
-        sym-circle(6pt), sym-square(6pt), sym-rhombus(6pt),
+        sym-circle(style.列表.符号尺寸), sym-square(style.列表.符号尺寸), sym-rhombus(style.列表.符号尺寸),
       ).at(calc.rem(it.level - 1, 3))],
     ),
   )
 
   // ========== 跨元素 show 委托 ==========
   // 标题、图/表/代码块、交叉引用分别委托 headings.typ / show.typ 渲染
-  show heading: it => heading-show-rule(it, smartpagebreak, heading-font: font.黑体)
+  show heading: it => heading-show-rule(it, smartpagebreak, heading-font: font.黑体, style: style)
   show figure: set block(breakable: true)
-  show figure: it => _figure-show-rule(it, merged-supplements)
+  show figure: it => _figure-show-rule(it, merged-supplements, style: style)
   show ref: it => _ref-show-rule(it, merged-supplements)
 
   // ========== LaTeX 引用兼容 ==========
