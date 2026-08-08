@@ -113,8 +113,8 @@ jobs:
             </div>
             <h2>快速开始</h2>
             <pre><code>typst init @preview/pku-thesis-pass:0.3.0 my-thesis
-          cd my-thesis
-          typst compile thesis.typ</code></pre>
+            cd my-thesis
+            typst compile thesis.typ</code></pre>
             <h2>链接</h2>
             <ul>
               <li><a href="https://github.com/chuxinyuan/pku-thesis-pass">GitHub 仓库</a></li>
