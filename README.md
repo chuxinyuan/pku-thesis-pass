@@ -124,7 +124,7 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 |------|----------|
 | 仿宋 | Times New Roman, FangSong, STFangsong, FandolFang R |
 | 宋体 | Times New Roman, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif |
-| 黑体 | Times New Roman, SimHei, PingFang SC, Noto Sans CJK SC, Source Han Sans |
+| 黑体 | Times New Roman, SimHei, STHeiti, Noto Sans CJK SC, Source Han Sans |
 | 楷体 | Times New Roman, KaiTi, STKaiti, AR PL UKai |
 | 代码 | Consolas, DejaVu Sans Mono, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif |
 

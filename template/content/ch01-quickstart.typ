@@ -72,7 +72,7 @@ typst compile template/thesis.typ --root .
   [宋体],
   [Times New Roman, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif],
   [黑体],
-  [Times New Roman, SimHei, PingFang SC, Noto Sans CJK SC, Source Han Sans],
+  [Times New Roman, SimHei, STHeiti, Noto Sans CJK SC, Source Han Sans],
   [楷体],
   [Times New Roman, KaiTi, STKaiti, AR PL UKai],
   [代码],
