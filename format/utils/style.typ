@@ -25,8 +25,9 @@
   // ======== 1.3 中文摘要 ========
   // 标题：三号（16pt）黑体居中，段前 24bp 后 18bp
   摘要标题: (font: font.黑体, size: size.三号, align: center, spacing-before: 24pt, spacing-after: 18pt),
-  // 内容：小四（12pt）宋体，行距固定 20bp
-  摘要内容: (font: font.宋体, size: size.小四, align: left, first-line-indent: 2em, leading: 20pt),
+  // 内容：小四（12pt）宋体
+  // 注：PKU 指南规定行距固定 20bp，实测 10.5pt 更接近 Word 模板效果
+  摘要内容: (font: font.宋体, size: size.小四, align: left, first-line-indent: 2em, leading: 10.5pt, spacing: 10.5pt),
   // 关键词：小四（12pt）宋体
   关键词: (font: font.宋体, size: size.小四),
 

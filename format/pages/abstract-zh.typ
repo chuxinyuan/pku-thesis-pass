@@ -5,17 +5,21 @@
 // ============================================================
 
 #import "../layouts/headings.typ": front-heading
+#import "../utils/style.typ": style as _style
 
 /// 中文摘要页
+/// style: 由 style.build(font) 构建的样式字典
 /// keywords-zh: 中文关键词数组，以"关键词："为前缀、顿号分隔
 /// first-line-indent: 段落首行缩进
 /// body: 摘要正文
 #let abstract-page-zh(
   keywords-zh: (),
   first-line-indent: 2em,
+  style: none,
   body,
 ) = {
-  set par(leading: 10.5pt, spacing: 10.5pt, justify: true)
+  let s = if style != none { style } else { _style }
+  set par(leading: s.摘要内容.leading, spacing: s.摘要内容.spacing, justify: true)
   front-heading("摘要", enter-front: true, header: "摘要")
   set par(first-line-indent: first-line-indent)
   body

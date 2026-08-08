@@ -321,6 +321,7 @@
   let abstract-zh = (body, keywords-zh: ()) => {
     set align(left + top)
     abstract-page-zh(
+      style: style,
       keywords-zh: keywords-zh,
       first-line-indent: first-line-indent,
     )[#body]
