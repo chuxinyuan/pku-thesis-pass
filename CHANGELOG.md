@@ -9,6 +9,9 @@
 - 页面闭包移入 `config/builder.typ`，config.typ 从 497 行瘦身到 186 行 ([31af70d])
 - `_make-theorem` 工厂函数消除 8 个定理环境代码重复 ([485a48f])
 - 模板文档代码示例全面同步 cfg.xxx 模式 ([be5013c])
+- 标题元数据接口 `headings-meta.typ` 解耦 header/footer 对 headings 的依赖 ([996ef69])
+- 导入依赖全面清理：11 个死 import + 3 个 `_` 前缀修正 + 3 个 `font.typ` 直接 import 移除 ([3dfc6a5], [08f7d90], [d9b34bf])
+- `reset-chapter-counters()` 提取到 counter.typ，消除 heading-show-rule 14 行重复 ([08f7d90])
 
 ### SSOT 样式系统
 
@@ -22,6 +25,10 @@
 - 标题字体 `text()` 包裹替代 `set text()`，避免外层宋体覆盖 ([2e0b4db])
 - 目录字体/行距回归修复 ([422c118])
 - 全局 `show: show-cn-fakebold` 替代 `show strong: 黑体` ([d0d2d79])
+- style.typ 死字段清理：删除 ~33 个未消费的 align/spacing-before-after/leading 字段 ([a2011b5])
+- 补全遗漏条目 15+：强调/公式编号/脚注/目录/参考文献/成果列表/子图/三线表/代码样式/标题行距/版权段落行距 等 ([de678fe], [ec12c1d])
+- 封面字段标签、年/月独立控制、页眉堆叠间距/下划线/编号间距全部归入 style.typ ([5de3868], [ec12c1d])
+- `show-header` → `show-page-marks`，语义明确控制页眉+页码 ([fda0b1e])
 
 ### 字体方案
 
@@ -30,6 +37,9 @@
 - 新增 `英文衬线`、`英文无衬线` 字体条目，统一从 font.typ 出口 ([d2e0c4b])
 - Linux 代码字体改用 DejaVu Sans Mono ([df69148])
 - 字体校验表通过 system-state 实时渲染当前方案 ([d3adc0a], [b42ab28])
+- Linux 方案纯开源：移除 Times New Roman/Arial，全用 Liberation 替代 ([be02ed8])
+- default 方案加入 Liberation Serif 跨平台兜底 ([be02ed8])
+- macOS 英文无衬线加入 Helvetica fallback ([28c5ee5])
 
 ### 新增功能
 
@@ -57,19 +67,31 @@
 - 中文摘要行距校准为 10.5pt ([27fca23])
 - `notion` → `notation` 笔误 ([8382c27])
 
+### 测试
+
+- 测试框架建立：6 个单元测试（number/util/style/cli/size/font）+ 组件测试 ([39858e4], [04e4437])
+- 6 个集成测试（minimal/linux/full/blind/heading/refs）([39858e4], [04e4437])
+- CI 盲审验证：`strings \| grep` 检测作者名泄漏 ([39858e4])
+- `just publish` test gate：测试不过不允许发布 ([f4d9e89])
+- 测试 PDF 含 "All tests passed" 标题，不再空白 ([58fa97d])
+- CI `test` → `build` → `deploy` 顺序优化 ([d759dea])
+
 ### 工具链
 
 - `scripts/release.py` — 发布/开发模式导入切换 ([bd089ad])
 - `scripts/bump.py` — 文档版本号自动同步 ([67fbfc5])
 - `scripts/publish.py` — 发布文件收集到 `release/<version>/` ([66b611b])
 - `.justfile` — 7 个 recipe（pdf/png/json/preview/dev/bump/publish）([53b90c6])
-- `.github/workflows/ci.yml` — 4 变体编译 + GitHub Pages 部署 ([6ab4178])
+- `.github/workflows/ci-deploy-test.yml` — 4 变体编译 + GitHub Pages 部署 ([6ab4178])
+- CI 字体安装脚本共用去重，微软字体 → Liberation ([c24acc1], [dbeaaeb])
 
 ### 代码质量
 
 - 第三方依赖集中管理（`format/imports.typ`）([15913fa])
 - 组件/布局/页面目录化重组 ([a6cf1d5], [2dc7586], [873dc96])
 - utils 子模块拆分（font/size/style/supplement/counter/number）([98f2aeb])
+- `_figure-show-rule` / `_ref-show-rule` → `figure-show-rule` / `ref-show-rule`，去 `_` 前缀 ([08f7d90])
+- `header-text` 变量遮蔽修正 → `custom-header` ([08f7d90])
 
 ---
 
@@ -158,3 +180,20 @@
 [2dc7586]: https://github.com/chuxinyuan/pku-thesis-pass/commit/2dc7586
 [873dc96]: https://github.com/chuxinyuan/pku-thesis-pass/commit/873dc96
 [98f2aeb]: https://github.com/chuxinyuan/pku-thesis-pass/commit/98f2aeb
+[996ef69]: https://github.com/chuxinyuan/pku-thesis-pass/commit/996ef69
+[3dfc6a5]: https://github.com/chuxinyuan/pku-thesis-pass/commit/3dfc6a5
+[08f7d90]: https://github.com/chuxinyuan/pku-thesis-pass/commit/08f7d90
+[d9b34bf]: https://github.com/chuxinyuan/pku-thesis-pass/commit/d9b34bf
+[a2011b5]: https://github.com/chuxinyuan/pku-thesis-pass/commit/a2011b5
+[de678fe]: https://github.com/chuxinyuan/pku-thesis-pass/commit/de678fe
+[ec12c1d]: https://github.com/chuxinyuan/pku-thesis-pass/commit/ec12c1d
+[fda0b1e]: https://github.com/chuxinyuan/pku-thesis-pass/commit/fda0b1e
+[be02ed8]: https://github.com/chuxinyuan/pku-thesis-pass/commit/be02ed8
+[28c5ee5]: https://github.com/chuxinyuan/pku-thesis-pass/commit/28c5ee5
+[39858e4]: https://github.com/chuxinyuan/pku-thesis-pass/commit/39858e4
+[04e4437]: https://github.com/chuxinyuan/pku-thesis-pass/commit/04e4437
+[f4d9e89]: https://github.com/chuxinyuan/pku-thesis-pass/commit/f4d9e89
+[58fa97d]: https://github.com/chuxinyuan/pku-thesis-pass/commit/58fa97d
+[d759dea]: https://github.com/chuxinyuan/pku-thesis-pass/commit/d759dea
+[c24acc1]: https://github.com/chuxinyuan/pku-thesis-pass/commit/c24acc1
+[dbeaaeb]: https://github.com/chuxinyuan/pku-thesis-pass/commit/dbeaaeb
