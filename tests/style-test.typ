@@ -29,3 +29,5 @@
 // weight 字段存在且正确
 #assert.eq(s.章标题.weight, "bold")
 #assert.eq(s.一级节标题.weight, "bold")
+
+= All tests passed

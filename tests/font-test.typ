@@ -14,3 +14,5 @@
 // Linux 必须以开源字体为主
 #assert(font-set.linux.黑体.contains("Noto Sans CJK SC"), message: "Linux 黑体缺少 Noto Sans CJK SC")
 #assert(font-set.linux.楷体.contains("AR PL UKai"), message: "Linux 楷体缺少 AR PL UKai")
+
+= All tests passed

@@ -8,3 +8,5 @@
 #assert.eq(_parse-bool("0", true), false)
 #assert.eq(_parse-bool(none, true), true)
 #assert.eq(_parse-bool("invalid", false), false)
+
+= All tests passed

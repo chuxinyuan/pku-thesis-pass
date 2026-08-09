@@ -6,3 +6,5 @@
 
 #assert.eq(_resolve-path(path("assets/logo.svg")), path("assets/logo.svg"))
 #assert.eq(_resolve-path("ref.bib"), "../ref.bib")
+
+= All tests passed

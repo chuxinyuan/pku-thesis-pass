@@ -7,3 +7,5 @@
 #assert.eq(size.小四, 12pt)
 #assert.eq(size.五号, 10.5pt)
 #assert.eq(size.小五, 9pt)
+
+= All tests passed

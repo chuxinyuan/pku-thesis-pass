@@ -11,3 +11,5 @@
 
 #assert.eq(chineseyear(2026),   "二〇二六")
 #assert.eq(chineseyear(2000),   "二〇〇〇")
+
+= All tests passed
