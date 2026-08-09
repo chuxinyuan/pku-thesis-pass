@@ -398,7 +398,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 使用方法：
 
-+ 在 `config()` 返回值中解构 `list-of-equations`
++ 通过 `cfg.list-of-equations` 访问公式列表
 + 在目录之后、正文之前调用 `#list-of-equations()`
 + 用 `#eq-block(caption: [描述])[公式]` 替代普通行间公式
 
@@ -567,7 +567,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 使用方法：
 
-+ 在 `config()` 返回值中解构 `list-of-code`
++ 通过 `cfg.list-of-code` 访问代码列表
 + 在目录之后、正文之前调用 `#list-of-code()`
 + 用 `#code-block(raw, caption: [标题])` 包装需要入列表的代码块
 
@@ -575,7 +575,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 == 论文特殊页面
 
-除正文外，论文还常包含主要符号对照表、攻读学位期间发表的论文、字数统计等特殊页面，模板分别提供 `notation`、`achievement`、`total-words` 等函数。它们的使用方式一致：先在 `config()` 返回值中解构对应函数，再在指定位置调用。
+除正文外，论文还常包含主要符号对照表、攻读学位期间发表的论文、字数统计等特殊页面，模板分别提供 `notation`、`achievement`、`total-words` 等函数。它们的使用方式一致：先通过 `cfg.xxx` 访问对应函数，再在指定位置调用。
 
 === 主要符号对照表
 
@@ -625,7 +625,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 使用方法：
 
-+ 在 `config()` 返回值中解构 `notation`
++ 通过 `cfg.notation` 访问符号表
 + 在列表之后、正文之前调用 `#notation[...]`
 + 用 `/ 符号: 说明` 语法书写条目，空行分组
 
@@ -651,7 +651,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 使用方法：
 
-+ 在 `config()` 返回值中解构 `achievement`
++ 通过 `cfg.achievement` 访问成果页
 + 在附录之后、致谢之前调用 `#achievement[...]`
 + 用 `+` 书写条目（自动编号 `[1]`、`[2]`…），作者本人姓名用 `*...*` 加粗，并按参考文献格式附上检索类型（SCI/EI）、SCI 收录号与影响因子
 
@@ -659,15 +659,15 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 === 字数统计
 
-如需统计正文与附录的字数，在 `config()` 中设置 `word-count: true`，并在正文任意位置解构出 `#total-words`（CJK 字数）或 `#total-characters`（字符数）来显示：
+如需统计正文与附录的字数，在 `config()` 中设置 `word-count: true`，并在正文任意位置调用 `#cfg.total-words`（CJK 字数）或 `#cfg.total-characters`（字符数）来显示：
 
 #code-preview(
   ```typ
-  #let (setup, cover, ..) = config(
+  #let cfg = config(
     word-count: true, // 统计正文与附录的字数
   )
 
-  全文总字数约为 #total-words 字。
+  全文总字数约为 #cfg.total-words 字。
   ```,
   [全文总字数约为 #total-words 字。],
 )

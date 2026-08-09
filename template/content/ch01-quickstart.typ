@@ -147,53 +147,42 @@ typst compile template/thesis.typ --root .
   ```typ
   #import "@preview/pku-thesis-pass:0.3.0": config, booktab, as-booktab, eq-block, code-block
 
-  #let (
-    setup: setup,
-    cover: cover,
-    copyright: copyright,
-    abstract-zh: abstract-zh,
-    outline: outline,
-    body-wrap: body-wrap,
-    bibliography: bibliography,
-    appendix: appendix,
-    acknowledgements: acknowledgements,
-    declaration: declaration,
-  ) = config(
+  #let cfg = config(
     author-zh: "张三",
     title-zh: "论文中文题目",
   )
 
-  #show: setup
-  #cover()
-  #copyright()
+  #show: cfg.setup
+  #(cfg.cover)()
+  #(cfg.copyright)()
 
-  #abstract-zh(keywords-zh: ("关键词1", "关键词2"))[中文摘要内容...]
+  #(cfg.abstract-zh)(keywords-zh: ("关键词1", "关键词2"))[中文摘要内容...]
 
-  #outline()
-  #show: body-wrap
-  #show: bibliography
+  #(cfg.outline)()
+  #show: cfg.body-wrap
+  #show: cfg.bibliography
 
   = 第一章 绪论
 
   这里是正文内容...
 
-  #appendix()
+  #(cfg.appendix)()
 
   = 附录 A 补充材料
 
   这里是附录内容...
 
-  #acknowledgements[致谢内容...]
-  #declaration()
+  #(cfg.acknowledgements)[致谢内容...]
+  #(cfg.declaration)()
   ```,
   caption: "论文文件基本结构",
 )
 
-模板采用 DI（依赖注入）模式：`config()` 返回一组闭包，用户解构后自行编排论文流程，不受固定模板限制。
+模板采用 DI（依赖注入）模式：`config()` 返回一组闭包字典，用户通过 `cfg.xxx` 方式调用各页面函数，自行编排论文流程，不受固定模板限制。
 
 == 调用模块
 
-`config()` 返回一组页面函数（封面、摘要、目录等），这些通过解构直接使用。但表格、公式块、代码块、定理环境等排版组件需要额外从模板中导入。
+`config()` 返回一组页面函数（封面、摘要、目录等），这些通过 `cfg.xxx` 方式调用。但表格、公式块、代码块、定理环境等排版组件需要额外从模板中导入。
 
 实际论文写作过程中大概率需要用到表格，这里仅以导入表格模块为例：
 
@@ -227,7 +216,7 @@ typst compile template/thesis.typ --root .
 - `remark` — 注环境（随章编号，支持 `@label` 交叉引用）
 - `proof` — 证明环境（不编号，末尾带空心方框收尾符号）
 - `word-count-cjk` — CJK 字数统计算子（用户通常不直接调用，使用下面的 `total-words` / `total-characters` 即可）
-- `total-words` — CJK 字数统计结果（也可从 `config()` 返回值直接解构）
-- `total-characters` — 总字符数统计结果（也可从 `config()` 返回值直接解构）
+- `total-words` — CJK 字数统计结果（也可通过 `cfg.total-words` 访问）
+- `total-characters` — 总字符数统计结果（也可通过 `cfg.total-characters` 访问）
 
 不建议通过 `#import "@preview/pku-thesis-pass:0.3.0": *` 或者 `#import "../../format/lib.typ": *` 导入所有模块，因为这样会引入不必要的依赖，污染环境且增加编译时间。

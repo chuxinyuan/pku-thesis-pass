@@ -23,14 +23,14 @@
 这里是附录内容...
 ```
 
-`appendix()` 由 `config()` 返回，在解构时获取。
+`appendix()` 由 `config()` 返回，通过 `(cfg.appendix)()` 调用。
 
 == 盲审模式
 
 `config()` 的 `blind` 参数控制盲审模式：
 
 ```typ
-#let (setup: setup, cover: cover, blind: blind, ..) = config(
+#let cfg = config(
   blind: true,
   ...
 )
