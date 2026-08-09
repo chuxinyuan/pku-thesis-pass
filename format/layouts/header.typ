@@ -63,8 +63,8 @@
         if is-even {
           header-text
         } else {
-          let header-text = meta.at("header", default: none)
-          if header-text == none { header-text = el.body }
+          let custom-header = meta.at("header", default: none)
+          if custom-header == none { custom-header = el.body }
           if el.numbering != none {
             chinesenumbering(
               ..counter(heading).at(el.location()),
@@ -72,7 +72,7 @@
             )
             h(style.页眉.编号间距)
           }
-          header-text
+          custom-header
         },
         line(stroke: style.页眉.下划线粗细, length: 100%),
       )

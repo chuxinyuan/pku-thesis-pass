@@ -10,7 +10,7 @@
 /// 图、表、代码块的 show 规则
 /// 图片：caption 在下方；表格：caption 在上方；代码块：caption 在上方
 /// supplements: 引用记号字典，用于生成"图 1.1"等标签
-#let _figure-show-rule(it, supplements, style: none) = {
+#let figure-show-rule(it, supplements, style: none) = {
   set align(center)
   if it.kind == image {
     counter(figure.where(kind: "subfigure")).update(0)
@@ -78,7 +78,7 @@
 /// 交叉引用 @ 标签的 show 规则
 /// 根据引用目标类型（equation / figure / heading）生成中文编号链接
 /// supplements: 引用记号字典，控制"图/表/式/节"等前缀
-#let _ref-show-rule(it, supplements) = {
+#let ref-show-rule(it, supplements) = {
   if it.element == none { it }
   else {
     h(0em, weak: true)

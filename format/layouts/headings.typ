@@ -8,7 +8,7 @@
 // ============================================================
 
 #import "../utils/size.typ": size
-#import "../utils/counter.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
+#import "../utils/counter.typ": partcounter, chaptercounter, reset-chapter-counters
 #import "headings-meta.typ": get-heading-meta
 
 /// 根据标题等级返回对应字号（level 1 由 heading-show-rule 直接处理）
@@ -26,15 +26,7 @@
 #let default-heading-spacing-before = (17pt, 24pt, 12pt, 6pt)
 #let default-heading-spacing-after = (16.5pt, 6pt, 6pt, 6pt)
 
-// Heading supplement 中可嵌入的元数据字段：
-//   pagebreak: bool         - 是否在此 heading 前分页（默认 true）
-//   part: int | none         - 状态转换目标 (0/1/2/3/none)
-//   reset-page: bool        - 是否重置页码为 1（默认 false）
-//   show-page-marks: bool  - 是否显示页眉和页码（默认 true）
-//   header: content | none  - 自定义页眉文本（替换标题）
-//   spacing-before/after    - 覆盖默认段间距
-//   linespacing             - 覆盖默认行距
-//   font                    - 覆盖默认字体
+// 标题元数据字段定义见 headings-meta.typ
 
 /// 创建前置部分的无编号标题（摘要、目录等）
 /// enter-front: true 时将 part 切换到 1（前置部分）并重置页码。
@@ -150,19 +142,7 @@
 
   if it.numbering != none {
     chaptercounter.step()
-    imagecounter.update(())
-    tablecounter.update(())
-    rawcounter.update(())
-    equationcounter.update(())
-    counter(math.equation).update(())
-    theoremcounter.update(())
-    definitioncounter.update(())
-    lemmacounter.update(())
-    corollarycounter.update(())
-    propositioncounter.update(())
-    propertycounter.update(())
-    examplecounter.update(())
-    remarkcounter.update(())
+    reset-chapter-counters()
   }
 
   set align(h-style.align)

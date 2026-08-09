@@ -33,3 +33,21 @@
 
 /// 跳过页状态：用于 always-start-odd 时标记被跳过的空白偶数页。
 #let skippedstate = state("skipped", false)
+
+/// 重置所有随章节编号的计数器（正文每章开头调用）
+/// 注意：chaptercounter 在此前已通过 .step() 递增
+#let reset-chapter-counters() = {
+  imagecounter.update(())
+  tablecounter.update(())
+  rawcounter.update(())
+  equationcounter.update(())
+  counter(math.equation).update(())
+  theoremcounter.update(())
+  definitioncounter.update(())
+  lemmacounter.update(())
+  corollarycounter.update(())
+  propositioncounter.update(())
+  propertycounter.update(())
+  examplecounter.update(())
+  remarkcounter.update(())
+}

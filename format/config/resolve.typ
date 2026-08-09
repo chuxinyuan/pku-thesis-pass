@@ -5,7 +5,7 @@
 #import "../utils/style.typ": build
 #import "../utils/font.typ": font-set
 #import "../utils/supplement.typ": supplement
-#import "../utils/util.typ": _resolve-path
+#import "../utils/util.typ": resolve-path
 #import "../utils/counter.typ": skippedstate
 
 /// 解析系统字体方案：CLI 参数优先，否则用 config() 参数
@@ -29,7 +29,7 @@
 /// 读取参考文献文件
 /// 路径应使用 path 类型，字符串路径按本地模式处理
 #let resolve-bib(bib-file) = if bib-file != none {
-  read(_resolve-path(bib-file))
+  read(resolve-path(bib-file))
 }
 
 /// 智能分页：always-start-odd: true 时章节从奇数页开始

@@ -13,7 +13,7 @@
 #import "headings.typ": heading-show-rule
 #import "header.typ": make-header
 #import "footer.typ": make-footer
-#import "show.typ": _figure-show-rule, _ref-show-rule
+#import "show.typ": figure-show-rule, ref-show-rule
 
 // ========== 列表符号 ==========
 // 无序列表用的实心符号：圆形、方形、菱形，供列表分层循环使用
@@ -165,8 +165,8 @@
   // 标题、图/表/代码块、交叉引用分别委托 headings.typ / show.typ 渲染
   show heading: it => heading-show-rule(it, smartpagebreak, style: style)
   show figure: set block(breakable: true)
-  show figure: it => _figure-show-rule(it, merged-supplements, style: style)
-  show ref: it => _ref-show-rule(it, merged-supplements)
+  show figure: it => figure-show-rule(it, merged-supplements, style: style)
+  show ref: it => ref-show-rule(it, merged-supplements)
 
   // ========== LaTeX 引用兼容 ==========
   // use-latexref=true 时：@fig:xxx 等带前缀引用解析失败时，剥离前缀重试 @xxx，

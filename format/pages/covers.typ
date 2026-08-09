@@ -8,7 +8,7 @@
 #import "../imports.typ": show-cn-fakebold
 #import "../utils/style.typ": style as _style
 #import "../utils/number.typ": chinesenumber, chineseyear
-#import "../utils/util.typ": _resolve-path, _ensure-not-eps
+#import "../utils/util.typ": resolve-path, ensure-not-eps
 
 // ========== 封面排版工具 ==========
 
@@ -214,12 +214,12 @@
       columns: (auto, auto),
       gutter: 0.4em,
       if logo != none {
-        image(_ensure-not-eps(_resolve-path(logo)), height: 2.4em, fit: "contain")
+        image(ensure-not-eps(resolve-path(logo)), height: 2.4em, fit: "contain")
       } else {
         _logo-placeholder(font)
       },
       if wordmark != none {
-        image(_ensure-not-eps(_resolve-path(wordmark)), height: 1.6em, fit: "contain")
+        image(ensure-not-eps(resolve-path(wordmark)), height: 1.6em, fit: "contain")
       } else {
         _wordmark-placeholder(font)
       },
