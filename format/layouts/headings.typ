@@ -30,7 +30,7 @@
 //   pagebreak: bool         - 是否在此 heading 前分页（默认 true）
 //   part: int | none         - 状态转换目标 (0/1/2/3/none)
 //   reset-page: bool        - 是否重置页码为 1（默认 false）
-//   show-header: bool       - 是否显示页眉（默认 true）
+//   show-page-marks: bool  - 是否显示页眉和页码（默认 true）
 //   header: content | none  - 自定义页眉文本（替换标题）
 //   spacing-before/after    - 覆盖默认段间距
 //   linespacing             - 覆盖默认行距
@@ -51,7 +51,7 @@
       pagebreak: pagebreak,
       part: if enter-front { 1 } else { none },
       reset-page: enter-front,
-      show-header: true,
+      show-page-marks: true,
       ..extra-meta.named(),
     ))],
   )[#title]
@@ -62,7 +62,7 @@
 #let back-heading(
   title,
   pagebreak: true,
-  show-header: true,
+  show-page-marks: true,
   outlined: true,
   ..extra-meta,
 ) = {
@@ -71,7 +71,7 @@
     outlined: outlined,
     supplement: [#metadata((
       pagebreak: pagebreak,
-      show-header: show-header,
+      show-page-marks: show-page-marks,
       ..extra-meta.named(),
     ))],
   )[#title]

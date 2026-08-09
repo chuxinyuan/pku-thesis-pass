@@ -2,7 +2,7 @@
 // footer.typ — 页脚生成
 // 根据 partcounter 部分显示罗马数字（前置部分）或阿拉伯数字（正文/附录）
 // 封面部分（part == 0）不显示页脚
-// 本页管辖标题的 show-header 元数据为 false 时清除页码（如声明页 clean-declaration）
+// 本页管辖标题的 show-page-marks 元数据为 false 时清除页码（如声明页 clean-declaration）
 // ============================================================
 
 #import "../utils/size.typ": size
@@ -17,11 +17,11 @@
   let logical-page = counter(page).at(here()).first()
   if skippedstate.at(here()) and calc.even(logical-page) { return }
 
-  // clean-declaration 检测：本页管辖标题的 show-header 为 false 时隐藏页码
+  // clean-declaration 检测：本页管辖标题的 show-page-marks 为 false 时隐藏页码
   let governing = get-page-headings(here()).governing
   if governing != none {
     let meta = get-heading-meta(governing)
-    if not meta.at("show-header", default: true) {
+    if not meta.at("show-page-marks", default: true) {
       return
     }
   }

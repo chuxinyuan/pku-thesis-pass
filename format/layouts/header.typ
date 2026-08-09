@@ -50,7 +50,7 @@
   if el == none { return }
 
   let meta = get-heading-meta(el)
-  if not meta.at("show-header", default: true) { return }
+  if not meta.at("show-page-marks", default: true) { return }
 
   set text(size: style.页眉.size)
   set par(spacing: 0pt)

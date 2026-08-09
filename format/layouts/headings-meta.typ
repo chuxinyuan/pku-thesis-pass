@@ -6,14 +6,14 @@
 // 修改字段名时需检查所有消费者：
 //   - headings-show-rule (headings.typ): pagebreak, part, reset-page
 //   - sizedheading (headings.typ):       spacing-before/after, linespacing, font
-//   - make-header (header.typ):          show-header, header
-//   - make-footer (footer.typ):          show-header
+//   - make-header (header.typ):          show-page-marks
+//   - make-footer (footer.typ):          show-page-marks
 //
 //  字段一览：
 //   pagebreak: bool         - 是否在此 heading 前分页（默认 true）
 //   part: int | none         - 状态转换目标 (0/1/2/none)
 //   reset-page: bool        - 是否重置页码为 1（默认 false）
-//   show-header: bool       - 是否显示页眉（默认 true）
+//   show-page-marks: bool   - 是否显示页眉和页码（默认 true）
 //   header: content | none  - 自定义页眉文本（替换章节标题）
 //   spacing-before/after    - 覆盖默认段间距
 //   linespacing             - 覆盖默认行距
