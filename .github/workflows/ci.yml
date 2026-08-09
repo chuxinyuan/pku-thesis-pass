@@ -27,7 +27,7 @@ jobs:
         uses: typst-community/setup-typst@v5
 
       - name: Install fonts
-        run: bash scripts/ci-install-fonts.sh
+        run: bash .github/workflows/ci-install-fonts.sh
 
       - name: Compile thesis.typ
         run: |
@@ -150,7 +150,7 @@ jobs:
         uses: typst-community/setup-typst@v5
 
       - name: Install fonts
-        run: bash scripts/ci-install-fonts.sh
+        run: bash .github/workflows/ci-install-fonts.sh
 
       - name: Run unit tests
         run: |
