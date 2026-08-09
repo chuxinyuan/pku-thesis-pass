@@ -83,9 +83,7 @@ typst compile template/thesis.typ --root .
   [Arial, Helvetica, Liberation Sans],
 )
 
-其他方案（`mac` / `windows` / `linux`）针对各平台预优化，基本无冗余 fallback，编译时零 warning。
-
-#strong[注意]：中文粗体默认用黑体显示。如果需要对黑体再额外加粗，或对宋体、楷体等进行加粗，模板已集成 `cuti` 包的伪粗体功能，会自动处理。
+其他方案（`mac` / `windows` / `linux`）针对各平台预优化，基本无冗余 fallback，安装相应字体后，编译时零 warning。
 
 === 字体族校验
 

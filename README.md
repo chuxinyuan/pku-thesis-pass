@@ -121,7 +121,7 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 ### 跨平台通用（system: "default"）
 
-优先使用 Windows 字体，Noto / Source Han 等开源字体兜底。
+优先使用 Windows 字体，Liberation / Source Han 等开源字体兜底。
 
 | 用途 | 字体列表 |
 |------|----------|
@@ -163,7 +163,7 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 ### Linux（system: "linux"）
 
-使用 Noto / Source Han / Fandol / Liberation 等常见开源字体。
+使用 Noto / Source Han / Fandol / Liberation 等常见开源字体，无商业字体依赖。
 
 | 用途 | 字体列表 |
 |------|----------|
