@@ -7,7 +7,7 @@
 
 #import "../utils/size.typ": size
 #import "../utils/counter.typ": partcounter, skippedstate
-#import "headings.typ": get-heading-meta, get-page-headings
+#import "headings-meta.typ": get-heading-meta, get-page-headings
 
 /// 生成页脚页码（作为 place 元素放置在页面底部）
 #let make-footer(style: none) = context {

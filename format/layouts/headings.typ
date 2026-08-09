@@ -9,6 +9,7 @@
 
 #import "../utils/size.typ": size
 #import "../utils/counter.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
+#import "headings-meta.typ": get-heading-meta, get-page-headings
 
 /// 根据标题等级返回对应字号（level 1 由 heading-show-rule 直接处理）
 #let get-heading-size(level, style: none) = {
@@ -74,39 +75,6 @@
       ..extra-meta.named(),
     ))],
   )[#title]
-}
-
-/// 从 heading 的 supplement 中提取元数据字典。
-/// 元数据通过 metadata 嵌入在 supplement 字段中。
-#let get-heading-meta(it) = {
-  if it.supplement != none and it.supplement.func() == metadata {
-    it.supplement.value
-  } else {
-    (:)
-  }
-}
-
-/// 查找与指定位置相关的 1 级标题
-/// - current: 与 location 同一物理页、位于其后的第一个 1 级标题
-///   （页眉位于页首、标题在其后时使用）
-/// - governing: 本页应遵循的标题 = current，否则为 location 之前最后一个
-///   1 级标题，都没有则为 none。页眉/页脚取 governing 的元数据做显示决策。
-/// 注意：本函数内部使用 query / location 等 context 操作，须在 context 内调用；
-/// 不加 `context` 关键字，使返回值保持为可直接取字段的普通字典。
-#let get-page-headings(location) = {
-  let physical-page = location.page()
-  let after = query(selector(heading.where(level: 1)).after(location))
-  let before = query(selector(heading.where(level: 1)).before(location))
-  let current = if after.len() > 0 {
-    let next = after.first()
-    if next.location().page() == physical-page { next } else { none }
-  } else { none }
-  let governing = if current != none {
-    current
-  } else if before.len() > 0 {
-    before.last()
-  } else { none }
-  (current: current, governing: governing)
 }
 
 /// 渲染标题正文（不重新触发 show heading）
