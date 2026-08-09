@@ -39,13 +39,13 @@
             _booktab-xubiao.update(true)
           }
         }),
-        table.hline(stroke: 1.5pt),
+        table.hline(stroke: style.三线表.顶线),
         ..header.children,
-        table.hline(stroke: 0.75pt),
+        table.hline(stroke: style.三线表.表头线),
       ),
       ..body,
       ..if footer != none { (footer,) } else { () },
-      table.hline(stroke: 1.5pt),
+      table.hline(stroke: style.三线表.底线),
     )
   },
 )

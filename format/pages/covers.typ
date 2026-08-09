@@ -172,7 +172,7 @@
   inset: 0.15em,
 )[
   #set align(center + horizon)
-  #text(size: _style.封面占位符.字号, fill: luma(120), font: font.黑体)[校徽]
+  #text(size: _style.封面占位符.字号, fill: luma(120), font: _style.封面占位符.font)[校徽]
 ]
 
 /// 校名字标灰色占位框：未提供字标图片时显示，提示用户自行配置
@@ -184,7 +184,7 @@
   inset: 0.15em,
 )[
   #set align(center + horizon)
-  #text(size: _style.封面占位符.字号, fill: luma(120), font: font.黑体)[字标]
+  #text(size: _style.封面占位符.字号, fill: luma(120), font: _style.封面占位符.font)[字标]
 ]
 
 /// 正常版封面

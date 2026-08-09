@@ -138,7 +138,7 @@
   // 斜体用楷体（pkuthss 惯例）
   show emph: it => text(font: style.强调.font, style: style.强调.style, it.body)
   // 代码用等宽字体
-  show raw: set text(font: font.代码, size: size.五号, top-edge: "ascender")
+  show raw: set text(font: style.代码样式.font, size: style.代码样式.size, top-edge: "ascender")
 
   // ========== 代码块高亮 ==========
   // codly 渲染代码块（行号、语言图标等由 codly-args 控制）

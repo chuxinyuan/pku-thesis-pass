@@ -121,10 +121,11 @@
     else { style.三级节标题 }
 
   if it.level != 1 {
-    return sizedheading(it, get-heading-size(it.level, style: style), style-font: (font: h-style.font, weight: h-style.weight), number-spacing: h-style.编号间距, heading-spacing-before: h-style.spacing-before, heading-spacing-after: h-style.spacing-after)
+    return sizedheading(it, get-heading-size(it.level, style: style), style-font: (font: h-style.font, weight: h-style.weight), number-spacing: h-style.编号间距, heading-spacing-before: h-style.spacing-before, heading-spacing-after: h-style.spacing-after, linespacing: style.标题行距)
   }
 
-  let meta = get-heading-meta(it) + (heading-spacing-before: h-style.spacing-before, heading-spacing-after: h-style.spacing-after)
+  let meta = get-heading-meta(it)
+  let meta = meta + (heading-spacing-before: h-style.spacing-before, heading-spacing-after: h-style.spacing-after, linespacing: meta.at("linespacing", default: style.标题行距))
   let should-pagebreak = meta.at("pagebreak", default: true)
   let target-part = meta.at("part", default: none)
   let should-reset-page = meta.at("reset-page", default: false)
