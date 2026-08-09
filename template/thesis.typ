@@ -11,30 +11,7 @@
 
 #import "../format/lib.typ": config
 
-#let (
-  setup,             // 全局页面与字体设置（#show: setup）
-  cover,             // 论文封面（盲审/正常版）
-  spine,             // 书脊页
-  copyright,         // 版权声明页
-  abstract-zh,       // 中文摘要页
-  abstract-en,       // 英文摘要页
-  outline,           // 中文目录
-  list-of-figures,   // 插图列表
-  list-of-tables,    // 表格列表
-  list-of-equations, // 公式列表
-  list-of-code,      // 代码列表
-  notation,          // 主要符号对照表
-  body-wrap,         // 正文全局样式（#show: body-wrap）
-  bibliography,      // 参考文献（#show: bibliography）
-  appendix,          // 进入附录部分（重置为"附录 A"编号）
-  achievement,       // 攻读学位期间发表的论文
-  acknowledgements,  // 致谢
-  declaration,       // 原创性声明和授权说明
-  font,              // 当前系统字体方案
-  system,            // 当前系统名称（default/mac/windows/linux）
-  blind,             // 盲审模式是否开启
-  total-words,       // 正文 CJK 字数统计结果
-) = config(
+#let cfg = config(
   // ========== 基本信息 ==========
   author-zh: "张三",
   author-en: "San Zhang",
@@ -82,48 +59,48 @@
 )
 
 // ========== 页面设置 ==========
-#show: setup
+#show: cfg.setup
 
 // ========== 论文封面 ==========
-#cover()
+#(cfg.cover)()
 
 // ========== 论文书脊 ==========
-// #spine()
+// #(cfg.spine)()
 
 // ========== 版权声明 ==========
-#copyright()
+#(cfg.copyright)()
 
 // ========== 中文摘要 ==========
-#abstract-zh(
+#(cfg.abstract-zh)(
   keywords-zh: ("Typst", "模板", "学位论文", "北京大学")
 )[#include "content/abstract-zh.typ"]
 
 // ========== 英文摘要 ==========
-#abstract-en(
+#(cfg.abstract-en)(
   keywords-en: ("Typst", "Template", "Thesis", "Peking University")
 )[#include "content/abstract-en.typ"]
 
 // ========== 论文目录 ==========
-#outline()
+#(cfg.outline)()
 
 // ========== 插图列表 ==========
-#list-of-figures()
+#(cfg.list-of-figures)()
 
 // ========== 表格列表 ==========
-#list-of-tables()
+#(cfg.list-of-tables)()
 
 // ========== 公式列表 ==========
-#list-of-equations()
+#(cfg.list-of-equations)()
 
 // ========== 代码列表 ==========
-#list-of-code()
+#(cfg.list-of-code)()
 
 // ========== 主要符号对照表 ==========
-#notation[#include "content/notation.typ"]
+#(cfg.notation)[#include "content/notation.typ"]
 
 // ========== 正文部分 ==========
-#show: body-wrap
-#show: bibliography
+#show: cfg.body-wrap
+#show: cfg.bibliography
 
 = 快速开始 <quickstart>
 
@@ -146,17 +123,17 @@
 #include "content/ch05-faq.typ"
 
 // ========== 附录部分 ==========
-#appendix()
+#(cfg.appendix)()
 
 = 关于 Typst <about>
 
 #include "content/appendix-about.typ"
 
 // ========== 攻读学位期间发表的论文 ==========
-#achievement[#include "content/achievement.typ"]
+#(cfg.achievement)[#include "content/achievement.typ"]
 
 // ========== 致谢部分 ==========
-#acknowledgements[#include "content/acknowledgements.typ"]
+#(cfg.acknowledgements)[#include "content/acknowledgements.typ"]
 
 // ========== 原创声明 ==========
-#declaration()
+#(cfg.declaration)()

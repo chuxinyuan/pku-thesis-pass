@@ -55,17 +55,20 @@ cd pku-thesis-pass
 
 ## 配置说明
 
-在 `thesis.typ` 中调用 `config()` 函数配置论文信息，返回值按固定顺序排列，解构出的各组件可按任意顺序编排：
+在 `thesis.typ` 中调用 `config()` 函数配置论文信息，返回值按字典形式访问，各组件可按任意顺序编排：
 
 ```typst
-#let (setup, cover, ..) = config(
+#let cfg = config(
   author-zh: "张三",
   title-zh: "论文中文题目",
   system: "default",
 )
+
+#show: cfg.setup
+#(cfg.cover)()
 ```
 
-如需精简，可用 `..` 跳过并收集其余组件，但注意位置解构必须与 `config()` 的返回顺序一致，否则组件会绑定错误。完整示例见 `template/thesis.typ`。
+完整示例见 `template/thesis.typ`。
 
 | 参数 | 类型 | 说明 |
 |------|------|------|
