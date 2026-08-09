@@ -19,6 +19,10 @@ json:
 test:
   @typst compile tests/number-test.typ --root .
   @typst compile tests/util-test.typ --root .
+  @typst compile tests/style-test.typ --root .
+  @typst compile tests/cli-test.typ --root .
+  @typst compile tests/size-test.typ --root .
+  @typst compile tests/font-test.typ --root .
 
 # switch imports to @preview mode (for publishing to Typst Universe)
 preview:

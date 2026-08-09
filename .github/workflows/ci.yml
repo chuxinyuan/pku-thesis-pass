@@ -151,3 +151,51 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v4
+
+      - name: Install fonts
+        run: |
+          sudo apt update
+          sudo apt install -y fonts-noto-cjk fonts-arphic-ukai
+          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+          sudo apt install -y ttf-mscorefonts-installer
+          sudo mkdir -p /usr/local/share/fonts
+          curl -sSL https://mirrors.aliyun.com/CTAN/fonts/fandol/FandolFang-Regular.otf -o /tmp/FandolFang-Regular.otf
+          sudo cp /tmp/FandolFang-Regular.otf /usr/local/share/fonts/
+          curl -sSL https://mirrors.aliyun.com/CTAN/fonts/lxgw-fonts/LXGWZhuqueFangsong-Regular.ttf -o /tmp/LXGWZhuqueFangsong-Regular.ttf
+          sudo cp /tmp/LXGWZhuqueFangsong-Regular.ttf /usr/local/share/fonts/
+          sudo fc-cache -fv
+
+      - name: Run unit tests
+        run: |
+          typst compile tests/number-test.typ --root .
+          typst compile tests/util-test.typ --root .
+          typst compile tests/style-test.typ --root .
+          typst compile tests/cli-test.typ --root .
+          typst compile tests/size-test.typ --root .
+          typst compile tests/font-test.typ --root .
+
+      - name: Compile integration tests
+        run: |
+          typst compile tests/thesis-minimal.typ --root .
+          typst compile tests/thesis-linux.typ --root . --input system=linux
+          typst compile tests/thesis-full.typ --root .
+          typst compile tests/thesis-blind.typ --root . --input blind=true
+          typst compile tests/thesis-heading.typ --root .
+          typst compile tests/thesis-refs.typ --root .
+
+      - name: Verify blind mode hides author
+        run: |
+          if strings tests/thesis-blind.pdf | grep -q "张三"; then
+            echo "ERROR: author name leaked in blind mode"
+            exit 1
+          fi
+          echo "OK: author name hidden in blind mode"
