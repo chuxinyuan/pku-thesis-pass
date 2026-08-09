@@ -35,9 +35,9 @@
     宋体: ("Times New Roman", "STSong"),
     黑体: ("Times New Roman", "PingFang SC", "STHeiti"),
     楷体: ("Times New Roman", "STKaiti"),
-    代码: ("Menlo", "STSong"),
-    英文衬线: ("Times New Roman"),
-    英文无衬线: ("Arial"),
+     代码: ("Menlo", "STSong"),
+     英文衬线: ("Times New Roman"),
+     英文无衬线: ("Arial", "Helvetica"),
   ),
 
   // Linux：纯开源字体，无商业字体依赖
