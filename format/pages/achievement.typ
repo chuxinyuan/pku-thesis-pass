@@ -23,8 +23,8 @@
   set par(first-line-indent: 0em)
   set enum(
     indent: 0pt,
-    numbering: "[1]",
-    body-indent: 1.2em,
+    numbering: style.成果列表.编号格式,
+    body-indent: style.成果列表.悬挂缩进,
     spacing: style.成果列表.spacing,
   )
 

@@ -60,7 +60,7 @@
     #block(width: 100%)[
       #stack(
         dir: ttb,
-        spacing: 3pt,
+        spacing: style.页眉.堆叠间距,
         if is-even {
           header-text
         } else {
@@ -71,11 +71,11 @@
               ..counter(heading).at(el.location()),
               location: el.location(),
             )
-            h(0.5em)
+            h(style.页眉.编号间距)
           }
           header-text
         },
-        line(stroke: 0.75pt, length: 100%),
+        line(stroke: style.页眉.下划线粗细, length: 100%),
       )
     ]
   ]

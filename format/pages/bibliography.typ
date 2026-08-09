@@ -13,7 +13,7 @@
   set par(
     leading: style.参考文献内容.leading,
     spacing: style.参考文献内容.para-spacing,
-    hanging-indent: 1.66em,
+    hanging-indent: style.参考文献内容.悬挂缩进,
     first-line-indent: 0em,
   )
   show regex("\\[\\d+\\]"): it => {
@@ -52,7 +52,7 @@
         set par(
           leading: style.参考文献内容.leading + extra-spacing,
           spacing: style.参考文献内容.para-spacing + extra-spacing,
-          hanging-indent: 1.66em,
+          hanging-indent: style.参考文献内容.悬挂缩进,
           first-line-indent: 0em,
           justify: true,
         )

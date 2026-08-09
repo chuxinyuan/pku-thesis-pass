@@ -104,7 +104,7 @@
   // 与 figure 同理：随章编号、附录切换 "A.1"；编号中的中文用宋体渲染
   set math.equation(
     numbering: (..nums) => context {
-      set text(font: font.宋体)
+      set text(font: style.公式编号.font)
       if not in-appendix(here()) {
         numbering("(1.1)", chaptercounter.at(here()).first(), ..nums)
       } else {
@@ -119,16 +119,16 @@
   show footnote: set super(size: style.脚注.super-size)
   show footnote.entry: it => {
     let loc = it.note.location()
-    set text(font: font.宋体, size: style.脚注.size)
+    set text(font: style.脚注.font, size: style.脚注.size)
     set par(
       justify: true,
       leading: style.脚注.leading,
       spacing: 0pt,
-      hanging-indent: 1.5em,
+      hanging-indent: style.脚注.悬挂缩进,
       first-line-indent: 0pt,
     )
     numbering(it.note.numbering, ..counter(footnote).at(loc))
-    h(0.5em)
+    h(style.脚注.编号间距)
     it.note.body
   }
 
@@ -136,7 +136,7 @@
   // 粗体用伪粗体描边（保证跨字体一致，避免真粗体不可用或过重）
   show: show-cn-fakebold
   // 斜体用楷体（pkuthss 惯例）
-  show emph: it => text(font: font.楷体, style: "italic", it.body)
+  show emph: it => text(font: style.强调.font, style: style.强调.style, it.body)
   // 代码用等宽字体
   show raw: set text(font: font.代码, size: size.五号, top-edge: "ascender")
 

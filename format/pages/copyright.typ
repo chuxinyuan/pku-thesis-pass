@@ -14,7 +14,7 @@
   front-heading(
     "版权声明",
     pagebreak: false,
-    linespacing: style.章标题.size * 1.3 * style.版权声明.linespacing-multiplier,
+    linespacing: style.章标题.size * style.版权声明.行距倍数 * style.版权声明.linespacing-multiplier,
     spacing-before: 0pt,
     spacing-after: 0pt,
   )

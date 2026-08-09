@@ -41,11 +41,11 @@
       } else {
         numbering(el.numbering, ..counter(heading).at(el_loc))
       }
-      h(1em)
+      h(style.目录其他.编号间距)
     }
 
     if indent {
-      h(1em * (el.level - 1))
+      h(style.目录其他.缩进量 * (el.level - 1))
     }
 
     if el.level == 1 {

@@ -78,17 +78,19 @@
 }
 
 /// 渲染标题正文（不重新触发 show heading）
-/// fs: 字号；style-font: 标题默认字体（无 meta 覆盖时使用）；meta: 通过 ..args 传入的元数据覆盖。
-#let sizedheading(it, fs, style-font: (:), ..meta) = {
+/// fs: 字号；style-font: 标题默认字体；number-spacing: 编号间距；meta: 通过 ..args 传入的元数据覆盖。
+#let sizedheading(it, fs, style-font: (:), number-spacing: 1em, ..meta) = {
   if it.body == none or it.body == [] { return }
 
   let spacing-before = meta.at(
-    "spacing-before",
-    default: default-heading-spacing-before.at(calc.min(it.level - 1, 3)),
+    "heading-spacing-before",
+    default: meta.at("spacing-before",
+    default: default-heading-spacing-before.at(calc.min(it.level - 1, 3))),
   )
   let spacing-after = meta.at(
-    "spacing-after",
-    default: default-heading-spacing-after.at(calc.min(it.level - 1, 3)),
+    "heading-spacing-after",
+    default: meta.at("spacing-after",
+    default: default-heading-spacing-after.at(calc.min(it.level - 1, 3))),
   )
   let linespacing = meta.at("linespacing", default: size.三号 * 1.3 * 2.41)
   let meta-font = meta.at("font", default: (:))
@@ -98,7 +100,7 @@
   v(spacing-before)
   let f = if meta-font != (:) { meta-font } else { (font: style-font.font, weight: style-font.weight, size: fs) }
   let body = if it.numbering != none {
-    counter(heading).display() + h(1em) + it.body
+    counter(heading).display() + h(number-spacing) + it.body
   } else {
     it.body
   }
@@ -119,10 +121,10 @@
     else { style.三级节标题 }
 
   if it.level != 1 {
-    return sizedheading(it, get-heading-size(it.level, style: style), style-font: (font: h-style.font, weight: h-style.weight))
+    return sizedheading(it, get-heading-size(it.level, style: style), style-font: (font: h-style.font, weight: h-style.weight), number-spacing: h-style.编号间距, heading-spacing-before: h-style.spacing-before, heading-spacing-after: h-style.spacing-after)
   }
 
-  let meta = get-heading-meta(it)
+  let meta = get-heading-meta(it) + (heading-spacing-before: h-style.spacing-before, heading-spacing-after: h-style.spacing-after)
   let should-pagebreak = meta.at("pagebreak", default: true)
   let target-part = meta.at("part", default: none)
   let should-reset-page = meta.at("reset-page", default: false)
@@ -163,5 +165,5 @@
   }
 
   set align(h-style.align)
-  sizedheading(it, style.章标题.size, style-font: (font: h-style.font, weight: h-style.weight), ..meta)
+  sizedheading(it, style.章标题.size, style-font: (font: h-style.font, weight: h-style.weight), number-spacing: h-style.编号间距, ..meta)
 }

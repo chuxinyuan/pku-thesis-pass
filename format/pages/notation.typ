@@ -52,7 +52,7 @@
   block(width: 100%, grid(
     columns: columns,
     align: left,
-    column-gutter: 4em,
+    column-gutter: style.符号表.列间距,
     row-gutter: style.符号表.row-gutter,
     ..out,
   ))

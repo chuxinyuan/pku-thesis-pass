@@ -12,7 +12,7 @@
 /// 原创性声明与授权说明页
 /// clean-declaration: 为 true 时清除该页的页眉和页码（通过 back-heading 的 show-header 元数据）
 #let declaration-page(clean-declaration: false, style: none) = {
-  set par(first-line-indent: 2em)
+  set par(first-line-indent: style.正文.first-line-indent)
   back-heading(
     "北京大学学位论文原创性声明和使用授权说明",
     pagebreak: true,

@@ -301,12 +301,12 @@
 ) = {
   let s = if style != none { style } else { _style }
   set align(center + top)
-  text(size: s.封面题头.size, font: font.黑体)[
+  text(size: s.封面题头.size, font: s.封面题头.font)[
     #show: show-cn-fakebold
     #header-text
   ]
   linebreak()
-  set text(size: s.封面信息.size, font: font.仿宋)
+  set text(size: s.封面信息.size, font: s.封面信息.font)
   set par(justify: true, leading: s.封面盲审.leading)
   [（匿名评阅论文封面）]
   v(1fr)

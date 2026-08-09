@@ -55,21 +55,21 @@
   // 章标题行：小四（12pt）黑体加粗，段前 6bp
   目录章标题: (font: font.黑体, size: size.小四, spacing-before: 6pt, weight: "bold"),
   // 节标题等：小四（12pt）宋体，实测 10.5pt 更接近 Word
-  目录其他: (font: font.宋体, size: size.小四, leading: 10.5pt),
+  目录其他: (font: font.宋体, size: size.小四, leading: 10.5pt, 编号间距: 1em, 缩进量: 1em),
 
   // ── 1.6 主要符号对照表 ──
-  符号表: (row-gutter: 10pt, group-gutter: 20pt),
+  符号表: (row-gutter: 10pt, group-gutter: 20pt, 列间距: 4em),
 
   // ── 1.7 正文 ──
   // ── 1.7.1 标题 ──
-  // 章标题：三号（16pt）黑体居中加粗
-  章标题: (font: font.黑体, size: size.三号, align: center, weight: "bold"),
-  // 一级节标题：四号（14pt）黑体居左加粗
-  一级节标题: (font: font.黑体, size: size.四号, weight: "bold"),
-  // 二级节标题：13pt 黑体居左加粗（指南直接指定，非传统字号名）
-  二级节标题: (font: font.黑体, size: 13pt, weight: "bold"),
-  // 三级节标题：小四（12pt）黑体居左加粗
-  三级节标题: (font: font.黑体, size: size.小四, weight: "bold"),
+  // 章标题：三号（16pt）黑体居中加粗，段前 24bp 后 18bp
+  章标题: (font: font.黑体, size: size.三号, align: center, weight: "bold", spacing-before: 24pt, spacing-after: 18pt, 编号间距: 1em),
+  // 一级节标题：四号（14pt）黑体居左加粗，段前 24bp 后 6bp
+  一级节标题: (font: font.黑体, size: size.四号, weight: "bold", spacing-before: 24pt, spacing-after: 6pt, 编号间距: 1em),
+  // 二级节标题：13pt 黑体居左加粗，段前 12bp 后 6bp（指南直接指定）
+  二级节标题: (font: font.黑体, size: 13pt, weight: "bold", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em),
+  // 三级节标题：小四（12pt）黑体居左加粗，段前 12bp 后 6bp
+  三级节标题: (font: font.黑体, size: size.小四, weight: "bold", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em),
 
   // ── 1.7.2 段落文字 ──
   // 正文：小四（12pt）宋体。PKU 指南规定行距固定 20bp，实测 10.5pt 更接近 Word
@@ -77,7 +77,16 @@
 
   // ── 1.7.3 脚注 ──
   // 脚注：小五（9pt）宋体，单倍行距，悬挂缩进
-  脚注: (font: font.宋体, size: size.小五, leading: 1.2em, super-size: 0.65em),
+  脚注: (font: font.宋体, size: size.小五, leading: 1.2em, super-size: 0.65em, 悬挂缩进: 1.5em, 编号间距: 0.5em, 编号格式: "①"),
+
+  // 正则文本强调：斜体用楷体
+  强调: (font: font.楷体, style: "italic"),
+
+  // 公式编号：宋体
+  公式编号: (font: font.宋体),
+
+  // 子图编号格式
+  子图编号格式: "(a)",
 
   // ── 1.7.4 图表 ──
   // 图序图名：11pt 宋体居中（指南直接指定，非传统字号名）
@@ -95,11 +104,11 @@
   // 定理证明结束标记（□）字号
   证明: (标记字号: 0.7em),
   // 版权声明标题行距倍数
-  版权声明: (linespacing-multiplier: 2),
+  版权声明: (行距倍数: 1.3, linespacing-multiplier: 2),
 
   // ── 1.8 参考文献 ──
-  // 内容：五号（10.5pt）宋体，行距 ~16bp，段前 3bp
-  参考文献内容: (font: font.宋体, size: size.五号, leading: 6.5pt, para-spacing: 6.5pt + 3pt),
+  // 参考文献内容：五号（10.5pt）宋体，行距 ~16bp，段前 3bp
+  参考文献内容: (font: font.宋体, size: size.五号, leading: 6.5pt, para-spacing: 6.5pt + 3pt, 悬挂缩进: 1.66em),
 
   // ── 1.9 附录与后置部分 ──
   // 致谢/后记/说明：格式同正文
@@ -107,7 +116,7 @@
   // 原创性声明与授权说明：固定法律文书，标题加粗
   声明: (font: font.宋体, size: size.小四, leading: 0.95em, spacing: 0.95em, weight: "bold"),
   // 攻读学位期间发表的论文列表
-  成果列表: (font: font.宋体, size: size.小四, spacing: 1.14em),
+  成果列表: (font: font.宋体, size: size.小四, spacing: 1.14em, 编号格式: "[1]", 悬挂缩进: 1.2em),
   // 书脊页：仿宋 12pt，左右窄边距
   书脊: (font: font.仿宋, size: 12pt, margin: (x: 1cm, y: 5.4cm)),
 
@@ -115,7 +124,7 @@
   // A4 纸，左侧装订
   页边距: (top: 3.0cm, bottom: 2.5cm, left: 2.6cm, right: 2.6cm),
   // 页眉：五号（10.5pt）宋体居中，距页顶 2cm
-  页眉: (font: font.宋体, size: size.五号, 堆叠间距: 3pt, 垂直位置: 2cm),
+  页眉: (font: font.宋体, size: size.五号, 堆叠间距: 3pt, 垂直位置: 2cm, 下划线粗细: 0.75pt, 编号间距: 0.5em),
   // 页码：五号（10.5pt）居中，距页底 1.75cm（旧版本误写为 9pt）
   页码: (font: font.英文衬线, size: size.五号, 垂直位置: 1.75cm),
 )

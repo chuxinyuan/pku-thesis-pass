@@ -47,7 +47,7 @@
     [
       #set text(size: style.图序图名.size)
       #context {
-        numbering("(a)", counter(figure.where(kind: "subfigure")).at(here()).first())
+        numbering(style.子图编号格式, counter(figure.where(kind: "subfigure")).at(here()).first())
       }
       #h(0.5em)
       #it.caption.body
