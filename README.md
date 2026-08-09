@@ -125,10 +125,10 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 | 用途 | 字体列表 |
 |------|----------|
-| 仿宋 | Times New Roman, FangSong, STFangsong, FandolFang R |
-| 宋体 | Times New Roman, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif |
-| 黑体 | Times New Roman, SimHei, STHeiti, Noto Sans CJK SC, Source Han Sans |
-| 楷体 | Times New Roman, KaiTi, STKaiti, AR PL UKai |
+| 仿宋 | Times New Roman, Liberation Serif, FangSong, STFangsong, FandolFang R |
+| 宋体 | Times New Roman, Liberation Serif, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif |
+| 黑体 | Times New Roman, Liberation Serif, SimHei, STHeiti, Noto Sans CJK SC, Source Han Sans |
+| 楷体 | Times New Roman, Liberation Serif, KaiTi, STKaiti, AR PL UKai |
 | 代码 | Consolas, DejaVu Sans Mono, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif |
 | 英文衬线 | Times New Roman, Liberation Serif |
 | 英文无衬线 | Arial, Liberation Sans |
@@ -167,13 +167,15 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 | 用途 | 字体列表 |
 |------|----------|
-| 仿宋 | Times New Roman, Liberation Serif, FandolFang R, Zhuque Fangsong (technical preview) |
-| 宋体 | Times New Roman, Liberation Serif, Noto Serif CJK SC, Source Han Serif |
-| 黑体 | Times New Roman, Liberation Serif, Noto Sans CJK SC, Source Han Sans |
-| 楷体 | Times New Roman, Liberation Serif, AR PL UKai |
+| 用途 | 字体列表 |
+|------|----------|
+| 仿宋 | Liberation Serif, FandolFang R, Zhuque Fangsong (technical preview) |
+| 宋体 | Liberation Serif, Noto Serif CJK SC, Source Han Serif |
+| 黑体 | Liberation Serif, Noto Sans CJK SC, Source Han Sans |
+| 楷体 | Liberation Serif, AR PL UKai |
 | 代码 | DejaVu Sans Mono, Noto Serif CJK SC, Source Han Serif |
-| 英文衬线 | Times New Roman, Liberation Serif |
-| 英文无衬线 | Arial, Liberation Sans |
+| 英文衬线 | Liberation Serif |
+| 英文无衬线 | Liberation Sans |
 
 ## 编译文档
 

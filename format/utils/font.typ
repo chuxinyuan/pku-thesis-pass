@@ -7,12 +7,12 @@
 /// 字体方案：每个条目为一个字体列表，Typst 按顺序依次 Fallback。
 /// 按系统分类，config() 的 system 参数可选择不同方案。
 #let font-set = (
-  // 跨平台通用：优先使用 Windows 字体，Noto / Source Han 等开源字体兜底
+  // 跨平台通用：优先使用 Windows 字体，Liberation / Noto / Source Han 等开源字体兜底
   default: (
-    仿宋: ("Times New Roman", "FangSong", "STFangsong", "FandolFang R"),
-    宋体: ("Times New Roman", "NSimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
-    黑体: ("Times New Roman", "SimHei", "STHeiti", "Noto Sans CJK SC", "Source Han Sans"),
-    楷体: ("Times New Roman", "KaiTi", "STKaiti", "AR PL UKai"),
+    仿宋: ("Times New Roman", "Liberation Serif", "FangSong", "STFangsong", "FandolFang R"),
+    宋体: ("Times New Roman", "Liberation Serif", "NSimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
+    黑体: ("Times New Roman", "Liberation Serif", "SimHei", "STHeiti", "Noto Sans CJK SC", "Source Han Sans"),
+    楷体: ("Times New Roman", "Liberation Serif", "KaiTi", "STKaiti", "AR PL UKai"),
     代码: ("Consolas", "DejaVu Sans Mono", "NSimSun", "STSong", "Noto Serif CJK SC", "Source Han Serif"),
     英文衬线: ("Times New Roman", "Liberation Serif"),
     英文无衬线: ("Arial", "Liberation Sans"),
@@ -40,15 +40,15 @@
     英文无衬线: ("Arial"),
   ),
 
-  // Linux：优先使用 Noto / Source Han / Fandol 等常见开源字体
+  // Linux：纯开源字体，无商业字体依赖
   linux: (
-    仿宋: ("Times New Roman", "Liberation Serif", "FandolFang R", "Zhuque Fangsong (technical preview)"),
-    宋体: ("Times New Roman", "Liberation Serif", "Noto Serif CJK SC", "Source Han Serif"),
-    黑体: ("Times New Roman", "Liberation Serif", "Noto Sans CJK SC", "Source Han Sans"),
-    楷体: ("Times New Roman", "Liberation Serif", "AR PL UKai"),
+    仿宋: ("Liberation Serif", "FandolFang R", "Zhuque Fangsong (technical preview)"),
+    宋体: ("Liberation Serif", "Noto Serif CJK SC", "Source Han Serif"),
+    黑体: ("Liberation Serif", "Noto Sans CJK SC", "Source Han Sans"),
+    楷体: ("Liberation Serif", "AR PL UKai"),
     代码: ("DejaVu Sans Mono", "Noto Serif CJK SC", "Source Han Serif"),
-    英文衬线: ("Times New Roman", "Liberation Serif"),
-    英文无衬线: ("Arial", "Liberation Sans"),
+    英文衬线: ("Liberation Serif",),
+    英文无衬线: ("Liberation Sans",),
   ),
 )
 
