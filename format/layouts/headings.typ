@@ -10,11 +10,9 @@
 #import "../utils/size.typ": size
 #import "../utils/counter.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
 
-/// 根据标题等级返回对应字号（用于 2–4 级标题）
+/// 根据标题等级返回对应字号（level 1 由 heading-show-rule 直接处理）
 #let get-heading-size(level, style: none) = {
-  if level == 1 {
-    style.章标题.size
-  } else if level == 2 {
+  if level == 2 {
     style.一级节标题.size
   } else if level == 3 {
     style.二级节标题.size
@@ -196,6 +194,6 @@
     remarkcounter.update(())
   }
 
-  set align(center)
+  set align(h-style.align)
   sizedheading(it, style.章标题.size, style-font: (font: h-style.font, weight: h-style.weight), ..meta)
 }
