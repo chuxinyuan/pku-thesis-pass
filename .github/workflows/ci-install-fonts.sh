@@ -4,9 +4,8 @@ set -euo pipefail
 sudo apt update
 sudo apt install -y fonts-noto-cjk fonts-arphic-ukai
 
-# Install Microsoft core fonts
-echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
-sudo apt install -y ttf-mscorefonts-installer
+# Install Liberation fonts (metric-compatible with Times New Roman / Arial)
+sudo apt install -y fonts-liberation
 
 # Install FandolFang and ZhuqueFangsong font
 sudo mkdir -p /usr/local/share/fonts
