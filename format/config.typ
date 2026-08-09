@@ -1,6 +1,6 @@
 // ============================================================
 // config.typ — 学位论文模板总控入口
-// config() 返回闭包字典，用户通过 cfg.xxx 方式调用各页面函数
+// config() 返回闭包字典 + 配置值，用户通过 cfg.xxx 方式调用
 //
 // 命令行参数（--input key=value）：
 //   --input blind=true|false                    盲审模式
@@ -11,37 +11,16 @@
 
 // ========== 子模块导入 ==========
 
-// 基础定义
 #import "utils/number.typ": appendix
-
-// 命令行参数与系统状态
 #import "config/cli.typ": _cli-blind, _cli-preview, _cli-always-start-odd, _cli-system, system-state
-
-// 解析函数
 #import "config/resolve.typ": resolve-font, resolve-supplements, resolve-bib, make-smartpagebreak
-
-// 基础设施
-#import "layouts/setup.typ": page-setup
-#import "components/wordcount.typ": word-count-cjk, total-words, total-characters
-
-// 页面
-#import "pages/covers.typ": cover-page-blind, cover-page-normal
-#import "pages/spine.typ": spine-page
-#import "pages/copyright.typ": copyright-page
-#import "pages/abstract-zh.typ": abstract-page-zh
-#import "pages/abstract-en.typ": abstract-page-en
-#import "pages/outline.typ": chineseoutline
-#import "pages/listoffigures.typ": listoffigures
-#import "pages/notation.typ": notation-page
-#import "pages/bibliography.typ": render-bibliography
-#import "pages/achievement.typ": achievement-page
-#import "pages/acknowledgements.typ": acknowledgements-page
-#import "pages/declaration.typ": declaration-page
+#import "config/builder.typ": build-pages
+#import "components/wordcount.typ": total-words, total-characters
 
 // ========== 参数化配置入口 ==========
 
 /// 论文主配置函数，返回闭包字典（DI 模式）
-/// 返回 `(setup, cover, ...)` 字典，通过 `cfg.xxx` 方式调用
+/// 返回字典，通过 `cfg.xxx` 方式调用各页面函数和配置值
 ///
 /// 基本信息：
 ///   author-zh — 中文姓名
@@ -71,18 +50,18 @@
 ///   always-start-odd — 章节从奇数页开始（默认 true）
 ///   clean-declaration — 声明页清除页眉页码（默认 false）
 ///   outline-depth — 目录深度（默认 3）
-///   word-count — 统计正文字数（默认 true，正文任意处可用 total-words / total-characters 显示）
-///   achievement-outlined — "攻读学位期间发表的论文"页是否出现在目录（默认 true）
+///   word-count — 统计正文字数（默认 true）
+///   achievement-outlined — "攻读学位期间发表的论文"页是否入目录（默认 true）
 ///   supplements — 自定义引用记号
 ///   use-latexref — 是否启用 LaTeX 引用兼容（默认 false）
-///   latexref-prefixes — LaTeX 引用剥离前缀列表（默认 ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:")）
+///   latexref-prefixes — LaTeX 引用剥离前缀列表
 ///   codly-args — 控制代码块行号、背景色、语言图标等
-///   logo — 封面校徽图片路径，`path` 类型（如 `path("assets/logo.svg")`，默认 none 显示占位框）
-///   wordmark — 封面校名字标图片路径，`path` 类型（如 `path("assets/wordmark.svg")`，默认 none 显示占位框）
+///   logo — 封面校徽图片路径（默认 none 显示占位框）
+///   wordmark — 封面校名字标图片路径（默认 none 显示占位框）
 ///
 /// 参考文献：
 ///   override-bib — 使用 Typst 原生 bibliography（默认 false）
-///   bib-file — BibTeX 文件（如：`path("path/to/xxxx.bib")`，`path` 类型）
+///   bib-file — BibTeX 文件，`path` 类型
 ///   bib-style — "numeric"(顺序编码) / "author-date"(著者-出版年)
 ///   bib-version — "2015" / "2025"
 ///   bib-cn-first — 中文文献优先（默认 true）
@@ -96,8 +75,6 @@
   blind-id: "L2023XXXXX",
   thesis-name: "博士研究生学位论文",
   header-text: "北京大学博士学位论文",
-  // 可以用 \n 控制中英文标题在非盲审封面 (blind=false) 中的换行点
-  // 在盲审封面 (blind=true) 中，手工插入的 \n 会被忽略，以确保标题连续
   title-zh: "北京大学学位论文 Typst 模板",
   title-en: "Typst Template for Peking University Thesis",
   school: "某个院系",
@@ -107,61 +84,31 @@
   direction: "某个研究方向",
   supervisor-zh: "李四",
   supervisor-en: "Si Li",
-  // 学位类型："academic"（学术学位）或 "professional"（专业学位）
-  degree-type: "academic", // "academic" 或 "professional"
+  degree-type: "academic",
   year: 2026,
   month: 6,
   // ========== 排版配置 ==========
-  system: "default",       // "default" / "mac" / "windows" / "linux"
-  blind: false,            // 盲审模式
-  // 预览模式下会将链接文本显示为蓝色
-  // 在生成打印版时，可以设置为 false
-  // 可通过命令行 --input preview=false 覆盖
+  system: "default",
+  blind: false,
   preview: true,
-  // 这里设置为 2em 是为了更加美观
-  // Word 模板中中文正文的首行缩进固定为 1.77em
-  // 如果要求严格对应，请将 first-line-indent 设置为 1.77em
-  first-line-indent: 2em,  // 首行缩进
-  always-start-odd: true,  // 章节从奇数页开始
-  // 是否清除原创性声明页的页眉和页码
-  // 如果想要去除原创性声明页的页眉和页码，可以设置为 true
-  // Word 模板中包含原创性声明页的页眉和页码，所以这里默认为 false
+  first-line-indent: 2em,
+  always-start-odd: true,
   clean-declaration: false,
-  outline-depth: 3,       // 目录深度
-  // 引用记号自定义（图、表、代码、公式、节）
-  // 示例：supplements: (图: "Figure", 表: "Table")
+  outline-depth: 3,
   supplements: (:),
-  // LaTeX 引用兼容：@fig:xxx 等带前缀引用解析失败时，剥离前缀重试 @xxx
-  // 用于从 LaTeX 迁移的文档（LaTeX 习惯写 \ref{fig:xxx}）。默认关闭
   use-latexref: false,
-  // use-latexref 时尝试剥离的前缀列表
   latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
-  // "攻读学位期间发表的论文"页是否出现在目录中（与致谢、声明一致，默认 true）
   achievement-outlined: true,
-  // 统计正文字数（CJK 字数 / 总字符数），可用 total-words / total-characters 显示，如不需要可设为 false
   word-count: true,
-  // 代码块参数：行号、语言图标、斑马条纹等
-  codly-args: (
-    display-icon: true,      // 语言图标
-    // number-format: none,  // 代码行号
-    // lang-format: none,    // 语言名称
-    // zebra-fill: none,     // 斑马条纹
-  ),
-  // 封面校徽、字标图片文件路径，参数值为 none 时封面显示灰色占位框
-  // 示例：logo: path("assets/logo.svg"), wordmark: path("assets/wordmark.svg")
+  codly-args: (display-icon: true),
   logo: none,
   wordmark: none,
   // ========== 参考文献 ==========
-  // 完全自定义参考文献样式，忽略以下参数
-  override-bib: false,    // 自定义引用样式时设为 true
+  override-bib: false,
   bib-file: none,
-  bib-style: "numeric",   // 引用风格："numeric" 或 "author-date"
-  // 引用版本（默认为 "2015"，可选 "2025"。注意： GB/T 7714-2025 标准从 2026 年 7 月 1 日开始实施）
-  bib-version: "2015",    // "2015" 或 "2025"
-  // 仅 bib-style: "author-date"。true（默认）时中文条目排在外文之前；false 时外文在前（传给 gb7714-bilingual 的 cn-first）
+  bib-style: "numeric",
+  bib-version: "2015",
   bib-cn-first: true,
-  // 仅 author-date 且中文作者：多音字校正，传给 auto-pinyin 的 to-pinyin(..., override: ...)
-  // 键为汉字（字符串），值为 tone-num-end 音节串，如 ("重": "chong2")
   bib-pinyin-override: (:),
 ) = {
   // 命令行参数覆盖
@@ -171,252 +118,59 @@
 
   // 字体方案、引用记号、参考文献解析
   let (resolved-system, font, style) = resolve-font(system, _cli-system)
-  let merged-supplements = resolve-supplements(supplements)
-  let _bib-content = resolve-bib(bib-file)
+  let supplements = resolve-supplements(supplements)
+  let bib-content = resolve-bib(bib-file)
   let smartpagebreak = make-smartpagebreak(always-start-odd)
 
-  // ========== 页面基础设置 ==========
-  let setup = (body) => {
-    system-state.update(resolved-system)
-    page-setup(
-      style: style,
-      font: font,
-      header-text: header-text,
-      preview: preview,
-      first-line-indent: first-line-indent,
-      smartpagebreak: smartpagebreak,
-      merged-supplements: merged-supplements,
-      codly-args: codly-args,
-      use-latexref: use-latexref,
-      latexref-prefixes: latexref-prefixes,
-      // PDF 元数据：盲审时隐藏作者，避免在文件属性中泄露
-      // 文档日期（CreationDate）由 Typst 原生写入编译时间，无需在此设置
-      document-title: title-zh,
-      document-author: if blind { none } else { author-zh },
-      body: body,
-    )
-  }
+  // 封装上下文，传入页面构建器
+  let ctx = (
+    style: style,
+    font: font,
+    system: resolved-system,
+    blind: blind,
+    preview: preview,
+    first-line-indent: first-line-indent,
+    smartpagebreak: smartpagebreak,
+    supplements: supplements,
+    bib-content: bib-content,
+    word-count: word-count,
+    outline-depth: outline-depth,
+    achievement-outlined: achievement-outlined,
+    clean-declaration: clean-declaration,
+    codly-args: codly-args,
+    use-latexref: use-latexref,
+    latexref-prefixes: latexref-prefixes,
+    header-text: header-text,
+    thesis-name: thesis-name,
+    title-zh: title-zh,
+    title-en: title-en,
+    author-zh: author-zh,
+    author-en: author-en,
+    student-id: student-id,
+    school: school,
+    first-major: first-major,
+    major-zh: major-zh,
+    major-en: major-en,
+    direction: direction,
+    supervisor-zh: supervisor-zh,
+    supervisor-en: supervisor-en,
+    blind-id: blind-id,
+    degree-type: degree-type,
+    year: year,
+    month: month,
+    logo: logo,
+    wordmark: wordmark,
+    override-bib: override-bib,
+    bib-style: bib-style,
+    bib-version: bib-version,
+    bib-cn-first: bib-cn-first,
+    bib-pinyin-override: bib-pinyin-override,
+  )
 
-  // ========== 论文封面 ==========
-  // front-heading 以外的自定义页面，闭包内含换页
-  let cover = () => {
-    if blind {
-      cover-page-blind(
-        style: style,
-        font: font,
-        header-text: header-text,
-        title-zh: title-zh,
-        title-en: title-en,
-        first-major: first-major,
-        major-zh: major-zh,
-        blind-id: blind-id,
-        year: year,
-        month: month,
-        degree-type: degree-type,
-      )
-    } else {
-      cover-page-normal(
-        style: style,
-        font: font,
-        thesis-name: thesis-name,
-        title-zh: title-zh,
-        author-zh: author-zh,
-        student-id: student-id,
-        school: school,
-        major-zh: major-zh,
-        direction: direction,
-        supervisor-zh: supervisor-zh,
-        degree-type: degree-type,
-        year: year,
-        month: month,
-        logo: logo,
-        wordmark: wordmark,
-      )
-    }
-    smartpagebreak()
-  }
+  let pages = build-pages(ctx, system-state)
 
-  // ========== 书脊页 ==========
-  // 打印装订用，非规范强制要求；默认不启用，需在 thesis.typ 显式调用
-  let spine = () => {
-    spine-page(style: style,
-        
-      title: title-zh,
-      author: author-zh,
-      font: font,
-      blind: blind,
-    )
-    smartpagebreak()
-  }
-
-  // ========== 版权声明 ==========
-  let copyright = () => {
-    copyright-page(style: style)
-    smartpagebreak()
-  }
-
-  // ========== 中文摘要 ==========
-  let abstract-zh = (body, keywords-zh: ()) => {
-    set align(left + top)
-    abstract-page-zh(
-      style: style,
-      keywords-zh: keywords-zh,
-      first-line-indent: first-line-indent,
-    )[#body]
-  }
-
-  // ========== 英文摘要 ==========
-  let abstract-en = (body, keywords-en: ()) => {
-    set align(left + top)
-    abstract-page-en(
-      style: style,
-      title-en: title-en,
-      author-en: author-en,
-      major-en: major-en,
-      supervisor-en: supervisor-en,
-      keywords-en: keywords-en,
-      blind: blind,
-    )[#body]
-  }
-
-  // ========== 论文目录 ==========
-  let outline = () => {
-    chineseoutline(style: style,
-        
-      title: "目录",
-      depth: outline-depth,
-      indent: true
-    )
-  }
-
-  // ========== 插图列表 ==========
-  let list-of-figures = () => {
-    listoffigures(
-      title: merged-supplements.插图列表,
-      kind: image,
-      supplements: merged-supplements,
-    )
-  }
-
-  // ========== 表格列表 ==========
-  let list-of-tables = () => {
-    listoffigures(
-      title: merged-supplements.表格列表,
-      kind: table,
-      supplements: merged-supplements,
-    )
-  }
-
-  // ========== 公式列表 ==========
-  let list-of-equations = () => {
-    listoffigures(
-      title: merged-supplements.公式列表,
-      kind: "equation",
-      supplements: merged-supplements,
-    )
-  }
-
-  // ========== 代码列表 ==========
-  let list-of-code = () => {
-    listoffigures(
-      title: merged-supplements.代码列表,
-      kind: "code",
-      supplements: merged-supplements,
-    )
-  }
-
-  // ========== 主要符号对照表 ==========
-  let notation = (body) => {
-    notation-page(style: style,
-        
-      title: merged-supplements.符号表,
-    )[#body]
-  }
-
-  // ========== 正文段落样式 ==========
-  let body-wrap = (body) => {
-    set align(left + top)
-    set par(
-      justify: true,
-      first-line-indent: (amount: first-line-indent, all: true),
-      leading: style.正文.leading,
-      spacing: style.正文.spacing,
-    )
-    // 字数统计：统计正文与附录（show 规则必须与 body 处于同一作用域才生效）
-    if word-count {
-      show: word-count-cjk
-      body
-    } else {
-      body
-    }
-  }
-
-  // ========== 参考文献 ==========
-  let bibliography = (body) => {
-    render-bibliography(
-      style: style,
-      bib-content: _bib-content,
-      bib-style: bib-style,
-      bib-version: bib-version,
-      bib-cn-first: bib-cn-first,
-      bib-pinyin-override: bib-pinyin-override,
-      override-bib: override-bib,
-    )[#body]
-  }
-
-  // ========== 攻读学位期间发表的论文 ==========
-  let achievement = (body) => {
-    if blind {
-      return
-    }
-    set align(left + top)
-    achievement-page(style: style,
-        
-      title: merged-supplements.成果表,
-      outlined: achievement-outlined,
-    )[#body]
-  }
-
-  // ========== 致谢部分 ==========
-  let acknowledgements = (body) => {
-    if blind {
-      return
-    }
-    set align(left + top)
-    acknowledgements-page(style: style,
-        
-      first-line-indent: first-line-indent,
-    )[#body]
-  }
-
-  // ========== 原创声明 ==========
-  let declaration = () => {
-    if blind {
-      return
-    }
-    declaration-page(clean-declaration: clean-declaration, style: style)
-  }
-
-  // ========== 返回字典 ==========
-  (
-    setup: setup,
-    cover: cover,
-    spine: spine,
-    copyright: copyright,
-    abstract-zh: abstract-zh,
-    abstract-en: abstract-en,
-    outline: outline,
-    list-of-figures: list-of-figures,
-    list-of-tables: list-of-tables,
-    list-of-equations: list-of-equations,
-    list-of-code: list-of-code,
-    notation: notation,
-    body-wrap: body-wrap,
-    bibliography: bibliography,
+  pages + (
     appendix: appendix,
-    achievement: achievement,
-    acknowledgements: acknowledgements,
-    declaration: declaration,
     font: font,
     style: style,
     system: resolved-system,
