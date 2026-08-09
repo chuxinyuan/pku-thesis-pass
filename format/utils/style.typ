@@ -41,7 +41,7 @@
 
   // ── 1.4 英文摘要 ──
   // 英文题目：三号（16pt）居中加粗
-  英文题目: (font: font.英文无衬线, size: size.三号, align: center, spacing-before: 24pt, spacing-after: 18pt, linespacing: 2em, weight: "bold"),
+  英文题目: (font: font.英文无衬线, size: size.三号, align: center, spacing-before: 24pt, spacing-after: 18pt, linespacing: 2em, weight: "regular"),
   // 作者/专业/导师：小四（12pt）居中
   英文作者信息: (font: font.英文衬线, size: size.小四, align: center, leading: 20pt),
   // "ABSTRACT"：小四（12pt）居中加粗
@@ -52,8 +52,8 @@
   // ── 1.5 目录 ──
   // 章标题行：小四（12pt）黑体加粗，行距 20bp，段前 6bp
   目录章标题: (font: font.黑体, size: size.小四, leading: 20pt, spacing-before: 6pt, spacing-after: 0pt, weight: "bold"),
-  // 节标题等：小四（12pt）宋体，行距 20bp
-  目录其他: (font: font.宋体, size: size.小四, leading: 20pt),
+  // 节标题等：小四（12pt）宋体，实测 10.5pt 更接近 Word
+  目录其他: (font: font.宋体, size: size.小四, leading: 10.5pt),
 
   // ── 1.6 主要符号对照表 ──
   // 行间距与分组间距

@@ -23,6 +23,7 @@
   )
 
   show outline.entry: it => context {
+    let s = style
     let el = it.element
     let el_loc = el.location()
 
@@ -53,14 +54,14 @@
 
     if maybe_number != none {
       link(el_loc, if el.level == 1 {
-        strong(maybe_number)
+        text(font: s.目录章标题.font, strong(maybe_number))
       } else {
         maybe_number
       })
     }
 
     link(el_loc, if el.level == 1 {
-      strong(el.body)
+      text(font: s.目录章标题.font, strong(el.body))
     } else {
       el.body
     })

@@ -112,8 +112,8 @@
 }
 
 /// 渲染标题正文（不重新触发 show heading）
-/// fs: 字号；font: 标题字体与 weight；meta: 通过 ..args 传入的元数据覆盖。
-#let sizedheading(it, fs, font: (:), ..meta) = {
+/// fs: 字号；style-font: 标题默认字体（无 meta 覆盖时使用）；meta: 通过 ..args 传入的元数据覆盖。
+#let sizedheading(it, fs, style-font: (:), ..meta) = {
   if it.body == none or it.body == [] { return }
 
   let spacing-before = meta.at(
@@ -130,7 +130,7 @@
   show heading: set block(above: 0pt, below: 0pt)
   set par(first-line-indent: 0em, leading: linespacing - 1em, spacing: 0pt)
   v(spacing-before)
-  let f = if meta-font != (:) { meta-font } else { font }
+  let f = if meta-font != (:) { meta-font } else { (font: style-font.font, weight: style-font.weight, size: fs) }
   let body = if it.numbering != none {
     counter(heading).display() + h(1em) + it.body
   } else {
@@ -153,7 +153,7 @@
     else { style.三级节标题 }
 
   if it.level != 1 {
-    return sizedheading(it, get-heading-size(it.level, style: style), font: (font: h-style.font, weight: h-style.weight))
+    return sizedheading(it, get-heading-size(it.level, style: style), style-font: (font: h-style.font, weight: h-style.weight))
   }
 
   let meta = get-heading-meta(it)
@@ -197,5 +197,5 @@
   }
 
   set align(center)
-  sizedheading(it, style.章标题.size, font: (font: h-style.font, weight: h-style.weight), ..meta)
+  sizedheading(it, style.章标题.size, style-font: (font: h-style.font, weight: h-style.weight), ..meta)
 }
