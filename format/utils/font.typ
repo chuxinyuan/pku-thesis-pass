@@ -42,10 +42,10 @@
 
   // Linux：优先使用 Noto / Source Han / Fandol 等常见开源字体
   linux: (
-    仿宋: ("Times New Roman", "FandolFang R", "Zhuque Fangsong (technical preview)"),
-    宋体: ("Times New Roman", "Noto Serif CJK SC", "Source Han Serif"),
-    黑体: ("Times New Roman", "Noto Sans CJK SC", "Source Han Sans"),
-    楷体: ("Times New Roman", "AR PL UKai"),
+    仿宋: ("Times New Roman", "Liberation Serif", "FandolFang R", "Zhuque Fangsong (technical preview)"),
+    宋体: ("Times New Roman", "Liberation Serif", "Noto Serif CJK SC", "Source Han Serif"),
+    黑体: ("Times New Roman", "Liberation Serif", "Noto Sans CJK SC", "Source Han Sans"),
+    楷体: ("Times New Roman", "Liberation Serif", "AR PL UKai"),
     代码: ("DejaVu Sans Mono", "Noto Serif CJK SC", "Source Han Serif"),
     英文衬线: ("Times New Roman", "Liberation Serif"),
     英文无衬线: ("Arial", "Liberation Sans"),
