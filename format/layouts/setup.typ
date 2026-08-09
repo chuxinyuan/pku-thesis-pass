@@ -7,7 +7,6 @@
 #import "../imports.typ": itemize, codly-init, codly, codly-languages, show-cn-fakebold
 
 #import "../utils/font.typ": font
-#import "../utils/size.typ": size
 #import "../utils/style.typ": style as _style
 #import "../utils/number.typ": in-appendix, chinesenumbering
 #import "../utils/counter.typ": chaptercounter

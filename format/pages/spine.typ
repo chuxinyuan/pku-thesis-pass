@@ -7,7 +7,7 @@
 // ============================================================
 
 #import "../utils/font.typ": font
-#import "../utils/size.typ": size
+#import "../utils/style.typ": style as _style
 
 /// 书脊页
 /// title: 论文中文标题

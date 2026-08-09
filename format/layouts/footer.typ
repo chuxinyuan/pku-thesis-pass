@@ -5,7 +5,6 @@
 // 本页管辖标题的 show-page-marks 元数据为 false 时清除页码（如声明页 clean-declaration）
 // ============================================================
 
-#import "../utils/size.typ": size
 #import "../utils/counter.typ": partcounter, skippedstate
 #import "headings-meta.typ": get-heading-meta, get-page-headings
 

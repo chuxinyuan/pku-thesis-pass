@@ -4,7 +4,7 @@
 // ============================================================
 
 #import "../layouts/setup.typ": page-setup
-#import "../components/wordcount.typ": word-count-cjk, total-words, total-characters
+#import "../components/wordcount.typ": word-count-cjk
 #import "../pages/covers.typ": cover-page-blind, cover-page-normal
 #import "../pages/spine.typ": spine-page
 #import "../pages/copyright.typ": copyright-page

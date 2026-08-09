@@ -9,7 +9,7 @@
 
 #import "../utils/size.typ": size
 #import "../utils/counter.typ": partcounter, chaptercounter, imagecounter, tablecounter, rawcounter, equationcounter, theoremcounter, definitioncounter, lemmacounter, corollarycounter, propositioncounter, propertycounter, examplecounter, remarkcounter
-#import "headings-meta.typ": get-heading-meta, get-page-headings
+#import "headings-meta.typ": get-heading-meta
 
 /// 根据标题等级返回对应字号（level 1 由 heading-show-rule 直接处理）
 #let get-heading-size(level, style: none) = {

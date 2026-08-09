@@ -7,7 +7,6 @@
 
 #import "../imports.typ": show-cn-fakebold
 #import "../utils/font.typ": font
-#import "../utils/size.typ": size
 #import "../utils/style.typ": style as _style
 #import "../utils/number.typ": chinesenumber, chineseyear
 #import "../utils/util.typ": _resolve-path, _ensure-not-eps

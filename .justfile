@@ -23,6 +23,7 @@ test:
   @typst compile tests/cli-test.typ --root .
   @typst compile tests/size-test.typ --root .
   @typst compile tests/font-test.typ --root .
+  @typst compile tests/component-test.typ --root .
   @typst compile tests/thesis-minimal.typ --root .
   @typst compile tests/thesis-linux.typ --root . --input system=linux
   @typst compile tests/thesis-full.typ --root .

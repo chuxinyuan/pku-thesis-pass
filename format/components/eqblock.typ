@@ -28,8 +28,9 @@
       caption: caption,
       kind: "equation",
       supplement: [式],
-      numbering: (..nums) => context {
-        chinesenumbering(
+       numbering: (..nums) => context {
+         // 与 show.typ:_kind-numbering 逻辑一致，见 layout.typ 去重计划
+         chinesenumbering(
           chaptercounter.at(here()).first(),
           ..nums,
           location: here(),

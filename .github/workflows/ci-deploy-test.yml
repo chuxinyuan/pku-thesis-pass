@@ -37,6 +37,7 @@ jobs:
           typst compile tests/cli-test.typ --root .
           typst compile tests/size-test.typ --root .
           typst compile tests/font-test.typ --root .
+          typst compile tests/component-test.typ --root .
 
       - name: Compile integration tests
         run: |
@@ -46,6 +47,8 @@ jobs:
           typst compile tests/thesis-blind.typ --root . --input blind=true
           typst compile tests/thesis-heading.typ --root .
           typst compile tests/thesis-refs.typ --root .
+          typst compile tests/thesis-full.typ --root . --input system=default
+          typst compile tests/thesis-full.typ --root . --input system=linux
 
       - name: Verify blind mode hides author
         run: |
