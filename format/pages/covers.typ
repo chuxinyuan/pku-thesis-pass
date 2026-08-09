@@ -301,7 +301,7 @@
 ) = {
   let s = if style != none { style } else { _style }
   set align(center + top)
-  text(size: s.封面题头.size, font: font.黑体, weight: s.封面题头.weight)[
+  text(size: s.封面题头.size, font: font.黑体)[
     #show: show-cn-fakebold
     #header-text
   ]
