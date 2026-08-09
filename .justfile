@@ -32,3 +32,8 @@ publish: preview bump
   @python3 scripts/publish.py
   @git checkout template/
   @echo "  template/ restored to dev mode"
+
+# run unit tests
+test:
+  @typst compile tests/number-test.typ --root .
+  @typst compile tests/util-test.typ --root .
