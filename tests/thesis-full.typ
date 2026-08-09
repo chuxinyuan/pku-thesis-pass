@@ -24,15 +24,32 @@
 
 #show: cfg.setup
 #(cfg.cover)()
+#(cfg.spine)()
 #(cfg.copyright)()
 
-#(cfg.abstract-zh)(keywords-zh: ("测试", "模板"))[这是中文摘要正文，用于验证完整配置下的编译流程。]
+#(cfg.abstract-zh)(keywords-zh: ("测试", "模板"))[这是摘要正文。]
+#(cfg.abstract-en)(keywords-en: ("Test", "Template"))[This is the main body of the abstract.]
 
 #(cfg.outline)()
+
 #(cfg.list-of-figures)()
 #(cfg.list-of-tables)()
+#(cfg.list-of-equations)()
+#(cfg.list-of-code)()
 
-= 第一章 绪论
+#(cfg.notation)[
+  / $pi$: 圆周率
+  / $integral$: 积分符号
+  / $bold(A)$: 矩阵
+
+  / $g$: 重力加速度
+  / $lambda$: 波长
+]
+
+#show: cfg.body-wrap
+#show: cfg.bibliography
+
+= 绪论
 
 正文段落内容，测试段落渲染和首行缩进。
 
@@ -47,7 +64,20 @@
 
 如 @fig-logo 和 @tbl-test 所示。
 
-= 第二章 结论
+= 结论
 
 结论正文内容。
 
+#(cfg.appendix)()
+
+= 这是附录
+
+附录内容写在这里。
+
+#(cfg.achievement)[
+  + *张三*, 李四, 王五. 论文题目[J]. 期刊名, 2025, 60(3): 123-130. （SCI 收录期刊；SCI 收录号 601JP；IF=9.432）
+  + *Zhang, S.*, Li, S., Wang, W. Paper title[J]. Journal Name, 2024, 55(2): 45-52. （SCI 收录期刊；SCI 收录号 5W1A；IF=8.123）
+]
+
+#(cfg.acknowledgements)[感谢一切#footnote("包括使用本模板的你。")。]
+#(cfg.declaration)()

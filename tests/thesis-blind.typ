@@ -16,7 +16,6 @@
 #(cfg.copyright)()
 #(cfg.abstract-zh)(keywords-zh: ("测试", "模板"))[摘要内容。]
 
-= 第一章
+= 这是标题
 
 正文内容。
-

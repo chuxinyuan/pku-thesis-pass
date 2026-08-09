@@ -2,10 +2,7 @@
 
 #import "../format/lib.typ": config
 
-#let cfg = config(
-  author-zh: "测试",
-  title-zh: "最小编译测试",
-)
+#let cfg = config()
 
 #show: cfg.setup
 #(cfg.cover)()

@@ -10,7 +10,7 @@
 #show: cfg.setup
 #(cfg.cover)()
 
-= 第一章 测试
+= 测试
 
 #figure(table(columns: 2, [A], [B]), caption: [测试表格]) <fig-logo>
 
