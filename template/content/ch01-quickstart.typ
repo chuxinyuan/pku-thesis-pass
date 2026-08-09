@@ -78,9 +78,9 @@ typst compile template/thesis.typ --root .
   [代码],
   [Consolas, DejaVu Sans Mono, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif],
   [英文衬线],
-  [Times New Roman, Liberation Serif, DejaVu Serif],
+  [Times New Roman, Liberation Serif],
   [英文无衬线],
-  [Arial, Liberation Sans, DejaVu Sans],
+  [Arial, Liberation Sans],
 )
 
 其他方案（`mac` / `windows` / `linux`）针对各平台预优化，基本无冗余 fallback，编译时零 warning。

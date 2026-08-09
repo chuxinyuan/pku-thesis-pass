@@ -33,7 +33,7 @@
   mac: (
     仿宋: ("Times New Roman", "STFangsong"),
     宋体: ("Times New Roman", "STSong"),
-    黑体: ("Times New Roman", "PingFang SC"),
+    黑体: ("Times New Roman", "PingFang SC", "STHeiti"),
     楷体: ("Times New Roman", "STKaiti"),
     代码: ("Menlo", "STSong"),
     英文衬线: ("Times New Roman"),

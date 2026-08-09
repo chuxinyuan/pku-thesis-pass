@@ -127,8 +127,8 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 | 黑体 | Times New Roman, SimHei, STHeiti, Noto Sans CJK SC, Source Han Sans |
 | 楷体 | Times New Roman, KaiTi, STKaiti, AR PL UKai |
 | 代码 | Consolas, DejaVu Sans Mono, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif |
-| 英文衬线 | Times New Roman, Liberation Serif, DejaVu Serif |
-| 英文无衬线 | Arial, Liberation Sans, DejaVu Sans |
+| 英文衬线 | Times New Roman, Liberation Serif |
+| 英文无衬线 | Arial, Liberation Sans |
 
 ### Windows（system: "windows"）
 
@@ -152,11 +152,11 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 |------|----------|
 | 仿宋 | Times New Roman, STFangsong |
 | 宋体 | Times New Roman, STSong |
-| 黑体 | Times New Roman, PingFang SC |
+| 黑体 | Times New Roman, PingFang SC, STHeiti |
 | 楷体 | Times New Roman, STKaiti |
 | 代码 | Menlo, STSong |
 | 英文衬线 | Times New Roman |
-| 英文无衬线 | Helvetica, Arial |
+| 英文无衬线 | Arial |
 
 ### Linux（system: "linux"）
 
@@ -169,8 +169,8 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 | 黑体 | Times New Roman, Noto Sans CJK SC, Source Han Sans |
 | 楷体 | Times New Roman, AR PL UKai |
 | 代码 | DejaVu Sans Mono, Noto Serif CJK SC, Source Han Serif |
-| 英文衬线 | Times New Roman, Liberation Serif, DejaVu Serif |
-| 英文无衬线 | Arial, Liberation Sans, DejaVu Sans |
+| 英文衬线 | Times New Roman, Liberation Serif |
+| 英文无衬线 | Arial, Liberation Sans |
 
 ## 编译文档
 
