@@ -105,7 +105,7 @@ jobs:
               <a href="thesis-blind-odd.pdf">📄 下载盲审版本 — 奇页开篇 (PDF)</a>
             </div>
             <h2>快速开始</h2>
-            <pre><code>typst init @preview/pku-thesis-pass:0.3.0 my-thesis
+            <pre style="margin: 0; padding: 0;"><code>typst init @preview/pku-thesis-pass:0.3.0 my-thesis
             cd my-thesis
             typst compile thesis.typ</code></pre>
             <h2>链接</h2>
