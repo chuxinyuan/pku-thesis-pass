@@ -27,63 +27,23 @@
   ]
 }
 
-/// 编号定理环境：定义、定理、引理、推论、命题、性质、注、例
-/// 各类型独立编号（随章重置，附录自动切换为 "附录 A.1"），支持 @label 引用
-/// title: 可选命名（如 "定理 3.1（唯一分解定理）"）
-#let theorem(title: none, body) = figure(
-  _theorem-block(theoremcounter, [定理], title, body),
-  kind: "theorem",
-  supplement: [定理],
-)
+/// 工厂函数：统一生成定理类环境（定理/定义/引理/推论/命题/性质/例/注）
+/// name: 中文名（如 "定理"），kind: figure kind，supplement: 引用前缀，counter: 对应计数器
+#let _make-theorem(name, kind, supplement, counter) = {
+  (title: none, body) => figure(
+    _theorem-block(counter, [#name], title, body),
+    kind: kind, supplement: supplement,
+  )
+}
 
-/// 定义环境
-#let definition(title: none, body) = figure(
-  _theorem-block(definitioncounter, [定义], title, body),
-  kind: "definition",
-  supplement: [定义],
-)
-
-/// 引理环境
-#let lemma(title: none, body) = figure(
-  _theorem-block(lemmacounter, [引理], title, body),
-  kind: "lemma",
-  supplement: [引理],
-)
-
-/// 推论环境
-#let corollary(title: none, body) = figure(
-  _theorem-block(corollarycounter, [推论], title, body),
-  kind: "corollary",
-  supplement: [推论],
-)
-
-/// 命题环境
-#let proposition(title: none, body) = figure(
-  _theorem-block(propositioncounter, [命题], title, body),
-  kind: "proposition",
-  supplement: [命题],
-)
-
-/// 性质环境
-#let property(title: none, body) = figure(
-  _theorem-block(propertycounter, [性质], title, body),
-  kind: "property",
-  supplement: [性质],
-)
-
-/// 例子环境
-#let example(title: none, body) = figure(
-  _theorem-block(examplecounter, [例], title, body),
-  kind: "example",
-  supplement: [例],
-)
-
-/// 注环境
-#let remark(title: none, body) = figure(
-  _theorem-block(remarkcounter, [注], title, body),
-  kind: "remark",
-  supplement: [注],
-)
+#let theorem     = _make-theorem("定理",    "theorem",     [定理], theoremcounter)
+#let definition  = _make-theorem("定义",    "definition",  [定义], definitioncounter)
+#let lemma       = _make-theorem("引理",    "lemma",       [引理], lemmacounter)
+#let corollary   = _make-theorem("推论",    "corollary",   [推论], corollarycounter)
+#let proposition = _make-theorem("命题",    "proposition", [命题], propositioncounter)
+#let property    = _make-theorem("性质",    "property",    [性质], propertycounter)
+#let example     = _make-theorem("例",      "example",     [例],   examplecounter)
+#let remark      = _make-theorem("注",      "remark",      [注],   remarkcounter)
 
 /// 证明环境：不编号，"证明"开头，正文后接空心方框 □ 收尾
 #let proof(body) = par(
