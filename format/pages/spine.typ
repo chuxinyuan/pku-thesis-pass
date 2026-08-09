@@ -6,7 +6,6 @@
 // 盲审（blind: true）时不显示作者，只保留标题。
 // ============================================================
 
-#import "../utils/font.typ": font
 #import "../utils/style.typ": style as _style
 
 /// 书脊页
@@ -19,7 +18,7 @@
 #let spine-page(
   title: none,
   author: none,
-  font: font,
+  font: none,
   style: none,
   blind: false,
 ) = {

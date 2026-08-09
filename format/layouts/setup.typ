@@ -6,7 +6,6 @@
 
 #import "../imports.typ": itemize, codly-init, codly, codly-languages, show-cn-fakebold
 
-#import "../utils/font.typ": font
 #import "../utils/style.typ": style as _style
 #import "../utils/number.typ": in-appendix, chinesenumbering
 #import "../utils/counter.typ": chaptercounter
@@ -50,7 +49,7 @@
 /// 在 #show: setup 处被 config() 调用，作用于全文
 /// 参数全部由 config() 传入，保持关注点分离
 #let page-setup(
-  font: font,
+  font: none,
   header-text: none,
   preview: true,
   first-line-indent: 2em,

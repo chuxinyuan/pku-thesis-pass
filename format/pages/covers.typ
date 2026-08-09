@@ -6,7 +6,6 @@
 // ============================================================
 
 #import "../imports.typ": show-cn-fakebold
-#import "../utils/font.typ": font
 #import "../utils/style.typ": style as _style
 #import "../utils/number.typ": chinesenumber, chineseyear
 #import "../utils/util.typ": _resolve-path, _ensure-not-eps
@@ -109,7 +108,7 @@
 /// fields: 数组，每项为 (字段名, 字段值) 元组
 /// name-width / value-width: 两列宽度
 /// row-height: 每行高度
-#let build-field-grid(fields, name-width, value-width, row-height, font: font, style: none) = context {
+#let build-field-grid(fields, name-width, value-width, row-height, font: none, style: none) = context {
   let s = if style != none { style } else { _style }
   let grid-contents = ()
 
@@ -191,7 +190,7 @@
 /// 未提供校徽/字标图片时显示灰色占位框（logo/wordmark 参数为 none）
 /// 利用 build-field-grid 实现字段名与值的对齐排版
 #let cover-page-normal(
-  font: font,
+  font: none,
   thesis-name: none,
   title-zh: none,
   author-zh: none,
@@ -286,7 +285,7 @@
 /// 显示校名（header-text）、中英文题目、学科信息、论文编号和学位类型
 /// 隐去作者姓名、学号、导师等可识别信息
 #let cover-page-blind(
-  font: font,
+  font: none,
   header-text: none,
   title-zh: none,
   title-en: none,
