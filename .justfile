@@ -15,6 +15,11 @@ pdf:
 json:
   @typst c --root . template/thesis.typ --timings record.json
 
+# run unit tests
+test:
+  @typst compile tests/number-test.typ --root .
+  @typst compile tests/util-test.typ --root .
+
 # switch imports to @preview mode (for publishing to Typst Universe)
 preview:
   @python3 scripts/release.py preview
@@ -28,12 +33,7 @@ bump:
   @python3 scripts/bump.py
 
 # collect packaged files into release/<version>/ for Typst Universe submission
-publish: preview bump
+publish: test preview bump
   @python3 scripts/publish.py
   @git checkout template/
   @echo "  template/ restored to dev mode"
-
-# run unit tests
-test:
-  @typst compile tests/number-test.typ --root .
-  @typst compile tests/util-test.typ --root .
