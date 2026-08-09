@@ -1,37 +1,24 @@
 // ============================================================
 // config.typ — 学位论文模板总控入口
-// 定义 config() 函数，返回一组闭包字典（DI 模式）
-// 用户解构后自行控制论文流程
-//
-// 用法：
-//   #let (setup, cover, abstract-zh, ..., bibliography) = config(...)
-//   #show: setup
-//   #cover()
-//   #abstract-zh(keywords-zh: (...))[摘要内容]
-//   #show: bibliography
+// config() 返回闭包字典，用户通过 cfg.xxx 方式调用各页面函数
 //
 // 命令行参数（--input key=value）：
 //   --input blind=true|false                    盲审模式
-//   --input preview=true|false                  预览模式（默认 true，链接显示蓝色，打印时请设置为 false）
+//   --input preview=true|false                  预览模式
 //   --input always-start-odd=true|false         章节是否总是从奇数页开始
 //   --input system=default|mac|windows|linux    系统字体方案
-//
-// 命令行参数示例：
-//   typst compile thesis.typ --input blind=true
-//   typst compile thesis.typ --input preview=false
-//   typst compile thesis.typ --input always-start-odd=false
-//   typst compile thesis.typ --input system=linux
 // ============================================================
 
 // ========== 子模块导入 ==========
 
 // 基础定义
-#import "utils/supplement.typ": supplement
-#import "utils/font.typ": font-set
-#import "utils/style.typ": build
-#import "utils/counter.typ": skippedstate
 #import "utils/number.typ": appendix
-#import "utils/util.typ": _resolve-path
+
+// 命令行参数与系统状态
+#import "config/cli.typ": _cli-blind, _cli-preview, _cli-always-start-odd, _cli-system, system-state
+
+// 解析函数
+#import "config/resolve.typ": resolve-font, resolve-supplements, resolve-bib, make-smartpagebreak
 
 // 基础设施
 #import "layouts/setup.typ": page-setup
@@ -51,38 +38,10 @@
 #import "pages/acknowledgements.typ": acknowledgements-page
 #import "pages/declaration.typ": declaration-page
 
-// ========== 命令行参数支持 ==========
-
-/// 字符串转布尔值："true"/"1" → true, "false"/"0" → false, 否则返回默认值。
-#let _parse-bool(value, default) = {
-  if value == none { default }
-  else if value == "true" or value == "1" { true }
-  else if value == "false" or value == "0" { false }
-  else { default }
-}
-
-/// 系统字体方案状态，供内容文件字体校验时读取当前生效的方案
-#let system-state = state("sys", "default")
-
-// CLI 参数解析
-// 
-// 解析命令行传入的配置参数，支持覆盖默认配置，值为 none 表示未传入。
-// 每个 _cli-* 对应一个 --input 参数，值为 none 表示未传入
-// 用法示例：typst compile --input blind=true --input system=windows
-
-/// --input blind=true|false
-#let _cli-blind = _parse-bool(sys.inputs.at("blind", default: none), none)
-/// --input preview=true|false
-#let _cli-preview = _parse-bool(sys.inputs.at("preview", default: none), none)
-/// --input always-start-odd=true|false
-#let _cli-always-start-odd = _parse-bool(sys.inputs.at("always-start-odd", default: none), none)
-/// --input system=default|mac|windows|linux
-#let _cli-system = sys.inputs.at("system", default: none)
-
 // ========== 参数化配置入口 ==========
 
 /// 论文主配置函数，返回闭包字典（DI 模式）
-/// 返回 `(setup, cover, ...)` 字典，用户解构后自行编排顺序
+/// 返回 `(setup, cover, ...)` 字典，通过 `cfg.xxx` 方式调用
 ///
 /// 基本信息：
 ///   author-zh — 中文姓名
@@ -210,35 +169,11 @@
   let preview = if _cli-preview != none { _cli-preview } else { preview }
   let always-start-odd = if _cli-always-start-odd != none { _cli-always-start-odd } else { always-start-odd }
 
-  // 解析系统字体方案：CLI 参数优先，否则用 config() 参数
-  let resolved-system = if _cli-system != none { _cli-system } else { system }
-  let font = font-set.at(resolved-system, default: font-set.default)
-  let style = build(font)
-
-  // 读取参考文献文件；路径应使用 path 类型（在调用处解析，可穿透包沙箱），
-  // 字符串路径则按本地模式处理（相对项目根目录）
-  let _bib-content = if bib-file != none {
-    read(_resolve-path(bib-file))
-  }
-
-  // 合并用户自定义引用记号
-  let merged-supplements = supplement
-  for (key, value) in supplements {
-    merged-supplements.insert(key, value)
-  }
-
-  // 智能分页：always-start-odd: true 时章节从奇数页开始
-  let smartpagebreak = () => {
-    if always-start-odd {
-      skippedstate.update(false)
-      pagebreak(weak: true)
-      skippedstate.update(true)
-      pagebreak(to: "odd", weak: true)
-      skippedstate.update(false)
-    } else {
-      pagebreak(weak: true)
-    }
-  }
+  // 字体方案、引用记号、参考文献解析
+  let (resolved-system, font, style) = resolve-font(system, _cli-system)
+  let merged-supplements = resolve-supplements(supplements)
+  let _bib-content = resolve-bib(bib-file)
+  let smartpagebreak = make-smartpagebreak(always-start-odd)
 
   // ========== 页面基础设置 ==========
   let setup = (body) => {
@@ -266,8 +201,8 @@
   // front-heading 以外的自定义页面，闭包内含换页
   let cover = () => {
     if blind {
-      cover-page-blind(style: style,
-        
+      cover-page-blind(
+        style: style,
         font: font,
         header-text: header-text,
         title-zh: title-zh,
@@ -280,8 +215,8 @@
         degree-type: degree-type,
       )
     } else {
-      cover-page-normal(style: style,
-        
+      cover-page-normal(
+        style: style,
         font: font,
         thesis-name: thesis-name,
         title-zh: title-zh,
