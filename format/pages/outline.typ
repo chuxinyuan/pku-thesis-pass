@@ -54,14 +54,14 @@
 
     if maybe_number != none {
       link(el_loc, if el.level == 1 {
-        text(font: s.目录章标题.font, strong(maybe_number))
+        text(font: s.目录章标题.font, size: s.目录章标题.size, weight: s.目录章标题.weight, maybe_number)
       } else {
         maybe_number
       })
     }
 
     link(el_loc, if el.level == 1 {
-      text(font: s.目录章标题.font, strong(el.body))
+      text(font: s.目录章标题.font, size: s.目录章标题.size, weight: s.目录章标题.weight, el.body)
     } else {
       el.body
     })

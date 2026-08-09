@@ -18,11 +18,12 @@
   body,
 ) = {
   set par(leading: style.摘要内容.leading, spacing: style.摘要内容.spacing, justify: true)
-  front-heading("摘要", enter-front: true, header: "摘要")
+  front-heading("摘要", enter-front: true, header: "摘要",
+    font: (font: style.摘要标题.font, size: style.摘要标题.size, weight: style.摘要标题.weight))
   set par(first-line-indent: first-line-indent)
   body
   v(1fr)
-  [关键词：]
+  text(font: style.关键词.font, size: style.关键词.size)[关键词：]
   keywords-zh.join("，")
   v(1em)
 }

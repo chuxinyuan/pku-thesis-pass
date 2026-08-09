@@ -26,6 +26,8 @@
   封面信息: (font: font.仿宋, size: size.三号, weight: "regular"),
   // 日期：三号（16pt）宋体 regular
   封面日期: (font: font.宋体, size: size.三号, weight: "regular"),
+  // 日期后缀（"年"、"月"）：同日期字体
+  封面日期标点: (font: font.黑体, size: size.三号, weight: "regular"),
   // 校徽/字标占位框文字字号
   封面占位符: (字号: 0.6em),
   // 盲审封面正文段落
@@ -83,7 +85,7 @@
   图序图名: (font: font.宋体, size: 11pt, align: center, spacing-before: 6pt, spacing-after: 12pt),
   // 表序表名：11pt 宋体居中
   表序表名: (font: font.宋体, size: 11pt, align: center, spacing-before: 12pt, spacing-after: 6pt),
-  // 表单元格：11pt 宋体（旧版本误写为 10.5pt）
+  // 表单元格：11pt 宋体（指南里写明是 11pt，但是 Word 模板是五号字体，对应 10.5pt）
   表单元格: (font: font.宋体, size: 11pt),
   // 代码块标题：11pt 宋体
   代码块标题: (font: font.宋体, size: 11pt),

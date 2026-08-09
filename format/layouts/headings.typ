@@ -17,7 +17,7 @@
   } else if level == 3 {
     style.二级节标题.size
   } else {
-    style.正文.size
+    style.三级节标题.size
   }
 }
 

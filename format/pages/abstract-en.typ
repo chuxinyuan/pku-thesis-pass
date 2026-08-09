@@ -36,6 +36,7 @@
   set par(spacing: style.英文摘要内容.leading, leading: style.英文摘要内容.leading, justify: true)
   if not blind {
     [
+      #set text(font: style.英文作者信息.font, size: style.英文作者信息.size)
       #set align(center)
       #author-en \(#major-en\) \
       Supervised by #supervisor-en

@@ -74,7 +74,7 @@
     footer: make-footer(style: style),
   )
   // 正文默认字体：宋体小四、中文断行
-  set text(font: font.宋体, size: style.正文.size, lang: "zh")
+  set text(font: style.正文.font, size: style.正文.size, lang: "zh")
 
   // ========== PDF 元数据 ==========
   // 盲审时 document-author 为 none，跳过作者字段，避免在文件属性中泄露作者信息

@@ -118,13 +118,13 @@
     let value-parts = split-text-by-width(value, value-width)
     for (i, part) in value-parts.enumerate() {
       if i == 0 {
-        grid-contents.push([#text(font: s.封面字段标签.font, weight: s.封面字段标签.weight)[#name]#v(0.5em)])
+        grid-contents.push([#text(font: s.封面字段标签.font, size: s.封面字段标签.size, weight: s.封面字段标签.weight)[#name]#v(0.5em)])
       } else {
         grid-contents.push([])
       }
       grid-contents.push([
         #set align(center)
-        #set text(size: s.封面信息.size, font: font.仿宋)
+        #set text(size: s.封面信息.size, font: s.封面信息.font)
         #part
         #v(0.5em)
       ])
@@ -275,8 +275,23 @@
   v(2fr)
   text(font: s.封面信息.font)[#degree-type-checkbox(degree-type)]
   v(1fr)
-  text(font: s.封面日期.font)[
-    #chineseyear(year) *年* #chinesenumber(month) *月*
+  text(
+    font: s.封面日期.font, 
+    size: s.封面日期.size, 
+    weight: s.封面日期.weight
+  )[
+    #chineseyear(year) 
+    #text(
+      font: s.封面日期标点.font, 
+      size: s.封面日期标点.size, 
+      weight: s.封面日期标点.weight
+    )[年] 
+    #chinesenumber(month) 
+    #text(
+      font: s.封面日期标点.font, 
+      size: s.封面日期标点.size, 
+      weight: s.封面日期标点.weight
+    )[月]
   ]
 }
 
