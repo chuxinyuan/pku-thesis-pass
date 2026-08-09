@@ -17,7 +17,46 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v5
+
+      - name: Install fonts
+        run: bash .github/workflows/ci-install-fonts.sh
+
+      - name: Run unit tests
+        run: |
+          typst compile tests/number-test.typ --root .
+          typst compile tests/util-test.typ --root .
+          typst compile tests/style-test.typ --root .
+          typst compile tests/cli-test.typ --root .
+          typst compile tests/size-test.typ --root .
+          typst compile tests/font-test.typ --root .
+
+      - name: Compile integration tests
+        run: |
+          typst compile tests/thesis-minimal.typ --root .
+          typst compile tests/thesis-linux.typ --root . --input system=linux
+          typst compile tests/thesis-full.typ --root .
+          typst compile tests/thesis-blind.typ --root . --input blind=true
+          typst compile tests/thesis-heading.typ --root .
+          typst compile tests/thesis-refs.typ --root .
+
+      - name: Verify blind mode hides author
+        run: |
+          if strings tests/thesis-blind.pdf | grep -q "张三"; then
+            echo "ERROR: author name leaked in blind mode"
+            exit 1
+          fi
+          echo "OK: author name hidden in blind mode"
+
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -139,41 +178,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Setup Typst
-        uses: typst-community/setup-typst@v5
-
-      - name: Install fonts
-        run: bash .github/workflows/ci-install-fonts.sh
-
-      - name: Run unit tests
-        run: |
-          typst compile tests/number-test.typ --root .
-          typst compile tests/util-test.typ --root .
-          typst compile tests/style-test.typ --root .
-          typst compile tests/cli-test.typ --root .
-          typst compile tests/size-test.typ --root .
-          typst compile tests/font-test.typ --root .
-
-      - name: Compile integration tests
-        run: |
-          typst compile tests/thesis-minimal.typ --root .
-          typst compile tests/thesis-linux.typ --root . --input system=linux
-          typst compile tests/thesis-full.typ --root .
-          typst compile tests/thesis-blind.typ --root . --input blind=true
-          typst compile tests/thesis-heading.typ --root .
-          typst compile tests/thesis-refs.typ --root .
-
-      - name: Verify blind mode hides author
-        run: |
-          if strings tests/thesis-blind.pdf | grep -q "张三"; then
-            echo "ERROR: author name leaked in blind mode"
-            exit 1
-          fi
-          echo "OK: author name hidden in blind mode"
