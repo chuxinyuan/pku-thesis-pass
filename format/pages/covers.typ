@@ -118,7 +118,7 @@
     let value-parts = split-text-by-width(value, value-width)
     for (i, part) in value-parts.enumerate() {
       if i == 0 {
-        grid-contents.push([#text(font: s.封面字段标签.font, size: s.封面字段标签.size, weight: s.封面字段标签.weight)[#name]#v(0.5em)])
+        grid-contents.push([#text(font: s.封面字段标签.font, size: s.封面字段标签.size)[#name]#v(0.5em)])
       } else {
         grid-contents.push([])
       }
@@ -228,7 +228,7 @@
     ),
   )
   linebreak()
-  text(font: s.封面题头.font, size: s.封面题头.size, weight: s.封面题头.weight)[#thesis-name]
+  text(font: s.封面题头.font, size: s.封面题头.size)[#thesis-name]
   v(1fr)
   context {
     set text(weight: s.封面题目.weight)
@@ -237,7 +237,7 @@
     let grid-contents = (
       [
         #set align(center)
-        #text(font: s.封面题目标签.font, size: s.封面题目标签.size, weight: s.封面题目标签.weight)[题目：]
+        #text(font: s.封面题目标签.font, size: s.封面题目标签.size)[题目：]
       ],
     )
     for (i, part) in title-zh-parts.enumerate() {
@@ -275,23 +275,11 @@
   v(2fr)
   text(font: s.封面信息.font)[#degree-type-checkbox(degree-type)]
   v(1fr)
-  text(
-    font: s.封面日期.font, 
-    size: s.封面日期.size, 
-    weight: s.封面日期.weight
-  )[
+  text(font: s.封面日期.font, size: s.封面日期.size)[
     #chineseyear(year) 
-    #text(
-      font: s.封面日期标点.font, 
-      size: s.封面日期标点.size, 
-      weight: s.封面日期标点.weight
-    )[年] 
+    #text(font: s.封面日期标点.font, size: s.封面日期标点.size)[年] 
     #chinesenumber(month) 
-    #text(
-      font: s.封面日期标点.font, 
-      size: s.封面日期标点.size, 
-      weight: s.封面日期标点.weight
-    )[月]
+    #text(font: s.封面日期标点.font, size: s.封面日期标点.size)[月]
   ]
 }
 
