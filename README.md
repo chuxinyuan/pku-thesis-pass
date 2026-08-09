@@ -163,10 +163,8 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
 ### Linux（system: "linux"）
 
-优先使用 Noto / Source Han 等常见开源字体。
+使用 Noto / Source Han / Fandol / Liberation 等常见开源字体。
 
-| 用途 | 字体列表 |
-|------|----------|
 | 用途 | 字体列表 |
 |------|----------|
 | 仿宋 | Liberation Serif, FandolFang R, Zhuque Fangsong (technical preview) |
