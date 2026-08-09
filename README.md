@@ -126,12 +126,12 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 | 用途 | 字体列表 |
 |------|----------|
 | 仿宋 | Times New Roman, Liberation Serif, FangSong, STFangsong, FandolFang R |
-| 宋体 | Times New Roman, Liberation Serif, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif |
-| 黑体 | Times New Roman, Liberation Serif, SimHei, STHeiti, Noto Sans CJK SC, Source Han Sans |
+| 宋体 | Times New Roman, Liberation Serif, NSimSun, STSong, Source Han Serif |
+| 黑体 | Times New Roman, Liberation Serif, SimHei, STHeiti, Source Han Sans |
 | 楷体 | Times New Roman, Liberation Serif, KaiTi, STKaiti, AR PL UKai |
-| 代码 | Consolas, DejaVu Sans Mono, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif |
+| 代码 | Consolas, Menlo, DejaVu Sans Mono, NSimSun, STSong, Source Han Serif |
 | 英文衬线 | Times New Roman, Liberation Serif |
-| 英文无衬线 | Arial, Liberation Sans |
+| 英文无衬线 | Arial, Helvetica, Liberation Sans |
 
 ### Windows（system: "windows"）
 
@@ -159,7 +159,7 @@ Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 | 楷体 | Times New Roman, STKaiti |
 | 代码 | Menlo, STSong |
 | 英文衬线 | Times New Roman |
-| 英文无衬线 | Arial, Helvetica |
+| 英文无衬线 | Helvetica |
 
 ### Linux（system: "linux"）
 

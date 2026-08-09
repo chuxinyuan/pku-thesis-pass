@@ -70,17 +70,17 @@ typst compile template/thesis.typ --root .
   [仿宋],
   [Times New Roman, Liberation Serif, FangSong, STFangsong, FandolFang R],
   [宋体],
-  [Times New Roman, Liberation Serif, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif],
+  [Times New Roman, Liberation Serif, NSimSun, STSong, Source Han Serif],
   [黑体],
-  [Times New Roman, Liberation Serif, SimHei, STHeiti, Noto Sans CJK SC, Source Han Sans],
+  [Times New Roman, Liberation Serif, SimHei, STHeiti, Source Han Sans],
   [楷体],
   [Times New Roman, Liberation Serif, KaiTi, STKaiti, AR PL UKai],
   [代码],
-  [Consolas, DejaVu Sans Mono, NSimSun, STSong, Noto Serif CJK SC, Source Han Serif],
+  [Consolas, Menlo, DejaVu Sans Mono, NSimSun, STSong, Source Han Serif],
   [英文衬线],
   [Times New Roman, Liberation Serif],
   [英文无衬线],
-  [Arial, Liberation Sans],
+  [Arial, Helvetica, Liberation Sans],
 )
 
 其他方案（`mac` / `windows` / `linux`）针对各平台预优化，基本无冗余 fallback，编译时零 warning。
