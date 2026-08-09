@@ -234,7 +234,7 @@
   [`3`],
   [目录显示的最大标题层级],
   [`word-count`],
-  [`true`],
+  [`false`],
   [统计正文与附录字数（CJK 字数 / 总字符数），正文中可用 `#total-words` / `#total-characters` 显示统计结果],
   [`achievement-outlined`],
   [`true`],
@@ -329,8 +329,8 @@
 
 - #strong[作用]：是否统计正文与附录字数。
 - #strong[可填值]：布尔值（`true` / `false`）。
-- #strong[默认值]：`true`。
-- #strong[填写示例]：`word-count: false`
+- #strong[默认值]：`false`。
+- #strong[填写示例]：`word-count: true`
 - #strong[注意事项]：开启后正文中可用 `#total-words`（CJK 字数）与 `#total-characters`（总字符数）显示统计结果；如不需要可设置 `false` 关闭统计以提升编译速度。
 
 === `achievement-outlined`

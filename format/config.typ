@@ -50,7 +50,7 @@
 ///   always-start-odd — 章节从奇数页开始（默认 true）
 ///   clean-declaration — 声明页清除页眉页码（默认 false）
 ///   outline-depth — 目录深度（默认 3）
-///   word-count — 统计正文字数（默认 true）
+///   word-count — 统计正文字数（默认 false）
 ///   achievement-outlined — "攻读学位期间发表的论文"页是否入目录（默认 true）
 ///   supplements — 自定义引用记号
 ///   use-latexref — 是否启用 LaTeX 引用兼容（默认 false）
@@ -99,7 +99,7 @@
   use-latexref: false,
   latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
   achievement-outlined: true,
-  word-count: true,
+  word-count: false,
   codly-args: (display-icon: true),
   logo: none,
   wordmark: none,
