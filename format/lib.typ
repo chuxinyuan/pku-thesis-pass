@@ -28,5 +28,5 @@
 #import "components/eqblock.typ": eq-block
 #import "components/codeblock.typ": code-block
 #import "components/subfigure.typ": subfigure
-#import "components/wordcount.typ": word-count-cjk, total-words, total-characters
 #import "components/theorem.typ": theorem, definition, lemma, corollary, proposition, property, example, remark, proof
+#import "components/wordcount.typ": word-count-cjk, total-words, total-characters

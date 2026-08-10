@@ -1,4 +1,4 @@
-#import "../../format/lib.typ": code-block, booktab, font-set, fakebold-rules, system-state, show-cn-fakebold
+#import "../../format/lib.typ": system-state, font-set, fakebold-rules, show-cn-fakebold, booktab, code-block
 
 == 安装与环境配置
 
@@ -123,7 +123,7 @@ typst compile template/thesis.typ --root .
           fam-cell(fam, bold.at(name, default: false), [I love China.], [#strong[I love China.]]),
         )
       }),
-      caption: "当前生效的字体族示例",
+      caption: "当前生效的字体族渲染效果示例",
     )
   }
 
@@ -142,7 +142,7 @@ typst compile template/thesis.typ --root .
 
 == 基本结构
 
-一个使用本模板的论文文件基本结构如下：
+一个使用本模板的论文组件基本结构如下：
 
 #code-block(
   ```typ
@@ -160,6 +160,7 @@ typst compile template/thesis.typ --root .
   #(cfg.abstract-zh)(keywords-zh: ("关键词1", "关键词2"))[中文摘要内容...]
 
   #(cfg.outline)()
+  
   #show: cfg.body-wrap
   #show: cfg.bibliography
 
@@ -176,7 +177,7 @@ typst compile template/thesis.typ --root .
   #(cfg.acknowledgements)[致谢内容...]
   #(cfg.declaration)()
   ```,
-  caption: "论文文件基本结构",
+  caption: "论文组件基本结构",
 )
 
 模板采用 DI（依赖注入）模式：`config()` 返回一组闭包字典，用户通过 `cfg.xxx` 方式调用各页面函数，自行编排论文流程，不受固定模板限制。
