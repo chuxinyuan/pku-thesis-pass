@@ -70,110 +70,97 @@ cd pku-thesis-pass
 
 完整示例见 `template/thesis.typ`。
 
-| 参数 | 类型 | 说明 |
-|------|------|------|
-| `author-zh` | str | 中文姓名 |
-| `author-en` | str | 英文姓名 |
-| `student-id` | str | 学号 |
-| `blind-id` | str | 盲审论文编号 |
-| `thesis-name` | str | 论文类型（如"博士研究生学位论文"） |
-| `header-text` | str | 页眉统一文本 |
-| `title-zh` | str | 中文题目 |
-| `title-en` | str | 英文题目 |
-| `school` | str | 院系 |
-| `first-major` | str | 一级学科 |
-| `major-zh` | str | 专业中文名 |
-| `major-en` | str | 专业英文名 |
-| `direction` | str | 研究方向 |
-| `supervisor-zh` | str | 导师中文名 |
-| `supervisor-en` | str | 导师英文名 |
-| `degree-type` | str | `"academic"` 或 `"professional"` |
-| `year` | int | 提交年份 |
-| `month` | int | 提交月份 |
-| `system` | str | 系统字体方案：`"default"`/`"mac"`/`"windows"`/`"linux"` |
-| `blind` | bool | 盲审模式（默认 `false`） |
-| `preview` | bool | 预览模式（默认 `true`） |
-| `first-line-indent` | length | 首行缩进（默认 `2em`） |
-| `always-start-odd` | bool | 章节从奇数页开始（默认 `true`） |
-| `clean-declaration` | bool | 声明页隐藏页眉页脚（默认 `false`） |
-| `outline-depth` | int | 目录深度（默认 `3`） |
-| `word-count` | bool | 统计正文与附录字数（默认 `true`），正文中可用 `total-words` / `total-characters` 显示统计结果 |
-| `achievement-outlined` | bool | "攻读学位期间发表的论文"页是否出现在目录（默认 `true`） |
-| `supplements` | dict | 自定义引用记号（图/表/代码/公式前缀）及列表标题（插图/表格/代码/公式列表、符号表、成果表） |
-| `use-latexref` | bool | LaTeX 引用兼容（默认 `false`） |
-| `latexref-prefixes` | array | `use-latexref` 为 `true` 时尝试剥离的前缀列表 |
-| `codly-args` | dict | 代码块样式参数（行号、语言图标等） |
-| `logo` | path | 封面校徽图片路径，如 `path("assets/logo.svg")`（默认 `none`，显示占位框） |
-| `wordmark` | path | 封面校名字标图片路径（默认 `none`，显示占位框） |
-| `override-bib` | bool | 自定义参考文献样式（默认 `false`） |
-| `bib-file` | path | BibTeX 文件路径，如 `path("ref.bib")` |
-| `bib-style` | str | `"numeric"` 或 `"author-date"` |
-| `bib-version` | str | `"2015"` 或 `"2025"` |
-| `bib-cn-first` | bool | 中文文献优先（默认 `true`） |
-| `bib-pinyin-override` | dict | 多音字校正，如 `("重": "chong2")` |
+| 参数                     | 类型   | 说明                                                                                               |
+| ------------------------ | ------ | -------------------------------------------------------------------------------------------------- |
+| `author-zh`            | str    | 中文姓名                                                                                           |
+| `author-en`            | str    | 英文姓名                                                                                           |
+| `student-id`           | str    | 学号                                                                                               |
+| `blind-id`             | str    | 盲审论文编号                                                                                       |
+| `thesis-name`          | str    | 论文类型（如"博士研究生学位论文"）                                                                 |
+| `header-text`          | str    | 页眉统一文本                                                                                       |
+| `title-zh`             | str    | 中文题目                                                                                           |
+| `title-en`             | str    | 英文题目                                                                                           |
+| `school`               | str    | 院系                                                                                               |
+| `first-major`          | str    | 一级学科                                                                                           |
+| `major-zh`             | str    | 专业中文名                                                                                         |
+| `major-en`             | str    | 专业英文名                                                                                         |
+| `direction`            | str    | 研究方向                                                                                           |
+| `supervisor-zh`        | str    | 导师中文名                                                                                         |
+| `supervisor-en`        | str    | 导师英文名                                                                                         |
+| `degree-type`          | str    | `"academic"` 或 `"professional"`                                                               |
+| `year`                 | int    | 提交年份                                                                                           |
+| `month`                | int    | 提交月份                                                                                           |
+| `system`               | str    | 系统字体方案：`"default"`/`"mac"`/`"windows"`/`"linux"`                                    |
+| `blind`                | bool   | 盲审模式（默认`false`）                                                                          |
+| `preview`              | bool   | 预览模式（默认`true`）                                                                           |
+| `first-line-indent`    | length | 首行缩进（默认`2em`）                                                                            |
+| `always-start-odd`     | bool   | 章节从奇数页开始（默认`true`）                                                                   |
+| `clean-declaration`    | bool   | 声明页隐藏页眉页脚（默认`false`）                                                                |
+| `outline-depth`        | int    | 目录深度（默认`3`）                                                                              |
+| `word-count`           | bool   | 统计正文与附录字数（默认`false`），正文中可用 `total-words` / `total-characters` 显示统计结果 |
+| `achievement-outlined` | bool   | "攻读学位期间发表的论文"页是否出现在目录（默认`true`）                                           |
+| `supplements`          | dict   | 自定义引用记号（图/表/代码/公式前缀）及列表标题（插图/表格/代码/公式列表、符号表、成果表）         |
+| `use-latexref`         | bool   | LaTeX 引用兼容（默认`false`）                                                                    |
+| `latexref-prefixes`    | array  | `use-latexref` 为 `true` 时尝试剥离的前缀列表                                                  |
+| `codly-args`           | dict   | 代码块样式参数（行号、语言图标等）                                                                 |
+| `logo`                 | path   | 封面校徽图片路径，如`path("assets/logo.svg")`（默认 `none`，显示占位框）                       |
+| `wordmark`             | path   | 封面校名字标图片路径（默认`none`，显示占位框）                                                   |
+| `override-bib`         | bool   | 自定义参考文献样式（默认`false`）                                                                |
+| `bib-file`             | path   | BibTeX 文件路径，如`path("ref.bib")`                                                             |
+| `bib-style`            | str    | `"numeric"` 或 `"author-date"`                                                                 |
+| `bib-version`          | str    | `"2015"` 或 `"2025"`                                                                           |
+| `bib-cn-first`         | bool   | 中文文献优先（默认`true`）                                                                       |
+| `bib-pinyin-override`  | dict   | 多音字校正，如`("重": "chong2")`                                                                 |
 
 ## 字体配置
 
-模板为每个平台预定义了字体方案，通过 `system` 参数切换：
-`"default"` / `"windows"` / `"mac"` / `"linux"`。
+模板为每个平台预定义了字体方案，通过 `system` 参数切换：`"windows"` / `"mac"` / `"linux"`，默认使用 Windows 系统字体方案。
 
 Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
 
-### 跨平台通用（system: "default"）
-
-优先使用 Windows 字体，Liberation / Source Han 等开源字体兜底。
-
-| 用途 | 字体列表 |
-|------|----------|
-| 仿宋 | Times New Roman, Liberation Serif, FangSong, STFangsong, FandolFang R |
-| 宋体 | Times New Roman, Liberation Serif, NSimSun, STSong, Source Han Serif |
-| 黑体 | Times New Roman, Liberation Serif, SimHei, STHeiti, Source Han Sans |
-| 楷体 | Times New Roman, Liberation Serif, KaiTi, STKaiti, AR PL UKai |
-| 代码 | Consolas, Menlo, DejaVu Sans Mono, NSimSun, STSong, Source Han Serif |
-| 英文衬线 | Times New Roman, Liberation Serif |
-| 英文无衬线 | Arial, Helvetica, Liberation Sans |
-
 ### Windows（system: "windows"）
 
-使用自带字体（FangSong / NSimSun / SimHei / KaiTi）。
+Windows：使用自带字体（FangSong / NSimSun / SimHei / KaiTi）。
 
-| 用途 | 字体列表 |
-|------|----------|
-| 仿宋 | Times New Roman, FangSong |
-| 宋体 | Times New Roman, NSimSun |
-| 黑体 | Times New Roman, SimHei |
-| 楷体 | Times New Roman, KaiTi |
-| 代码 | Consolas, NSimSun |
-| 英文衬线 | Times New Roman |
-| 英文无衬线 | Arial |
+| 用途       | 字体列表                  |
+| ---------- | ------------------------- |
+| 仿宋       | Times New Roman, FangSong |
+| 宋体       | Times New Roman, NSimSun  |
+| 黑体       | Times New Roman, SimHei   |
+| 楷体       | Times New Roman, KaiTi    |
+| 代码       | Consolas, NSimSun         |
+| 英文衬线   | Times New Roman           |
+| 英文无衬线 | Arial                     |
 
 ### macOS（system: "mac"）
 
-使用苹果电脑自带字体，精简不留冗余 fallback。
+macOS：使用苹果电脑自带字体，精简不留冗余 fallback。
 
-| 用途 | 字体列表 |
-|------|----------|
-| 仿宋 | Times New Roman, STFangsong |
-| 宋体 | Times New Roman, STSong |
-| 黑体 | Times New Roman, PingFang SC, STHeiti |
-| 楷体 | Times New Roman, STKaiti |
-| 代码 | Menlo, STSong |
-| 英文衬线 | Times New Roman |
-| 英文无衬线 | Helvetica |
+| 用途       | 字体列表                     |
+| ---------- | ---------------------------- |
+| 仿宋       | Times New Roman, STFangsong  |
+| 宋体       | Times New Roman, STSong      |
+| 黑体       | Times New Roman, PingFang SC |
+| 楷体       | Times New Roman, STKaiti     |
+| 代码       | Menlo, STSong                |
+| 英文衬线   | Times New Roman              |
+| 英文无衬线 | Helvetica                    |
 
 ### Linux（system: "linux"）
 
-使用 Noto / Source Han / Fandol / Liberation 等常见开源字体，无商业字体依赖。
+Linux：纯开源字体，无商业字体依赖。
 
-| 用途 | 字体列表 |
-|------|----------|
-| 仿宋 | Liberation Serif, FandolFang R, Zhuque Fangsong (technical preview) |
-| 宋体 | Liberation Serif, Noto Serif CJK SC, Source Han Serif |
-| 黑体 | Liberation Serif, Noto Sans CJK SC, Source Han Sans |
-| 楷体 | Liberation Serif, AR PL UKai |
-| 代码 | DejaVu Sans Mono, Noto Serif CJK SC, Source Han Serif |
-| 英文衬线 | Liberation Serif |
-| 英文无衬线 | Liberation Sans |
+| 用途       | 字体列表                                                            |
+| ---------- | ------------------------------------------------------------------- |
+| 仿宋       | Liberation Serif, FandolFang R, Zhuque Fangsong (technical preview) |
+| 宋体       | Liberation Serif, Noto Serif CJK SC, Source Han Serif               |
+| 黑体       | Liberation Serif, Noto Sans CJK SC, Source Han Sans                 |
+| 楷体       | Liberation Serif, AR PL UKai                                        |
+| 代码       | DejaVu Sans Mono, Noto Serif CJK SC, Source Han Serif               |
+| 英文衬线   | Liberation Serif                                                    |
+| 英文无衬线 | Liberation Sans                                                     |
+
+注：FandolFang 字库不全，朱雀仿宋候补；Typst 目前对可变字体支持有限，优先使用 Adobe 发行的思源字体。
 
 ## 编译文档
 

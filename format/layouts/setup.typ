@@ -132,8 +132,12 @@
 
   // ========== 正文强调样式 ==========
   // 粗体根据字体粗体策略门控：字体内建粗体 → 走真粗体；无粗体 → cuti 描边
-  if style.正文.fakebold {
-    show: show-cn-fakebold
+  show text.where(weight: "bold").or(strong): it => {
+    if style.正文.fakebold {
+      show-cn-fakebold(it)
+    } else {
+      it
+    }
   }
   // 斜体用楷体（pkuthss 惯例）
   show emph: it => text(font: style.强调.font, style: style.强调.style, it.body)

@@ -6,7 +6,7 @@
 //   --input blind=true|false                    盲审模式
 //   --input preview=true|false                  预览模式
 //   --input always-start-odd=true|false         章节是否总是从奇数页开始
-//   --input system=default|mac|windows|linux    系统字体方案
+//   --input system=default|windows|mac|linux    系统字体方案
 // ============================================================
 
 // ========== 子模块导入 ==========

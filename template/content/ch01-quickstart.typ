@@ -1,4 +1,4 @@
-#import "../../format/lib.typ": code-block, booktab, font-set, system-state, show-cn-fakebold
+#import "../../format/lib.typ": code-block, booktab, font-set, fakebold-rules, system-state, show-cn-fakebold
 
 == 安装与环境配置
 
@@ -58,32 +58,30 @@ typst compile template/thesis.typ --root .
 
 == 字体配置
 
-本模板的字体配置在 `format/utils/font.typ` 中定义，支持四套字体方案，通过 `system` 参数切换。默认使用跨平台通用的 `default` 方案：
+本模板的字体配置在 `format/utils/font.typ` 中定义，模板为每个平台预定义了字体方案，通过 `system` 参数切换：`"windows"` / `"mac"` / `"linux"`，默认使用 Windows 系统字体方案。
 
 #booktab(
   width: 100%,
   columns: (auto, 1fr),
   align: (left, left),
-  caption: "default 方案字体列表",
+  caption: "Windows 系统字体方案",
   [*用途*],
   [*字体列表*],
   [仿宋],
-  [Times New Roman, Liberation Serif, FangSong, STFangsong, FandolFang R],
+  [Times New Roman, FangSong],
   [宋体],
-  [Times New Roman, Liberation Serif, NSimSun, STSong, Source Han Serif],
+  [Times New Roman, NSimSun],
   [黑体],
-  [Times New Roman, Liberation Serif, SimHei, STHeiti, Source Han Sans],
+  [Times New Roman, SimHei],
   [楷体],
-  [Times New Roman, Liberation Serif, KaiTi, STKaiti, AR PL UKai],
+  [Times New Roman, KaiTi],
   [代码],
-  [Consolas, Menlo, DejaVu Sans Mono, NSimSun, STSong, Source Han Serif],
+  [Consolas, NSimSun],
   [英文衬线],
-  [Times New Roman, Liberation Serif],
+  [Times New Roman],
   [英文无衬线],
-  [Arial, Helvetica, Liberation Sans],
+  [Arial],
 )
-
-其他方案（`mac` / `windows` / `linux`）针对各平台预优化，基本无冗余 fallback，安装相应字体后，编译时零 warning。
 
 === 字体族校验
 
@@ -92,6 +90,7 @@ typst compile template/thesis.typ --root .
 #context {
   let sys = system-state.get()
   let fonts = font-set.at(sys, default: font-set.default)
+  let bold = fakebold-rules.at(sys, default: fakebold-rules.default)
   let lines = (
     ("仿宋", fonts.仿宋),
     ("宋体", fonts.宋体),
@@ -99,14 +98,17 @@ typst compile template/thesis.typ --root .
     ("楷体", fonts.楷体),
     ("代码", fonts.代码),
   )
-  let fam-cell(fam, normal-sample, bold-sample) = box(width: 100%, {
+  let fam-cell(fam, need-fakebold, normal-sample, bold-sample) = box(width: 100%, {
     set text(font: fam)
     normal-sample
     linebreak()
-    bold-sample
+    if need-fakebold {
+      show-cn-fakebold[#bold-sample]
+    } else {
+      bold-sample
+    }
   })
-  show-cn-fakebold(
-    booktab(
+  booktab(
       width: 100%,
       columns: (auto, 2fr, 1fr, 1fr),
       align: (left, left, left, left),
@@ -115,14 +117,13 @@ typst compile template/thesis.typ --root .
         (
           [#strong[#name]],
           [#fam.join("、")],
-          fam-cell(fam, [为中华崛起而读书], [#strong[为中华崛起而读书]]),
-          fam-cell(fam, [I love China.], [#strong[I love China.]]),
+          fam-cell(fam, bold.at(name, default: false), [为中华崛起而读书], [#strong[为中华崛起而读书]]),
+          fam-cell(fam, bold.at(name, default: false), [I love China.], [#strong[I love China.]]),
         )
       }),
       caption: "当前生效的字体族示例",
     )
-  )
-}
+  }
 
 若某字体未安装，Typst 会在该字体族的列表内逐级 fallback，直到命中已安装的字体；若列表中所有字体均缺失，编译时会报 `unknown font family` 警告，可参考下一节「字体警告」的处理方法。
 

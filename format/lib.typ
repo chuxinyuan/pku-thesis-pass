@@ -9,7 +9,7 @@
 //   --input blind=true|false                    盲审模式
 //   --input preview=true|false                  预览模式（默认 true，链接显示蓝色，打印时请设置为 false）
 //   --input always-start-odd=true|false         章节是否总是从奇数页开始
-//   --input system=default|mac|windows|linux    系统字体方案
+//   --input system=default|windows|mac|linux    系统字体方案
 // ============================================================
 
 // ========== 公开 API ==========
@@ -18,7 +18,7 @@
 #import "config.typ": config, system-state
 
 // 字体方案
-#import "utils/font.typ": font-set
+#import "utils/font.typ": font-set, fakebold-rules
 
 // 工具
 #import "imports.typ": show-cn-fakebold

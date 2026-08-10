@@ -19,5 +19,5 @@
 #let _cli-preview = _parse-bool(sys.inputs.at("preview", default: none), none)
 /// --input always-start-odd=true|false
 #let _cli-always-start-odd = _parse-bool(sys.inputs.at("always-start-odd", default: none), none)
-/// --input system=default|mac|windows|linux
+/// --input system=default|windows|mac|linux
 #let _cli-system = sys.inputs.at("system", default: none)
