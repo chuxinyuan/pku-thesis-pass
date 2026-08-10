@@ -54,3 +54,13 @@
 
 /// 向前兼容：未设置 system 时使用 default 方案
 #let font = font-set.default
+
+// ========== 粗体策略 ==========
+
+/// 字体粗体策略：true = 使用 cuti 伪粗体，false = 使用字体自带真粗体
+#let boldmap = (
+  default:  (黑体: false, 宋体: false, 楷体: true, 仿宋: true),
+  windows:  (黑体: false, 宋体: false, 楷体: true, 仿宋: true),
+  mac:      (黑体: false, 宋体: true, 楷体: true, 仿宋: true),
+  linux:    (黑体: false, 宋体: false, 楷体: true, 仿宋: true),
+)

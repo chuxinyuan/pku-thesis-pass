@@ -1,9 +1,9 @@
 // tests/style-test.typ — SSOT 样式字典单元测试
 
 #import "../format/utils/style.typ": build
-#import "../format/utils/font.typ": font-set
+#import "../format/utils/font.typ": font-set, boldmap
 
-#let s = build(font-set.default)
+#let s = build(font-set.default, fakebold: boldmap.default)
 
 // 标题字号
 #assert.eq(s.章标题.size, 16pt)

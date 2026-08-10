@@ -131,8 +131,10 @@
   }
 
   // ========== 正文强调样式 ==========
-  // 粗体用伪粗体描边（保证跨字体一致，避免真粗体不可用或过重）
-  show: show-cn-fakebold
+  // 粗体根据字体粗体策略门控：字体内建粗体 → 走真粗体；无粗体 → cuti 描边
+  if style.正文.fakebold {
+    show: show-cn-fakebold
+  }
   // 斜体用楷体（pkuthss 惯例）
   show emph: it => text(font: style.强调.font, style: style.强调.style, it.body)
   // 代码用等宽字体

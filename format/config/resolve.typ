@@ -3,7 +3,7 @@
 // ============================================================
 
 #import "../utils/style.typ": build
-#import "../utils/font.typ": font-set
+#import "../utils/font.typ": font-set, boldmap
 #import "../utils/supplement.typ": supplement
 #import "../utils/util.typ": resolve-path
 #import "../utils/counter.typ": skippedstate
@@ -13,7 +13,8 @@
 #let resolve-font(system, _cli-system) = {
   let resolved-system = if _cli-system != none { _cli-system } else { system }
   let font = font-set.at(resolved-system, default: font-set.default)
-  let style = build(font)
+  let fakebold = boldmap.at(resolved-system, default: boldmap.default)
+  let style = build(font, fakebold: fakebold)
   (resolved-system: resolved-system, font: font, style: style)
 }
 
