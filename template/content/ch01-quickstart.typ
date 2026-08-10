@@ -200,7 +200,10 @@ typst compile template/thesis.typ --root .
 本模板提供如下模块可供导入：
 
 - `config` — 论文配置入口，返回页面函数闭包字典（核心模块）
+- `system-state` — 系统字体方案状态（类型 `state`），供字体校验表读取当前生效方案
 - `font-set` — 跨平台字体方案字典（`font-set.windows` / `.macos` / `.linux`）
+- `fakebold-rules` — 字体伪粗体策略字典（`fakebold-rules.windows` / `.macos` / `.linux`），控制各字型的粗体行为
+- `show-cn-fakebold` — 中文伪粗体函数，为无粗体变体的字体（如楷体、仿宋）添加描边模拟加粗
 - `booktab` — 学术三线表组件
 - `as-booktab` — 将原生 `table` 装饰为三线表样式
 - `code-preview` — 代码与渲染效果左右对照组件（主要用于本使用指南）
