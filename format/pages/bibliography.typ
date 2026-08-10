@@ -66,10 +66,10 @@
         }
       },
     )
-    show metadata.where(value: "pkuthss-appendix"): _ => make-bib()
+    show metadata.where(value: "thesis-appendix"): _ => make-bib()
     init-gb7714.with(bib-content, style: bib-style, version: bib-version, cn-first: bib-cn-first, pinyin-override: bib-pinyin-override)(body)
     context {
-      if query(metadata.where(value: "pkuthss-appendix")).len() == 0 {
+      if query(metadata.where(value: "thesis-appendix")).len() == 0 {
         make-bib()
       }
     }

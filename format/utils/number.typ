@@ -5,10 +5,10 @@
 #import "counter.typ": partcounter, chaptercounter
 
 /// 附录切换函数：在正文末尾调用，进入附录模式
-/// 发射 pkuthss-appendix 元数据标记（用于触发参考文献渲染）
+/// 发射 thesis-appendix 元数据标记（用于触发参考文献渲染）
 /// 并将 part 置为 3（附录部分），重置章节和标题计数器
 #let appendix() = {
-  metadata("pkuthss-appendix")
+  metadata("thesis-appendix")
   partcounter.update(3)
   chaptercounter.update(0)
   counter(heading).update(0)
