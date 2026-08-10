@@ -30,24 +30,10 @@ jobs:
         run: bash .github/workflows/ci-install-fonts.sh
 
       - name: Run unit tests
-        run: |
-          typst compile tests/number-test.typ --root .
-          typst compile tests/util-test.typ --root .
-          typst compile tests/style-test.typ --root .
-          typst compile tests/cli-test.typ --root .
-          typst compile tests/size-test.typ --root .
-          typst compile tests/font-test.typ --root .
-          typst compile tests/component-test.typ --root .
+        run: bash scripts/unit-tests.sh
 
-      - name: Compile integration tests
-        run: |
-          typst compile tests/thesis-minimal.typ --root .
-          typst compile tests/thesis-linux.typ --root . --input system=linux
-          typst compile tests/thesis-full.typ --root .
-          typst compile tests/thesis-blind.typ --root . --input blind=true
-          typst compile tests/thesis-heading.typ --root .
-          typst compile tests/thesis-refs.typ --root .
-          typst compile tests/thesis-full.typ --root . --input system=linux
+      - name: Run integration tests
+        run: bash scripts/integration-tests.sh
 
       - name: Verify blind mode hides sensitive info
         run: |
