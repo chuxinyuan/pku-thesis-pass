@@ -49,13 +49,15 @@ jobs:
           typst compile tests/thesis-refs.typ --root .
           typst compile tests/thesis-full.typ --root . --input system=linux
 
-      - name: Verify blind mode hides author
+      - name: Verify blind mode hides sensitive info
         run: |
-          if strings tests/thesis-blind.pdf | grep -q "张三"; then
-            echo "ERROR: author name leaked in blind mode"
-            exit 1
-          fi
-          echo "OK: author name hidden in blind mode"
+          for keyword in "张三" "李四" "23000xxxxx" "致谢导师" "发表论文"; do
+            if strings tests/thesis-blind.pdf | grep -q "$keyword"; then
+              echo "ERROR: '$keyword' leaked in blind mode"
+              exit 1
+            fi
+          done
+          echo "OK: all sensitive info hidden in blind mode"
 
   build:
     needs: test
