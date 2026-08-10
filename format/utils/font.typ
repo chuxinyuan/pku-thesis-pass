@@ -58,9 +58,9 @@
 // ========== 粗体策略 ==========
 
 /// 字体粗体策略：true = 使用 cuti 伪粗体，false = 使用字体自带真粗体
-#let boldmap = (
+#let fakebold-rules = (
   default:  (黑体: false, 宋体: false, 楷体: true, 仿宋: true),
   windows:  (黑体: false, 宋体: false, 楷体: true, 仿宋: true),
   mac:      (黑体: false, 宋体: true, 楷体: true, 仿宋: true),
-  linux:    (黑体: false, 宋体: false, 楷体: true, 仿宋: true),
+  linux:    (黑体: false, 宋体: false, 楷体: true, 仿宋: false),
 )

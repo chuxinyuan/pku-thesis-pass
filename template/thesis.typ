@@ -33,7 +33,7 @@
   month: 6,
 
   // ========== 排版配置 ==========
-  system: "default",
+  system: "linux",
   blind: false,
   preview: true,
   first-line-indent: 2em,

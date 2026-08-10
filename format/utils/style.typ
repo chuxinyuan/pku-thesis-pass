@@ -10,7 +10,7 @@
 // 如需按 Word 模板做视觉校准，调整 size.typ 中对应字号的 pt 值即可全局生效。
 
 #import "size.typ": size
-#import "font.typ": font-set, boldmap
+#import "font.typ": font-set, fakebold-rules
 
 #let build(font, fakebold: (:)) = (
   // ── 1.1 封面 ──
@@ -140,4 +140,4 @@
 /// 默认样式（基于 font-set.default + font-bold.default），供以下场景使用：
 /// 1. booktab.typ 等用户组件的模块级回退
 /// 2. 所有页面函数的 style 参数默认值（参数为 none 时回退到此）
-#let style = build(font-set.default, fakebold: boldmap.default)
+#let style = build(font-set.default, fakebold: fakebold-rules.default)
