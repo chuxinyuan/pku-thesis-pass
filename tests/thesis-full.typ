@@ -18,7 +18,7 @@
   degree-type: "academic",
   year: 2026,
   month: 6,
-  system: "default",
+  system: "windows",
   supplements: (成果表: "发表论文"),
 )
 

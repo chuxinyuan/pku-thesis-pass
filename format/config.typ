@@ -3,10 +3,10 @@
 // config() 返回闭包字典 + 配置值，用户通过 cfg.xxx 方式调用
 //
 // 命令行参数（--input key=value）：
-//   --input blind=true|false                    盲审模式
-//   --input preview=true|false                  预览模式
-//   --input always-start-odd=true|false         章节是否总是从奇数页开始
-//   --input system=default|windows|mac|linux    系统字体方案
+//   --input blind=true|false               盲审模式
+//   --input preview=true|false             预览模式（默认 true，链接显示蓝色，打印时请设置为 false）
+//   --input always-start-odd=true|false    章节是否总是从奇数页开始
+//   --input system=windows|macos|linux     系统字体方案
 // ============================================================
 
 // ========== 子模块导入 ==========
@@ -43,7 +43,7 @@
 ///   month — 论文提交月份
 ///
 /// 排版配置：
-///   system — 系统字体方案："default"/"mac"/"windows"/"linux"（默认 "default"）
+///   system — 系统字体方案："windows"/"macos"/"linux"（默认 "windows"）
 ///   blind — 盲审模式（默认 false）
 ///   preview — 预览模式（链接显示蓝色，默认 true）
 ///   first-line-indent — 首行缩进（默认 2em）
@@ -88,7 +88,7 @@
   year: 2026,
   month: 6,
   // ========== 排版配置 ==========
-  system: "default",
+  system: "windows",
   blind: false,
   preview: true,
   first-line-indent: 2em,

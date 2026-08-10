@@ -3,7 +3,7 @@
 #import "../format/utils/font.typ": font-set
 
 // 每套方案都必须包含 5 个核心中文字体条目
-#for scheme in (font-set.default, font-set.windows, font-set.mac, font-set.linux) {
+#for scheme in (font-set.windows, font-set.macos, font-set.linux) {
   assert(scheme.仿宋.len() > 0, message: "仿宋 missing")
   assert(scheme.宋体.len() > 0, message: "宋体 missing")
   assert(scheme.黑体.len() > 0, message: "黑体 missing")

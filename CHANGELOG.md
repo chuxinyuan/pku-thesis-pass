@@ -38,7 +38,6 @@
 - Linux 代码字体改用 DejaVu Sans Mono ([df69148])
 - 字体校验表通过 system-state 实时渲染当前方案 ([d3adc0a], [b42ab28])
 - Linux 方案纯开源：移除 Times New Roman/Arial，全用 Liberation 替代 ([be02ed8])
-- default 方案加入 Liberation Serif 跨平台兜底 ([be02ed8])
 - macOS 英文无衬线加入 Helvetica fallback ([28c5ee5])
 
 ### 新增功能
@@ -100,7 +99,7 @@
 ### DI 模式
 
 - `config()` 返回闭包字典，用户可自由编排论文流程 ([07c6ca])
-- 跨平台字体方案（`default`/`mac`/`windows`/`linux`）+ `--input system` 切换
+- 跨平台字体方案 + `--input system` 切换
 - 字体校验表实时渲染（`system-state` 驱动）
 
 ### 模板指南

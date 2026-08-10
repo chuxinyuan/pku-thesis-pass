@@ -6,10 +6,10 @@
 // 覆盖封面、版权声明、中英文摘要、目录、正文、图表、参考文献、附录、致谢、原创性声明等全部流程
 //
 // 命令行参数（--input key=value）：
-//   --input blind=true|false                    盲审模式
-//   --input preview=true|false                  预览模式（默认 true，链接显示蓝色，打印时请设置为 false）
-//   --input always-start-odd=true|false         章节是否总是从奇数页开始
-//   --input system=default|windows|mac|linux    系统字体方案
+//   --input blind=true|false               盲审模式
+//   --input preview=true|false             预览模式（默认 true，链接显示蓝色，打印时请设置为 false）
+//   --input always-start-odd=true|false    章节是否总是从奇数页开始
+//   --input system=windows|macos|linux     系统字体方案
 // ============================================================
 
 // ========== 公开 API ==========

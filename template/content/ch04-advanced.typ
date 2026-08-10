@@ -101,7 +101,7 @@ typst compile thesis.typ --input preview=false
   [`always-start-odd`],
   [章节从奇数页开始：`true` 启用，`false` 禁用],
   [`system`],
-  [系统字体方案：`default`/`mac`/`windows`/`linux`],
+  [系统字体方案：`windows`/`macos`/`linux`],
 )
 
 ```bash

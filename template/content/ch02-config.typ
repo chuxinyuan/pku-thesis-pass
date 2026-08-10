@@ -213,8 +213,8 @@
   [*系统默认值*],
   [*说明*],
   [`system`],
-  [`"default"`],
-  [字体方案：`"default"`/`"mac"`/`"windows"`/`"linux"`],
+  [`"windows"`],
+  [字体方案：`"windows"`/`"macos"`/`"linux"`],
   [`blind`],
   [`false`],
   [是否为盲审模式，盲审模式隐藏作者、导师等信息],
@@ -272,10 +272,10 @@
 === `system`
 
 - #strong[作用]：系统字体方案，决定中文与西文字体的 fallback 顺序。
-- #strong[可填值]：`"default"` / `"mac"` / `"windows"` / `"linux"`。
-- #strong[默认值]：`"default"`。
+- #strong[可填值]：`"windows"` / `"macos"` / `"linux"`。
+- #strong[默认值]：`"windows"`。
 - #strong[填写示例]：`system: "linux"`
-- #strong[注意事项]：可被命令行 `--input system=linux` 覆盖，优先级高于此配置。各方案的字体对照见 README"字体配置"一节。
+- #strong[注意事项]：可被命令行 `--input system=linux` 覆盖，优先级高于此配置。各方案的字体对照见 README "字体配置" 一节。
 
 === `blind`
 

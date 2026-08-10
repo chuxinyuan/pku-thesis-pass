@@ -3,7 +3,7 @@
 // ============================================================
 //
 // build(font) 返回各元素的字体/字号/间距样式字典，作为全模板的单一事实来源。
-// font 为 config() 解析出的当前系统字体方案（font-set.default/mac/windows/linux），
+// font 为 config() 解析出的当前系统字体方案（font-set.windows/macos/linux），
 // 调用方通过 style.正文.font 可直接拿到字体数组，用于 set text() 等。
 //
 // 条目按指南章节号组织，注释中的字号（三号、小四等）对应 size.typ。
@@ -137,7 +137,7 @@
   页码: (font: font.英文衬线, size: size.五号, 垂直位置: 1.75cm),
 )
 
-/// 默认样式（基于 font-set.default + font-bold.default），供以下场景使用：
+/// 默认样式（基于 font-set.windows + fakebold-rules.windows），供以下场景使用：
 /// 1. booktab.typ 等用户组件的模块级回退
 /// 2. 所有页面函数的 style 参数默认值（参数为 none 时回退到此）
-#let style = build(font-set.default, fakebold: fakebold-rules.default)
+#let style = build(font-set.windows, fakebold: fakebold-rules.windows)

@@ -3,10 +3,10 @@
 // 渲染文档：typst compile thesis.typ --root .
 //
 // 命令行参数（--input key=value）：
-//   --input blind=true|false                    盲审模式
-//   --input preview=true|false                  预览模式（默认 true，链接显示蓝色）
-//   --input always-start-odd=true|false         章节是否总是从奇数页开始
-//   --input system=default|mac|windows|linux    系统字体方案
+//   --input blind=true|false               盲审模式
+//   --input preview=true|false             预览模式（默认 true，链接显示蓝色）
+//   --input always-start-odd=true|false    章节是否总是从奇数页开始
+//   --input system=windows|macos|linux     系统字体方案
 // ============================================================
 
 #import "../format/lib.typ": config
@@ -33,7 +33,7 @@
   month: 6,
 
   // ========== 排版配置 ==========
-  system: "linux",
+  system: "windows",
   blind: false,
   preview: true,
   first-line-indent: 2em,

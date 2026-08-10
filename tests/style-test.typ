@@ -3,7 +3,7 @@
 #import "../format/utils/style.typ": build
 #import "../format/utils/font.typ": font-set, fakebold-rules
 
-#let s = build(font-set.default, fakebold: fakebold-rules.default)
+#let s = build(font-set.windows, fakebold: fakebold-rules.windows)
 
 // 标题字号
 #assert.eq(s.章标题.size, 16pt)

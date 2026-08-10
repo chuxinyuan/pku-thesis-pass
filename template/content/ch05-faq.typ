@@ -55,18 +55,6 @@ config(
 
 #strong[注意]：盲审封面（`blind: true`）会自动把 `\n` 替换为空格，避免手工换行导致排版错位。
 
-== 出现 unknown font family 警告怎么办？
-
-该警告说明系统未安装对应字体，参考如下方式处理：
-
-- 使用 `--input system=mac`（macOS）或 `--input system=linux`（Linux）切换到对应平台的精简方案
-- 下载对应字体（如思源宋体、思源黑体等）
-  - 将字体安装到系统中
-  - 或在编译时加 `--font-path` 参数指定字体文件所在目录
-- 开发者可编辑 `format/utils/font.typ` 中的字体配置
-
-详见 @quickstart 的「字体配置」一节的字体族校验与字体警告。
-
 == 表格被跨页分割怎么办？
 
 本模板默认允许表格跨页（`show figure: set block(breakable: true)`）。长表跨页会自动重复表头，并在续表页右上角标注"续表"，无需手动控制；`booktab` 会自动完成这些。

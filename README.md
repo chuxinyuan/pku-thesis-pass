@@ -31,7 +31,7 @@
 - 正文字数统计（wordometer，标题不计入）
 - 自动设置 PDF 元数据（标题 / 作者，盲审版隐藏作者）
 - 命令行参数控制（`blind` / `preview` / `always-start-odd` / `system`）
-- 跨平台字体方案（default / macOS / Windows / Linux）
+- 跨平台字体方案（Windows / macOS / Linux）
 
 ## 获取模板
 
@@ -61,7 +61,7 @@ cd pku-thesis-pass
 #let cfg = config(
   author-zh: "张三",
   title-zh: "论文中文题目",
-  system: "default",
+  system: "windows",
 )
 
 #show: cfg.setup
@@ -70,57 +70,57 @@ cd pku-thesis-pass
 
 完整示例见 `template/thesis.typ`。
 
-| 参数                     | 类型   | 说明                                                                                               |
-| ------------------------ | ------ | -------------------------------------------------------------------------------------------------- |
-| `author-zh`            | str    | 中文姓名                                                                                           |
-| `author-en`            | str    | 英文姓名                                                                                           |
-| `student-id`           | str    | 学号                                                                                               |
-| `blind-id`             | str    | 盲审论文编号                                                                                       |
-| `thesis-name`          | str    | 论文类型（如"博士研究生学位论文"）                                                                 |
-| `header-text`          | str    | 页眉统一文本                                                                                       |
-| `title-zh`             | str    | 中文题目                                                                                           |
-| `title-en`             | str    | 英文题目                                                                                           |
-| `school`               | str    | 院系                                                                                               |
-| `first-major`          | str    | 一级学科                                                                                           |
-| `major-zh`             | str    | 专业中文名                                                                                         |
-| `major-en`             | str    | 专业英文名                                                                                         |
-| `direction`            | str    | 研究方向                                                                                           |
-| `supervisor-zh`        | str    | 导师中文名                                                                                         |
-| `supervisor-en`        | str    | 导师英文名                                                                                         |
+| 参数                     | 类型   | 说明                                                                                          |
+| ------------------------ | ------ | -------------------------------------------------------------------------------------------- |
+| `author-zh`            | str    | 中文姓名                                                                                        |
+| `author-en`            | str    | 英文姓名                                                                                        |
+| `student-id`           | str    | 学号                                                                                           |
+| `blind-id`             | str    | 盲审论文编号                                                                                    |
+| `thesis-name`          | str    | 论文类型（如"博士研究生学位论文"）                                                                |
+| `header-text`          | str    | 页眉统一文本                                                                                    |
+| `title-zh`             | str    | 中文题目                                                                                        |
+| `title-en`             | str    | 英文题目                                                                                        |
+| `school`               | str    | 院系                                                                                            |
+| `first-major`          | str    | 一级学科                                                                                        |
+| `major-zh`             | str    | 专业中文名                                                                                      |
+| `major-en`             | str    | 专业英文名                                                                                      |
+| `direction`            | str    | 研究方向                                                                                        |
+| `supervisor-zh`        | str    | 导师中文名                                                                                      |
+| `supervisor-en`        | str    | 导师英文名                                                                                      |
 | `degree-type`          | str    | `"academic"` 或 `"professional"`                                                               |
-| `year`                 | int    | 提交年份                                                                                           |
-| `month`                | int    | 提交月份                                                                                           |
-| `system`               | str    | 系统字体方案：`"default"`/`"mac"`/`"windows"`/`"linux"`                                    |
+| `year`                 | int    | 提交年份                                                                                        |
+| `month`                | int    | 提交月份                                                                                        |
+| `system`               | str    | 系统字体方案：`"windows"`/`"macos"`/`"linux"`                                                    |
 | `blind`                | bool   | 盲审模式（默认`false`）                                                                          |
 | `preview`              | bool   | 预览模式（默认`true`）                                                                           |
 | `first-line-indent`    | length | 首行缩进（默认`2em`）                                                                            |
-| `always-start-odd`     | bool   | 章节从奇数页开始（默认`true`）                                                                   |
-| `clean-declaration`    | bool   | 声明页隐藏页眉页脚（默认`false`）                                                                |
+| `always-start-odd`     | bool   | 章节从奇数页开始（默认`true`）                                                                    |
+| `clean-declaration`    | bool   | 声明页隐藏页眉页脚（默认`false`）                                                                 |
 | `outline-depth`        | int    | 目录深度（默认`3`）                                                                              |
-| `word-count`           | bool   | 统计正文与附录字数（默认`false`），正文中可用 `total-words` / `total-characters` 显示统计结果 |
-| `achievement-outlined` | bool   | "攻读学位期间发表的论文"页是否出现在目录（默认`true`）                                           |
-| `supplements`          | dict   | 自定义引用记号（图/表/代码/公式前缀）及列表标题（插图/表格/代码/公式列表、符号表、成果表）         |
+| `word-count`           | bool   | 统计正文与附录字数（默认`false`），正文中可用 `total-words` / `total-characters` 显示统计结果       |
+| `achievement-outlined` | bool   | "攻读学位期间发表的论文"页是否出现在目录（默认`true`）                                              |
+| `supplements`          | dict   | 自定义引用记号（图/表/代码/公式前缀）及列表标题（插图/表格/代码/公式列表、符号表、成果表）             |
 | `use-latexref`         | bool   | LaTeX 引用兼容（默认`false`）                                                                    |
-| `latexref-prefixes`    | array  | `use-latexref` 为 `true` 时尝试剥离的前缀列表                                                  |
+| `latexref-prefixes`    | array  | `use-latexref` 为 `true` 时尝试剥离的前缀列表                                                     |
 | `codly-args`           | dict   | 代码块样式参数（行号、语言图标等）                                                                 |
-| `logo`                 | path   | 封面校徽图片路径，如`path("assets/logo.svg")`（默认 `none`，显示占位框）                       |
-| `wordmark`             | path   | 封面校名字标图片路径（默认`none`，显示占位框）                                                   |
-| `override-bib`         | bool   | 自定义参考文献样式（默认`false`）                                                                |
+| `logo`                 | path   | 封面校徽图片路径，如`path("assets/logo.svg")`（默认 `none`，显示占位框）                           |
+| `wordmark`             | path   | 封面校名字标图片路径（默认`none`，显示占位框）                                                     |
+| `override-bib`         | bool   | 自定义参考文献样式（默认`false`）                                                                 |
 | `bib-file`             | path   | BibTeX 文件路径，如`path("ref.bib")`                                                             |
-| `bib-style`            | str    | `"numeric"` 或 `"author-date"`                                                                 |
-| `bib-version`          | str    | `"2015"` 或 `"2025"`                                                                           |
-| `bib-cn-first`         | bool   | 中文文献优先（默认`true`）                                                                       |
+| `bib-style`            | str    | `"numeric"` 或 `"author-date"`                                                                  |
+| `bib-version`          | str    | `"2015"` 或 `"2025"`                                                                            |
+| `bib-cn-first`         | bool   | 中文文献优先（默认`true`）                                                                        |
 | `bib-pinyin-override`  | dict   | 多音字校正，如`("重": "chong2")`                                                                 |
 
 ## 字体配置
 
-模板为每个平台预定义了字体方案，通过 `system` 参数切换：`"windows"` / `"mac"` / `"linux"`，默认使用 Windows 系统字体方案。
+模板为每个平台预定义了字体方案，通过 `system` 参数切换：`"windows"` / `"macos"` / `"linux"`，默认使用 Windows 系统字体方案。
 
-Typst 按列表顺序依次 fallback，优先使用列表中靠前的字体。
+Typst 按列表顺序依次 Fallback，优先使用列表中靠前的字体。
 
 ### Windows（system: "windows"）
 
-Windows：使用自带字体（FangSong / NSimSun / SimHei / KaiTi）。
+Windows：使用系统自带字体
 
 | 用途       | 字体列表                  |
 | ---------- | ------------------------- |
@@ -132,9 +132,9 @@ Windows：使用自带字体（FangSong / NSimSun / SimHei / KaiTi）。
 | 英文衬线   | Times New Roman           |
 | 英文无衬线 | Arial                     |
 
-### macOS（system: "mac"）
+### macOS（system: "macos"）
 
-macOS：使用苹果电脑自带字体，精简不留冗余 fallback。
+macOS：使用系统自带字体
 
 | 用途       | 字体列表                     |
 | ---------- | ---------------------------- |
@@ -148,10 +148,10 @@ macOS：使用苹果电脑自带字体，精简不留冗余 fallback。
 
 ### Linux（system: "linux"）
 
-Linux：纯开源字体，无商业字体依赖。
+Linux：纯开源字体，无商业字体依赖
 
 | 用途       | 字体列表                                                            |
-| ---------- | ------------------------------------------------------------------- |
+| ---------- | ------------------------------------------------------------------ |
 | 仿宋       | Liberation Serif, FandolFang R, Zhuque Fangsong (technical preview) |
 | 宋体       | Liberation Serif, Noto Serif CJK SC, Source Han Serif               |
 | 黑体       | Liberation Serif, Noto Sans CJK SC, Source Han Sans                 |

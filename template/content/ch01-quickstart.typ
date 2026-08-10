@@ -58,7 +58,7 @@ typst compile template/thesis.typ --root .
 
 == 字体配置
 
-本模板的字体配置在 `format/utils/font.typ` 中定义，模板为每个平台预定义了字体方案，通过 `system` 参数切换：`"windows"` / `"mac"` / `"linux"`，默认使用 Windows 系统字体方案。
+本模板的字体配置在 `format/utils/font.typ` 中定义，模板为每个平台预定义了字体方案，通过 `system` 参数切换：`"windows"` / `"macos"` / `"linux"`，默认使用 Windows 系统字体方案。
 
 #booktab(
   width: 100%,
@@ -81,7 +81,9 @@ typst compile template/thesis.typ --root .
   [Times New Roman],
   [英文无衬线],
   [Arial],
-)
+) <windows-font>
+
+如果您使用的是 macOS 或者 Linux 系统，但是您希望渲染出和 Windows 系统下一样的字体效果，您也可以设置 `system: windows`，但是需要事先在系统里安装 @windows-font 所示的全部字体。
 
 === 字体族校验
 
@@ -89,8 +91,8 @@ typst compile template/thesis.typ --root .
 
 #context {
   let sys = system-state.get()
-  let fonts = font-set.at(sys, default: font-set.default)
-  let bold = fakebold-rules.at(sys, default: fakebold-rules.default)
+  let fonts = font-set.at(sys, default: font-set.windows)
+  let bold = fakebold-rules.at(sys, default: fakebold-rules.windows)
   let lines = (
     ("仿宋", fonts.仿宋),
     ("宋体", fonts.宋体),
@@ -125,14 +127,14 @@ typst compile template/thesis.typ --root .
     )
   }
 
-若某字体未安装，Typst 会在该字体族的列表内逐级 fallback，直到命中已安装的字体；若列表中所有字体均缺失，编译时会报 `unknown font family` 警告，可参考下一节「字体警告」的处理方法。
+若某字体未安装，Typst 会在该字体族的列表内逐级 Fallback，直到命中已安装的字体；若列表中所有字体均缺失，编译时会报 `unknown font family` 警告，可参考下一节「字体警告」的处理方法。
 
 === 字体警告
 
 如果编译时出现 `unknown font family` 警告，说明系统未安装对应字体。
 
 *解决方案*：
-- 使用 `--input system=mac`（macOS）或 `--input system=linux`（Linux）切换到对应平台的精简方案
+- 使用 `--input system=macos`（macOS）或 `--input system=linux`（Linux）切换到对应平台的字体方案
 - 下载对应字体（如思源宋体、思源黑体等）
   - 将字体安装到系统中
   - 或在编译时加上 `--font-path` 参数指定字体文件所在目录
@@ -198,7 +200,7 @@ typst compile template/thesis.typ --root .
 本模板提供如下模块可供导入：
 
 - `config` — 论文配置入口，返回页面函数闭包字典（核心模块）
-- `font-set` — 跨平台字体方案字典（`font-set.default` / `.mac` / `.windows` / `.linux`）
+- `font-set` — 跨平台字体方案字典（`font-set.windows` / `.macos` / `.linux`）
 - `booktab` — 学术三线表组件
 - `as-booktab` — 将原生 `table` 装饰为三线表样式
 - `code-preview` — 代码与渲染效果左右对照组件（主要用于本使用指南）

@@ -12,8 +12,8 @@
 /// 返回 (resolved-system, font, style)
 #let resolve-font(system, _cli-system) = {
   let resolved-system = if _cli-system != none { _cli-system } else { system }
-  let font = font-set.at(resolved-system, default: font-set.default)
-  let fakebold = fakebold-rules.at(resolved-system, default: fakebold-rules.default)
+  let font = font-set.at(resolved-system, default: font-set.windows)
+  let fakebold = fakebold-rules.at(resolved-system, default: fakebold-rules.windows)
   let style = build(font, fakebold: fakebold)
   (resolved-system: resolved-system, font: font, style: style)
 }
