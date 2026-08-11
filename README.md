@@ -153,10 +153,10 @@ Linux：纯开源字体，无商业字体依赖
 | 用途       | 字体列表                                                            |
 | ---------- | ------------------------------------------------------------------ |
 | 仿宋       | Liberation Serif, FandolFang R, Zhuque Fangsong (technical preview) |
-| 宋体       | Liberation Serif, Noto Serif CJK SC, Source Han Serif               |
-| 黑体       | Liberation Serif, Noto Sans CJK SC, Source Han Sans                 |
+| 宋体       | Liberation Serif, Source Han Serif, Noto Serif CJK SC               |
+| 黑体       | Liberation Serif, Source Han Sans, Noto Sans CJK SC                 |
 | 楷体       | Liberation Serif, AR PL UKai                                        |
-| 代码       | DejaVu Sans Mono, Noto Serif CJK SC, Source Han Serif               |
+| 代码       | DejaVu Sans Mono, Source Han Serif, Noto Serif CJK SC               |
 | 英文衬线   | Liberation Serif                                                    |
 | 英文无衬线 | Liberation Sans                                                     |
 
