@@ -1,6 +1,6 @@
 // tests/thesis-full.typ — 全参数编译集成测试
 
-#import "../format/lib.typ": config, booktab, code-block
+#import "../format/lib.typ": config, booktab, code-block, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
 
 #let cfg = config(
   author-zh: "张三",
@@ -63,6 +63,16 @@
 ) <tbl-test>
 
 如 @fig-logo 和 @tbl-test 所示。
+
+#theorem[这是一个定理。]
+#definition[这是一个定义。]
+#lemma[这是一个引理。]
+#corollary[这是一个推论。]
+#proposition[这是一个命题。]
+#property[这是一个性质。]
+#example[这是一个例子。]
+#remark[这是一个注释。]
+#proof[证明内容。]
 
 = 结论
 

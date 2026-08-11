@@ -8,3 +8,4 @@ typst compile tests/cli-test.typ --root .
 typst compile tests/size-test.typ --root .
 typst compile tests/font-test.typ --root .
 typst compile tests/component-test.typ --root .
+typst compile tests/resolve-test.typ --root .

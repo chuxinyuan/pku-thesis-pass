@@ -29,7 +29,7 @@
   // 日期后缀（"年"、"月"）：黑体
   封面日期标点: (font: font.黑体, size: size.三号, fakebold: fakebold.黑体),
   // 校徽/字标占位框文字
-  封面占位符: (font: font.黑体, 字号: 0.6em),
+  封面占位符: (font: font.黑体, size: 0.6em),
   // 盲审封面正文段落
   封面盲审: (leading: 1em, spacing: 1.5em),
 
@@ -79,7 +79,7 @@
 
   // ── 1.7.3 脚注 ──
   // 脚注：小五（9pt）宋体，单倍行距，悬挂缩进
-  脚注: (font: font.宋体, size: size.小五, leading: 1.2em, super-size: 0.65em, 悬挂缩进: 1.5em, 编号间距: 0.5em, 编号格式: "①", fakebold: fakebold.宋体),
+  脚注: (font: font.宋体, size: size.小五, leading: 1.2em, super-size: 0.65em, 悬挂缩进: 1.5em, 编号间距: 0.5em, fakebold: fakebold.宋体),
 
   // 正则文本强调：斜体用楷体
   强调: (font: font.楷体, style: "italic", fakebold: fakebold.楷体),
