@@ -255,7 +255,7 @@
   [`("fig:", ..)`],
   [`use-latexref` 为 `true` 时尝试剥离的前缀列表，可按需增删，如 `("图:", "表:")`],
   [`codly-args`],
-  [`(display-icon: true)`],
+  [`(:)`],
   [传递给 `codly` 包的额外参数，用于自定义代码块样式。常用选项：\
     `number-format: none`  关闭代码行号；\
     `display-icon: false`  关闭语言图标；\
@@ -369,7 +369,7 @@
 
 - #strong[作用]：传递给 `codly` 包的代码块样式参数。
 - #strong[可填值]：字典（dict）。
-- #strong[默认值]：`(display-icon: true)`。
+- #strong[默认值]：`(:)`。
 - #strong[常见选项]：
   - `number-format: none`   关闭代码行号
   - `display-icon: false`   关闭语言图标

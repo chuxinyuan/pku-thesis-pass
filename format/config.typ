@@ -100,7 +100,7 @@
   latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:"),
   achievement-outlined: true,
   word-count: false,
-  codly-args: (display-icon: true),
+  codly-args: (:),
   logo: none,
   wordmark: none,
   // ========== 参考文献 ==========
