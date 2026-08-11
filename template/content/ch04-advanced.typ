@@ -50,7 +50,7 @@ typst compile thesis.typ --input blind=false
 这样导出的 PDF 在系统中按标题、作者归类时更规范，也便于检索：
 
 ```typ
-#let (setup, ..) = config(
+#let cfg = config(
   title-zh: "论文中文题目",
   author-zh: "张三",
   ...
@@ -106,7 +106,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 在 `config()` 中设置 `use-latexref: true`：
 
 ```typ
-#let (setup, ..) = config(
+#let cfg = config(
   ...
   use-latexref: true,
 )
@@ -152,7 +152,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 分别对应图、表、公式、代码、图片、算法。如需增删，用 `latexref-prefixes` 参数覆盖，例如支持中文前缀：
 
 ```typ
-#let (setup, ..) = config(
+#let cfg = config(
   use-latexref: true,
   latexref-prefixes: ("fig:", "tbl:", "eqt:", "lst:", "img:", "alg:", "图:", "表:"),
 )
@@ -195,31 +195,31 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
   [*顺序*],
   [*调用*],
   [1],
-  [`#show: setup` 页面设置（字号、行距、页眉页脚、show 规则）],
+  [`#show: cfg.setup` 页面设置（字号、行距、页眉页脚、show 规则）],
   [2],
-  [`#cover()` 封面（按 `blind` 自动选择正常/盲审版）],
+  [`#(cfg.cover)()` 封面（按 `blind` 自动选择正常/盲审版）],
   [3],
-  [`#copyright()` 版权声明页],
+  [`#(cfg.copyright)()` 版权声明页],
   [4],
-  [`#abstract-zh(...)` / `#abstract-en(...)` 中英文摘要],
+  [`#(cfg.abstract-zh)(...)` / `#(cfg.abstract-en)(...)` 中英文摘要],
   [5],
-  [`#outline()` 中文目录],
+  [`#(cfg.outline)()` 中文目录],
   [6],
-  [`#list-of-figures()` / `#list-of-tables()` / `#list-of-equations()` / `#list-of-code()` 各列表（按需）],
+  [`#(cfg.list-of-figures)()` / `#(cfg.list-of-tables)()` / `#(cfg.list-of-equations)()` / `#(cfg.list-of-code)()` 各列表（按需）],
   [7],
-  [`#notation[...]` 主要符号对照表（按需）],
+  [`#(cfg.notation)[...]` 主要符号对照表（按需）],
   [8],
-  [`#show: body-wrap` + 正文章节内容],
+  [`#show: cfg.body-wrap` + 正文章节内容],
   [9],
-  [`#show: bibliography` 参考文献（也可在正文中按需引用）],
+  [`#show: cfg.bibliography` 参考文献（也可在正文中按需引用）],
   [10],
-  [`#appendix()` 开始附录，之后章节编号切换为字母格式],
+  [`#(cfg.appendix)()` 开始附录，之后章节编号切换为字母格式],
   [11],
-  [`#achievement[...]` 攻读学位期间发表的论文（按需）],
+  [`#(cfg.achievement)[...]` 攻读学位期间发表的论文（按需）],
   [12],
-  [`#acknowledgements[...]` 致谢],
+  [`#(cfg.acknowledgements)[...]` 致谢],
   [13],
-  [`#declaration()` 原创性声明],
+  [`#(cfg.declaration)()` 原创性声明],
 )
 
 上述顺序与示例 `thesis.typ` 完全一致，可直接参照其编排。
@@ -230,7 +230,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 
 === config() 返回的页面函数
 
-- `setup(body)`：页面设置（字号、行距、页眉页脚、show 规则），作为 `#show: setup` 调用
+- `setup(body)`：页面设置（字号、行距、页眉页脚、show 规则），作为 `#show: cfg.setup` 调用
 - `cover()`：生成封面（根据 `blind` 自动选择正常/盲审版）
 - `copyright()`：版权声明页
 - `abstract-zh` / `abstract-en`：中英文摘要
