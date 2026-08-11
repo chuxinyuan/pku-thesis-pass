@@ -38,11 +38,19 @@ def _get_dev_import_path(file_path: str, template_dir: str) -> str:
 
 
 def _is_inside_code_block(lines: list[str], lineno: int) -> bool:
+    """Check if lineno is inside a code block. Handles nested blocks via backtick count."""
     depth = 0
+    open_ticks = 0
     for i in range(lineno):
         stripped = lines[i].lstrip()
-        if stripped.startswith("```"):
-            depth = 1 - depth
+        if stripped.startswith("`"):
+            tick_count = len(stripped) - len(stripped.lstrip("`"))
+            if stripped.lstrip("`") == "" or stripped[tick_count:tick_count+1] in (" ", "\n"):
+                if depth == 0:
+                    open_ticks = tick_count
+                    depth = 1
+                elif tick_count == open_ticks:
+                    depth = 0
     return depth == 1
 
 

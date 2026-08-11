@@ -35,5 +35,5 @@ bump:
 # collect packaged files into release/<version>/ for Typst Universe submission
 publish: test preview bump
   @python3 scripts/publish.py
-  @git checkout template/
+  @git checkout -- template/
   @echo "  template/ restored to dev mode"

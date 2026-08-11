@@ -39,6 +39,8 @@
 - 字体校验表通过 system-state 实时渲染当前方案 ([d3adc0a], [b42ab28])
 - Linux 方案纯开源：移除 Times New Roman/Arial，全用 Liberation 替代 ([be02ed8])
 - macOS 英文无衬线加入 Helvetica fallback ([28c5ee5])
+- 字体感知伪粗体策略：有真粗体走原生 bold，无粗体用 cuti 描边（`fakebold-rules`）([d79954e])
+- 取消 `default` 跨平台方案，改为三套精确控制（`windows`/`macos`/`linux`），`system` 参数默认 `windows` ([1e79e54], [2373cba])
 
 ### 新增功能
 
@@ -51,6 +53,7 @@
 - 公式块（`eq-block`）([1e353c2])
 - CJK 字数统计（`word-count-cjk` / `total-words` / `total-characters`）([a35bb41])
 - LaTeX 引用兼容（`use-latexref`）([a420895])
+- PDF 元数据自动设置（标题/作者，盲审模式隐藏作者）([3286585])
 - 长表跨页自动续表（重复表头 + "续表"标注）([f87cd7d])
 
 ### 模板指南
@@ -140,7 +143,6 @@
 [485a48f]: https://github.com/chuxinyuan/pku-thesis-pass/commit/485a48f
 [be5013c]: https://github.com/chuxinyuan/pku-thesis-pass/commit/be5013c
 [0fdc2d8]: https://github.com/chuxinyuan/pku-thesis-pass/commit/0fdc2d8
-[eae6d98]: https://github.com/chuxinyuan/pku-thesis-pass/commit/eae6d98
 [5de3868]: https://github.com/chuxinyuan/pku-thesis-pass/commit/5de3868
 [b067aba]: https://github.com/chuxinyuan/pku-thesis-pass/commit/b067aba
 [422c118]: https://github.com/chuxinyuan/pku-thesis-pass/commit/422c118
@@ -196,3 +198,7 @@
 [d759dea]: https://github.com/chuxinyuan/pku-thesis-pass/commit/d759dea
 [c24acc1]: https://github.com/chuxinyuan/pku-thesis-pass/commit/c24acc1
 [dbeaaeb]: https://github.com/chuxinyuan/pku-thesis-pass/commit/dbeaaeb
+[d79954e]: https://github.com/chuxinyuan/pku-thesis-pass/commit/d79954e
+[1e79e54]: https://github.com/chuxinyuan/pku-thesis-pass/commit/1e79e54
+[2373cba]: https://github.com/chuxinyuan/pku-thesis-pass/commit/2373cba
+[3286585]: https://github.com/chuxinyuan/pku-thesis-pass/commit/3286585
