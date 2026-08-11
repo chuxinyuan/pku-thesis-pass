@@ -1,4 +1,4 @@
-#import "../../format/lib.typ": code-preview, booktab, eq-block, code-block
+#import "../../format/lib.typ": booktab, code-preview, code-block, eq-block
 
 == 自定义页眉页脚
 
@@ -10,20 +10,6 @@
 页脚规则：
 - 前置部分（摘要、目录等）使用罗马数字
 - 正文部分使用阿拉伯数字
-
-== 附录
-
-使用 `#appendix()` 命令开始附录部分。附录中的章节、图表、公式编号会自动切换为字母格式（如 A.1、A.2）：
-
-```typ
-#appendix()
-
-= 附录 A 补充材料
-
-这里是附录内容...
-```
-
-`appendix()` 由 `config()` 返回，通过 `(cfg.appendix)()` 调用。
 
 == 盲审模式
 
@@ -40,6 +26,8 @@
 - 封面使用盲审格式，显示盲审编号
 - 隐藏作者、导师等个人信息
 - 隐藏致谢和原创性声明
+- 隐藏成果页
+- PDF元数据隐藏作者
 
 也可以通过命令行参数临时切换：
 

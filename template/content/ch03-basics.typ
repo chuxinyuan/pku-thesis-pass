@@ -1,4 +1,4 @@
-#import "../../format/lib.typ": as-booktab, booktab, code-block, code-preview, eq-block, subfigure, total-words, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
+#import "../../format/lib.typ": booktab, as-booktab, code-preview, code-block, eq-block, subfigure, theorem, definition, lemma, corollary, proposition, property, example, remark, proof, total-words
 
 本章介绍 Typst 的基本语法和功能，帮助用户快速上手。
 
@@ -17,7 +17,7 @@
 #code-preview(
   ```typ
   // 内容模式
-  这是普通文本，*粗体*，_斜体_。
+  这是普通文本
 
   // 在内容中嵌入代码
   计算结果：#(1 + 2 + 3)
@@ -27,8 +27,8 @@
   你好，#name！
   ```,
   [
-    这是普通文本，*粗体*，_斜体_。
-
+    这是普通文本
+    
     计算结果：#(1 + 2 + 3)
 
     #let name = "张三"
@@ -80,18 +80,24 @@ Typst 中的标题使用 `=` 表示，其后跟着标题的内容。`=` 的数�
   [*bold* and _italic_ are simple.],
 )
 
-本模板遵循 PKUTHSS 的惯例：使用黑体表示粗体，楷体表示斜体。中文粗体通过 `#strong[...]` 实现。
+字体加粗的代码模式通过 `#strong[...]` 实现。
 
 #code-preview(
   ```typ
   这是*粗体*文字。
-  这是#strong[粗体]文字，无额外空白。
+  这是_斜体_文字。
+
+  这是#strong[粗体]文字，无额外空格。
   ```,
   [
     这是*粗体*文字。
-    这是#strong[粗体]文字，无额外空白。
+    这是_斜体_文字。
+
+    这是#strong[粗体]文字，无额外空格。
   ],
 )
+
+#strong[注意]：根据 CTAN #link("https://ctan.org/pkg/pkuthss")[pkuthss] 惯例，中文的斜体用楷体表示，本模板继续沿用。另外，pkuthss 惯例，粗体用黑体表示，本模板没有选择沿用，而是选择与 Word 相同的行为模式，保持字形不变，仅加粗字体，其中有些字体有粗体，比如思源字体，有些字体没有粗体，比如仿宋字体，本模板的策略是：有真粗体的用真粗体；没有粗体的，利用 #link("https://typst.app/universe/package/cuti")[cuti] 包通过描边的方式加粗，即伪粗体。
 
 === 脚注
 
@@ -103,6 +109,8 @@ Typst 原生支持脚注功能。本模板中，每一页的脚注编号从 ① 
   ```,
   [Typst 支持添加脚注#footnote[这是一个脚注。]。],
 )
+
+#strong[注意]：如果脚注在某一页的最上面一段，脚注内容有可能跑到上一页去，这是 Typst 的一个 bug，临时解决办法是手动加入 `#pagebreak(weak: true)` 强制换行。
 
 === 列表
 
@@ -153,8 +161,6 @@ Typst 支持无序列表和有序列表：
 )
 
 @logo 展示了北京大学校徽。代码中的 `<logo>` 是标签，可以在文中通过 `@logo` 来引用。
-
-=== 子图
 
 当需要在一张图中展示多张子图时，使用 `subfigure` 组件将各子图放进一个 `grid`，并整体放入 `figure`。子图会自动按 `(a)(b)(c)` 编号，编号与主图编号无关，例如下面的校徽和字标排成与封面相同的效果：
 
@@ -229,11 +235,11 @@ Typst 中定义表格使用 `table` 函数。如需标题和引用功能，同�
 
 本模板提供了 `booktab` 函数用于生成更美观的三线表。`booktab` 基于原生 `table` 实现，支持大部分 `table` 参数（`stroke` 除外），第一行自动作为表头。
 
-*引用规则*：
+#strong[引用规则]：
   - 仅当 `outlined = true`（默认）时，`booktab` 才会包装为 `figure`，此时 `caption` 生效、表格可被 `@label` 引用。
   - 设 `outlined: false` 时为纯表格，`caption` 不生效，且不能使用 `@` 引用。
 
-*注意*：本模板默认允许表格跨页显示（`show figure: set block(breakable: true)`）。长表跨页时会自动重复表头，并在续表页右上角标注"续表"，无需手动控制。如果不希望某个表格被分割，可以在表格前手动插入 `#pagebreak()` 进行调整。详细 API 见 @advanced 的「组件与辅助函数参考」。
+#strong[注意]：本模板默认允许表格跨页显示（`show figure: set block(breakable: true)`）。长表跨页时会自动重复表头，并在续表页右上角标注"续表"，无需手动控制。如果不希望某个表格被分割，可以在表格前手动插入 `#pagebreak()` 进行调整。详细 API 见 @advanced 的「组件与辅助函数参考」。
 
 @booktab-example 展示了 `booktab` 的示例效果：
 
@@ -253,15 +259,9 @@ Typst 中定义表格使用 `table` 函数。如需标题和引用功能，同�
       columns: (1fr, 1fr, 1fr),
       align: (left, center, right),
       caption: [三线表示例],
-      [左对齐],
-      [居中],
-      [右对齐],
-      [4],
-      [5],
-      [6],
-      [7],
-      [8],
-      [9],
+      [左对齐], [居中], [右对齐],
+      [4], [5], [6],
+      [7], [8], [9],
     ) <booktab-example>
   ],
 )
@@ -316,7 +316,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
   ],
 )
 
-@integral 展示了一个积分公式。
+@integral 展示了高斯积分公式。
 
 === 不编号公式
 
@@ -324,26 +324,30 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 #code-preview(
   ```typ
-  $ F_n = F_(n-1) + F_(n-2) $ <fibo>
+  $ a(t) = g $ <accel>
 
   中间推导，不编号：
-  #math.equation($ F_n = floor(1 / sqrt(5) phi.alt^n) $, numbering: none, block: true)
+  #math.equation($ v(t) = integral g dif t = g t + v_0 $, numbering: none, block: true)
 
-  后续公式仍从下一号继续：
-  $ F_n = floor(1 / sqrt(5) phi.alt^n) $ <fibo2>
+  #math.equation($ s(t) = integral (g t + v_0) dif t $, numbering: none, block: true)
+
+  后续公式编号继续：
+  $ s(t) = 1/2 g t^2 + v_0 t + s_0 $ <disp>
   ```,
   [
-    $ F_n = F_(n-1) + F_(n-2) $ <fibo>
+    $ a(t) = g $ <accel>
 
     中间推导，不编号：
-    #math.equation($ F_n = floor(1 / sqrt(5) phi.alt^n) $, numbering: none, block: true)
+    #math.equation($ v(t) = integral g dif t = g t + v_0 $, numbering: none, block: true)
 
-    后续公式仍从下一号继续：
-    $ F_n = floor(1 / sqrt(5) phi.alt^n) $ <fibo2>
+    #math.equation($ s(t) = integral (g t + v_0) dif t $, numbering: none, block: true)
+
+    后续公式编号继续：
+    $ s(t) = 1/2 g t^2 + v_0 t + s_0 $ <disp>
   ],
 )
 
-如上所示，@fibo 与 @fibo2 的编号连续，中间的公式没有编号。
+如上所示，@accel 与 @disp 的编号连续，中间的公式没有编号。
 
 === 多行公式
 
@@ -351,13 +355,12 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 #code-preview(
   ```typ
-  $ sum_(k=0)^n k
-      &= 1 + 2 + ... + n \
-      &= (n(n+1)) / 2 $ <sum>
+  $ sum_(k=0)^n k & = 1 + 2 + ... + n \
+                  & = (n(n+1)) / 2
+  $ <sum>
   ```,
   [
-    $
-      sum_(k=0)^n k & = 1 + 2 + ... + n \
+    $ sum_(k=0)^n k & = 1 + 2 + ... + n \
                     & = (n(n+1)) / 2
     $ <sum>
   ],
@@ -365,7 +368,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 === 公式目录
 
-当论文中公式较多时，可使用公式目录（公式列表）方便读者查找。模板提供了 `eq-block` 组件和 `list-of-equations` 函数来实现这一功能。
+当论文中公式较多时，可使用公式目录（公式列表）方便读者查找。使用 `$...$` 语法生成的公式没法为公式添加描述信息，放在目录里只有编号，一眼看过去，和具体哪个公式联系不起来，这就需要借助 `#figure` 包裹公式，并添加更多参数设置，这样显然比较麻烦，为此本模板专门开发了 `eq-block` 组件和 `list-of-equations` 函数来实现这一功能。
 
 `eq-block` 将公式包装为带描述文字的可引用单元，使其出现在公式目录中：
 #code-preview(
@@ -399,7 +402,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 使用方法：
 
 + 通过 `cfg.list-of-equations` 访问公式列表
-+ 在目录之后、正文之前调用 `#list-of-equations()`
++ 在目录之后、正文之前调用 `#(cfg.list-of-equations)()`
 + 用 `#eq-block(caption: [描述])[公式]` 替代普通行间公式
 
 #strong[注意]：使用公式目录时，所有需要编号的公式应统一用 `eq-block`，避免与普通 `$ ... $` 的计数器冲突。不需要编号的公式可用 `#math.equation($...$, numbering: none, block: true)`。`eq-block` 的详细 API 见 @advanced 的「组件与辅助函数参考」。
@@ -476,12 +479,22 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 #code-preview(
   ```typ
   #proof[
-    对 $n$ 使用数学归纳法即可证明。
+    假设素数只有有限个，设为 $p_1, p_2, dots, p_n$。
+    令 $N = p_1 p_2 dots p_n + 1$。
+    由于 $N$ 大于所有 $p_i$，它要么是素数，要么含有素因子。
+    但 $N$ 除以任意 $p_i$ 都余 $1$，所以不能被任何 $p_i$ 整除。
+    因此 $N$ 的素因子必定是一个新的素数，与“只有有限个素数”矛盾。
+    故素数有无穷多个。
   ]
   ```,
   [
     #proof[
-      对 $n$ 使用数学归纳法即可证明。
+      假设素数只有有限个，设为 $p_1, p_2, dots, p_n$。
+      令 $N = p_1 p_2 dots p_n + 1$。
+      由于 $N$ 大于所有 $p_i$，它要么是素数，要么含有素因子。
+      但 $N$ 除以任意 $p_i$ 都余 $1$，所以不能被任何 $p_i$ 整除。
+      因此 $N$ 的素因子必定是一个新的素数，与“只有有限个素数”矛盾。
+      故素数有无穷多个。
     ]
   ],
 )
@@ -509,127 +522,148 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 
 如果需要给代码块加标题并在文章中引用，可以使用本模板提供的 `code-block` 命令：
 
-#code-block(
-  ```python
-  def fibonacci(n):
-      if n <= 1:
-          return n
-      return fibonacci(n-1) + fibonacci(n-2)
-  ```,
-  caption: "斐波那契数列递归实现",
-) <fib>
+#code-preview(
+  ````typ
+  #code-block(
+    ```r
+    sum(1:100)
+    ```,
+    caption: "计算 1 到 100 的所有整数之和",
+  ) <sum100>
+  ````,
+  [
+    #code-block(
+    ```r
+    sum(1:100)
+    ```,
+    caption: "计算 1 到 100 的所有整数之和",
+  ) <sum100>
+  ]
+)
 
-@fib 展示了斐波那契数列的递归实现。
+@sum100 展示了计算 1 到 100 的所有整数之和的 R 语言代码。
 
 省略 `caption` 时 `code-block` 原样返回代码块，不编号、不入代码列表、不可被 `@` 引用：
 
 #code-preview(
   ````typ
-  ```python
-  # 普通代码块，无标题无编号
-  x = 1
+  #code-block(
+    ```r
+    sum(1:100)
+    ```,
+  ) <sum100-test>
+  ````,
+  [
+    #code-block(
+    ```r
+    sum(1:100)
+    ```,
+  ) <sum100-test>
+  ]
+)
+
+等价于下面的写法：
+
+#code-preview(
+  ````typ
+  ```r
+  sum(100)
   ```
   ````,
   [
-    ```python
-    # 普通代码块，无标题无编号
-    x = 1
+    ```r
+    sum(100)
     ```
   ],
 )
 
-=== 代码列表
+当论文中代码较多时，可使用代码列表方便读者查找。模板提供了 `list-of-code` 函数来生成代码列表。使用方法：
 
-当论文中代码较多时，可使用代码列表方便读者查找。模板提供了 `list-of-code` 函数来生成代码列表。
-
-用 `code-block` 包装并提供 `caption` 的代码块会自动出现在代码列表中：
-
-#code-preview(
-  ````typ
-  #code-block(
-    ```R
-    sum(1:100)
-    ```,
-  caption: "R 语言入门示例",
-  ) <r-hello>
-  ````,
-  [
-    #code-block(
-      ```R
-      sum(1:100)
-      ```,
-      caption: "R 语言入门示例",
-    ) <r-hello>
-  ],
-)
-
-如 @fib 和 @r-hello 所示，这些代码块会自动出现在代码列表中。而上方未使用 `#code-block` 包裹提供 `caption` 的普通代码块则不会出现在目录后面的代码列表里。
-
-使用方法：
-
-+ 通过 `cfg.list-of-code` 访问代码列表
-+ 在目录之后、正文之前调用 `#list-of-code()`
++ 通过 `cfg.list-of-code` 访问公式列表
++ 在目录之后、正文之前调用 `#(cfg.list-of-code)()`
 + 用 `#code-block(raw, caption: [标题])` 包装需要入列表的代码块
+
+用 `code-block` 包装并提供 `caption` 的代码块会自动出现在代码列表中，如 @sum100 所示，这些代码块会自动出现在代码列表中。而上方*使用了`#code-block` 包裹但是未提供 `caption` 的代码块*或者*未使用 `#code-block` 包裹的普通代码块*则不会出现在目录后面的代码列表里。
 
 与公式列表类似，使用代码列表时，需要编号的代码块应统一用 `code-block` 包装。`code-block` 的详细 API 见 @advanced 的「组件与辅助函数参考」。
 
+== 图表等目录顺序
+
+#let user-guide = "https://grs.pku.edu.cn/docs/2019-05/20190524160158375113.pdf"
+
+根据《北京大学研究生学位论文写作指南》（2004版）#footnote(user-guide)，论文的图表一般不用专门制作目录，如确有必要，可另起一页放到本目录之后。因此，如果不需要在目录后显示插图、表格、公式、代码列表，可以删除或注释掉如下代码：
+
+```typ
+// ========== 插图列表 ==========
+#(cfg.list-of-figures)()
+
+// ========== 表格列表 ==========
+#(cfg.list-of-tables)()
+
+// ========== 公式列表 ==========
+#(cfg.list-of-equations)()
+
+// ========== 代码列表 ==========
+#(cfg.list-of-code)()
+```
+
+如果论文目录后需要图表目录，但是它们出现的顺序需要调整，比如需要将表格列表放在插图列表之前，只需要调整上述代码的顺序即可：
+
+```typ
+// ========== 表格列表 ==========
+#(cfg.list-of-tables)()
+
+// ========== 插图列表 ==========
+#(cfg.list-of-figures)()
+```
+
+其它公式列表、代码列表等页面顺序调整方法相同。
+
 == 论文特殊页面
 
-除正文外，论文还常包含主要符号对照表、攻读学位期间发表的论文、字数统计等特殊页面，模板分别提供 `notation`、`achievement`、`total-words` 等函数。它们的使用方式一致：先通过 `cfg.xxx` 访问对应函数，再在指定位置调用。
+除正文外，论文还常包含书脊页、主要符号对照表、攻读学位期间发表的论文、字数统计等特殊页面，模板分别提供 `spine`、`notation`、`achievement`、`total-words` 等函数。它们的使用方式一致：先通过 `cfg.xxx` 访问对应函数，再在指定位置调用。
+
+=== 论文书脊页
+
+书脊页用于打印装订时在书脊上显示论文标题与作者，北大规范未强制要求，但博士论文装订常见。书脊页会竖排显示 `title-zh`（页面右侧上方）与 `author-zh`（页面右侧下方）；盲审模式（`blind: true`）下自动隐藏作者，只保留标题。如打印论文时需启用，在`thesis.typ` 中取消注释 `#(cfg.spine)()`即可。另，建议打印时同时设置章节总是从奇数页开始，方法是设置 `always-start-odd: true`。
 
 === 主要符号对照表
 
-当论文中使用了大量的符号、标志、缩略词、专门计量单位、自定义名词和术语时，可按北大《写作指南》要求编写"主要符号对照表"，放在目录之后、正文之前。模板提供了 `notation` 页面函数来实现这一功能。
+根据北大写作指南规定，如果论文中使用了大量的符号、标志、缩略词、专门计量单位、自定义名词和术语等，应编写“主要符号对照表”。如果上述符号和缩略词数量不多，可以不设专门的“主要符号对照表”，在论文中出现时随即加以说明即可。“主要符号对照表”放目录之后、正文之前。
 
-内容使用 Typst 原生的术语语法 `/ 符号: 说明`，默认双栏排布（每行两对"符号+说明"并排）；空行用于分组（如符号、希腊字母、缩略词等）：
+模板提供了 `notation` 页面函数来实现这一功能。内容使用 Typst 原生的术语语法 `/ 符号: 说明`，默认双栏排布（每行两对"符号+说明"并排）；空行用于分组（如符号、希腊字母、缩略词等）。如果论文中需要“主要符号对照表”，可以在 `thesis.typ` 中取消注释 `#(cfg.notation)[...]`所在行即可。例如：
 
-#code-preview(
-  ```typ
-  #notation[
-    / $x, y$: 变量
-    / $a$: 常量
+```typ
+// ========== 主要符号对照表 ==========
+#(cfg.notation)[
+  / $pi$: 圆周率
+  / $infinity$: 无穷大
+  / $sum$: 求和符号
+  / $integral$: 积分符号
+  / $partial$: 偏导数符号
+  / $bold(A)$: 矩阵
 
-    / $gamma$: 比热比
-    / $delta$: 误差
+  / $g$: 重力加速度
+  / $lambda$: 波长
+  / $c$: 光速
+]
+```
 
-    / CPU: 中央处理器
-    / GPU: 图形处理器
-  ]
-  ```,
-  [
-    #let mock = [
-      / $x, y$: 变量
-      / $a$: 常量
+但是我更推荐你把 `[]` 中的内容放到 `content/notation.typ` 文件中，这样可以让
+`thesis.typ` 更加简洁，并且方便符号表的维护。
 
-      / $gamma$: 比热比
-      / $delta$: 误差
-
-      / CPU: 中央处理器
-      / GPU: 图形处理器
-    ]
-    #let cell(it) = if it.func() == terms.item {
-      (it.term, it.description)
-    } else {
-      grid.cell(none, colspan: 4, inset: (y: 5pt))
-    }
-    #grid(
-      columns: (auto, 1fr, auto, 1fr),
-      row-gutter: 8pt,
-      ..mock.children
-        .filter(it => it.func() == parbreak or it.func() == terms.item)
-        .map(cell)
-        .flatten(),
-    )
-  ],
-)
+```typ
+// ========== 主要符号对照表 ==========
+#(cfg.notation)[#include "content/notation.typ"]
+```
 
 使用方法：
 
 + 通过 `cfg.notation` 访问符号表
-+ 在列表之后、正文之前调用 `#notation[...]`
++ 在列表之后、正文之前调用 `#(cfg.notation)[...]`
 + 用 `/ 符号: 说明` 语法书写条目，空行分组
 
-`notation` 页面标题默认显示"主要符号对照表"，可通过 `supplements: (符号表: "...")` 自定义。若论文中符号与缩略词数量不多，可省略此页，在正文中随即说明即可。
+如果你希望修改“主要符号对照表”的标题名称，比如你希望它显示为“符号对照表”，那么你只需要在`config()` 中设置`supplements: (符号表: "符号对照表")` 来修改标题名称。
 
 === 攻读学位期间发表的论文
 
@@ -652,7 +686,7 @@ Typst 使用 `$...$` 包裹数学公式。行内公式前后需要有空格，�
 使用方法：
 
 + 通过 `cfg.achievement` 访问成果页
-+ 在附录之后、致谢之前调用 `#achievement[...]`
++ 在附录之后、致谢之前调用 `#(cfg.achievement)[...]`
 + 用 `+` 书写条目（自动编号 `[1]`、`[2]`…），作者本人姓名用 `*...*` 加粗，并按参考文献格式附上检索类型（SCI/EI）、SCI 收录号与影响因子
 
 `achievement` 页面标题默认显示"攻读学位期间发表的论文"，可通过 `supplements: (成果表: "...")` 自定义；该页默认出现在目录中（与致谢、声明一致），如需隐藏，在 `config()` 中设置 `achievement-outlined: false` 即可。
@@ -684,23 +718,23 @@ Typst 支持 BibLaTeX 格式的 `.bib` 文件。在文档中引用文献使用 `
 
 #code-preview(
   ```typ
-  可以像这样引用参考文献@wang2010guide @kopka2004guide。
+  可以像这样引用参考文献 @wang2010guide @kopka2004guide。
   ```,
-  [可以像这样引用参考文献@wang2010guide @kopka2004guide。],
+  [可以像这样引用参考文献 @wang2010guide @kopka2004guide。],
 )
 
 使用本模板时，只需在 `config()` 函数中配置 `bib-file` 等参数即可：
 
 #code-block(
   ```typ
-  #let (setup: setup, body-wrap: body-wrap, bibliography: bibliography, ..) = config(
+  #let cfg = config(
     bib-file: path("ref.bib"),
     bib-style: "numeric",
     bib-version: "2015",
   )
-  #show: setup
+  #show: cfg.setup
   ...
-  #show: bibliography
+  #show: cfg.bibliography
   ```,
   caption: "参考文献配置示例",
 )
@@ -731,13 +765,13 @@ gb7714-bilingual 会自动检测文献语言。如果自动检测不准确，可
 如果需要使用其他引用样式（如 APA、IEEE 等），可以设置 `override-bib: true`，此时模板会跳过 gb7714-bilingual，改用 Typst 原生 `bibliography` 函数：
 
 ```typ
-#let (setup: setup, body-wrap: body-wrap, bibliography: bibliography, ..) = config(
+#let cfg = config(
   bib-file: path("ref.bib"),
   override-bib: true,
   ...
 )
-#show: setup
-#show: body-wrap
+#show: cfg.setup
+#show: cfg.body-wrap
 
 // ... 正文内容 ...
 
