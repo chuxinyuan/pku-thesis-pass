@@ -17,17 +17,10 @@ import re
 import sys
 from pathlib import Path
 
+from _version import get_version
+
 DEV_PATH_RE = re.compile(r'(#import\s+)"(?:\.\./)+format/lib\.typ"')
-PUB_PATH_RE = re.compile(r'(#import\s+)"@preview/pku-thesis-pass:[\d.]+"')
-
-
-def _get_version(root: Path) -> str:
-    """Read version from typst.toml [package] section."""
-    content = (root / "typst.toml").read_text()
-    m = re.search(r'^version\s*=\s*"([^"]+)"', content, re.MULTILINE)
-    if m is None:
-        raise SystemExit("Could not find version in typst.toml")
-    return m.group(1)
+PUB_PATH_RE = re.compile(r'(#import\s+)"@preview/pku-thesis-pass:[\d.]+(?:-[0-9a-zA-Z.]+)?"')
 
 
 def _get_dev_import_path(file_path: str, template_dir: str) -> str:
@@ -74,7 +67,7 @@ def swap_to_dev(content: str, file_path: str, template_dir: Path) -> str:
 
 
 def apply(mode: str, root: Path) -> None:
-    version = _get_version(root)
+    version = get_version(root)
     template_dir = root / "template"
     fn = {"preview": swap_to_preview, "dev": swap_to_dev}
 

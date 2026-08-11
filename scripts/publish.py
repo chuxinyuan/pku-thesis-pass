@@ -13,18 +13,12 @@ import shutil
 import sys
 from pathlib import Path
 
-
-def _get_version(root: Path) -> str:
-    content = (root / "typst.toml").read_text()
-    m = re.search(r'^version\s*=\s*"([^"]+)"', content, re.MULTILINE)
-    if m is None:
-        raise SystemExit("Could not find version in typst.toml")
-    return m.group(1)
+from _version import get_version
 
 
 def main() -> None:
     root = Path(__file__).resolve().parent.parent
-    version = _get_version(root)
+    version = get_version(root)
     dest = root / "release" / version
 
     print(f"Collecting release files to release/{version}/ ...")
@@ -33,7 +27,7 @@ def main() -> None:
         shutil.rmtree(dest)
 
     # top-level files
-    for filename in ["typst.toml", "thumbnail.png", "LICENSE", "README.md"]:
+    for filename in ["typst.toml", "thumbnail.png", "LICENSE", "CHANGELOG.md", "README.md"]:
         path = root / filename
         if path.exists():
             copy_fn = shutil.copy2 if path.is_file() else shutil.copytree

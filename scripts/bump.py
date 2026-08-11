@@ -13,20 +13,14 @@ import re
 import sys
 from pathlib import Path
 
-VERSION_DOC_RE = re.compile(r"@preview/pku-thesis-pass:\d+\.\d+\.\d+")
+from _version import get_version
 
-
-def _get_version(root: Path) -> str:
-    content = (root / "typst.toml").read_text()
-    m = re.search(r'^version\s*=\s*"([^"]+)"', content, re.MULTILINE)
-    if m is None:
-        raise SystemExit("Could not find version in typst.toml")
-    return m.group(1)
+VERSION_DOC_RE = re.compile(r"@preview/pku-thesis-pass:[\d.]+(?:-[0-9a-zA-Z.]+)?")
 
 
 def main() -> None:
     root = Path(__file__).resolve().parent.parent
-    version = _get_version(root)
+    version = get_version(root)
     print(f"Bumping doc version references to {version}...")
 
     content_dir = root / "template" / "content"

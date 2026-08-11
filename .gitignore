@@ -2,3 +2,4 @@
 thesis.pdf
 tests/*.pdf
 release/
+__pycache__/
