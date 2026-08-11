@@ -74,6 +74,10 @@
 #remark[这是一个注释。]
 #proof[证明内容。]
 
+#code-block(caption: [测试代码], ```python
+print("hello")
+```)
+
 = 结论
 
 结论正文内容。

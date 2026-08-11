@@ -22,6 +22,18 @@
 ) <tbl-data>
 
 如 @fig-logo 所示，数据见表 @tbl-data。
+
+// Subfigure example
+#figure(
+  grid(columns: 2, gutter: 1em,
+    subfigure(table(columns: 1, [A]), caption: [子 A], lbl: "sub-a"),
+    subfigure(table(columns: 1, [B]), caption: [子 B], lbl: "sub-b"),
+  ),
+  caption: [子图示例],
+) <fig-sub>
+
+如 @fig-sub 所示。
+
 #(cfg.outline)()
 #(cfg.list-of-figures)()
 #(cfg.list-of-tables)()
