@@ -1,5 +1,5 @@
 .DS_Store
 thesis.pdf
-tests/*.pdf
+tests/**/*.pdf
 release/
 __pycache__/

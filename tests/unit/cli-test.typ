@@ -1,6 +1,6 @@
 // tests/cli-test.typ — CLI 参数解析单元测试
 
-#import "../format/config/cli.typ": _parse-bool
+#import "../../format/config/cli.typ": _parse-bool
 
 #assert.eq(_parse-bool("true", false), true)
 #assert.eq(_parse-bool("1", false), true)

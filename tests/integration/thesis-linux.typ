@@ -1,6 +1,6 @@
 // tests/thesis-linux.typ — Linux 字体方案集成测试
 
-#import "../format/lib.typ": config
+#import "../../format/lib.typ": config
 
 #let cfg = config(
   author-zh: "测试",

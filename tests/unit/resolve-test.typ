@@ -1,6 +1,6 @@
 // tests/resolve-test.typ — 解析函数单元测试
 
-#import "../format/config/resolve.typ": resolve-supplements, resolve-bib, make-smartpagebreak
+#import "../../format/config/resolve.typ": resolve-supplements, resolve-bib, make-smartpagebreak
 
 // Test supplement merging
 #let merged = resolve-supplements((:))

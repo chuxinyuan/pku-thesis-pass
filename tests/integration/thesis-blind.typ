@@ -1,7 +1,7 @@
 // tests/thesis-blind.typ — 盲审集成测试
 // 编译后应通过 strings 验证不包含作者/导师姓名
 
-#import "../format/lib.typ": config
+#import "../../format/lib.typ": config
 
 #let cfg = config(
   // 反向验证的内容

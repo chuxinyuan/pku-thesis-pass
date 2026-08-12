@@ -1,6 +1,6 @@
 // tests/supplement-test.typ — 引用记号字典单元测试
 
-#import "../format/utils/supplement.typ": supplement
+#import "../../format/utils/supplement.typ": supplement
 
 // Verify all required keys exist
 #assert.eq(supplement.图, "图")

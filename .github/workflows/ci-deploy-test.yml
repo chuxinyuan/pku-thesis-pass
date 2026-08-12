@@ -35,15 +35,11 @@ jobs:
       - name: Run integration tests
         run: bash scripts/integration-tests.sh
 
-      - name: Verify blind mode hides sensitive info
-        run: |
-          for keyword in "张三" "李四" "23000xxxxx" "致谢导师" "发表论文"; do
-            if strings tests/thesis-blind.pdf | grep -q "$keyword"; then
-              echo "ERROR: '$keyword' leaked in blind mode"
-              exit 1
-            fi
-          done
-          echo "OK: all sensitive info hidden in blind mode"
+      - name: Install pdfplumber (for spec black-box checks)
+        run: python3 -m pip install --break-system-packages pdfplumber
+
+      - name: Run format spec tests
+        run: bash scripts/spec-tests.sh
 
   build:
     needs: test

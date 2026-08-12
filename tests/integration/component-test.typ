@@ -1,6 +1,6 @@
-// tests/component-test.typ — 核心组件单元测试
+// tests/integration/component-test.typ — 核心组件渲染集成测试
 
-#import "../format/lib.typ": booktab, eq-block, code-block, proof
+#import "../../format/lib.typ": booktab, eq-block, code-block, proof
 
 #booktab(columns: 2, caption: [组件测试], [A], [B], [1], [2])
 #eq-block(caption: [质能方程])[$ E = m c^2 $]

@@ -1,6 +1,6 @@
 // tests/counter-test.typ — 计数器定义单元测试
 
-#import "../format/utils/counter.typ": (
+#import "../../format/utils/counter.typ": (
   partcounter, chaptercounter, imagecounter, tablecounter, rawcounter,
   equationcounter, theoremcounter, definitioncounter, lemmacounter,
   corollarycounter, propositioncounter, propertycounter, examplecounter,

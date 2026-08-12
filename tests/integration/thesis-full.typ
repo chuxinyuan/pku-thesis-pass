@@ -1,6 +1,6 @@
 // tests/thesis-full.typ — 全参数编译集成测试
 
-#import "../format/lib.typ": config, booktab, code-block, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
+#import "../../format/lib.typ": config, booktab, code-block, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
 
 #let cfg = config(
   author-zh: "张三",

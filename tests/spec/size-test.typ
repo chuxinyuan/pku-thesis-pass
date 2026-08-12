@@ -1,6 +1,6 @@
-// tests/size-test.typ — 字号表单元测试
+// tests/spec/size-test.typ — 字号表格式规范测试
 
-#import "../format/utils/size.typ": size
+#import "../../format/utils/size.typ": size
 
 #assert.eq(size.三号, 16pt)
 #assert.eq(size.四号, 14pt)

@@ -1,6 +1,6 @@
 // tests/thesis-refs.typ — 图表与交叉引用集成测试
 
-#import "../format/lib.typ": config, booktab, code-block, subfigure
+#import "../../format/lib.typ": config, booktab, code-block, subfigure
 
 #let cfg = config(
   author-zh: "引用测试",

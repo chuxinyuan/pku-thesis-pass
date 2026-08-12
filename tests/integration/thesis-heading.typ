@@ -1,6 +1,6 @@
 // tests/thesis-heading.typ — 标题渲染集成测试
 
-#import "../format/lib.typ": config
+#import "../../format/lib.typ": config
 
 #let cfg = config(
   author-zh: "标题测试",

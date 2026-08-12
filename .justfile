@@ -15,10 +15,20 @@ pdf:
 json:
   @typst c --root . template/thesis.typ --timings record.json
 
-# run all tests
-test:
+# run all tests (unit + integration + spec)
+test: unit integration spec
+
+# run unit tests (pure functions)
+unit:
   @bash scripts/unit-tests.sh
+
+# run integration tests (end-to-end compilation)
+integration:
   @bash scripts/integration-tests.sh
+
+# run format spec tests (white-box style values + black-box PDF check)
+spec:
+  @bash scripts/spec-tests.sh
 
 # switch imports to @preview mode (for publishing to Typst Universe)
 preview:

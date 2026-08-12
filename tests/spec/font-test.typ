@@ -1,6 +1,6 @@
-// tests/font-test.typ — 字体方案单元测试
+// tests/spec/font-test.typ — 字体方案格式规范测试
 
-#import "../format/utils/font.typ": font-set
+#import "../../format/utils/font.typ": font-set
 
 // 每套方案都必须包含 5 个核心中文字体条目
 #for scheme in (font-set.windows, font-set.macos, font-set.linux) {
