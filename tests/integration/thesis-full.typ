@@ -1,6 +1,6 @@
 // tests/thesis-full.typ — 全参数编译集成测试
 
-#import "../../format/lib.typ": config, booktab, code-block, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
+#import "../../format/lib.typ": config, booktab, code-block, eq-block, theorem, definition, lemma, corollary, proposition, property, example, remark, proof
 
 #let cfg = config(
   author-zh: "张三",
@@ -77,6 +77,10 @@
 #code-block(caption: [测试代码], ```python
 print("hello")
 ```)
+
+#eq-block(caption: [质能方程])[$ E = m c^2 $] <eq-massenergy>
+
+如 @eq-massenergy 所示。
 
 = 结论
 

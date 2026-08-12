@@ -2,7 +2,7 @@
 """格式规范黑盒测试 — 检查编译后的 PDF 实际渲染结果是否符合北大指南。
 
 用法:
-    python3 scripts/spec-blackbox.py <fixture.pdf>
+    python3 scripts/spec-blackbox.py <fixture.pdf> <fixture-blind.pdf>
 
 依赖:
     pdfplumber (pip install pdfplumber)
@@ -14,6 +14,7 @@
     4. 正文 12pt（小四）、脚注 9pt（小五）
     5. 图题/表题 11pt
     6. 页码 10.5pt（五号，显式断言非 9pt）
+    7. PDF 元数据：普通版 Title/Author 非空，盲审版 Author 必须为空
 
 说明: 字号断言为系统无关（字体 pt 值不随字体方案改变），
       故本黑盒测试在任何平台 / 任何 system 参数下均可运行。
@@ -68,7 +69,8 @@ def marker_rendered_at(chars, marker, expected, tol):
     return False
 
 
-def main(pdf_path):
+def check_render(pdf_path):
+    """检查普通版 PDF：A4 页面 + 字号 + 页码。"""
     with pdfplumber.open(pdf_path) as pdf:
         # 1. 页面尺寸 A4
         for i, page in enumerate(pdf.pages, start=1):
@@ -107,17 +109,43 @@ def main(pdf_path):
                     f"页码字号 {sorted(page_num_sizes)}pt，期望 10.5pt（五号，非 9pt）"
                 )
 
+
+def check_metadata(normal_path, blind_path):
+    """检查 PDF 元数据：普通版 Title/Author 非空，盲审版 Author 为空。"""
+    with pdfplumber.open(normal_path) as normal, \
+         pdfplumber.open(blind_path) as blind:
+        n_title = normal.metadata.get("Title")
+        n_author = normal.metadata.get("Author")
+        b_title = blind.metadata.get("Title")
+        b_author = blind.metadata.get("Author")
+
+        if not n_title:
+            failures.append("普通版 PDF 元数据缺少 Title")
+        if not n_author:
+            failures.append("普通版 PDF 元数据缺少 Author")
+        if not b_title:
+            failures.append("盲审版 PDF 元数据缺少 Title")
+        if b_author:
+            failures.append(
+                f"盲审版 PDF 元数据泄露 Author: {b_author!r}（应为空）"
+            )
+
+
+def main(normal_path, blind_path):
+    check_render(normal_path)
+    check_metadata(normal_path, blind_path)
+
     if failures:
         print("格式规范黑盒检查失败：")
         for f in failures:
             print(f"  ✗ {f}")
         sys.exit(1)
 
-    print("格式规范黑盒检查通过：A4 页面 + 9 项字号 + 页码均符合指南")
+    print("格式规范黑盒检查通过：A4 页面 + 9 项字号 + 页码 + PDF 元数据均符合指南")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print(__doc__)
         sys.exit(2)
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])

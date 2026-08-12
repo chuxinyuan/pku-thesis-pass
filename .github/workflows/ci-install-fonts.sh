@@ -4,6 +4,9 @@ set -euo pipefail
 sudo apt update
 sudo apt install -y fonts-noto-cjk fonts-arphic-ukai
 
+# poppler-utils provides pdftotext (used by blind-mode and longtable/bib checks)
+sudo apt install -y poppler-utils
+
 # Install Liberation fonts (metric-compatible with Times New Roman / Arial)
 sudo apt install -y fonts-liberation
 
