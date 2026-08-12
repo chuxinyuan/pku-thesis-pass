@@ -6,6 +6,26 @@
   <img src="thumbnail.png" alt="Cover of an example thesis" width="80%">
 </p>
 
+## 一分钟快速体验
+
+三行命令，立即生成一份完整的示例学位论文 PDF：
+
+```bash
+typst init @preview/pku-thesis-pass:0.3.0 my-thesis
+cd my-thesis
+typst compile thesis.typ
+```
+
+打开 `thesis.pdf`，即可看到一份包含封面、摘要、目录、正文、参考文献、致谢等全部要素的完整示例论文——无需任何配置。这份示例论文同时也是一份用户指南，按论文格式排版，边看边用。之后只需把 `thesis.typ` 中的示例信息替换成你自己的内容即可开始写作。
+
+> 🎁 彩蛋：一条命令自动生成盲审版论文，隐藏封面个人信息、致谢与原创性声明等：
+>
+> ```bash
+> typst compile thesis.typ --input blind=true
+> ```
+
+完整能力见下文[功能特性](#功能特性)。
+
 ## 功能特性
 
 - 封面（正常版 + 盲审版）

@@ -1,6 +1,6 @@
 [package]
 name = "pku-thesis-pass"
-version = "0.3.0"
+version = "0.3.1"
 entrypoint = "format/lib.typ"
 authors = ["Xinyuan Chu"]
 license = "MIT"
