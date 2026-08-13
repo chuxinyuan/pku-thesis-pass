@@ -64,11 +64,13 @@
   // 标题行距基准值（默认公式：三号 * 1.3 * 2.41）
   标题行距: size.三号 * 1.3 * 2.41,
   // ── 1.7.1 标题 ──
-  // 章标题：三号（16pt）黑体居中，段前 24bp 后 18bp
-  章标题: (font: font.黑体, size: size.三号, align: center, weight: "regular", spacing-before: 24pt, spacing-after: 18pt, 编号间距: 1em, fakebold: fakebold.黑体),
+  // 指南 2014 里的章标题：三号（16pt）黑体居中，段前 24bp 后 18bp，单倍间距
+  // 硕士研究生学位论文格式模板（2024）文件里章标题：三号（16pt）黑体居中，段前 17bp 后 16.5bp，2.41 倍间距
+  // pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是段前 17bp 后 16.5bp，2.41 倍间距
+  章标题: (font: font.黑体, size: size.三号, align: center, weight: "regular", spacing-before: 17pt, spacing-after: 16.5pt, 编号间距: 1em, fakebold: fakebold.黑体),
   // 一级节标题：四号（14pt）黑体居左，段前 24bp 后 6bp
   一级节标题: (font: font.黑体, size: size.四号, weight: "regular", spacing-before: 24pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
-  // 二级节标题：13pt 黑体居左，段前 12bp 后 6bp（指南直接指定）
+  // 二级节标题：13pt 黑体居左，段前 12bp 后 6bp
   二级节标题: (font: font.黑体, size: 13pt, weight: "regular", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
   // 三级节标题：小四（12pt）黑体居左，段前 12bp 后 6bp
   三级节标题: (font: font.黑体, size: size.小四, weight: "regular", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
@@ -99,7 +101,7 @@
   // 表序表名：11pt 宋体居中
   表序表名: (font: font.宋体, size: 11pt),
   // 指南 2014 里的表单元格：11pt 宋体
-  // 硕士研究生学位论文格式模板(2024).doc 文件里表单元格字号是五号字体，对应 10.5pt
+  // 硕士研究生学位论文格式模板（2024）文件里表单元格字号是五号字体，对应 10.5pt
   // pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是 10.5pt
   表单元格: (font: font.宋体, size: 10.5pt),
   // 代码块标题：11pt 宋体
@@ -136,7 +138,7 @@
   // 页眉：五号（10.5pt）宋体居中，距页顶 2cm
   页眉: (font: font.宋体, size: size.五号, 堆叠间距: 3pt, 垂直位置: 2cm, 下划线粗细: 0.75pt, 编号间距: 0.5em),
   // 页码：五号（10.5pt）居中，距页底 1.75cm（写作指南 2014 版）
-  // 硕士研究生学位论文格式模板(2024).doc 文件里页码字号是小五（9pt）
+  // 硕士研究生学位论文格式模板（2024）文件里页码字号是小五（9pt）
   // pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是 9pt
   页码: (font: font.英文衬线, size: size.小五, 垂直位置: 1.75cm),
 )

@@ -43,11 +43,13 @@
 #assert.eq(s.目录其他.size, 12pt)  // 小四宋体
 
 // ── 1.7.1 标题 ──
-// 章标题：三号黑体居中，段前 24 段后 18
+// 指南 2014 里的章标题：三号（16pt）黑体居中，段前 24bp 后 18bp，单倍间距
+// 硕士研究生学位论文格式模板（2024）文件里章标题：三号（16pt）黑体居中，段前 17bp 后 16.5bp，2.41 倍间距
+// pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是段前 17bp 后 16.5bp，2.41 倍间距
 #assert.eq(s.章标题.size, 16pt)
 #assert.eq(s.章标题.align, center)
-#assert.eq(s.章标题.spacing-before, 24pt)
-#assert.eq(s.章标题.spacing-after, 18pt)
+#assert.eq(s.章标题.spacing-before, 17pt)
+#assert.eq(s.章标题.spacing-after, 16.5pt)
 #assert.eq(s.章标题.weight, "regular")
 // 一级节标题：四号（14pt），段前 24 段后 6
 #assert.eq(s.一级节标题.size, 14pt)
@@ -79,7 +81,7 @@
 #assert.eq(s.图序图名.size, 11pt)
 #assert.eq(s.表序表名.size, 11pt)
 // 指南 2014 里的表单元格字号标准是 11pt
-// 硕士研究生学位论文格式模板(2024).doc 文件里表单元格字号是五号字体，对应 10.5pt
+// 硕士研究生学位论文格式模板（2024）文件里表单元格字号是五号字体，对应 10.5pt
 // pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是 10.5pt
 #assert.eq(s.表单元格.size, 10.5pt)
 
@@ -98,7 +100,7 @@
 #assert.eq(s.页眉.垂直位置, 2cm)
 #assert.eq(s.页眉.下划线粗细, 0.75pt)
 // 页码：五号（10.5pt）居中，距页底 1.75cm（指南：Times New Roman 五号）
-// 硕士研究生学位论文格式模板(2024).doc 文件里页码字号是小五（9pt）
+// 硕士研究生学位论文格式模板（2024）文件里页码字号是小五（9pt）
 // pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是 9pt
 #assert.eq(s.页码.size, 9pt)
 #assert.eq(s.页码.垂直位置, 1.75cm)

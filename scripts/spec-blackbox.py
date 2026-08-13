@@ -106,7 +106,7 @@ def check_render(pdf_path):
             bad = [s for s in page_num_sizes if abs(s - 9) > TOL]
             if bad:
                 failures.append(
-                    f"页码字号 {sorted(page_num_sizes)}pt，期望 9pt（Word 模板 2024 和写作指南 2014 版里的标准有差异，按照最新的标准执行）"
+                    f"页码字号 {sorted(page_num_sizes)}pt，期望 9pt（Word 模板（2024）和写作指南（2014）版标准有差异，按照最新的标准执行）"
                 )
 
 
