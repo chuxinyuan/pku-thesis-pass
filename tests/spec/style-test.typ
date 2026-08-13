@@ -78,8 +78,10 @@
 // ── 1.7.4 图表 ──
 #assert.eq(s.图序图名.size, 11pt)
 #assert.eq(s.表序表名.size, 11pt)
-// 指南规定表单元格 11pt（Word 模板为五号 10.5pt），本项目遵循指南
-#assert.eq(s.表单元格.size, 11pt)
+// 指南 2014 里的表单元格字号标准是 11pt
+// 硕士研究生学位论文格式模板(2024).doc 文件里表单元格字号是五号字体，对应 10.5pt
+// pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是 10.5pt
+#assert.eq(s.表单元格.size, 10.5pt)
 
 // ── 1.8 参考文献 ──
 #assert.eq(s.参考文献内容.size, 10.5pt)  // 五号
