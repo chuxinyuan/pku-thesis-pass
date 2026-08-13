@@ -54,7 +54,7 @@
 /// true -> 使用 cuti 伪粗体
 /// false -> 使用字体自带真粗体
 #let fakebold-rules = (
-  windows:  (黑体: false, 宋体: true, 楷体: true, 仿宋: true),
-  macos:    (黑体: false, 宋体: false, 楷体: false, 仿宋: true),
+  windows:  (黑体: true, 宋体: true, 楷体: true, 仿宋: true),
+  macos:    (黑体: false, 宋体: true, 楷体: true, 仿宋: true),
   linux:    (黑体: false, 宋体: false, 楷体: true, 仿宋: true),
 )

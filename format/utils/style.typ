@@ -2,8 +2,9 @@
 // style.typ — 北大格式规范（《研究生学位论文写作指南》2014）
 // ============================================================
 //
-// build(font) 返回各元素的字体/字号/间距样式字典，作为全模板的单一事实来源。
+// build(font, fakebold) 返回各元素的字体/字号/间距样式字典，作为全模板的单一事实来源。
 // font 为 config() 解析出的当前系统字体方案（font-set.windows/macos/linux），
+// fakebold 为对应系统的伪粗体策略（fakebold-rules），透传到需加粗元素的 fakebold 字段。
 // 调用方通过 style.正文.font 可直接拿到字体数组，用于 set text() 等。
 //
 // 条目按指南章节号组织，注释中的字号（三号、小四等）对应 size.typ。
@@ -15,19 +16,19 @@
 #let build(font, fakebold: (:)) = (
   // ── 1.1 封面 ──
   // "博士研究生学位论文"：小初（36pt）黑体
-  封面题头: (font: font.黑体, size: size.小初, fakebold: fakebold.黑体),
+  封面题头: (font: font.黑体, size: size.小初),
   // "题目：" 前缀标签：二号（22pt）宋体
-  封面题目标签: (font: font.宋体, size: size.二号, fakebold: fakebold.宋体),
+  封面题目标签: (font: font.宋体, size: size.二号),
   // 题目：一号（26pt）黑体居中加粗
-  封面题目: (font: font.黑体, size: size.一号, weight: "bold", fakebold: fakebold.黑体),
+  封面题目: (font: font.黑体, size: size.一号, fakebold: fakebold.黑体),
   // 字段标签（"姓  名："等）：黑体，与仿宋值形成对比
-  封面字段标签: (font: font.黑体, size: size.三号, fakebold: fakebold.黑体),
+  封面字段标签: (font: font.黑体, size: size.三号),
   // 作者/导师/院系：三号（16pt）仿宋
-  封面信息: (font: font.仿宋, size: size.三号, fakebold: fakebold.仿宋),
+  封面信息: (font: font.仿宋, size: size.三号),
   // 日期：三号（16pt）宋体
-  封面日期: (font: font.宋体, size: size.三号, fakebold: fakebold.宋体),
+  封面日期: (font: font.宋体, size: size.三号),
   // 日期后缀（"年"、"月"）：黑体
-  封面日期标点: (font: font.黑体, size: size.三号, fakebold: fakebold.黑体),
+  封面日期标点: (font: font.黑体, size: size.三号),
   // 校徽/字标占位框文字
   封面占位符: (font: font.黑体, size: 0.6em),
   // 盲审封面正文段落
@@ -35,11 +36,11 @@
 
   // ── 1.3 中文摘要 ──
   // 标题：三号（16pt）黑体，段前 24bp 后 18bp
-  摘要标题: (font: font.黑体, size: size.三号, spacing-before: 24pt, spacing-after: 18pt, weight: "regular", fakebold: fakebold.黑体),
+  摘要标题: (font: font.黑体, size: size.三号, spacing-before: 24pt, spacing-after: 18pt, weight: "regular"),
   // 内容：小四（12pt）宋体。PKU 指南规定行距固定 20bp，实测 10.5pt 更接近 Word
-  摘要内容: (font: font.宋体, size: size.小四, first-line-indent: 2em, leading: 10.5pt, spacing: 10.5pt, fakebold: fakebold.宋体),
+  摘要内容: (font: font.宋体, size: size.小四, first-line-indent: 2em, leading: 10.5pt, spacing: 10.5pt),
   // 关键词：小四（12pt）宋体
-  关键词: (font: font.宋体, size: size.小四, fakebold: fakebold.宋体),
+  关键词: (font: font.宋体, size: size.小四),
 
   // ── 1.4 英文摘要 ──
   // 英文题目：三号（16pt），段前 24bp 后 18bp，单倍间距
@@ -47,15 +48,15 @@
   // 作者/专业/导师：小四（12pt）居中
   英文作者信息: (font: font.英文衬线, size: size.小四, leading: 20pt),
   // "ABSTRACT"：小四（12pt）加粗，段前 8bp 后 6bp
-  英文摘要标题: (font: font.英文无衬线, size: size.小四, spacing-before: 8pt, spacing-after: 6pt, weight: "bold"),
+  英文摘要标题: (font: font.英文无衬线, size: size.小四, spacing-before: 8pt, spacing-after: 6pt),
   // 内容：小四（12pt），首行缩进 0.74cm。PKU 指南规定 20bp，实测 12.5pt 更接近 Word
   英文摘要内容: (font: font.英文衬线, size: size.小四, first-line-indent: 0.74cm, leading: 12.5pt),
 
   // ── 1.5 目录 ──
   // 章标题行：小四（12pt）黑体，段前 6bp
-  目录章标题: (font: font.黑体, size: size.小四, spacing-before: 6pt, weight: "regular", fakebold: fakebold.黑体),
+  目录章标题: (font: font.黑体, size: size.小四, spacing-before: 6pt, weight: "regular"),
   // 节标题等：小四（12pt）宋体，实测 10.5pt 更接近 Word
-  目录其他: (font: font.宋体, size: size.小四, leading: 10.5pt, 编号间距: 1em, 缩进量: 1em, fakebold: fakebold.宋体),
+  目录其他: (font: font.宋体, size: size.小四, leading: 10.5pt, 编号间距: 1em, 缩进量: 1em),
 
   // ── 1.6 主要符号对照表 ──
   符号表: (row-gutter: 10pt, group-gutter: 20pt, 列间距: 4em),
@@ -67,13 +68,13 @@
   // 指南 2014 里的章标题：三号（16pt）黑体居中，段前 24bp 后 18bp，单倍间距
   // 硕士研究生学位论文格式模板（2024）文件里章标题：三号（16pt）黑体居中，段前 17bp 后 16.5bp，2.41 倍间距
   // pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是段前 17bp 后 16.5bp，2.41 倍间距
-  章标题: (font: font.黑体, size: size.三号, align: center, weight: "regular", spacing-before: 17pt, spacing-after: 16.5pt, 编号间距: 1em, fakebold: fakebold.黑体),
+  章标题: (font: font.黑体, size: size.三号, align: center, weight: "regular", spacing-before: 17pt, spacing-after: 16.5pt, 编号间距: 1em),
   // 一级节标题：四号（14pt）黑体居左，段前 24bp 后 6bp
-  一级节标题: (font: font.黑体, size: size.四号, weight: "regular", spacing-before: 24pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
+  一级节标题: (font: font.黑体, size: size.四号, weight: "regular", spacing-before: 24pt, spacing-after: 6pt, 编号间距: 1em),
   // 二级节标题：13pt 黑体居左，段前 12bp 后 6bp
-  二级节标题: (font: font.黑体, size: 13pt, weight: "regular", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
+  二级节标题: (font: font.黑体, size: 13pt, weight: "regular", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em),
   // 三级节标题：小四（12pt）黑体居左，段前 12bp 后 6bp
-  三级节标题: (font: font.黑体, size: size.小四, weight: "regular", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
+  三级节标题: (font: font.黑体, size: size.小四, weight: "regular", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em),
 
   // ── 1.7.2 段落文字 ──
   // 正文：小四（12pt）宋体。PKU 指南规定行距固定 20bp，实测 10.5pt 更接近 Word
@@ -81,10 +82,10 @@
 
   // ── 1.7.3 脚注 ──
   // 脚注：小五（9pt）宋体，单倍行距，悬挂缩进
-  脚注: (font: font.宋体, size: size.小五, leading: 1.2em, super-size: 0.65em, 悬挂缩进: 1.5em, 编号间距: 0.5em, fakebold: fakebold.宋体),
+  脚注: (font: font.宋体, size: size.小五, leading: 1.2em, super-size: 0.65em, 悬挂缩进: 1.5em, 编号间距: 0.5em),
 
   // 正则文本强调：斜体用楷体
-  强调: (font: font.楷体, style: "italic", fakebold: fakebold.楷体),
+  强调: (font: font.楷体, style: "italic"),
 
   // 公式编号：宋体
   公式编号: (font: font.宋体),
@@ -124,13 +125,13 @@
 
   // ── 1.9 附录与后置部分 ──
   // 致谢/后记/说明：格式同正文
-  致谢: (font: font.宋体, size: size.小四, leading: 10.5pt, spacing: 10.5pt, fakebold: fakebold.宋体),
+  致谢: (font: font.宋体, size: size.小四, leading: 10.5pt, spacing: 10.5pt),
   // 原创性声明与授权说明：固定法律文书，标题加粗
-  声明: (font: font.宋体, size: size.小四, leading: 0.95em, spacing: 0.95em, weight: "bold", fakebold: fakebold.宋体),
+  声明: (font: font.宋体, size: size.小四, leading: 0.95em, spacing: 0.95em, fakebold: fakebold.宋体),
   // 攻读学位期间发表的论文列表
-  成果列表: (font: font.宋体, size: size.小四, spacing: 1.14em, 编号格式: "[1]", 悬挂缩进: 1.2em, fakebold: fakebold.宋体),
+  成果列表: (font: font.宋体, size: size.小四, spacing: 1.14em, 编号格式: "[1]", 悬挂缩进: 1.2em),
   // 书脊页：仿宋 12pt，左右窄边距
-  书脊: (font: font.仿宋, size: 12pt, margin: (x: 1cm, y: 5.4cm), fakebold: fakebold.仿宋),
+  书脊: (font: font.仿宋, size: 12pt, margin: (x: 1cm, y: 5.4cm)),
 
   // ── 1.11 页面设置 ──
   // A4 纸，左侧装订

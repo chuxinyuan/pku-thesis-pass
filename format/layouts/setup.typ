@@ -4,7 +4,8 @@
 // 全局排版基础设施，供 config.typ 编排时调用
 // ============================================================
 
-#import "../imports.typ": itemize, codly-init, codly, codly-languages, show-cn-fakebold
+#import "../imports.typ": itemize, codly-init, codly, codly-languages
+#import "../utils/bold.typ": bold
 
 #import "../utils/style.typ": style as _style
 #import "../utils/number.typ": in-appendix, chinesenumbering
@@ -131,14 +132,8 @@
   }
 
   // ========== 正文强调样式 ==========
-  // 粗体根据字体粗体策略门控：字体内建粗体 → 走真粗体；无粗体 → cuti 描边
-  show text.where(weight: "bold").or(strong): it => {
-    if style.正文.fakebold {
-      show-cn-fakebold(it)
-    } else {
-      it
-    }
-  }
+  // 加粗统一入口：有真粗体走 weight:bold，无真粗体走 cuti 描边（正文为宋体）
+  show strong: it => bold(it.body, style.正文.fakebold)
   // 斜体用楷体（pkuthss 惯例）
   show emph: it => text(font: style.强调.font, style: style.强调.style, it.body)
   // 代码用等宽字体

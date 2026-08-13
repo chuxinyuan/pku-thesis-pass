@@ -5,8 +5,8 @@
 //   - cover-page-normal：正常提交用（显示校徽、作者、导师等信息）
 // ============================================================
 
-#import "../imports.typ": show-cn-fakebold
 #import "../utils/style.typ": style as _style
+#import "../utils/bold.typ": bold
 #import "../utils/number.typ": chinesenumber, chineseyear
 #import "../utils/util.typ": resolve-path, ensure-not-eps
 
@@ -229,8 +229,6 @@
   text(font: s.封面题头.font, size: s.封面题头.size)[#thesis-name]
   v(1fr)
   context {
-    set text(weight: s.封面题目.weight)
-    show: show-cn-fakebold
     let title-zh-parts = split-text-by-width(title-zh, 10.16cm)
     let grid-contents = (
       [
@@ -239,7 +237,7 @@
       ],
     )
     for (i, part) in title-zh-parts.enumerate() {
-      grid-contents.push(part)
+      grid-contents.push(bold(part, s.封面题目.fakebold))
       if i < title-zh-parts.len() - 1 {
         grid-contents.push([])
       }
@@ -300,7 +298,6 @@
   let s = if style != none { style } else { _style }
   set align(center + top)
   text(size: s.封面题头.size, font: s.封面题头.font)[
-    #show: show-cn-fakebold
     #header-text
   ]
   linebreak()

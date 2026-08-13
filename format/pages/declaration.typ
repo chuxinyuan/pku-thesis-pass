@@ -6,7 +6,7 @@
 // ============================================================
 
 #import "../layouts/headings.typ": back-heading
-#import "../imports.typ": show-cn-fakebold
+#import "../utils/bold.typ": bold
 /// 原创性声明与授权说明页
 /// clean-declaration: 为 true 时清除该页的页眉和页码（通过 back-heading 的 show-page-marks 元数据）
 #let declaration-page(clean-declaration: false, style: none) = {
@@ -17,10 +17,10 @@
     show-page-marks: not clean-declaration,
   )
 
-  align(center)[#text(
+  align(center)[#bold(
+    [原创性声明],
+    style.声明.fakebold,
     size: style.声明.size,
-    weight: style.声明.weight,
-    show-cn-fakebold[原创性声明],
   )]
   v(1fr)
   [
@@ -42,10 +42,10 @@
     ]
 
     #v(1fr)
-    #align(center)[#text(
+    #align(center)[#bold(
+      [学位论文使用授权说明],
+      style.声明.fakebold,
       size: style.声明.size,
-      weight: style.声明.weight,
-      show-cn-fakebold[学位论文使用授权说明],
     )]
     #align(center)[#text(size: style.声明.size)[（必须装订在提交学校图书馆的印刷本）]]
     #v(1fr)

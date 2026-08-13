@@ -21,6 +21,7 @@
 #import "utils/font.typ": font-set, fakebold-rules
 
 // 工具
+// 公开导出 cuti 伪粗体函数，供需要自定义描边的用户使用（模板内部加粗统一走 utils/bold.typ）
 #import "imports.typ": show-cn-fakebold
 
 // 组件

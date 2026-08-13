@@ -10,7 +10,6 @@
 #import "../utils/size.typ": size
 #import "../utils/counter.typ": partcounter, chaptercounter, reset-chapter-counters
 #import "headings-meta.typ": get-heading-meta
-#import "../imports.typ": show-cn-fakebold
 
 /// 根据标题等级返回对应字号（level 1 由 heading-show-rule 直接处理）
 #let get-heading-size(level, style: none) = {
@@ -71,8 +70,8 @@
 }
 
 /// 渲染标题正文（不重新触发 show heading）
-/// fs: 字号；style-font: 标题默认字体；number-spacing: 编号间距；fakebold: 是否使用伪粗体；meta: 通过 ..args 传入的元数据覆盖。
-#let sizedheading(it, fs, style-font: (:), number-spacing: 1em, fakebold: false, ..meta) = {
+/// fs: 字号；style-font: 标题默认字体；number-spacing: 编号间距；meta: 通过 ..args 传入的元数据覆盖。
+#let sizedheading(it, fs, style-font: (:), number-spacing: 1em, ..meta) = {
   if it.body == none or it.body == [] { return }
 
   let spacing-before = meta.at(
@@ -97,11 +96,7 @@
   } else {
     it.body
   }
-  if fakebold {
-    show-cn-fakebold(text(..f, body))
-  } else {
-    text(..f, body)
-  }
+  text(..f, body)
   v(spacing-after)
 }
 
@@ -118,7 +113,7 @@
     else { style.三级节标题 }
 
   if it.level != 1 {
-    return sizedheading(it, get-heading-size(it.level, style: style), style-font: (font: h-style.font, weight: h-style.weight), number-spacing: h-style.编号间距, fakebold: h-style.fakebold, heading-spacing-before: h-style.spacing-before, heading-spacing-after: h-style.spacing-after, linespacing: style.标题行距)
+    return sizedheading(it, get-heading-size(it.level, style: style), style-font: (font: h-style.font, weight: h-style.weight), number-spacing: h-style.编号间距, heading-spacing-before: h-style.spacing-before, heading-spacing-after: h-style.spacing-after, linespacing: style.标题行距)
   }
 
   let meta = get-heading-meta(it)
@@ -151,5 +146,5 @@
   }
 
   set align(h-style.align)
-  sizedheading(it, style.章标题.size, style-font: (font: h-style.font, weight: h-style.weight), number-spacing: h-style.编号间距, fakebold: h-style.fakebold, ..meta)
+  sizedheading(it, style.章标题.size, style-font: (font: h-style.font, weight: h-style.weight), number-spacing: h-style.编号间距, ..meta)
 }

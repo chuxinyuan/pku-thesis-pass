@@ -5,6 +5,7 @@
 // ============================================================
 
 #import "../layouts/headings.typ": front-heading
+#import "../utils/bold.typ": bold
 
 /// 英文摘要页
 /// style: 由 style.build(font) 构建的样式字典
@@ -45,7 +46,12 @@
   // Word 模板中英文摘要的首行缩进固定为 0.74cm
   set par(first-line-indent: style.英文摘要内容.first-line-indent, justify: true)
   v(style.英文摘要标题.spacing-before)
-  align(center)[#text(font: style.英文摘要标题.font, size: style.英文摘要标题.size, weight: style.英文摘要标题.weight)[ABSTRACT]]
+  align(center)[#bold(
+    [ABSTRACT],
+    false,
+    font: style.英文摘要标题.font,
+    size: style.英文摘要标题.size,
+  )]
   v(style.英文摘要标题.spacing-after)
   body
   v(1fr)

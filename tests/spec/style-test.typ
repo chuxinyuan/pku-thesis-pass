@@ -15,7 +15,7 @@
 #assert.eq(s.封面题目标签.size, 22pt)  // 二号
 #assert.eq(s.封面信息.size, 16pt)  // 三号（作者/导师用仿宋）
 #assert.eq(s.封面日期.size, 16pt)  // 三号（日期用宋体）
-#assert.eq(s.封面题目.weight, "bold")
+#assert.eq(s.封面题目.fakebold, true)  // Windows 黑体 SimHei 无真粗体 → 描边
 
 // ── 1.3 中文摘要 ──
 #assert.eq(s.摘要标题.size, 16pt)  // 三号黑体
