@@ -34,8 +34,8 @@
   封面盲审: (leading: 1em, spacing: 1.5em),
 
   // ── 1.3 中文摘要 ──
-  // 标题：三号（16pt）黑体加粗，段前 24bp 后 18bp
-  摘要标题: (font: font.黑体, size: size.三号, spacing-before: 24pt, spacing-after: 18pt, weight: "bold", fakebold: fakebold.黑体),
+  // 标题：三号（16pt）黑体，段前 24bp 后 18bp
+  摘要标题: (font: font.黑体, size: size.三号, spacing-before: 24pt, spacing-after: 18pt, weight: "regular", fakebold: fakebold.黑体),
   // 内容：小四（12pt）宋体。PKU 指南规定行距固定 20bp，实测 10.5pt 更接近 Word
   摘要内容: (font: font.宋体, size: size.小四, first-line-indent: 2em, leading: 10.5pt, spacing: 10.5pt, fakebold: fakebold.宋体),
   // 关键词：小四（12pt）宋体
@@ -52,8 +52,8 @@
   英文摘要内容: (font: font.英文衬线, size: size.小四, first-line-indent: 0.74cm, leading: 12.5pt),
 
   // ── 1.5 目录 ──
-  // 章标题行：小四（12pt）黑体加粗，段前 6bp
-  目录章标题: (font: font.黑体, size: size.小四, spacing-before: 6pt, weight: "bold", fakebold: fakebold.黑体),
+  // 章标题行：小四（12pt）黑体，段前 6bp
+  目录章标题: (font: font.黑体, size: size.小四, spacing-before: 6pt, weight: "regular", fakebold: fakebold.黑体),
   // 节标题等：小四（12pt）宋体，实测 10.5pt 更接近 Word
   目录其他: (font: font.宋体, size: size.小四, leading: 10.5pt, 编号间距: 1em, 缩进量: 1em, fakebold: fakebold.宋体),
 
@@ -64,14 +64,14 @@
   // 标题行距基准值（默认公式：三号 * 1.3 * 2.41）
   标题行距: size.三号 * 1.3 * 2.41,
   // ── 1.7.1 标题 ──
-  // 章标题：三号（16pt）黑体居中加粗，段前 24bp 后 18bp
-  章标题: (font: font.黑体, size: size.三号, align: center, weight: "bold", spacing-before: 24pt, spacing-after: 18pt, 编号间距: 1em, fakebold: fakebold.黑体),
-  // 一级节标题：四号（14pt）黑体居左加粗，段前 24bp 后 6bp
-  一级节标题: (font: font.黑体, size: size.四号, weight: "bold", spacing-before: 24pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
-  // 二级节标题：13pt 黑体居左加粗，段前 12bp 后 6bp（指南直接指定）
-  二级节标题: (font: font.黑体, size: 13pt, weight: "bold", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
-  // 三级节标题：小四（12pt）黑体居左加粗，段前 12bp 后 6bp
-  三级节标题: (font: font.黑体, size: size.小四, weight: "bold", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
+  // 章标题：三号（16pt）黑体居中，段前 24bp 后 18bp
+  章标题: (font: font.黑体, size: size.三号, align: center, weight: "regular", spacing-before: 24pt, spacing-after: 18pt, 编号间距: 1em, fakebold: fakebold.黑体),
+  // 一级节标题：四号（14pt）黑体居左，段前 24bp 后 6bp
+  一级节标题: (font: font.黑体, size: size.四号, weight: "regular", spacing-before: 24pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
+  // 二级节标题：13pt 黑体居左，段前 12bp 后 6bp（指南直接指定）
+  二级节标题: (font: font.黑体, size: 13pt, weight: "regular", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
+  // 三级节标题：小四（12pt）黑体居左，段前 12bp 后 6bp
+  三级节标题: (font: font.黑体, size: size.小四, weight: "regular", spacing-before: 12pt, spacing-after: 6pt, 编号间距: 1em, fakebold: fakebold.黑体),
 
   // ── 1.7.2 段落文字 ──
   // 正文：小四（12pt）宋体。PKU 指南规定行距固定 20bp，实测 10.5pt 更接近 Word

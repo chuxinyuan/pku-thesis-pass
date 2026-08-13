@@ -48,22 +48,22 @@
 #assert.eq(s.章标题.align, center)
 #assert.eq(s.章标题.spacing-before, 24pt)
 #assert.eq(s.章标题.spacing-after, 18pt)
-#assert.eq(s.章标题.weight, "bold")
+#assert.eq(s.章标题.weight, "regular")
 // 一级节标题：四号（14pt），段前 24 段后 6
 #assert.eq(s.一级节标题.size, 14pt)
 #assert.eq(s.一级节标题.spacing-before, 24pt)
 #assert.eq(s.一级节标题.spacing-after, 6pt)
-#assert.eq(s.一级节标题.weight, "bold")
+#assert.eq(s.一级节标题.weight, "regular")
 // 二级节标题：13pt，段前 12 段后 6
 #assert.eq(s.二级节标题.size, 13pt)
 #assert.eq(s.二级节标题.spacing-before, 12pt)
 #assert.eq(s.二级节标题.spacing-after, 6pt)
-#assert.eq(s.二级节标题.weight, "bold")
+#assert.eq(s.二级节标题.weight, "regular")
 // 三级节标题：小四（12pt），段前 12 段后 6
 #assert.eq(s.三级节标题.size, 12pt)
 #assert.eq(s.三级节标题.spacing-before, 12pt)
 #assert.eq(s.三级节标题.spacing-after, 6pt)
-#assert.eq(s.三级节标题.weight, "bold")
+#assert.eq(s.三级节标题.weight, "regular")
 
 // ── 1.7.2 段落文字 ──
 #assert.eq(s.正文.size, 12pt)  // 小四宋体
