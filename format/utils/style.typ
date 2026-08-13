@@ -42,8 +42,8 @@
   关键词: (font: font.宋体, size: size.小四, fakebold: fakebold.宋体),
 
   // ── 1.4 英文摘要 ──
-  // 英文题目：三号（16pt），段前 24bp 后 18bp
-  英文题目: (font: font.英文无衬线, size: size.三号, spacing-before: 24pt, spacing-after: 18pt, linespacing: 2em, weight: "regular"),
+  // 英文题目：三号（16pt），段前 24bp 后 18bp，单倍间距
+  英文题目: (font: font.英文无衬线, size: size.三号, spacing-before: 24pt, spacing-after: 18pt, linespacing: 1.65em, weight: "regular"),
   // 作者/专业/导师：小四（12pt）居中
   英文作者信息: (font: font.英文衬线, size: size.小四, leading: 20pt),
   // "ABSTRACT"：小四（12pt）加粗，段前 8bp 后 6bp
