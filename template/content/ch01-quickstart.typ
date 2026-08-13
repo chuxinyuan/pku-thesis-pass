@@ -119,8 +119,8 @@ typst compile template/thesis.typ --root .
         (
           [#strong[#name]],
           [#fam.join("、")],
-          fam-cell(fam, bold.at(name, default: false), [为中华崛起而读书], [#strong[为中华崛起而读书]]),
-          fam-cell(fam, bold.at(name, default: false), [I love China.], [#strong[I love China.]]),
+          fam-cell(fam, bold.at(name, default: false), [为中华崛起而读书], [#text(weight: "bold")[为中华崛起而读书]]),
+          fam-cell(fam, bold.at(name, default: false), [I love China.], [#text(weight: "bold")[I love China.]]),
         )
       }),
       caption: "当前生效的字体族渲染效果示例",
