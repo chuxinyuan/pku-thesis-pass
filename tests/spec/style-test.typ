@@ -95,8 +95,10 @@
 #assert.eq(s.页眉.size, 10.5pt)
 #assert.eq(s.页眉.垂直位置, 2cm)
 #assert.eq(s.页眉.下划线粗细, 0.75pt)
-// 页码：五号（10.5pt）居中，距页底 1.75cm（指南：Times New Roman 五号，非 9pt）
-#assert.eq(s.页码.size, 10.5pt)
+// 页码：五号（10.5pt）居中，距页底 1.75cm（指南：Times New Roman 五号）
+// 硕士研究生学位论文格式模板(2024).doc 文件里页码字号是小五（9pt）
+// pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是 9pt
+#assert.eq(s.页码.size, 9pt)
 #assert.eq(s.页码.垂直位置, 1.75cm)
 
 = All tests passed

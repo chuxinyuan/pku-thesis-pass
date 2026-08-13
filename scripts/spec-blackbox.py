@@ -91,7 +91,7 @@ def check_render(pdf_path):
                     f"「{marker}」未以 {expected}pt 渲染（{desc}）"
                 )
 
-        # 3. 页码字号（五号 10.5pt，非 9pt）
+        # 3. 页码字号（小五 9pt）
         page_num_sizes = set()
         found_page_num = False
         for page in pdf.pages[1:]:
@@ -103,10 +103,10 @@ def check_render(pdf_path):
         if not found_page_num:
             failures.append("未在页脚区域检测到页码")
         else:
-            bad = [s for s in page_num_sizes if abs(s - 10.5) > TOL]
+            bad = [s for s in page_num_sizes if abs(s - 9) > TOL]
             if bad:
                 failures.append(
-                    f"页码字号 {sorted(page_num_sizes)}pt，期望 10.5pt（五号，非 9pt）"
+                    f"页码字号 {sorted(page_num_sizes)}pt，期望 9pt（Word 模板 2024 和写作指南 2014 版里的标准有差异，按照最新的标准执行）"
                 )
 
 
@@ -141,7 +141,7 @@ def main(normal_path, blind_path):
             print(f"  ✗ {f}")
         sys.exit(1)
 
-    print("格式规范黑盒检查通过：A4 页面 + 9 项字号 + 页码 + PDF 元数据均符合指南")
+    print("格式规范黑盒检查通过：A4 页面 + 9 项字号 + 页码 + PDF 元数据均符合指南及 Word 模板（2024）规范")
 
 
 if __name__ == "__main__":

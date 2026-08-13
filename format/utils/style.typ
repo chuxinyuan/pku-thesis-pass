@@ -133,8 +133,10 @@
   页边距: (top: 3.0cm, bottom: 2.5cm, left: 2.6cm, right: 2.6cm),
   // 页眉：五号（10.5pt）宋体居中，距页顶 2cm
   页眉: (font: font.宋体, size: size.五号, 堆叠间距: 3pt, 垂直位置: 2cm, 下划线粗细: 0.75pt, 编号间距: 0.5em),
-  // 页码：五号（10.5pt）居中，距页底 1.75cm（旧版本误写为 9pt）
-  页码: (font: font.英文衬线, size: size.五号, 垂直位置: 1.75cm),
+  // 页码：五号（10.5pt）居中，距页底 1.75cm（写作指南 2014 版）
+  // 硕士研究生学位论文格式模板(2024).doc 文件里是页码字号是小五（9pt）
+  // pkuthss-typst 也采用了最新的 Word 模板（2024）标准用的是 9pt
+  页码: (font: font.英文衬线, size: size.小五, 垂直位置: 1.75cm),
 )
 
 /// 默认样式（基于 font-set.windows + fakebold-rules.windows），供以下场景使用：
