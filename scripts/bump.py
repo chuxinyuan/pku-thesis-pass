@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Bump version references in doc examples to match typst.toml.
 
-Scans template/content/*.typ and replaces all occurrences of
-@preview/pku-thesis-pass:<old-version> with the current version
-read from typst.toml [package] section.
+Scans template/content/*.typ and the root README.md, replacing all
+occurrences of @preview/pku-thesis-pass:<old-version> with the current
+version read from typst.toml [package] section.
 
 Usage:
     python3 scripts/bump.py
@@ -24,7 +24,8 @@ def main() -> None:
     print(f"Bumping doc version references to {version}...")
 
     content_dir = root / "template" / "content"
-    for f in sorted(content_dir.rglob("*.typ")):
+    targets = [*sorted(content_dir.rglob("*.typ")), root / "README.md"]
+    for f in targets:
         old = f.read_text()
         new = VERSION_DOC_RE.sub(rf"@preview/pku-thesis-pass:{version}", old)
         if new != old:
