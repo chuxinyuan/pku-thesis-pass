@@ -5,7 +5,7 @@
 // ============================================================
 
 #import "../utils/number.typ": chinesenumbering
-#import "../utils/counter.typ": chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter, theorem-kinds
+#import "../utils/counter.typ": chaptercounter, equationcounter, imagecounter, tablecounter, rawcounter, theorem-kinds, continued-caption-state
 
 /// 图、表、代码块的 show 规则
 /// 图片：caption 在下方；表格：caption 在上方；代码块：caption 在上方
@@ -20,11 +20,24 @@
       #it.caption
     ]
   } else if it.kind == table {
+    continued-caption-state.update(
+      if it.caption != none {
+        (
+          supplement: it.caption.supplement,
+          body: it.caption.body,
+          counter: it.counter,
+          numbering: it.numbering,
+        )
+      } else {
+        none
+      }
+    )
     [
       #set text(size: style.表序表名.size)
       #it.caption
     ]
     it.body
+    continued-caption-state.update(none)
   } else if it.kind == "equation" {
     set align(center)
     block(width: 100%, {

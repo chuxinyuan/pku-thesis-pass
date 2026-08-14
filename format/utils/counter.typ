@@ -34,6 +34,9 @@
 /// 跳过页状态：用于 always-start-odd 时标记被跳过的空白偶数页。
 #let skippedstate = state("skipped", false)
 
+/// 续表标题状态：figure-show-rule 注入表题，供三线表续页表头渲染"续表 X.Y 名称"
+#let continued-caption-state = state("booktab-continued-caption", none)
+
 /// 重置所有随章节编号的计数器（正文每章开头调用）
 /// 注意：chaptercounter 在此前已通过 .step() 递增
 #let reset-chapter-counters() = {

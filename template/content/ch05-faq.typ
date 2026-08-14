@@ -57,7 +57,7 @@ config(
 
 == 表格被跨页分割怎么办？
 
-本模板默认允许表格跨页（`show figure: set block(breakable: true)`）。长表跨页会自动重复表头，并在续表页右上角标注"续表"，无需手动控制；`booktab` 会自动完成这些。
+本模板默认允许表格跨页（`show figure: set block(breakable: true)`）。长表跨页会自动重复表头，并在续表页居中显示完整表题（在表号前加"续"，如"续表 1.1 表名"），无需手动控制；`booktab` 和 `as-booktab` 都会自动完成这些。
 
 如果某个表格不希望被分割，可在表格前手动插入 `#pagebreak()` 调整。详见 @basics 的表格一节。
 

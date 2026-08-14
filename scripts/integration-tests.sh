@@ -24,12 +24,19 @@ typst compile tests/integration/thesis-refs.typ --root .
 typst compile tests/integration/thesis-longtable.typ --root .
 typst compile tests/integration/thesis-bib.typ --root .
 
-# Verify longtable: cross-page continued table must render the "续表" marker
-if ! pdftotext tests/integration/thesis-longtable.pdf - | grep -q "续表"; then
-  echo "FAIL: longtable did not render 续表 marker"
+# Verify longtable: cross-page continued table must render the full caption
+# with "续" prefix（"续表 1.1 ..." for booktab, "续表 1.2 ..." for as-booktab）
+# 注意：不能用 grep -q——它与 set -o pipefail 组合时，grep 提前退出会让
+# pdftotext 收到 SIGPIPE，导致假失败（exit 141）。
+if ! pdftotext tests/integration/thesis-longtable.pdf - | grep -F "续表 1.1" > /dev/null; then
+  echo "FAIL: booktab did not render continued caption 续表 1.1"
   exit 1
 fi
-echo "PASS: longtable renders 续表 marker"
+if ! pdftotext tests/integration/thesis-longtable.pdf - | grep -F "续表 1.2" > /dev/null; then
+  echo "FAIL: as-booktab did not render continued caption 续表 1.2"
+  exit 1
+fi
+echo "PASS: longtable renders continued captions (booktab + as-booktab)"
 
 # Verify bibliography: GB/T 7714 entries must actually render
 if ! pdftotext tests/integration/thesis-bib.pdf - | grep -q "王晓华"; then
