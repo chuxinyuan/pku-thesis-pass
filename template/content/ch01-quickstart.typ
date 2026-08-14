@@ -25,7 +25,7 @@ Typst 是一个现代化的排版系统，可以通过以下方式使用：
 === 方式一：从 Typst Universe 创建（推荐）
 
 ```bash
-typst init @preview/pku-thesis-pass:0.3.0 my-thesis
+typst init @preview/pku-thesis-pass:0.3.1 my-thesis
 cd my-thesis
 ```
 
@@ -146,7 +146,7 @@ typst compile template/thesis.typ --root .
 
 #code-block(
   ```typ
-  #import "@preview/pku-thesis-pass:0.3.0": config, booktab, as-booktab, eq-block, code-block
+  #import "@preview/pku-thesis-pass:0.3.1": config, booktab, as-booktab, eq-block, code-block
 
   #let cfg = config(
     author-zh: "张三",
@@ -189,7 +189,7 @@ typst compile template/thesis.typ --root .
 实际论文写作过程中大概率需要用到表格，这里仅以导入表格模块为例：
 
 ```typ
-#import "@preview/pku-thesis-pass:0.3.0": config, booktab, as-booktab
+#import "@preview/pku-thesis-pass:0.3.1": config, booktab, as-booktab
 ```
 
 未发布到官方仓库的改动需用本地相对导入，以免 `@preview` 包与本地源码不一致导致报错，上述代码要相应地改为：
@@ -224,4 +224,4 @@ typst compile template/thesis.typ --root .
 - `total-words` — CJK 字数统计结果（也可通过 `cfg.total-words` 访问）
 - `total-characters` — 总字符数统计结果（也可通过 `cfg.total-characters` 访问）
 
-不建议通过 `#import "@preview/pku-thesis-pass:0.3.0": *` 或者 `#import "../../format/lib.typ": *` 导入所有模块，因为这样会引入不必要的依赖，污染环境且增加编译时间。
+不建议通过 `#import "@preview/pku-thesis-pass:0.3.1": *` 或者 `#import "../../format/lib.typ": *` 导入所有模块，因为这样会引入不必要的依赖，污染环境且增加编译时间。

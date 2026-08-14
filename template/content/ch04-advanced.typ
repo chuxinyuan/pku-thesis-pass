@@ -256,7 +256,7 @@ typst compile thesis.typ --input blind=true --input preview=false --input system
 模板导出了 `booktab`、`as-booktab`、`eq-block`、`code-block` 等组件，用法示例见 @basics，以下为各组件说明与 API：
 
 ```typ
-#import "@preview/pku-thesis-pass:0.3.0": booktab, as-booktab, eq-block, code-block
+#import "@preview/pku-thesis-pass:0.3.1": booktab, as-booktab, eq-block, code-block
 ```
 
 - `#booktab(...)`：生成三线表，第一行自动加粗为表头，支持 `outlined: false` 生成纯表格

@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.3.1] — 2026-08-14
+
+### 格式对齐 Word 2024 模板
+
+- 页码字号 10.5pt → 9pt（小五），对齐 Word 2024 模板 ([4ff6f25])
+- 表单元格字号 11pt → 10.5pt（五号），对齐 Word 2024 模板 ([508db89])
+- 章标题段前段后改为 17pt / 16.5pt、2.41 倍间距，对齐 Word 2024 模板 ([1805f0a])
+- 英文题目行距改为单倍（1.65em）([382398d])
+
+### 标题与加粗
+
+- 各级标题不再加粗（`weight: regular`），黑体不加粗，对齐指南 ([2b05f49])
+- 新增 `format/utils/bold.typ` 统一加粗入口，按 `fakebold-rules` 决定真粗体或 cuti 描边 ([997d458])
+- 修正 `fakebold-rules`：Windows 黑体、macOS 宋体/楷体无真粗体，改用描边 ([997d458])
+- 全局加粗规则收窄为 `show strong`，`text(weight: bold)`（如 Arial 的 ABSTRACT）不再被误描边 ([997d458])
+- 清理 style.typ 未消费的 fakebold / weight 死字段 ([997d458])
+- 字体校验演示表改用 `text(weight: bold)`，绕过全局规则避免双重描边 ([dff26ef])
+
+### 测试
+
+- 测试重组为 unit / integration / spec 三类 ([f703a95])
+- 补齐覆盖缺口（longtable / 参考文献 / PDF 元数据 / 公式），盲审验证 strings → pdftotext 修复假阴性 ([9edece8])
+
+### 文档
+
+- README 新增「一分钟快速体验」([54da6a5])
+
+---
+
 ## [0.3.0] — 2026-08-09
 
 ### 架构重构
@@ -135,7 +164,8 @@
 - 跨平台字体 fallback 链
 - 模板指南（快速开始 + 基本功能）
 
-[0.3.0]: https://github.com/chuxinyuan/pku-thesis-pass/compare/v0.2.0...main
+[0.3.1]: https://github.com/chuxinyuan/pku-thesis-pass/compare/v0.3.0...main
+[0.3.0]: https://github.com/chuxinyuan/pku-thesis-pass/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/chuxinyuan/pku-thesis-pass/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/chuxinyuan/pku-thesis-pass/releases/tag/v0.1.0
 [31af70d]: https://github.com/chuxinyuan/pku-thesis-pass/commit/31af70d
@@ -202,3 +232,13 @@
 [1e79e54]: https://github.com/chuxinyuan/pku-thesis-pass/commit/1e79e54
 [2373cba]: https://github.com/chuxinyuan/pku-thesis-pass/commit/2373cba
 [3286585]: https://github.com/chuxinyuan/pku-thesis-pass/commit/3286585
+[4ff6f25]: https://github.com/chuxinyuan/pku-thesis-pass/commit/4ff6f25
+[508db89]: https://github.com/chuxinyuan/pku-thesis-pass/commit/508db89
+[1805f0a]: https://github.com/chuxinyuan/pku-thesis-pass/commit/1805f0a
+[382398d]: https://github.com/chuxinyuan/pku-thesis-pass/commit/382398d
+[2b05f49]: https://github.com/chuxinyuan/pku-thesis-pass/commit/2b05f49
+[997d458]: https://github.com/chuxinyuan/pku-thesis-pass/commit/997d458
+[dff26ef]: https://github.com/chuxinyuan/pku-thesis-pass/commit/dff26ef
+[f703a95]: https://github.com/chuxinyuan/pku-thesis-pass/commit/f703a95
+[9edece8]: https://github.com/chuxinyuan/pku-thesis-pass/commit/9edece8
+[54da6a5]: https://github.com/chuxinyuan/pku-thesis-pass/commit/54da6a5

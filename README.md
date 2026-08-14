@@ -11,7 +11,7 @@
 三行命令，立即生成一份完整的示例学位论文 PDF：
 
 ```bash
-typst init @preview/pku-thesis-pass:0.3.0 my-thesis
+typst init @preview/pku-thesis-pass:0.3.1 my-thesis
 cd my-thesis
 typst compile thesis.typ
 ```
@@ -58,7 +58,7 @@ typst compile thesis.typ
 ### 方式一：从 Typst Universe 创建（推荐）
 
 ```bash
-typst init @preview/pku-thesis-pass:0.3.0 my-thesis
+typst init @preview/pku-thesis-pass:0.3.1 my-thesis
 cd my-thesis
 ```
 
@@ -214,7 +214,7 @@ typst compile template/thesis.typ --root .
 
 ```typ
 #import "../../format/lib.typ": code-block, booktab, font-set
-// #import "@preview/pku-thesis-pass:0.3.0": code-block, booktab, font-set
+// #import "@preview/pku-thesis-pass:0.3.1": code-block, booktab, font-set
 ```
 
 未发布到官方仓库的改动需用本地相对导入（如上述 `../../format/...`），以免 `@preview` 包与本地源码不一致。
