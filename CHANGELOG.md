@@ -18,6 +18,10 @@
 - 清理 style.typ 未消费的 fakebold / weight 死字段 ([997d458])
 - 字体校验演示表改用 `text(weight: bold)`，绕过全局规则避免双重描边 ([dff26ef])
 
+### 长表续表
+
+- 长表跨页续页由右上角小字「续表」改为居中显示完整表题（表号前加「续」，如「续表 1.1 表名」），对齐《指南》；`booktab` 与 `as-booktab` 均支持 ([9fc7e33])
+
 ### 测试
 
 - 测试重组为 unit / integration / spec 三类 ([f703a95])
@@ -239,6 +243,7 @@
 [2b05f49]: https://github.com/chuxinyuan/pku-thesis-pass/commit/2b05f49
 [997d458]: https://github.com/chuxinyuan/pku-thesis-pass/commit/997d458
 [dff26ef]: https://github.com/chuxinyuan/pku-thesis-pass/commit/dff26ef
+[9fc7e33]: https://github.com/chuxinyuan/pku-thesis-pass/commit/9fc7e33
 [f703a95]: https://github.com/chuxinyuan/pku-thesis-pass/commit/f703a95
 [9edece8]: https://github.com/chuxinyuan/pku-thesis-pass/commit/9edece8
 [54da6a5]: https://github.com/chuxinyuan/pku-thesis-pass/commit/54da6a5
