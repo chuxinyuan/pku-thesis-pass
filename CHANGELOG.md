@@ -168,7 +168,7 @@
 - 跨平台字体 fallback 链
 - 模板指南（快速开始 + 基本功能）
 
-[0.3.1]: https://github.com/chuxinyuan/pku-thesis-pass/compare/v0.3.0...main
+[0.3.1]: https://github.com/chuxinyuan/pku-thesis-pass/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/chuxinyuan/pku-thesis-pass/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/chuxinyuan/pku-thesis-pass/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/chuxinyuan/pku-thesis-pass/releases/tag/v0.1.0
