@@ -221,7 +221,7 @@ typst compile template/thesis.typ --root .
 
 ## 致谢
 
-感谢 [pkuthss-typst](https://github.com/pku-typst/pkuthss-typst) 项目成员的杰出贡献，正是他们的卓越工作让北京大学学位论文排版变得简单而优雅。本模板在充分借鉴其理念与实现的基础上，借助 AI 辅助微调，最终形成了当前的论文模板。
+感谢 [pkuthss-typst](https://github.com/pku-typst/pkuthss-typst) 项目成员的杰出贡献，正是他们的卓越工作让北京大学学位论文排版变得简单而优雅。本模板在充分借鉴其理念与实现的基础上，在 AI 的协助下做了架构调整、职能拆分和功能增强，最终形成了当前的论文模板。
 
 ## 许可证（License）
 
